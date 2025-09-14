@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul Lengkap - Limit Fungsi Trigonometri (SMA)</title>
+    <script>
+        window.MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']]
+          },
+          svg: {
+            fontCache: 'global'
+          }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-text: #333333;
+            --secondary-text: #555555;
+            --border-color: #dddddd;
+            --title-grad-1: #4a4a4a;
+            --title-grad-2: #000000;
+        }
+        
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            font-size: 10pt;
+            line-height: 1.6;
+            color: var(--primary-text);
+            background-color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            counter-reset: page;
+        }
+
+        .page {
+            background: white;
+            width: 176mm;
+            min-height: 250mm;
+            padding: 20mm;
+            margin: 1cm auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .page::after {
+            counter-increment: page;
+            content: counter(page);
+            position: absolute;
+            bottom: 15mm;
+            right: 20mm;
+            font-size: 10pt;
+            color: #888;
+        }
+
+        .cover-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 3px solid #444;
+            height: 250mm;
+        }
+        
+        .cover-page::after, .toc-page::after {
+            content: ''; /* No page number on cover and TOC */
+        }
+
+        .cover-page img {
+            max-width: 250px;
+            margin-bottom: 40px;
+        }
+
+        .cover-page .title {
+            font-size: 38pt;
+            font-weight: 900;
+            margin: 0;
+            color: var(--title-grad-2);
+            background: -webkit-linear-gradient(45deg, var(--title-grad-1), var(--title-grad-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .cover-page .subtitle {
+            font-size: 18pt;
+            margin-top: 15px;
+            color: var(--secondary-text);
+            font-weight: 700;
+        }
+
+        @media print {
+            body { background: none; }
+            .page { width: 100%; height: 100%; margin: 0; box-shadow: none; page-break-after: always; }
+        }
+        
+        .watermark-container .page::before {
+            content: '';
+            background-image: url('https://imgix3.ruangguru.com/assets/miscellaneous/jpeg_sijv7w_5618.jpeg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 12cm;
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%; height: 100%;
+            opacity: 0.08;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .cover-page::before, .toc-page::before { opacity: 0; }
+
+        .content-wrapper { position: relative; z-index: 1; width: 100%; }
+        
+        h1 { font-size: 24pt; text-align: center; border-bottom: 2px solid var(--primary-text); padding-bottom: 10px; margin-bottom: 20px; }
+        h2 { font-size: 18pt; color: #000; border-left: 5px solid #555; padding-left: 10px; margin-top: 30px; }
+        h3 { font-size: 14pt; color: #222; margin-top: 30px; font-weight: 700; border-bottom: 2px solid #eee; padding-bottom: 5px; }
+        h4 { font-size: 12pt; font-weight: 700; margin-bottom: 5px; }
+
+        .toc-list { list-style-type: none; padding: 0; }
+        .toc-list li { margin-bottom: 10px; font-size: 12pt; }
+        .toc-list a { text-decoration: none; color: var(--primary-text); }
+        .toc-list a:hover { text-decoration: underline; }
+        
+        .layout-1-kolom { columns: 1; }
+        .latihan-item { display: grid; grid-template-columns: 1fr 0.7fr; gap: 20px; border-top: 1px dashed var(--border-color); padding-top: 15px; margin-top: 15px; break-inside: avoid; }
+        .latihan-item:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
+        
+        .soal-item, .soal-latihan { margin-bottom: 15px; break-inside: avoid; overflow-wrap: break-word; word-wrap: break-word; }
+        
+        .coret-coret { border: 1px dashed #c0c0c0; min-height: 120px; padding: 10px; border-radius: 5px; }
+        
+        .pembahasan { background-color: #f9f9f9; border: 1px solid var(--border-color); padding: 15px; border-radius: 5px; margin-top: 10px; margin-bottom: 15px; overflow-wrap: break-word; }
+        .pembahasan b { display: block; margin-bottom: 5px;}
+        
+        ol { padding-left: 0; }
+        ol.pilihan-ganda { list-style-type: none; padding-left: 20px; }
+        ol.pilihan-ganda li { margin-bottom: 8px; }
+        ol.pilihan-ganda li::before { content: attr(data-option) ". "; font-weight: bold; margin-right: 5px; }
+
+        .keterangan-soal { font-style: italic; font-size: 9pt; color: var(--secondary-text); margin-bottom: 10px; }
+        
+        table.soal-kategori { width:100%; border-collapse: collapse; text-align: left; margin-top: 10px; }
+        table.soal-kategori th, table.soal-kategori td { padding: 8px; border: 1px solid #ccc; vertical-align: middle; }
+        table.soal-kategori th:not(:first-child) { text-align: center; width: 60px;}
+        table.soal-kategori td:not(:first-child) { text-align: center; }
+
+    </style>
+</head>
+<body>
+
+<div class="watermark-container">
+
+    <!-- Cover Page -->
+    <section class="page cover-page">
+        <div class="content-wrapper">
+            <img src="https://imgix3.ruangguru.com/assets/miscellaneous/jpeg_sijv7w_5618.jpeg" alt="EXE Logo">
+            <h1 class="title">MODUL LENGKAP<br>LIMIT FUNGSI TRIGONOMETRI</h1>
+            <p class="subtitle">Kumpulan Soal TKA Matematika SMA</p>
+        </div>
+    </section>
+
+    <!-- Table of Contents -->
+    <section class="page toc-page">
+        <div class="content-wrapper">
+            <h1>Daftar Isi</h1>
+            <ul class="toc-list">
+                <li><a href="#materi">Bagian 1: Materi Lengkap</a></li>
+                <li><a href="#materi-1">&nbsp;&nbsp;&nbsp;› 1.1 Rumus Dasar Limit Trigonometri</a></li>
+                <li><a href="#materi-2">&nbsp;&nbsp;&nbsp;› 1.2 Identitas & Manipulasi Aljabar</a></li>
+                <li><a href="#contoh-soal">Bagian 2: Contoh Soal & Pembahasan</a></li>
+                <li><a href="#latihan-soal">Bagian 3: Bank Soal Latihan (50 Soal)</a></li>
+                <li><a href="#latihan-mudah">&nbsp;&nbsp;&nbsp;› 3.1 Soal Mudah (1-10) - Pengetahuan & Pemahaman</a></li>
+                <li><a href="#latihan-sedang">&nbsp;&nbsp;&nbsp;› 3.2 Soal Sedang (11-25) - Aplikasi</a></li>
+                <li><a href="#latihan-sulit">&nbsp;&nbsp;&nbsp;› 3.3 Soal Sulit (26-50) - Penalaran</a></li>
+                <li><a href="#pembahasan-latihan">Bagian 4: Kunci Jawaban & Pembahasan</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Materi Lengkap -->
+    <section id="materi" class="page">
+      <div class="content-wrapper">
+        <h2>Bagian 1: Materi Lengkap</h2>
+        <h3 id="materi-1">1.1 Rumus Dasar Limit Fungsi Trigonometri</h3>
+        <p>Limit fungsi trigonometri adalah nilai yang dicapai oleh suatu fungsi trigonometri ketika variabelnya mendekati suatu nilai tertentu. Rumus dasar untuk limit menuju nol adalah sebagai berikut:</p>
+        <ul>
+            <li>$\lim\limits_{x \to 0} \frac{\sin ax}{bx} = \frac{a}{b}$</li>
+            <li>$\lim\limits_{x \to 0} \frac{bx}{\sin ax} = \frac{b}{a}$</li>
+            <li>$\lim\limits_{x \to 0} \frac{\tan ax}{bx} = \frac{a}{b}$</li>
+            <li>$\lim\limits_{x \to 0} \frac{bx}{\tan ax} = \frac{b}{a}$</li>
+            <li>$\lim\limits_{x \to 0} \frac{\sin ax}{\sin bx} = \frac{a}{b}$</li>
+            <li>$\lim\limits_{x \to 0} \frac{\tan ax}{\tan bx} = \frac{a}{b}$</li>
+            <li>$\lim\limits_{x \to 0} \frac{\sin ax}{\tan bx} = \frac{a}{b}$</li>
+            <li>$\lim\limits_{x \to 0} \frac{\tan ax}{\sin bx} = \frac{a}{b}$</li>
+        </ul>
+        <p><b>Catatan Penting:</b> Rumus di atas hanya berlaku untuk fungsi sinus dan tangen. Untuk fungsi cosinus, kita umumnya menggunakan substitusi langsung selama hasilnya bukan bentuk tak tentu $\frac{0}{0}$.</p>
+        
+        <h3 id="materi-2">1.2 Identitas & Manipulasi Aljabar</h3>
+        <p>Seringkali, soal limit tidak dapat langsung diselesaikan dengan rumus dasar. Diperlukan manipulasi aljabar menggunakan identitas trigonometri. Beberapa identitas yang sering digunakan:</p>
+        <ul>
+            <li><b>Identitas Pythagoras:</b> $\sin^2 x + \cos^2 x = 1$</li>
+            <li><b>Identitas Sudut Rangkap Cosinus:</b>
+                <ul>
+                    <li>$\cos 2x = \cos^2 x - \sin^2 x$</li>
+                    <li>$\cos 2x = 2\cos^2 x - 1$</li>
+                    <li>$\cos 2x = 1 - 2\sin^2 x$, yang sering diubah menjadi $1 - \cos 2x = 2\sin^2 x$</li>
+                </ul>
+            </li>
+            <li><b>Identitas Lain:</b> $\tan x = \frac{\sin x}{\cos x}$ dan $\cot x = \frac{\cos x}{\sin x}$</li>
+        </ul>
+        <p>Untuk limit menuju $c \neq 0$, seringkali kita menggunakan pemisalan, misalnya $y = x-c$ sehingga limitnya menjadi $y \to 0$.</p>
+      </div>
+    </section>
+    
+    <section id="contoh-soal" class="page">
+        <div class="content-wrapper">
+            <h2>Bagian 2: Contoh Soal & Pembahasan</h2>
+            <div class="soal-item"><b>1. (Aplikasi Rumus Dasar)</b><br>Hitunglah nilai dari $\lim\limits_{x \to 0} \frac{\tan 5x}{\sin 3x}$.<div class="pembahasan"><b>Teori:</b> Gunakan rumus dasar $\lim\limits_{x \to 0} \frac{\tan ax}{\sin bx} = \frac{a}{b}$.<br><b>Langkah:</b> Dari soal, kita dapat mengidentifikasi $a=5$ dan $b=3$.<br>Maka, $\lim\limits_{x \to 0} \frac{\tan 5x}{\sin 3x} = \frac{5}{3}$.</div></div>
+            <div class="soal-item"><b>2. (Manipulasi Identitas)</b><br>Tentukan nilai dari $\lim\limits_{x \to 0} \frac{1 - \cos 6x}{x^2}$.<div class="pembahasan"><b>Teori:</b> Gunakan identitas $1-\cos(2a) = 2\sin^2(a)$.<br><b>Langkah 1:</b> Ubah bentuk pembilang.<br> $1 - \cos 6x = 2\sin^2(3x)$.<br><b>Langkah 2:</b> Substitusi ke dalam limit.<br>$\lim\limits_{x \to 0} \frac{2\sin^2(3x)}{x^2} = \lim\limits_{x \to 0} 2 \cdot \frac{\sin 3x}{x} \cdot \frac{\sin 3x}{x}$.<br><b>Langkah 3:</b> Hitung nilai limit.<br>$= 2 \cdot (\frac{3}{1}) \cdot (\frac{3}{1}) = 2 \cdot 3 \cdot 3 = 18$.</div></div>
+             <div class="soal-item"><b>3. (Limit Menuju $c \neq 0$)</b><br>Hitunglah $\lim\limits_{x \to 2} \frac{\sin(x-2)}{x^2-4}$.<div class="pembahasan"><b>Teori:</b> Gunakan faktorisasi dan pemisalan agar limit menuju nol.<br><b>Langkah 1:</b> Faktorkan penyebut.<br>$x^2-4 = (x-2)(x+2)$.<br><b>Langkah 2:</b> Pisahkan limit.<br>$\lim\limits_{x \to 2} \frac{\sin(x-2)}{(x-2)(x+2)} = \lim\limits_{x \to 2} \frac{\sin(x-2)}{x-2} \cdot \lim\limits_{x \to 2} \frac{1}{x+2}$.<br><b>Langkah 3:</b> Selesaikan limit. Misal $y=x-2$, saat $x \to 2$ maka $y \to 0$.<br>Bagian pertama menjadi $\lim\limits_{y \to 0} \frac{\sin y}{y} = 1$.<br>Bagian kedua substitusi langsung: $\frac{1}{2+2} = \frac{1}{4}$.<br><b>Hasil Akhir:</b> $1 \cdot \frac{1}{4} = \frac{1}{4}$.</div></div>
+        </div>
+    </section>
+    
+    <!-- Latihan Soal Mudah -->
+    <section id="latihan-mudah" class="page">
+        <div class="content-wrapper">
+            <h2 id="latihan-soal">Bagian 3: Bank Soal Latihan</h2>
+            <h3>3.1 Soal Mudah (1-10) - Pengetahuan & Pemahaman</h3>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Pengetahuan & Pemahaman | Tipe: Pilihan Ganda</div><b>1.</b> Nilai dari $\lim\limits_{x \to 0} \frac{\sin 4x}{8x}$ adalah...<ol class="pilihan-ganda"><li data-option="A">4</li><li data-option="B">2</li><li data-option="C">1</li><li data-option="D">1/2</li><li data-option="E">1/4</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Pengetahuan & Pemahaman | Tipe: Pilihan Ganda</div><b>2.</b> Nilai dari $\lim\limits_{x \to 0} \frac{3x}{\tan 9x}$ adalah...<ol class="pilihan-ganda"><li data-option="A">3</li><li data-option="B">1</li><li data-option="C">1/3</li><li data-option="D">1/9</li><li data-option="E">0</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Pengetahuan & Pemahaman | Tipe: Pilihan Ganda</div><b>3.</b> Nilai dari $\lim\limits_{x \to 0} \frac{\sin 2x}{\tan 10x}$ adalah...<ol class="pilihan-ganda"><li data-option="A">5</li><li data-option="B">2</li><li data-option="C">1/2</li><li data-option="D">1/5</li><li data-option="E">1/10</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Pengetahuan & Pemahaman | Tipe: Pilihan Ganda</div><b>4.</b> Nilai dari $\lim\limits_{x \to 0} \frac{x \sin 3x}{\tan^2 2x}$ adalah...<ol class="pilihan-ganda"><li data-option="A">3/4</li><li data-option="B">3/2</li><li data-option="C">1/2</li><li data-option="D">2/3</li><li data-option="E">4/3</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Pengetahuan & Pemahaman | Tipe: Pilihan Ganda</div><b>5.</b> Nilai dari $\lim\limits_{x \to 0} (2 \cos x + 3)$ adalah...<ol class="pilihan-ganda"><li data-option="A">2</li><li data-option="B">3</li><li data-option="C">4</li><li data-option="D">5</li><li data-option="E">Tidak ada</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Pengetahuan & Pemahaman | Tipe: Pilihan Ganda</div><b>6.</b> Nilai dari $\lim\limits_{x \to 0} \frac{\sin^2 3x}{3x^2}$ adalah...<ol class="pilihan-ganda"><li data-option="A">9</li><li data-option="B">3</li><li data-option="C">1</li><li data-option="D">1/3</li><li data-option="E">0</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Pengetahuan & Pemahaman | Tipe: Pilihan Ganda</div><b>7.</b> Nilai dari $\lim\limits_{x \to 0} \frac{5x \tan x}{1 - \cos x}$ adalah...<ol class="pilihan-ganda"><li data-option="A">0</li><li data-option="B">2.5</li><li data-option="C">5</li><li data-option="D">10</li><li data-option="E">Tak hingga</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Pengetahuan & Pemahaman | Tipe: Pilihan Ganda</div><b>8.</b> Nilai dari $\lim\limits_{x \to \pi/4} \frac{\sin x}{\cos x}$ adalah...<ol class="pilihan-ganda"><li data-option="A">0</li><li data-option="B">1/2</li><li data-option="C">1</li><li data-option="D">$\sqrt{2}$</li><li data-option="E">Tak hingga</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Pengetahuan & Pemahaman | Tipe: Pilihan Ganda</div><b>9.</b> Nilai dari $\lim\limits_{x \to 0} \frac{2 \sin 2x}{3 \tan 3x}$ adalah...<ol class="pilihan-ganda"><li data-option="A">2/3</li><li data-option="B">4/9</li><li data-option="C">1/3</li><li data-option="D">9/4</li><li data-option="E">1</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Pengetahuan & Pemahaman | Tipe: Pilihan Ganda</div><b>10.</b> Nilai dari $\lim\limits_{x \to 0} \frac{1 - \cos 2x}{2x \sin x}$ adalah...<ol class="pilihan-ganda"><li data-option="A">0</li><li data-option="B">1/2</li><li data-option="C">1</li><li data-option="D">2</li><li data-option="E">4</li></ol></div><div class="coret-coret"></div></div>
+        </div>
+    </section>
+
+    <!-- Latihan Soal Sedang -->
+    <section id="latihan-sedang" class="page">
+        <div class="content-wrapper">
+            <h3>3.2 Soal Sedang (11-25) - Aplikasi</h3>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Aplikasi | Tipe: Pilihan Ganda</div><b>11.</b> Nilai dari $\lim\limits_{x \to 1} \frac{(x^2-1) \sin(2x-2)}{(x-1)^2}$ adalah...<ol class="pilihan-ganda"><li data-option="A">0</li><li data-option="B">1</li><li data-option="C">2</li><li data-option="D">4</li><li data-option="E">6</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Aplikasi | Tipe: Pilihan Ganda</div><b>12.</b> Nilai dari $\lim\limits_{x \to 0} \frac{\cos x - \cos 3x}{x \tan x}$ adalah...<ol class="pilihan-ganda"><li data-option="A">-4</li><li data-option="B">-2</li><li data-option="C">2</li><li data-option="D">4</li><li data-option="E">8</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Aplikasi | Tipe: Pilihan Ganda</div><b>13.</b> Nilai dari $\lim\limits_{x \to \infty} x \sin(\frac{5}{x})$ adalah...<ol class="pilihan-ganda"><li data-option="A">0</li><li data-option="B">1</li><li data-option="C">5</li><li data-option="D">1/5</li><li data-option="E">Tak hingga</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Aplikasi | Tipe: Pilihan Ganda</div><b>14.</b> Nilai dari $\lim\limits_{x \to \pi/2} \frac{1 - \sin x}{x - \pi/2}$ adalah...<ol class="pilihan-ganda"><li data-option="A">0</li><li data-option="B">1</li><li data-option="C">-1</li><li data-option="D">1/2</li><li data-option="E">Tak hingga</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Aplikasi | Tipe: Pilihan Ganda</div><b>15.</b> Nilai dari $\lim\limits_{x \to 0} \frac{\sqrt{1+\tan x} - \sqrt{1+\sin x}}{x^3}$ adalah...<ol class="pilihan-ganda"><li data-option="A">1/4</li><li data-option="B">1/2</li><li data-option="C">0</li><li data-option="D">-1/2</li><li data-option="E">-1/4</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Aplikasi | Tipe: Analisis Kecukupan Data</div><b>16.</b> Tentukan nilai dari $\lim\limits_{x \to a} \frac{\sin(x-a)}{x^2-a^2}$.<br>(1) $a=2$<br>(2) $a \neq 0$<br><div class="keterangan-soal" style="margin-top:10px;">Pilih jawaban berdasarkan petunjuk berikut:<br>A. Pernyataan (1) SAJA cukup, tetapi (2) SAJA tidak cukup.<br>B. Pernyataan (2) SAJA cukup, tetapi (1) SAJA tidak cukup.<br>C. DUA pernyataan BERSAMA-SAMA cukup, tetapi SATU saja tidak cukup.<br>D. Pernyataan (1) SAJA cukup dan (2) SAJA cukup.<br>E. Pernyataan (1) dan (2) tidak cukup.</div></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Aplikasi | Tipe: Pilihan Ganda</div><b>17.</b> Nilai dari $\lim\limits_{x \to 0} \frac{x^2 \cos x}{1-\cos x}$ adalah...<ol class="pilihan-ganda"><li data-option="A">0</li><li data-option="B">1</li><li data-option="C">2</li><li data-option="D">-1</li><li data-option="E">-2</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Aplikasi | Tipe: Pilihan Ganda</div><b>18.</b> Nilai dari $\lim\limits_{y \to 0} \frac{\tan(2y) \sin(y)}{y \tan(y)}$ adalah...<ol class="pilihan-ganda"><li data-option="A">0</li><li data-option="B">1</li><li data-option="C">2</li><li data-option="D">3</li><li data-option="E">4</li></ol></div><div class="coret-coret"></div></div>
+             <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Aplikasi | Tipe: Pilihan Ganda</div><b>19.</b> Nilai dari $\lim\limits_{x \to 0} \frac{\sin(2x) + \tan(3x) - \sin(5x)}{2x}$ adalah...<ol class="pilihan-ganda"><li data-option="A">0</li><li data-option="B">1</li><li data-option="C">2</li><li data-option="D">3</li><li data-option="E">5</li></ol></div><div class="coret-coret"></div></div>
+             <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Aplikasi | Tipe: Pilihan Ganda</div><b>20.</b> Nilai dari $\lim\limits_{x \to 3} \frac{x^2-9}{\sin(x-3)}$ adalah...<ol class="pilihan-ganda"><li data-option="A">0</li><li data-option="B">1</li><li data-option="C">3</li><li data-option="D">6</li><li data-option="E">9</li></ol></div><div class="coret-coret"></div></div>
+             <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Aplikasi | Tipe: Pilihan Ganda</div><b>21.</b> Nilai dari $\lim\limits_{x \to 0} \frac{2x^2}{1-\cos^2(2x)}$ adalah...<ol class="pilihan-ganda"><li data-option="A">1/2</li><li data-option="B">1</li><li data-option="C">2</li><li data-option="D">4</li><li data-option="E">0</li></ol></div><div class="coret-coret"></div></div>
+             <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Aplikasi | Tipe: Pilihan Ganda Kompleks</div><b>22.</b> Manakah di antara limit berikut yang nilainya adalah $1/2$? <b>(bisa pilih lebih dari satu jawaban)</b><ol class="pilihan-ganda"><li data-option="A">$\lim\limits_{x \to 0} \frac{\sin x}{2x}$</li><li data-option="B">$\lim\limits_{x \to 0} \frac{x}{\tan 2x}$</li><li data-option="C">$\lim\limits_{x \to 0} \frac{1-\cos x}{x^2}$</li><li data-option="D">$\lim\limits_{x \to 0} \frac{\sin^2 x}{2x^2}$</li><li data-option="E">$\lim\limits_{x \to 0} \frac{\tan 2x}{4x}$</li></ol></div><div class="coret-coret"></div></div>
+             <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Aplikasi | Tipe: Pilihan Ganda</div><b>23.</b> Nilai dari $\lim\limits_{x \to \pi} \frac{\sin(\pi-x)}{x-\pi}$ adalah...<ol class="pilihan-ganda"><li data-option="A">1</li><li data-option="B">-1</li><li data-option="C">0</li><li data-option="D">$\pi$</li><li data-option="E">Tidak ada</li></ol></div><div class="coret-coret"></div></div>
+             <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Aplikasi | Tipe: Pilihan Ganda</div><b>24.</b> Nilai dari $\lim\limits_{x \to 0} \frac{\sin 4x + \sin 2x}{6x \cos x}$ adalah...<ol class="pilihan-ganda"><li data-option="A">0</li><li data-option="B">1/3</li><li data-option="C">2/3</li><li data-option="D">1</li><li data-option="E">2</li></ol></div><div class="coret-coret"></div></div>
+             <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Aplikasi | Tipe: Analisis Kecukupan Data</div><b>25.</b> Tentukan nilai $k$ jika $\lim\limits_{x \to 0} \frac{1-\cos(kx)}{x\sin x} = 8$.<br>(1) $k$ adalah bilangan positif.<br>(2) $k$ adalah kelipatan 4.<br><div class="keterangan-soal" style="margin-top:10px;">Pilih jawaban berdasarkan petunjuk A-E dari soal nomor 16.</div></div><div class="coret-coret"></div></div>
+        </div>
+    </section>
+
+    <!-- Latihan Soal Sulit -->
+    <section id="latihan-sulit" class="page">
+        <div class="content-wrapper">
+            <h3>3.3 Soal Sulit (26-50) - Penalaran</h3>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Penalaran | Tipe: Pilihan Ganda</div><b>26.</b> Nilai dari $\lim\limits_{x \to \pi/4} \frac{\cos 2x}{\cos x - \sin x}$ adalah...<ol class="pilihan-ganda"><li data-option="A">1</li><li data-option="B">$\sqrt{2}$</li><li data-option="C">2</li><li data-option="D">$2\sqrt{2}$</li><li data-option="E">0</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Penalaran | Tipe: Pilihan Ganda</div><b>27.</b> Nilai dari $\lim\limits_{x \to \infty} \frac{1-\cos(\frac{6}{x})}{\tan(\frac{3}{x})\sin(\frac{2}{x})}$ adalah...<ol class="pilihan-ganda"><li data-option="A">1</li><li data-option="B">2</li><li data-option="C">3</li><li data-option="D">6</li><li data-option="E">18</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Penalaran | Tipe: Pilihan Ganda</div><b>28.</b> Jika $f(x) = \sin(2x)$, maka $\lim\limits_{h \to 0} \frac{f(x+h) - f(x)}{h}$ adalah...<ol class="pilihan-ganda"><li data-option="A">$\cos(2x)$</li><li data-option="B">$2\cos(2x)$</li><li data-option="C">$\sin(2x)$</li><li data-option="D">$2\sin(x)\cos(x)$</li><li data-option="E">$-\sin(2x)$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Penalaran | Tipe: Pilihan Ganda</div><b>29.</b> Nilai dari $\lim\limits_{x \to \pi/2} (\sec x - \tan x)$ adalah...<ol class="pilihan-ganda"><li data-option="A">0</li><li data-option="B">1/2</li><li data-option="C">1</li><li data-option="D">2</li><li data-option="E">Tak hingga</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Penalaran | Tipe: Analisis Kecukupan Data</div><b>30.</b> Tentukan nilai $\lim\limits_{x \to 0} \frac{a \sin x - b \tan x}{x^3}$.<br>(1) $a=b$<br>(2) $a+b=4$<br><div class="keterangan-soal" style="margin-top:10px;">Pilih jawaban berdasarkan petunjuk A-E dari soal nomor 16.</div></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Penalaran | Tipe: Pilihan Ganda</div><b>31.</b> Nilai dari $\lim\limits_{x \to 0} \frac{\tan x - \sin x}{x^3}$ adalah...<ol class="pilihan-ganda"><li data-option="A">0</li><li data-option="B">1/2</li><li data-option="C">1</li><li data-option="D">2</li><li data-option="E">-1/2</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Penalaran | Tipe: Pilihan Ganda</div><b>32.</b> Diberikan $f(x) = \frac{\sin(x-2)}{2x-4}$. Nilai dari $\lim\limits_{x \to 2} (f(x) + f(x)^2)$ adalah...<ol class="pilihan-ganda"><li data-option="A">1/4</li><li data-option="B">1/2</li><li data-option="C">3/4</li><li data-option="D">1</li><li data-option="E">5/4</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Penalaran | Tipe: Pilihan Ganda Kompleks Kategori</div><b>33.</b> Diberikan fungsi $L(a) = \lim\limits_{x \to a} \frac{\sin(x^2-a^2)}{x-a}$. Pasangkan pernyataan di kolom kiri dengan nilai yang sesuai di kolom kanan.
+            <table class="soal-kategori">
+              <thead><tr><th>Pernyataan</th><th>Pilihan Nilai</th></tr></thead>
+              <tbody>
+                <tr><td>(1) Nilai $L(0)$</td><td>(A) $2\pi$</td></tr>
+                <tr><td>(2) Nilai $L(1)$</td><td>(B) 0</td></tr>
+                <tr><td>(3) Nilai $L(\pi)$</td><td>(C) 2</td></tr>
+              </tbody>
+            </table>
+            <ol class="pilihan-ganda">
+                <li data-option="A">(1)-(A), (2)-(B), (3)-(C)</li>
+                <li data-option="B">(1)-(B), (2)-(C), (3)-(A)</li>
+                <li data-option="C">(1)-(C), (2)-(A), (3)-(B)</li>
+                <li data-option="D">(1)-(B), (2)-(A), (3)-(C)</li>
+                <li data-option="E">(1)-(A), (2)-(C), (3)-(B)</li>
+            </ol>
+            </div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Penalaran | Tipe: Pilihan Ganda</div><b>34.</b> Nilai dari $\lim\limits_{x \to 0} \frac{x ( \cos 4x - 1 )}{\sin 3x \tan^2 x}$ adalah...<ol class="pilihan-ganda"><li data-option="A">-8/3</li><li data-option="B">-4/3</li><li data-option="C">0</li><li data-option="D">4/3</li><li data-option="E">8/3</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Penalaran | Tipe: Pilihan Ganda</div><b>35.</b> Nilai dari $\lim\limits_{x \to 2} \frac{(x-2) \cos( \pi x / 4)}{\sin(\pi(x-2))}$ adalah...<ol class="pilihan-ganda"><li data-option="A">$-1/\pi$</li><li data-option="B">$1/\pi$</li><li data-option="C">0</li><li data-option="D">$1/2$</li><li data-option="E">$-1/2</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Penalaran | Tipe: Pilihan Ganda Kompleks</div><b>36.</b> Manakah pernyataan berikut yang benar? <b>(bisa pilih lebih dari satu jawaban)</b><ol class="pilihan-ganda"><li data-option="A">$\lim\limits_{x \to 0} \frac{\sin(\sin x)}{x} = 1$</li><li data-option="B">$\lim\limits_{x \to 0} \frac{\cos x}{x}$ tidak ada</li><li data-option="C">$\lim\limits_{x \to \infty} \cos x$ tidak ada</li><li data-option="D">$\lim\limits_{x \to \pi/2} \tan x = 1$</li><li data-option="E">$\lim\limits_{x \to 0} \frac{1-\cos(2x)}{x} = 0$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Penalaran | Tipe: Pilihan Ganda</div><b>37.</b> Nilai dari $\lim\limits_{x \to 0} \frac{\cot x}{\cot 2x}$ adalah...<ol class="pilihan-ganda"><li data-option="A">0</li><li data-option="B">1/2</li><li data-option="C">1</li><li data-option="D">2</li><li data-option="E">Tak hingga</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Penalaran | Tipe: Pilihan Ganda</div><b>38.</b> Nilai dari $\lim\limits_{x \to 1} \frac{\tan(\pi x / 4) - 1}{x-1}$ adalah...<ol class="pilihan-ganda"><li data-option="A">$\pi/4$</li><li data-option="B">$\pi/2$</li><li data-option="C">$\pi$</li><li data-option="D">2</li><li data-option="E">4</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Penalaran | Tipe: Analisis Kecukupan Data</div><b>39.</b> Diberikan $f(x) = ax+b$. Apakah $\lim\limits_{x \to 0} \frac{\sin(f(x))}{x} = 3$? <br>(1) $f(0) = 0$<br>(2) Gradien garis $y=f(x)$ adalah 3.<br><div class="keterangan-soal" style="margin-top:10px;">Pilih jawaban berdasarkan petunjuk A-E dari soal nomor 16.</div></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Penalaran | Tipe: Pilihan Ganda</div><b>40.</b> Nilai dari $\lim\limits_{x \to 0} \frac{1 - \sqrt{\cos x}}{x^2}$ adalah...<ol class="pilihan-ganda"><li data-option="A">1</li><li data-option="B">1/2</li><li data-option="C">1/4</li><li data-option="D">-1/2</li><li data-option="E">-1/4</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Penalaran | Tipe: Pilihan Ganda</div><b>41.</b> Nilai dari $\lim\limits_{h \to 0} \frac{\sin(x+h) - \sin x}{h}$ adalah... (anggap $x$ konstanta)<ol class="pilihan-ganda"><li data-option="A">$\sin x$</li><li data-option="B">$\cos x$</li><li data-option="C">$\tan x$</li><li data-option="D">$-\sin x$</li><li data-option="E">$-\cos x$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Penalaran | Tipe: Pilihan Ganda</div><b>42.</b> $\lim\limits_{x \to a} \frac{\sin x - \sin a}{x-a} = \dots$<ol class="pilihan-ganda"><li data-option="A">$\sin a$</li><li data-option="B">$\cos a$</li><li data-option="C">$\tan a$</li><li data-option="D">$-\sin a$</li><li data-option="E">$-\cos a$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Penalaran | Tipe: Pilihan Ganda</div><b>43.</b> $\lim\limits_{x \to 0} \frac{x^3}{\sqrt{1+\sin x} - \sqrt{1-\sin x}} = \dots$<ol class="pilihan-ganda"><li data-option="A">0</li><li data-option="B">1</li><li data-option="C">2</li><li data-option="D">4</li><li data-option="E">Tak hingga</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Penalaran | Tipe: Pilihan Ganda</div><b>44.</b> $\lim\limits_{h \to 0} \frac{\cos(x+2h) - \cos(x-2h)}{h \sin h} = \dots$<ol class="pilihan-ganda"><li data-option="A">$-4\sin x$</li><li data-option="B">$-2\sin x$</li><li data-option="C">0</li><li data-option="D">$2\sin x$</li><li data-option="E">$4\sin x$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Penalaran | Tipe: Pilihan Ganda Kompleks Kategori</div><b>45.</b> Diberikan limit $L = \lim\limits_{x \to 0} \frac{\sin(ax)\tan(bx)}{1-\cos(cx)}$. Tentukan apakah pernyataan berikut Benar atau Salah.
+            <table class="soal-kategori">
+              <thead><tr><th>Pernyataan</th><th>Benar</th><th>Salah</th></tr></thead>
+              <tbody>
+                <tr><td>(1) Jika $a=1, b=2, c=3$, maka $L = 4/9$.</td><td></td><td></td></tr>
+                <tr><td>(2) Nilai $L$ adalah $\frac{2ab}{c^2}$.</td><td></td><td></td></tr>
+                <tr><td>(3) Jika $a=b=c=2$, maka $L=2$.</td><td></td><td></td></tr>
+              </tbody>
+            </table>
+            <ol class="pilihan-ganda">
+                <li data-option="A">(1)S, (2)B, (3)B</li>
+                <li data-option="B">(1)B, (2)B, (3)S</li>
+                <li data-option="C">(1)S, (2)S, (3)B</li>
+                <li data-option="D">(1)B, (2)B, (3)B</li>
+                <li data-option="E">(1)B, (2)S, (3)B</li>
+            </ol>
+            </div><div class="coret-coret"></div></div>
+             <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Penalaran | Tipe: Pilihan Ganda</div><b>46.</b> $\lim\limits_{x \to \infty} x \cdot \tan(\frac{3}{x}) \cdot (\sqrt{x^2+4x}-x) = \dots$<ol class="pilihan-ganda"><li data-option="A">0</li><li data-option="B">3/2</li><li data-option="C">3</li><li data-option="D">6</li><li data-option="E">Tak hingga</li></ol></div><div class="coret-coret"></div></div>
+             <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Penalaran | Tipe: Pilihan Ganda</div><b>47.</b> $\lim\limits_{x \to 0} \frac{\sin(x^2-4x)}{x^2-2x} = \dots$<ol class="pilihan-ganda"><li data-option="A">4</li><li data-option="B">2</li><li data-option="C">1</li><li data-option="D">-2</li><li data-option="E">-4</li></ol></div><div class="coret-coret"></div></div>
+             <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Penalaran | Tipe: Pilihan Ganda</div><b>48.</b> Jika $\lim\limits_{x \to 0} \frac{\sin(2x)}{ax} = b$ dan $\lim\limits_{x \to 0} \frac{\tan(bx)}{x} = a$, dan $a,b > 0$, maka $a+b$ adalah...<ol class="pilihan-ganda"><li data-option="A">1</li><li data-option="B">2</li><li data-option="C">3</li><li data-option="D">$2\sqrt{2}$</li><li data-option="E">5</li></ol></div><div class="coret-coret"></div></div>
+             <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Penalaran | Tipe: Pilihan Ganda</div><b>49.</b> $\lim\limits_{x \to 0} \frac{1 - \cos^3 x}{x \sin x \cos x} = \dots$<ol class="pilihan-ganda"><li data-option="A">0</li><li data-option="B">1/2</li><li data-option="C">1</li><li data-option="D">3/2</li><li data-option="E">2</li></ol></div><div class="coret-coret"></div></div>
+             <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Penalaran | Tipe: Pilihan Ganda</div><b>50.</b> $\lim\limits_{x \to 0} \frac{8x^3}{2\sin x - \sin 2x} = \dots$<ol class="pilihan-ganda"><li data-option="A">2</li><li data-option="B">4</li><li data-option="C">8</li><li data-option="D">12</li><li data-option="E">16</li></ol></div><div class="coret-coret"></div></div>
+
+        </div>
+    </section>
+    
+    <!-- Pembahasan -->
+    <section id="pembahasan-latihan" class="page">
+        <div class="content-wrapper">
+            <h2>Bagian 4: Kunci Jawaban & Pembahasan</h2>
+            <h3>Pembahasan Soal Mudah (1-10)</h3>
+            <div class="pembahasan"><b>1. Jawaban: D</b><b>Teori Dasar:</b> Menggunakan rumus dasar $\lim\limits_{x \to 0} \frac{\sin ax}{bx} = \frac{a}{b}$.<br><b>Pengerjaan Soal:</b> Dengan $a=4$ dan $b=8$, maka nilai limitnya adalah $\frac{4}{8} = \frac{1}{2}$.</div>
+            <div class="pembahasan"><b>2. Jawaban: C</b><b>Teori Dasar:</b> Menggunakan rumus dasar $\lim\limits_{x \to 0} \frac{ax}{\tan bx} = \frac{a}{b}$.<br><b>Pengerjaan Soal:</b> Dengan $a=3$ dan $b=9$, maka nilai limitnya adalah $\frac{3}{9} = \frac{1}{3}$.</div>
+            <div class="pembahasan"><b>3. Jawaban: D</b><b>Teori Dasar:</b> Menggunakan rumus dasar $\lim\limits_{x \to 0} \frac{\sin ax}{\tan bx} = \frac{a}{b}$.<br><b>Pengerjaan Soal:</b> Dengan $a=2$ dan $b=10$, maka nilai limitnya adalah $\frac{2}{10} = \frac{1}{5}$.</div>
+            <div class="pembahasan"><b>4. Jawaban: A</b><b>Teori Dasar:</b> Pecah limit menjadi perkalian bentuk dasar.<br><b>Pengerjaan Soal:</b> $$ \lim\limits_{x \to 0} \frac{x \sin 3x}{\tan 2x \tan 2x} = \lim\limits_{x \to 0} \left(\frac{x}{\tan 2x} \cdot \frac{\sin 3x}{\tan 2x}\right) = \left(\frac{1}{2}\right) \cdot \left(\frac{3}{2}\right) = \frac{3}{4} $$</div>
+            <div class="pembahasan"><b>5. Jawaban: D</b><b>Teori Dasar:</b> Jika fungsi kontinu di titik limit, nilai limit dapat dicari dengan substitusi langsung.<br><b>Pengerjaan Soal:</b> Substitusi $x=0$: $2 \cos(0) + 3 = 2(1) + 3 = 5$.</div>
+            <div class="pembahasan"><b>6. Jawaban: B</b><b>Teori Dasar:</b> Menggunakan sifat $\lim\limits_{x \to 0} (\frac{\sin ax}{x})^2 = a^2$.<br><b>Pengerjaan Soal:</b> $\lim\limits_{x \to 0} \frac{\sin^2 3x}{3x^2} = \frac{1}{3} \lim\limits_{x \to 0} (\frac{\sin 3x}{x})^2 = \frac{1}{3} \cdot (3)^2 = \frac{9}{3} = 3$.</div>
+            <div class="pembahasan"><b>7. Jawaban: D</b><b>Teori Dasar:</b> Menggunakan identitas $1 - \cos x = 2\sin^2(\frac{x}{2})$.<br><b>Pengerjaan Soal:</b> $$ \begin{aligned} \lim\limits_{x \to 0} \frac{5x \tan x}{2\sin^2(x/2)} &= \lim\limits_{x \to 0} \frac{5}{2} \cdot \frac{x}{\sin(x/2)} \cdot \frac{\tan x}{\sin(x/2)} \\ &= \frac{5}{2} \cdot \left(\frac{1}{1/2}\right) \cdot \left(\frac{1}{1/2}\right) \\ &= \frac{5}{2} \cdot 2 \cdot 2 = 10 \end{aligned} $$</div>
+            <div class="pembahasan"><b>8. Jawaban: C</b><b>Teori Dasar:</b> Substitusi langsung jika tidak menghasilkan bentuk tak tentu.<br><b>Pengerjaan Soal:</b> $\lim\limits_{x \to \pi/4} \frac{\sin x}{\cos x} = \lim\limits_{x \to \pi/4} \tan x = \tan(\pi/4) = 1$.</div>
+            <div class="pembahasan"><b>9. Jawaban: B</b><b>Teori Dasar:</b> Menggunakan sifat dasar limit trigonometri.<br><b>Pengerjaan Soal:</b> $\lim\limits_{x \to 0} \frac{2 \sin 2x}{3 \tan 3x} = \frac{2}{3} \lim\limits_{x \to 0} \frac{\sin 2x}{\tan 3x} = \frac{2}{3} \cdot \frac{2}{3} = \frac{4}{9}$.</div>
+            <div class="pembahasan"><b>10. Jawaban: C</b><b>Teori Dasar:</b> Menggunakan identitas $1 - \cos(2x) = 2\sin^2 x$.<br><b>Pengerjaan Soal:</b> $\lim\limits_{x \to 0} \frac{2\sin^2 x}{2x \sin x} = \lim\limits_{x \to 0} \frac{\sin x}{x} = 1$.</div>
+        </div>
+    </section>
+    <section class="page">
+        <div class="content-wrapper">
+            <h3>Pembahasan Soal Sedang (11-25)</h3>
+            <div class="pembahasan"><b>11. Jawaban: D</b><b>Teori Dasar:</b> Faktorisasi aljabar dan pemisalan untuk limit menuju $c \neq 0$.<br><b>Pengerjaan Soal:</b> $$ \begin{aligned} L &= \lim\limits_{x \to 1} \frac{(x-1)(x+1)\sin(2(x-1))}{(x-1)^2} \\ &= \lim\limits_{x \to 1} (x+1) \cdot \frac{\sin(2(x-1))}{x-1} \\ &= (1+1) \cdot 2 = 4 \end{aligned} $$</div>
+            <div class="pembahasan"><b>12. Jawaban: D</b><b>Teori Dasar:</b> Menggunakan identitas $\cos A - \cos B = -2\sin(\frac{A+B}{2})\sin(\frac{A-B}{2})$.<br><b>Pengerjaan Soal:</b> $$ \begin{aligned} L &= \lim\limits_{x \to 0} \frac{-2\sin(2x)\sin(-x)}{x \tan x} \\ &= \lim\limits_{x \to 0} \frac{2\sin(2x)\sin(x)}{x \tan x} \\ &= 2 \cdot \left(\lim\limits_{x \to 0} \frac{\sin 2x}{x}\right) \cdot \left(\lim\limits_{x \to 0} \frac{\sin x}{\tan x}\right) \\ &= 2 \cdot 2 \cdot 1 = 4 \end{aligned} $$</div>
+            <div class="pembahasan"><b>13. Jawaban: C</b><b>Teori Dasar:</b> Untuk limit tak hingga, gunakan pemisalan $y=1/x$. Saat $x \to \infty$, maka $y \to 0$.<br><b>Pengerjaan Soal:</b> $\lim\limits_{y \to 0} \frac{1}{y} \sin(5y) = \lim\limits_{y \to 0} \frac{\sin 5y}{y} = 5$.</div>
+            <div class="pembahasan"><b>14. Jawaban: A</b><b>Teori Dasar:</b> Jika substitusi menghasilkan bentuk $\frac{0}{0}$, dapat digunakan Aturan L'Hopital (turunan pembilang dan penyebut).<br><b>Pengerjaan Soal:</b> Turunkan pembilang: $\frac{d}{dx}(1-\sin x) = -\cos x$. Turunkan penyebut: $\frac{d}{dx}(x-\pi/2)=1$. Limitnya menjadi $\lim\limits_{x \to \pi/2} \frac{-\cos x}{1} = -\cos(\pi/2) = 0$.</div>
+            <div class="pembahasan"><b>15. Jawaban: A</b><b>Teori Dasar:</b> Kalikan dengan bentuk sekawan untuk menghilangkan akar. Gunakan identitas $1-\cos x = 2\sin^2(x/2)$.<br><b>Pengerjaan Soal:</b> $$ \begin{aligned} L &= \lim\limits_{x \to 0} \frac{\tan x - \sin x}{x^3(\sqrt{1+\tan x}+\sqrt{1+\sin x})} \\ &= \lim\limits_{x \to 0} \frac{\tan x(1-\cos x)}{x^3 \cdot 2} \\ &= \frac{1}{2} \lim\limits_{x \to 0} \frac{\tan x \cdot 2\sin^2(x/2)}{x^3} \\ &\approx \frac{1}{2} \lim\limits_{x \to 0} \frac{x \cdot 2(x/2)^2}{x^3} = \frac{1}{4} \end{aligned} $$</div>
+            <div class="pembahasan"><b>16. Jawaban: A</b><b>Teori Dasar:</b> Nilai limit harus berupa konstanta numerik. Analisis kecukupan data berarti menentukan apakah informasi yang diberikan cukup untuk mencapai konstanta tersebut.<br><b>Pengerjaan Soal:</b> Limitnya adalah $\lim\limits_{x \to a} \frac{\sin(x-a)}{(x-a)(x+a)} = \frac{1}{a+a} = \frac{1}{2a}$. Agar nilainya pasti, kita butuh nilai $a$. Pernyataan (1) memberi $a=2$, sehingga nilai limit adalah $1/4$. Cukup. Pernyataan (2) hanya menyatakan $a \neq 0$, yang berarti nilainya masih $\frac{1}{2a}$ (bukan konstanta spesifik). Tidak cukup.</div>
+            <div class="pembahasan"><b>17. Jawaban: C</b><b>Teori Dasar:</b> Gunakan identitas $1-\cos x = 2\sin^2(x/2)$.<br><b>Pengerjaan Soal:</b> $$ \begin{aligned} L &= \lim\limits_{x \to 0} \frac{x^2 \cos x}{2\sin^2(x/2)} \\ &= \left(\lim\limits_{x \to 0} \cos x\right) \cdot \frac{1}{2} \lim\limits_{x \to 0} \left(\frac{x}{\sin(x/2)}\right)^2 \\ &= 1 \cdot \frac{1}{2} \cdot \left(\frac{1}{1/2}\right)^2 = \frac{1}{2} \cdot 2^2 = 2 \end{aligned} $$</div>
+            <div class="pembahasan"><b>18. Jawaban: C</b><b>Teori Dasar:</b> Pecah menjadi perkalian bentuk-bentuk dasar limit.<br><b>Pengerjaan Soal:</b> $\lim\limits_{y \to 0} \left(\frac{\tan(2y)}{y} \cdot \frac{\sin(y)}{\tan(y)}\right) = \left(\lim\limits_{y \to 0} \frac{\tan(2y)}{y}\right) \cdot \left(\lim\limits_{y \to 0} \frac{\sin(y)}{\tan(y)}\right) = 2 \cdot 1 = 2$.</div>
+            <div class="pembahasan"><b>19. Jawaban: A</b><b>Teori Dasar:</b> Sifat penjumlahan dan pengurangan limit.<br><b>Pengerjaan Soal:</b> Pecah menjadi $\lim\limits_{x \to 0} \left(\frac{\sin(2x)}{2x} + \frac{\tan(3x)}{2x} - \frac{\sin(5x)}{2x}\right) = \frac{2}{2} + \frac{3}{2} - \frac{5}{2} = \frac{2+3-5}{2} = 0$.</div>
+            <div class="pembahasan"><b>20. Jawaban: D</b><b>Teori Dasar:</b> Faktorisasi aljabar dan pemisalan.<br><b>Pengerjaan Soal:</b> $\lim\limits_{x \to 3} \frac{(x-3)(x+3)}{\sin(x-3)} = \lim\limits_{x \to 3} (x+3) \cdot \lim\limits_{x \to 3} \frac{x-3}{\sin(x-3)} = (3+3) \cdot 1 = 6$.</div>
+            <div class="pembahasan"><b>21. Jawaban: A</b><b>Teori Dasar:</b> Identitas Pythagoras: $\sin^2 A + \cos^2 A = 1 \implies 1-\cos^2 A = \sin^2 A$.<br><b>Pengerjaan Soal:</b> $\lim\limits_{x \to 0} \frac{2x^2}{\sin^2(2x)} = 2 \cdot \lim\limits_{x \to 0} \left(\frac{x}{\sin 2x}\right)^2 = 2 \cdot \left(\frac{1}{2}\right)^2 = 2 \cdot \frac{1}{4} = \frac{1}{2}$.</div>
+            <div class="pembahasan"><b>22. Jawaban: A, B, C, D, E</b><b>Teori Dasar:</b> Evaluasi setiap pilihan menggunakan rumus dasar dan identitas.<br><b>Pengerjaan Soal:</b> A: $\frac{1}{2}$. B: $\frac{1}{2}$. C: $\lim\limits_{x \to 0} \frac{2\sin^2(x/2)}{x^2} = 2(\frac{1}{2})^2 = 1/2$. D: $\frac{1}{2}\lim\limits_{x \to 0}(\frac{\sin x}{x})^2 = \frac{1}{2}$. E: $\frac{2}{4}=\frac{1}{2}$. Semua pilihan benar.</div>
+            <div class="pembahasan"><b>23. Jawaban: B</b><b>Teori Dasar:</b> Pemisalan $y = x - \pi$. Identitas $\sin(\pi - A) = \sin A$.<br><b>Pengerjaan Soal:</b> Misal $y=x-\pi$. Saat $x \to \pi$, $y \to 0$. $x = y+\pi$. Limitnya menjadi $\lim\limits_{y \to 0} \frac{\sin(\pi-(y+\pi))}{y} = \lim\limits_{y \to 0} \frac{\sin(-y)}{y} = -1$.</div>
+            <div class="pembahasan"><b>24. Jawaban: D</b><b>Teori Dasar:</b> Sifat distributif limit terhadap penjumlahan.<br><b>Pengerjaan Soal:</b> $\lim\limits_{x \to 0} \frac{1}{\cos x} \cdot \left(\frac{\sin 4x}{6x} + \frac{\sin 2x}{6x}\right) = 1 \cdot \left(\frac{4}{6} + \frac{2}{6}\right) = \frac{6}{6} = 1$.</div>
+            <div class="pembahasan"><b>25. Jawaban: A</b><b>Teori Dasar:</b> Gunakan identitas $1-\cos(A) = 2\sin^2(A/2)$.<br><b>Pengerjaan Soal:</b> $\lim\limits_{x \to 0} \frac{2\sin^2(kx/2)}{x\sin x} \approx \lim\limits_{x \to 0} \frac{2(kx/2)^2}{x^2} = \frac{2k^2x^2/4}{x^2} = \frac{k^2}{2}$. Maka $\frac{k^2}{2} = 8 \implies k^2=16 \implies k=\pm 4$. Pernyataan (1) $k>0$ membuat $k=4$ sebagai solusi unik. Cukup. Pernyataan (2) $k$ kelipatan 4 (bisa $4, 8, -4, ...$) tidak cukup untuk memberi satu nilai pasti.</div>
+        </div>
+    </section>
+    <section class="page">
+        <div class="content-wrapper">
+            <h3>Pembahasan Soal Sulit (26-50)</h3>
+            <div class="pembahasan"><b>26. Jawaban: B</b><b>Teori Dasar:</b> Identitas sudut rangkap $\cos 2x = \cos^2 x - \sin^2 x$ dan faktorisasi selisih kuadrat.<br><b>Pengerjaan Soal:</b> $$ \begin{aligned} L &= \lim\limits_{x \to \pi/4} \frac{\cos^2 x - \sin^2 x}{\cos x - \sin x} \\ &= \lim\limits_{x \to \pi/4} \frac{(\cos x - \sin x)(\cos x + \sin x)}{\cos x - \sin x} \\ &= \lim\limits_{x \to \pi/4} (\cos x + \sin x) \\ &= \cos(\frac{\pi}{4}) + \sin(\frac{\pi}{4}) = \frac{\sqrt{2}}{2} + \frac{\sqrt{2}}{2} = \sqrt{2} \end{aligned} $$</div>
+            <div class="pembahasan"><b>27. Jawaban: C</b><b>Teori Dasar:</b> Pemisalan $y=1/x$ dan identitas $1-\cos A = 2\sin^2(A/2)$.<br><b>Pengerjaan Soal:</b> $$ \begin{aligned} L &= \lim\limits_{y \to 0} \frac{1-\cos(6y)}{\tan(3y)\sin(2y)} \\ &= \lim\limits_{y \to 0} \frac{2\sin^2(3y)}{\tan(3y)\sin(2y)} \\ &= 2 \cdot \lim\limits_{y \to 0} \frac{\sin(3y)}{\tan(3y)} \cdot \frac{\sin(3y)}{\sin(2y)} \\ &= 2 \cdot 1 \cdot \frac{3}{2} = 3 \end{aligned} $$</div>
+            <div class="pembahasan"><b>28. Jawaban: B</b><b>Teori Dasar:</b> Bentuk limit tersebut adalah definisi turunan pertama dari fungsi $f(x)$. Turunan dari $\sin(ax)$ adalah $a\cos(ax)$.<br><b>Pengerjaan Soal:</b> Ini adalah turunan dari $f(x)=\sin(2x)$. Maka $f'(x) = 2\cos(2x)$.</div>
+            <div class="pembahasan"><b>29. Jawaban: A</b><b>Teori Dasar:</b> Ubah ke bentuk sin dan cos. Gunakan Aturan L'Hopital jika bentuknya $\frac{0}{0}$.<br><b>Pengerjaan Soal:</b> $\lim\limits_{x \to \pi/2} (\frac{1}{\cos x} - \frac{\sin x}{\cos x}) = \lim\limits_{x \to \pi/2} \frac{1-\sin x}{\cos x}$. Karena bentuknya $0/0$, gunakan L'Hopital: $\lim\limits_{x \to \pi/2} \frac{-\cos x}{-\sin x} = \frac{-\cos(\pi/2)}{-\sin(\pi/2)} = \frac{0}{-1} = 0$.</div>
+            <div class="pembahasan"><b>30. Jawaban: C</b><b>Teori Dasar:</b> Agar limit $\frac{f(x)}{x^n}$ ada dan tidak nol, suku terendah pada deret Taylor $f(x)$ harus $x^n$. $\sin x \approx x - \frac{x^3}{6}$, $\tan x \approx x + \frac{x^3}{3}$.<br><b>Pengerjaan Soal:</b> Pembilang menjadi $a(x-\frac{x^3}{6}) - b(x+\frac{x^3}{3}) = (a-b)x - (\frac{a}{6}+\frac{b}{3})x^3$. Agar dapat dibagi $x^3$, suku $(a-b)x$ harus nol. Jadi $a=b$. Pernyataan (1) membuat limit ada, tapi nilainya $-(\frac{a}{6}+\frac{a}{3}) = -a/2$. Kita perlu nilai $a$. Pernyataan (2) saja tidak cukup. Keduanya bersama: $a=b$ dan $a+b=4 \implies a=b=2$. Cukup.</div>
+            <div class="pembahasan"><b>31. Jawaban: B</b><b>Teori Dasar:</b> Keluarkan faktor umum dan gunakan identitas $1-\cos x=2\sin^2(x/2)$.<br><b>Pengerjaan Soal:</b> $$ \begin{aligned} L &= \lim\limits_{x \to 0} \frac{\sin x(1-\cos x)}{x^3 \cos x} \\ &= \left(\lim\limits_{x \to 0} \frac{\sin x}{x}\right) \left(\lim\limits_{x \to 0} \frac{1-\cos x}{x^2}\right) \left(\lim\limits_{x \to 0} \frac{1}{\cos x}\right) \\ &= (1) \cdot (\frac{1}{2}) \cdot (1) = \frac{1}{2} \end{aligned} $$</div>
+            <div class="pembahasan"><b>32. Jawaban: C</b><b>Teori Dasar:</b> Sifat limit: $\lim (g(x)+h(x)) = \lim g(x) + \lim h(x)$.<br><b>Pengerjaan Soal:</b> Nilai $\lim\limits_{x \to 2} f(x) = \lim\limits_{x \to 2} \frac{\sin(x-2)}{2(x-2)} = \frac{1}{2}$. Sebut nilai ini $L$. Yang ditanya adalah $\lim\limits_{x \to 2} (f(x) + (f(x))^2) = L + L^2 = \frac{1}{2} + (\frac{1}{2})^2 = \frac{1}{2} + \frac{1}{4} = \frac{3}{4}$.</div>
+            <div class="pembahasan"><b>33. Jawaban: B</b><b>Teori Dasar:</b> Manipulasi aljabar agar sesuai dengan bentuk dasar limit.<br><b>Pengerjaan Soal:</b> $$ \begin{aligned} L(a) &= \lim\limits_{x \to a} \frac{\sin((x-a)(x+a))}{x-a} \\ &= \lim\limits_{x \to a} \frac{\sin((x-a)(x+a))}{(x-a)(x+a)} \cdot (x+a) \\ &= 1 \cdot (a+a) = 2a \end{aligned} $$ (1) $L(0)=2(0)=0$. (2) $L(1)=2(1)=2$. (3) $L(\pi)=2\pi$. Jadi (1)-B, (2)-C, (3)-A.</div>
+            <div class="pembahasan"><b>34. Jawaban: A</b><b>Teori Dasar:</b> Gunakan identitas $\cos(A)-1 = -2\sin^2(A/2)$.<br><b>Pengerjaan Soal:</b> $$ \begin{aligned} L &= \lim\limits_{x \to 0} \frac{x(-2\sin^2(2x))}{\sin 3x \tan^2 x} \\ &\approx \lim\limits_{x \to 0} \frac{-2x(2x)^2}{3x \cdot x^2} \\ &= \lim\limits_{x \to 0} \frac{-8x^3}{3x^3} = -8/3 \end{aligned} $$</div>
+            <div class="pembahasan"><b>35. Jawaban: C</b><b>Teori Dasar:</b> Sifat perkalian limit. Substitusi langsung jika tidak menghasilkan bentuk tak tentu.<br><b>Pengerjaan Soal:</b> $\lim\limits_{x \to 2} \cos(\frac{\pi x}{4}) \cdot \lim\limits_{x \to 2} \frac{x-2}{\sin(\pi(x-2))}$. Bagian pertama: $\cos(\pi/2) = 0$. Bagian kedua: $\frac{1}{\pi}$. Hasilnya $0 \cdot \frac{1}{\pi} = 0$.</div>
+            <div class="pembahasan"><b>36. Jawaban: A, B, C, E</b><b>Teori Dasar:</b> Evaluasi kebenaran setiap pernyataan.<br><b>Pengerjaan Soal:</b> (A) Benar, $\frac{\sin(\sin x)}{\sin x} \frac{\sin x}{x} \to 1 \cdot 1=1$. (B) Benar, limit kiri $\to -\infty$, kanan $\to +\infty$. (C) Benar, nilai $\cos x$ terus berosilasi antara -1 dan 1. (D) Salah, $\lim\limits_{x \to \pi/2} \tan x$ tidak ada (tak hingga). (E) Benar, $\lim\limits_{x \to 0} \frac{2\sin^2(x)}{x} = \lim\limits_{x \to 0} 2\sin(x) \frac{\sin x}{x} = 2(0)(1)=0$.</div>
+            <div class="pembahasan"><b>37. Jawaban: D</b><b>Teori Dasar:</b> $\cot x = 1/\tan x$.<br><b>Pengerjaan Soal:</b> $\lim\limits_{x \to 0} \frac{\cot x}{\cot 2x} = \lim\limits_{x \to 0} \frac{\tan 2x}{\tan x} = \frac{2}{1} = 2$.</div>
+            <div class="pembahasan"><b>38. Jawaban: B</b><b>Teori Dasar:</b> Bentuk limit adalah definisi turunan. $f'(a) = \lim\limits_{x \to a} \frac{f(x)-f(a)}{x-a}$.<br><b>Pengerjaan Soal:</b> Ini adalah turunan dari $f(x)=\tan(\pi x/4)$ di $x=1$. $f'(x) = \sec^2(\pi x/4) \cdot (\pi/4)$. Maka $f'(1) = \sec^2(\pi/4) \cdot \pi/4 = (\sqrt{2})^2 \cdot \pi/4 = 2\pi/4 = \pi/2$.</div>
+            <div class="pembahasan"><b>39. Jawaban: C</b><b>Teori Dasar:</b> Agar limit $\lim\limits_{x \to 0} \frac{\sin(g(x))}{x}$ ada dan terhingga, $g(x)$ harus menuju 0 saat $x \to 0$.<br><b>Pengerjaan Soal:</b> Agar limit ada, $\lim\limits_{x \to 0} f(x) = f(0) = 0$. Pernyataan (1) $f(0)=0$ berarti $a(0)+b=0 \implies b=0$. Limit menjadi $\lim\limits_{x \to 0} \frac{\sin(ax)}{x} = a$. Pernyataan (2) memberi $a=3$. Jadi $a=3, b=0$ diperlukan. Keduanya bersama-sama cukup.</div>
+            <div class="pembahasan"><b>40. Jawaban: C</b><b>Teori Dasar:</b> Kalikan dengan sekawan dan gunakan $1-\cos x = 2\sin^2(x/2)$.<br><b>Pengerjaan Soal:</b> $$ \begin{aligned} L &= \lim\limits_{x \to 0} \frac{1-\cos x}{x^2(1+\sqrt{\cos x})} \\ &= \left(\lim\limits_{x \to 0} \frac{1-\cos x}{x^2}\right) \cdot \left(\lim\limits_{x \to 0} \frac{1}{1+\sqrt{\cos x}}\right) \\ &= \left(\frac{1}{2}\right) \cdot \left(\frac{1}{1+\sqrt{1}}\right) = \frac{1}{4} \end{aligned} $$</div>
+            <div class="pembahasan"><b>41. Jawaban: B</b><b>Teori Dasar:</b> Bentuk limit tersebut adalah definisi turunan dari fungsi $f(x)=\sin x$.<br><b>Pengerjaan Soal:</b> Turunan dari $\sin x$ adalah $\cos x$.</div>
+            <div class="pembahasan"><b>42. Jawaban: B</b><b>Teori Dasar:</b> Bentuk limit tersebut adalah definisi turunan dari fungsi $f(x)=\sin x$ di titik $x=a$.<br><b>Pengerjaan Soal:</b> Turunan dari $\sin x$ adalah $\cos x$. Di titik $x=a$, nilainya adalah $\cos a$.</div>
+            <div class="pembahasan"><b>43. Jawaban: A</b><b>Teori Dasar:</b> Kalikan dengan bentuk sekawan untuk menghilangkan akar.<br><b>Pengerjaan Soal:</b> $\lim\limits_{x \to 0} \frac{x^3(\sqrt{1+\sin x} + \sqrt{1-\sin x})}{(1+\sin x)-(1-\sin x)} = \lim\limits_{x \to 0} \frac{x^3(\approx 2)}{2\sin x} = \lim\limits_{x \to 0} \frac{x^3}{\sin x} = \lim\limits_{x \to 0} x^2 \cdot \frac{x}{\sin x} = 0^2 \cdot 1 = 0$.</div>
+            <div class="pembahasan"><b>44. Jawaban: A</b><b>Teori Dasar:</b> Gunakan identitas $\cos A - \cos B = -2\sin(\frac{A+B}{2})\sin(\frac{A-B}{2})$.<br><b>Pengerjaan Soal:</b> $$ \begin{aligned} L &= \lim\limits_{h \to 0} \frac{-2\sin(x)\sin(2h)}{h \sin h} \\ &= -2\sin x \cdot \left(\lim\limits_{h \to 0} \frac{\sin 2h}{h}\right) \cdot \left(\lim\limits_{h \to 0} \frac{h}{\sin h}\right) \\ &= -2\sin x \cdot 2 \cdot 1 = -4\sin x \end{aligned} $$</div>
+            <div class="pembahasan"><b>45. Jawaban: D</b><b>Teori Dasar:</b> Gunakan $1-\cos(cx) = 2\sin^2(cx/2)$ dan rumus dasar limit.<br><b>Pengerjaan Soal:</b> $$ \begin{aligned} L &= \lim\limits_{x \to 0} \frac{\sin(ax)\tan(bx)}{2\sin^2(cx/2)} \\ &\approx \lim\limits_{x \to 0} \frac{(ax)(bx)}{2(cx/2)^2} = \frac{abx^2}{2c^2x^2/4} = \frac{2ab}{c^2} \end{aligned} $$ (1) Benar: $L = \frac{2(1)(2)}{3^2} = 4/9$. (2) Benar: Sesuai penurunan rumus. (3) Benar: $L = \frac{2(2)(2)}{2^2}=2$. Semua pernyataan benar.</div>
+            <div class="pembahasan"><b>46. Jawaban: D</b><b>Teori Dasar:</b> Pecah limit menjadi perkalian. Gunakan pemisalan $y=1/x$ untuk bagian trigonometri dan kalikan sekawan untuk bagian akar.<br><b>Pengerjaan Soal:</b> Pecah menjadi $L = \left(\lim\limits_{x \to \infty} x \tan(\frac{3}{x})\right) \cdot \left(\lim\limits_{x \to \infty} (\sqrt{x^2+4x}-x)\right)$.<br><b>Bagian 1:</b> Misalkan $y=1/x$. $\lim\limits_{y \to 0} \frac{\tan(3y)}{y} = 3$.<br><b>Bagian 2:</b> $\lim\limits_{x \to \infty} \frac{(x^2+4x)-x^2}{\sqrt{x^2+4x}+x} = \lim\limits_{x \to \infty} \frac{4x}{x(\sqrt{1+4/x}+1)} = \frac{4}{2}=2$.<br><b>Hasil Akhir:</b> $L = 3 \times 2 = 6$.</div>
+            <div class="pembahasan"><b>47. Jawaban: B</b><b>Teori Dasar:</b> Faktorisasi dan penggunaan sifat dasar limit.<br><b>Pengerjaan Soal:</b> $$ \begin{aligned} L &= \lim\limits_{x \to 0} \frac{\sin(x(x-4))}{x(x-2)} \\ &= \lim\limits_{x \to 0} \frac{\sin(x(x-4))}{x(x-4)} \cdot \frac{x(x-4)}{x(x-2)} \\ &= 1 \cdot \lim\limits_{x \to 0} \frac{x-4}{x-2} = \frac{-4}{-2}=2 \end{aligned} $$</div>
+            <div class="pembahasan"><b>48. Jawaban: D</b><b>Teori Dasar:</b> Menyelesaikan sistem persamaan dari hasil evaluasi limit.<br><b>Pengerjaan Soal:</b> Limit pertama: $\frac{2}{a} = b \implies ab=2$. Limit kedua: $b=a$. Substitusi $a$ ke persamaan pertama: $a \cdot a = 2 \implies a^2=2 \implies a=\sqrt{2}$ (karena $a>0$). Maka $b=\sqrt{2}$. Jadi $a+b = \sqrt{2}+\sqrt{2} = 2\sqrt{2}$.</div>
+            <div class="pembahasan"><b>49. Jawaban: D</b><b>Teori Dasar:</b> Faktorisasi selisih kubik $1-a^3 = (1-a)(1+a+a^2)$ dan identitas $1-\cos x=2\sin^2(x/2)$.<br><b>Pengerjaan Soal:</b> $$ \begin{aligned} L &= \lim\limits_{x \to 0} \frac{(1-\cos x)(1+\cos x+\cos^2 x)}{x \sin x \cos x} \\ &= \left(\lim\limits_{x \to 0} \frac{1-\cos x}{x \sin x}\right) \cdot \left(\lim\limits_{x \to 0} \frac{1+\cos x+\cos^2 x}{\cos x}\right) \\ &= \left(\frac{1}{2}\right) \cdot \left(\frac{1+1+1}{1}\right) = \frac{3}{2} \end{aligned} $$</div>
+            <div class="pembahasan"><b>50. Jawaban: C</b><b>Teori Dasar:</b> Gunakan identitas $\sin 2x = 2\sin x \cos x$ dan $1-\cos x = 2\sin^2(x/2)$.<br><b>Pengerjaan Soal:</b> $$ \begin{aligned} L &= \lim\limits_{x \to 0} \frac{8x^3}{2\sin x(1-\cos x)} \\ &= \lim\limits_{x \to 0} \frac{8x^3}{2\sin x(2\sin^2(x/2))} \\ &\approx \lim\limits_{x \to 0} \frac{8x^3}{4x (x/2)^2} = \lim\limits_{x \to 0} \frac{8x^3}{x^3} = 8 \end{aligned} $$</div>
+        </div>
+    </section>
+
+</div>
+
+</body>
+</html>
+
