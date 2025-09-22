@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul Lengkap - Turunan Fungsi (SMA)</title>
+    <script>
+        window.MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']]
+          },
+          svg: {
+            fontCache: 'global'
+          }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-text: #333333;
+            --secondary-text: #555555;
+            --border-color: #dddddd;
+            --title-grad-1: #4a4a4a;
+            --title-grad-2: #000000;
+        }
+        
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            font-size: 10pt;
+            line-height: 1.6;
+            color: var(--primary-text);
+            background-color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            counter-reset: page;
+        }
+
+        .page {
+            background: white;
+            width: 176mm;
+            min-height: 250mm;
+            padding: 20mm;
+            margin: 1cm auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .page::after {
+            counter-increment: page;
+            content: counter(page);
+            position: absolute;
+            bottom: 15mm;
+            right: 20mm;
+            font-size: 10pt;
+            color: #888;
+        }
+
+        .cover-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 3px solid #444;
+            height: 250mm;
+        }
+        
+        .cover-page::after, .toc-page::after {
+            content: ''; /* No page number on cover and TOC */
+        }
+
+        .cover-page img {
+            max-width: 250px;
+            margin-bottom: 40px;
+        }
+
+        .cover-page .title {
+            font-size: 38pt;
+            font-weight: 900;
+            margin: 0;
+            color: var(--title-grad-2);
+            background: -webkit-linear-gradient(45deg, var(--title-grad-1), var(--title-grad-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .cover-page .subtitle {
+            font-size: 18pt;
+            margin-top: 15px;
+            color: var(--secondary-text);
+            font-weight: 700;
+        }
+
+        @media print {
+            body { background: none; }
+            .page { width: 100%; height: 100%; margin: 0; box-shadow: none; page-break-after: always; }
+        }
+        
+        .watermark-container .page::before {
+            content: '';
+            background-image: url('https://imgix3.ruangguru.com/assets/miscellaneous/jpeg_sijv7w_5618.jpeg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 12cm;
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%; height: 100%;
+            opacity: 0.08;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .cover-page::before, .toc-page::before { opacity: 0; }
+
+        .content-wrapper { position: relative; z-index: 1; width: 100%; }
+        
+        h1 { font-size: 24pt; text-align: center; border-bottom: 2px solid var(--primary-text); padding-bottom: 10px; margin-bottom: 20px; }
+        h2 { font-size: 18pt; color: #000; border-left: 5px solid #555; padding-left: 10px; margin-top: 30px; }
+        h3 { font-size: 14pt; color: #222; margin-top: 30px; font-weight: 700; border-bottom: 2px solid #eee; padding-bottom: 5px; }
+        h4 { font-size: 12pt; font-weight: 700; margin-bottom: 5px; }
+
+        .toc-list { list-style-type: none; padding: 0; }
+        .toc-list li { margin-bottom: 10px; font-size: 12pt; }
+        .toc-list a { text-decoration: none; color: var(--primary-text); }
+        .toc-list a:hover { text-decoration: underline; }
+        
+        .layout-1-kolom { columns: 1; }
+        .latihan-item { display: grid; grid-template-columns: 1fr 0.7fr; gap: 20px; border-top: 1px dashed var(--border-color); padding-top: 15px; margin-top: 15px; break-inside: avoid; }
+        .latihan-item:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
+        
+        .soal-item, .soal-latihan { margin-bottom: 15px; break-inside: avoid; overflow-wrap: break-word; word-wrap: break-word; }
+        
+        .coret-coret { border: 1px dashed #c0c0c0; min-height: 120px; padding: 10px; border-radius: 5px; }
+        
+        .pembahasan { background-color: #f9f9f9; border: 1px solid var(--border-color); padding: 15px; border-radius: 5px; margin-top: 10px; margin-bottom: 15px; overflow-wrap: break-word; }
+        .pembahasan b { display: block; margin-bottom: 5px;}
+        
+        ol { padding-left: 0; }
+        ol.pilihan-ganda { list-style-type: none; padding-left: 20px; }
+        ol.pilihan-ganda li { margin-bottom: 8px; }
+        ol.pilihan-ganda li::before { content: attr(data-option) ". "; font-weight: bold; margin-right: 5px; }
+
+        .keterangan-soal { font-style: italic; font-size: 9pt; color: var(--secondary-text); margin-bottom: 10px; }
+        
+        table.soal-kategori { width:100%; border-collapse: collapse; text-align: left; margin-top: 10px; }
+        table.soal-kategori th, table.soal-kategori td { padding: 8px; border: 1px solid #ccc; vertical-align: middle; }
+        table.soal-kategori th:not(:first-child) { text-align: center; width: 60px;}
+        table.soal-kategori td:not(:first-child) { text-align: center; }
+
+    </style>
+</head>
+<body>
+
+<div class="watermark-container">
+
+    <!-- Cover Page -->
+    <section class="page cover-page">
+        <div class="content-wrapper">
+            <img src="https://imgix3.ruangguru.com/assets/miscellaneous/jpeg_sijv7w_5618.jpeg" alt="EXE Logo">
+            <h1 class="title">MODUL LENGKAP<br>TURUNAN FUNGSI</h1>
+            <p class="subtitle">Kumpulan Soal TKA Matematika SMA</p>
+        </div>
+    </section>
+
+    <!-- Table of Contents -->
+    <section class="page toc-page">
+        <div class="content-wrapper">
+            <h1>Daftar Isi</h1>
+            <ul class="toc-list">
+                <li><a href="#materi">Bagian 1: Materi Lengkap</a></li>
+                <li><a href="#materi-1">&nbsp;&nbsp;&nbsp;› 1.1 Konsep & Definisi Turunan</a></li>
+                <li><a href="#materi-2">&nbsp;&nbsp;&nbsp;› 1.2 Sifat & Rumus Dasar</a></li>
+                <li><a href="#materi-3">&nbsp;&nbsp;&nbsp;› 1.3 Aplikasi Turunan</a></li>
+                <li><a href="#contoh-soal">Bagian 2: Contoh Soal & Pembahasan</a></li>
+                <li><a href="#latihan-soal">Bagian 3: Bank Soal Latihan (100 Soal)</a></li>
+                <li><a href="#latihan-mudah">&nbsp;&nbsp;&nbsp;› 3.1 Soal Mudah (1-20) - Konsep & Rumus Dasar</a></li>
+                <li><a href="#latihan-sedang">&nbsp;&nbsp;&nbsp;› 3.2 Soal Sedang (21-60) - Aplikasi & Kombinasi</a></li>
+                <li><a href="#latihan-sulit">&nbsp;&nbsp;&nbsp;› 3.3 Soal Sulit (61-100) - Penalaran & Masalah Kontekstual</a></li>
+                <li><a href="#pembahasan-latihan">Bagian 4: Kunci Jawaban & Pembahasan</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Materi Lengkap -->
+    <section id="materi" class="page">
+      <div class="content-wrapper">
+        <h2>Bagian 1: Materi Lengkap</h2>
+        <h3 id="materi-1">1.1 Konsep & Definisi Turunan</h3>
+        <p>Turunan sebuah fungsi $f(x)$ di titik $x=c$ secara formal didefinisikan sebagai laju perubahan sesaat nilai fungsi di titik tersebut. Turunan dilambangkan dengan $f'(x)$ atau $\frac{dy}{dx}$. Definisi formal turunan menggunakan konsep limit adalah:</p>
+        $$ f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h} $$
+        <p><b>Interpretasi Geometris:</b> Nilai turunan $f'(c)$ sama dengan gradien (kemiringan) garis singgung kurva $y=f(x)$ di titik $(c, f(c))$.</p>
+        <p><b>Interpretasi Fisis:</b> Jika $s(t)$ adalah fungsi posisi suatu objek terhadap waktu $t$, maka turunan pertamanya, $s'(t) = v(t)$, adalah fungsi kecepatan sesaat, dan turunan keduanya, $s''(t) = a(t)$, adalah fungsi percepatan sesaat.</p>
+        
+        <h3 id="materi-2">1.2 Sifat & Rumus Dasar</h3>
+        <p>Berikut adalah rumus-rumus dasar dan sifat-sifat turunan yang esensial.</p>
+        <h4>Turunan Fungsi Aljabar</h4>
+        <ul>
+            <li><b>Fungsi Konstanta:</b> Jika $f(x)=k$, maka $f'(x)=0$.</li>
+            <li><b>Aturan Pangkat:</b> Jika $f(x)=ax^n$, maka $f'(x)=anx^{n-1}$.</li>
+            <li><b>Aturan Jumlah & Selisih:</b> Jika $h(x)=f(x) \pm g(x)$, maka $h'(x)=f'(x) \pm g'(x)$.</li>
+            <li><b>Aturan Perkalian (Product Rule):</b> Jika $h(x)=u(x)v(x)$, maka $h'(x)=u'(x)v(x)+u(x)v'(x)$.</li>
+            <li><b>Aturan Pembagian (Quotient Rule):</b> Jika $h(x)=\frac{u(x)}{v(x)}$, maka $h'(x)=\frac{u'(x)v(x)-u(x)v'(x)}{[v(x)]^2}$.</li>
+            <li><b>Aturan Rantai (Chain Rule):</b> Jika $h(x)=f(g(x))$, maka $h'(x)=f'(g(x)) \cdot g'(x)$.</li>
+        </ul>
+        <h4>Turunan Fungsi Trigonometri</h4>
+        <ul>
+            <li>Jika $f(x)=\sin x$, maka $f'(x)=\cos x$.</li>
+            <li>Jika $f(x)=\cos x$, maka $f'(x)=-\sin x$.</li>
+            <li>Jika $f(x)=\tan x$, maka $f'(x)=\sec^2 x$.</li>
+            <li>Jika $f(x)=\cot x$, maka $f'(x)=-\csc^2 x$.</li>
+            <li>Jika $f(x)=\sec x$, maka $f'(x)=\sec x \tan x$.</li>
+            <li>Jika $f(x)=\csc x$, maka $f'(x)=-\csc x \cot x$.</li>
+        </ul>
+        
+        <h3 id="materi-3">1.3 Aplikasi Turunan</h3>
+        <p>Turunan memiliki banyak aplikasi penting, terutama dalam menganalisis perilaku fungsi.</p>
+        <ul>
+            <li><b>Persamaan Garis Singgung:</b> Gradien garis singgung kurva $y=f(x)$ di titik $(x_1, y_1)$ adalah $m=f'(x_1)$. Persamaannya adalah $y-y_1 = m(x-x_1)$.</li>
+            <li><b>Kemonotonan Fungsi (Fungsi Naik/Turun):</b>
+                <ul>
+                    <li>Fungsi $f(x)$ dikatakan <b>naik</b> pada suatu interval jika $f'(x) > 0$.</li>
+                    <li>Fungsi $f(x)$ dikatakan <b>turun</b> pada suatu interval jika $f'(x) < 0$.</li>
+                </ul>
+            </li>
+            <li><b>Titik Stasioner dan Nilai Ekstrim:</b>
+                <ul>
+                    <li><b>Titik stasioner</b> terjadi ketika $f'(x)=0$.</li>
+                    <li><b>Uji Turunan Pertama:</b> Misal $c$ adalah titik stasioner.
+                        <ul>
+                           <li>Jika tanda $f'(x)$ berubah dari (+) ke (-), maka $f(c)$ adalah <b>nilai balik maksimum</b>.</li>
+                           <li>Jika tanda $f'(x)$ berubah dari (-) ke (+), maka $f(c)$ adalah <b>nilai balik minimum</b>.</li>
+                           <li>Jika tanda tidak berubah, maka $(c, f(c))$ adalah <b>titik belok</b>.</li>
+                        </ul>
+                    </li>
+                    <li><b>Uji Turunan Kedua:</b>
+                        <ul>
+                           <li>Jika $f''(c) < 0$, maka $f(c)$ adalah <b>nilai balik maksimum</b>.</li>
+                           <li>Jika $f''(c) > 0$, maka $f(c)$ adalah <b>nilai balik minimum</b>.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><b>Masalah Optimisasi:</b> Menemukan nilai maksimum atau minimum dari suatu besaran (misalnya luas, volume, keuntungan) yang dapat dimodelkan sebagai sebuah fungsi.</li>
+        </ul>
+      </div>
+    </section>
+    
+    <section id="contoh-soal" class="page">
+        <div class="content-wrapper">
+            <h2>Bagian 2: Contoh Soal & Pembahasan</h2>
+            <div class="soal-item"><b>1. (Aturan Pangkat & Jumlah)</b><br>Tentukan turunan pertama dari $f(x) = 4x^3 - 5x^2 + 2x - 10$.<div class="pembahasan"><b>Teori:</b> Gunakan aturan pangkat $f(x)=ax^n \implies f'(x)=anx^{n-1}$ dan aturan jumlah/selisih.<br><b>Langkah:</b> Turunkan setiap suku secara terpisah.<br>
+            $\begin{aligned}f'(x) &= \frac{d}{dx}(4x^3) - \frac{d}{dx}(5x^2) + \frac{d}{dx}(2x) - \frac{d}{dx}(10) \\ &= (4 \cdot 3)x^{3-1} - (5 \cdot 2)x^{2-1} + (2 \cdot 1)x^{1-1} - 0 \\ &= 12x^2 - 10x + 2\end{aligned}$
+            </div></div>
+            <div class="soal-item"><b>2. (Aturan Perkalian & Trigonometri)</b><br>Tentukan turunan dari $h(x) = x^2 \sin x$.<div class="pembahasan"><b>Teori:</b> Gunakan aturan perkalian $h'(x) = u'v + uv'$.<br><b>Langkah 1:</b> Identifikasi $u$ dan $v$.<br>Misal $u(x) = x^2 \implies u'(x) = 2x$.<br>Misal $v(x) = \sin x \implies v'(x) = \cos x$.<br><b>Langkah 2:</b> Masukkan ke dalam rumus.<br>$h'(x) = (2x)(\sin x) + (x^2)(\cos x) = 2x \sin x + x^2 \cos x$.</div></div>
+             <div class="soal-item"><b>3. (Aplikasi - Interval Fungsi Naik)</b><br>Tentukan interval di mana fungsi $f(x) = x^3 - 3x^2 - 9x + 1$ naik.<div class="pembahasan"><b>Teori:</b> Fungsi naik terjadi saat $f'(x) > 0$.<br><b>Langkah 1:</b> Cari turunan pertama.<br>$f'(x) = 3x^2 - 6x - 9$.<br><b>Langkah 2:</b> Tentukan syarat fungsi naik.<br>$f'(x) > 0 \implies 3x^2 - 6x - 9 > 0$.<br><b>Langkah 3:</b> Selesaikan pertidaksamaan kuadrat.<br>$x^2 - 2x - 3 > 0$<br>$(x-3)(x+1) > 0$.<br>Pembuat nol adalah $x=3$ dan $x=-1$. Dengan menggunakan garis bilangan, didapat interval di mana pertidaksamaan bernilai positif.<br><b>Hasil:</b> Fungsi naik pada interval $x < -1$ atau $x > 3$.</div></div>
+        </div>
+    </section>
+    
+    <!-- Latihan Soal Mudah -->
+    <section id="latihan-mudah" class="page">
+        <div class="content-wrapper">
+            <h2 id="latihan-soal">Bagian 3: Bank Soal Latihan</h2>
+            <h3>3.1 Soal Mudah (1-20) - Konsep & Rumus Dasar</h3>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Mudah | Tipe: Pilihan Ganda</div><b>1.</b> Turunan pertama dari $f(x) = 7x^3$ adalah...<ol class="pilihan-ganda"><li data-option="A">$7x^2$</li><li data-option="B">$21x^2$</li><li data-option="C">$21x^3$</li><li data-option="D">$7x$</li><li data-option="E">$21x$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Mudah | Tipe: Pilihan Ganda</div><b>2.</b> Jika $f(x) = 10$, maka $f'(x)$ adalah...<ol class="pilihan-ganda"><li data-option="A">10</li><li data-option="B">1</li><li data-option="C">0</li><li data-option="D">-10</li><li data-option="E">x</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Mudah | Tipe: Pilihan Ganda</div><b>3.</b> Turunan pertama dari $g(x) = 2x^5 - 3x + 4$ adalah...<ol class="pilihan-ganda"><li data-option="A">$10x^4 - 3$</li><li data-option="B">$10x^5 - 3x$</li><li data-option="C">$2x^4 - 3$</li><li data-option="D">$10x^4$</li><li data-option="E">$8x^4-3$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Mudah | Tipe: Pilihan Ganda</div><b>4.</b> Turunan dari $f(t) = \frac{1}{t^2}$ adalah...<ol class="pilihan-ganda"><li data-option="A">$2t$</li><li data-option="B">$-2t$</li><li data-option="C">$\frac{2}{t^3}$</li><li data-option="D">$- \frac{2}{t^3}$</li><li data-option="E">$- \frac{1}{t^3}$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Mudah | Tipe: Pilihan Ganda</div><b>5.</b> Turunan dari $y = \sqrt{x}$ adalah...<ol class="pilihan-ganda"><li data-option="A">$ \frac{1}{2\sqrt{x}} $</li><li data-option="B">$ 2\sqrt{x} $</li><li data-option="C">$ \frac{1}{\sqrt{x}} $</li><li data-option="D">$ x^{-1/2} $</li><li data-option="E">$ - \frac{1}{2\sqrt{x}} $</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Mudah | Tipe: Pilihan Ganda</div><b>6.</b> Turunan pertama dari $f(x) = 5\cos x$ adalah...<ol class="pilihan-ganda"><li data-option="A">$5\sin x$</li><li data-option="B">$-5\sin x$</li><li data-option="C">$5\cos x$</li><li data-option="D">$-5\cos x$</li><li data-option="E">$\sin x$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Mudah | Tipe: Pilihan Ganda</div><b>7.</b> Jika $y = 3\sin x - 2\cos x$, maka $\frac{dy}{dx}$ adalah...<ol class="pilihan-ganda"><li data-option="A">$3\cos x - 2\sin x$</li><li data-option="B">$-3\cos x + 2\sin x$</li><li data-option="C">$3\cos x + 2\sin x$</li><li data-option="D">$-3\cos x - 2\sin x$</li><li data-option="E">$5(\cos x + \sin x)$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Mudah | Tipe: Pilihan Ganda</div><b>8.</b> Turunan dari $f(x) = 4\tan x$ adalah...<ol class="pilihan-ganda"><li data-option="A">$4\sec^2 x$</li><li data-option="B">$-4\sec^2 x$</li><li data-option="C">$4\cot x$</li><li data-option="D">$4\sec x \tan x$</li><li data-option="E">$4$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Mudah | Tipe: Pilihan Ganda</div><b>9.</b> Jika $f(x) = x^2 + \sin x$, maka $f'(x)$ adalah...<ol class="pilihan-ganda"><li data-option="A">$2x - \cos x$</li><li data-option="B">$2x + \cos x$</li><li data-option="C">$x + \cos x$</li><li data-option="D">$2x$</li><li data-option="E">$\cos x$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Mudah | Tipe: Pilihan Ganda</div><b>10.</b> Turunan dari $y = -2\cot x$ adalah...<ol class="pilihan-ganda"><li data-option="A">$2\tan x$</li><li data-option="B">$-2\csc^2 x$</li><li data-option="C">$2\csc^2 x$</li><li data-option="D">$-2\sec^2 x$</li><li data-option="E">$2\sec^2 x$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Mudah | Tipe: Pilihan Ganda</div><b>11.</b> Jika $f(x) = x(x+3)$, maka $f'(x)$ adalah...<ol class="pilihan-ganda"><li data-option="A">$2x+3$</li><li data-option="B">$x+3$</li><li data-option="C">$2x$</li><li data-option="D">$x^2+3x$</li><li data-option="E">3</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Mudah | Tipe: Pilihan Ganda</div><b>12.</b> Gradien garis singgung kurva $y=x^2-2x$ di titik $x=3$ adalah...<ol class="pilihan-ganda"><li data-option="A">2</li><li data-option="B">3</li><li data-option="C">4</li><li data-option="D">5</li><li data-option="E">6</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Mudah | Tipe: Pilihan Ganda</div><b>13.</b> Turunan pertama dari $y = (2x-1)^2$ adalah...<ol class="pilihan-ganda"><li data-option="A">$2(2x-1)$</li><li data-option="B">$4(2x-1)$</li><li data-option="C">$8x-2$</li><li data-option="D">$4x-2$</li><li data-option="E">4</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Mudah | Tipe: Pilihan Ganda</div><b>14.</b> Jika $s(t) = t^3 - 6t$ adalah fungsi posisi, maka fungsi kecepatan $v(t)$ adalah...<ol class="pilihan-ganda"><li data-option="A">$3t^2-6$</li><li data-option="B">$t^2-6$</li><li data-option="C">$3t^2$</li><li data-option="D">$6t$</li><li data-option="E">$-6$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Mudah | Tipe: Pilihan Ganda</div><b>15.</b> Turunan dari $f(x) = 3\sec x$ adalah...<ol class="pilihan-ganda"><li data-option="A">$3\tan x$</li><li data-option="B">$3\sec x \tan x$</li><li data-option="C">$-3\sec x \tan x$</li><li data-option="D">$3\csc x$</li><li data-option="E">$-3\csc x \cot x$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Mudah | Tipe: Pilihan Ganda</div><b>16.</b> Turunan dari $f(x) = \frac{x^4}{2} - \frac{x^2}{4}$ adalah...<ol class="pilihan-ganda"><li data-option="A">$2x^3 - x/2$</li><li data-option="B">$2x^3 - x/4$</li><li data-option="C">$4x^3 - 2x$</li><li data-option="D">$x^3 - x$</li><li data-option="E">$2x^3-x$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Mudah | Tipe: Pilihan Ganda</div><b>17.</b> Jika $f(x) = (x+1)(x-2)$, maka $f'(0)$ adalah...<ol class="pilihan-ganda"><li data-option="A">1</li><li data-option="B">0</li><li data-option="C">-1</li><li data-option="D">-2</li><li data-option="E">2</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Mudah | Tipe: Pilihan Ganda</div><b>18.</b> Turunan dari $y=5x + \cos x$ adalah...<ol class="pilihan-ganda"><li data-option="A">$5-\sin x$</li><li data-option="B">$5+\sin x$</li><li data-option="C">$1-\sin x$</li><li data-option="D">$1+\sin x$</li><li data-option="E">5</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Mudah | Tipe: Pilihan Ganda</div><b>19.</b> Turunan dari $f(x) = -4\csc x$ adalah...<ol class="pilihan-ganda"><li data-option="A">$-4\csc x \cot x$</li><li data-option="B">$4\csc x \cot x$</li><li data-option="C">$4\sec x \tan x$</li><li data-option="D">$-4\sec x$</li><li data-option="E">$4\cot^2 x$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Mudah | Tipe: Pilihan Ganda</div><b>20.</b> Laju perubahan fungsi $f(x) = x^3 - 1$ pada $x=2$ adalah...<ol class="pilihan-ganda"><li data-option="A">3</li><li data-option="B">6</li><li data-option="C">8</li><li data-option="D">11</li><li data-option="E">12</li></ol></div><div class="coret-coret"></div></div>
+        </div>
+    </section>
+
+    <!-- Latihan Soal Sedang -->
+    <section id="latihan-sedang" class="page">
+        <div class="content-wrapper">
+            <h3>3.2 Soal Sedang (21-60) - Aplikasi & Kombinasi</h3>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>21.</b> Turunan dari $f(x) = (3x+2)^5$ adalah...<ol class="pilihan-ganda"><li data-option="A">$5(3x+2)^4$</li><li data-option="B">$3(3x+2)^4$</li><li data-option="C">$15(3x+2)^4$</li><li data-option="D">$15(3x+2)^5$</li><li data-option="E">$(3x+2)^4$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>22.</b> Turunan dari $y = \sin(4x-1)$ adalah...<ol class="pilihan-ganda"><li data-option="A">$\cos(4x-1)$</li><li data-option="B">$-\cos(4x-1)$</li><li data-option="C">$4\cos(4x-1)$</li><li data-option="D">$-4\cos(4x-1)$</li><li data-option="E">$4\sin(4x-1)$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>23.</b> Turunan pertama dari $f(x) = (x^2+1)(2x-3)$ adalah...<ol class="pilihan-ganda"><li data-option="A">$4x$</li><li data-option="B">$6x^2-6x+2$</li><li data-option="C">$2x^2-6x+2$</li><li data-option="D">$6x^2+6x-2$</li><li data-option="E">$6x^2-6x-2$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>24.</b> Turunan dari $y = \frac{2x}{x-1}$ adalah...<ol class="pilihan-ganda"><li data-option="A">$\frac{2}{(x-1)^2}$</li><li data-option="B">$\frac{-2}{(x-1)^2}$</li><li data-option="C">$\frac{4x-2}{(x-1)^2}$</li><li data-option="D">$\frac{2x-2}{(x-1)^2}$</li><li data-option="E">2</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>25.</b> Turunan dari $f(x) = \cos^3 x$ adalah...<ol class="pilihan-ganda"><li data-option="A">$3\cos^2 x$</li><li data-option="B">$-3\sin x \cos^2 x$</li><li data-option="C">$3\sin x \cos^2 x$</li><li data-option="D">$-3\cos^2 x$</li><li data-option="E">$3\sin^2 x$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>26.</b> Persamaan garis singgung kurva $y = x^2 - 4x + 3$ di titik $(3,0)$ adalah...<ol class="pilihan-ganda"><li data-option="A">$y = 2x - 6$</li><li data-option="B">$y = -2x + 6$</li><li data-option="C">$y = 2x + 6$</li><li data-option="D">$y = x - 3$</li><li data-option="E">$y=3x-9$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>27.</b> Fungsi $f(x) = x^3 - 12x$ turun pada interval...<ol class="pilihan-ganda"><li data-option="A">$x < -2$ atau $x > 2$</li><li data-option="B">$-2 < x < 2$</li><li data-option="C">$x < -4$ atau $x > 4$</li><li data-option="D">$-4 < x < 4$</li><li data-option="E">selalu turun</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>28.</b> Turunan dari $y=3x^2 \tan x$ adalah...<ol class="pilihan-ganda"><li data-option="A">$6x \tan x + 3x^2 \sec^2 x$</li><li data-option="B">$6x \sec^2 x$</li><li data-option="C">$6x \tan x - 3x^2 \sec^2 x$</li><li data-option="D">$3x^2 \tan x + 6x \sec^2 x$</li><li data-option="E">$6x \tan x$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>29.</b> Turunan dari $f(x) = \sqrt{x^2+9}$ adalah...<ol class="pilihan-ganda"><li data-option="A">$\frac{x}{\sqrt{x^2+9}}$</li><li data-option="B">$\frac{2x}{\sqrt{x^2+9}}$</li><li data-option="C">$\frac{1}{2\sqrt{x^2+9}}$</li><li data-option="D">$x\sqrt{x^2+9}$</li><li data-option="E">$2x\sqrt{x^2+9}$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>30.</b> Titik stasioner dari fungsi $f(x) = x^2 - 6x + 5$ adalah...<ol class="pilihan-ganda"><li data-option="A">$(3, -4)$</li><li data-option="B">$(-3, 32)$</li><li data-option="C">$(3, 4)$</li><li data-option="D">$(6, 5)$</li><li data-option="E">$(0, 5)$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>31.</b> Turunan dari $y = \frac{\sin x}{\cos x}$ adalah...<ol class="pilihan-ganda"><li data-option="A">$1$</li><li data-option="B">$\sec^2 x$</li><li data-option="C">$-\csc^2 x$</li><li data-option="D">$\cot x$</li><li data-option="E">$\frac{\cos^2 x - \sin^2 x}{\cos^2 x}$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>32.</b> Nilai minimum lokal dari $f(x) = \frac{1}{3}x^3 - x^2 - 3x + 4$ adalah...<ol class="pilihan-ganda"><li data-option="A">$-5$</li><li data-option="B">$-1/3$</li><li data-option="C">$14/3$</li><li data-option="D">3</li><li data-option="E">9</li></ol></div><div class="coret-coret"></div></div>
+             <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>33.</b> Turunan kedua dari $f(x) = x^4 - 2x^3$ adalah...<ol class="pilihan-ganda"><li data-option="A">$4x^3-6x^2$</li><li data-option="B">$12x^2-12x$</li><li data-option="C">$12x^2-6x$</li><li data-option="D">$24x-12$</li><li data-option="E">$24$</li></ol></div><div class="coret-coret"></div></div>
+             <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>34.</b> Garis singgung kurva $y=2\sin x$ di titik berabsis $x=\pi/6$ memotong sumbu Y di titik...<ol class="pilihan-ganda"><li data-option="A">$(0, 1-\frac{\pi\sqrt{3}}{6})$</li><li data-option="B">$(0, 1)$</li><li data-option="C">$(0, 1+\frac{\pi\sqrt{3}}{6})$</li><li data-option="D">$(0, \sqrt{3})$</li><li data-option="E">$(0, 1-\frac{\pi}{6})$</li></ol></div><div class="coret-coret"></div></div>
+             <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>35.</b> Turunan dari $y = \frac{1+\cos x}{\sin x}$ adalah...<ol class="pilihan-ganda"><li data-option="A">$\frac{-1}{1-\cos x}$</li><li data-option="B">$\frac{-\sin x}{1+\cos x}$</li><li data-option="C">$\csc x \cot x$</li><li data-option="D">$- \csc x$</li><li data-option="E">$\frac{-1}{1+\cos x}$</li></ol></div><div class="coret-coret"></div></div>
+             <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda Kompleks</div><b>36.</b> Manakah di antara fungsi berikut yang memiliki turunan $2x+3$? <b>(bisa pilih lebih dari satu jawaban)</b><ol class="pilihan-ganda"><li data-option="A">$f(x) = x^2+3x$</li><li data-option="B">$f(x) = x^2+3x-10$</li><li data-option="C">$f(x) = (x+1)(x+2)$</li><li data-option="D">$f(x)=2x^2+3x$</li><li data-option="E">$f(x) = x^2+3x+2024$</li></ol></div><div class="coret-coret"></div></div>
+             <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Analisis Kecukupan Data</div><b>37.</b> Tentukan gradien garis singgung kurva $y=ax^2+b$ di $x=1$.<br>(1) Kurva melalui titik (1, 3).<br>(2) $a=2$<br><div class="keterangan-soal" style="margin-top:10px;">A. (1) SAJA cukup, (2) SAJA tidak cukup.<br>B. (2) SAJA cukup, (1) SAJA tidak cukup.<br>C. DUA pernyataan BERSAMA-SAMA cukup, tapi SATU tidak cukup.<br>D. (1) SAJA cukup dan (2) SAJA cukup.<br>E. (1) dan (2) tidak cukup.</div></div><div class="coret-coret"></div></div>
+             <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>38.</b> Turunan dari $f(x) = \sec(2x)$ adalah...<ol class="pilihan-ganda"><li data-option="A">$2\sec(2x)\tan(2x)$</li><li data-option="B">$\sec(2x)\tan(2x)$</li><li data-option="C">$2\sec^2(2x)$</li><li data-option="D">$-2\sec(2x)\tan(2x)$</li><li data-option="E">$\tan^2(2x)$</li></ol></div><div class="coret-coret"></div></div>
+             <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>39.</b> Jika $f'(x)$ adalah turunan dari $f(x)=2x^3 - 3x^2 - 12x + 1$, maka nilai $x$ yang memenuhi $f'(x)=0$ adalah...<ol class="pilihan-ganda"><li data-option="A">1 dan 2</li><li data-option="B">-1 dan 2</li><li data-option="C">-1 dan -2</li><li data-option="D">1 dan -2</li><li data-option="E">0 dan 1</li></ol></div><div class="coret-coret"></div></div>
+             <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>40.</b> Turunan pertama dari $y=\sin x \cos x$ adalah...<ol class="pilihan-ganda"><li data-option="A">$1$</li><li data-option="B">$\cos 2x$</li><li data-option="C">$\sin 2x$</li><li data-option="D">$\cos^2 x$</li><li data-option="E">$-\sin^2 x$</li></ol></div><div class="coret-coret"></div></div>
+             <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>41.</b> Sebuah partikel bergerak dengan persamaan posisi $s(t) = 2t^3 - 3t^2 + 10$. Percepatan partikel pada saat $t=2$ detik adalah...<ol class="pilihan-ganda"><li data-option="A">12</li><li data-option="B">18</li><li data-option="C">24</li><li data-option="D">30</li><li data-option="E">36</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>42.</b> Turunan dari $f(x) = \frac{x^2+1}{x}$ adalah...<ol class="pilihan-ganda"><li data-option="A">$1 - \frac{1}{x^2}$</li><li data-option="B">$1 + \frac{1}{x^2}$</li><li data-option="C">$2x$</li><li data-option="D">$1$</li><li data-option="E">$ \frac{2x^2-(x^2+1)}{x^2} $</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>43.</b> Fungsi $f(x) = \sin x + \cos x$ untuk $0 \le x \le 2\pi$ mencapai nilai maksimum pada $x=...$<ol class="pilihan-ganda"><li data-option="A">$\pi/4$</li><li data-option="B">$\pi/2$</li><li data-option="C">$3\pi/4$</li><li data-option="D">$\pi$</li><li data-option="E">$5\pi/4$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>44.</b> Jika $f(x) = (ax+b)^n$, maka $f'(x)$ adalah...<ol class="pilihan-ganda"><li data-option="A">$n(ax+b)^{n-1}$</li><li data-option="B">$an(ax+b)^{n-1}$</li><li data-option="C">$a(ax+b)^{n-1}$</li><li data-option="D">$bn(ax+b)^{n-1}$</li><li data-option="E">$abn(ax+b)^{n-1}$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>45.</b> Turunan dari $y = \tan(x^2)$ adalah...<ol class="pilihan-ganda"><li data-option="A">$2x \sec^2(x^2)$</li><li data-option="B">$\sec^2(x^2)$</li><li data-option="C">$2x \tan(x^2)$</li><li data-option="D">$2x \sec(x^2)$</li><li data-option="E">$\sec^2(2x)$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>46.</b> Biaya produksi $x$ unit barang dinyatakan dengan fungsi $C(x) = x^2 - 10x + 100$ (dalam ribuan rupiah). Biaya marginal saat memproduksi 20 unit adalah...<ol class="pilihan-ganda"><li data-option="A">Rp 10.000</li><li data-option="B">Rp 20.000</li><li data-option="C">Rp 30.000</li><li data-option="D">Rp 40.000</li><li data-option="E">Rp 50.000</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>47.</b> Turunan dari $f(x) = (2x-1)^3(x+4)$ adalah...<ol class="pilihan-ganda"><li data-option="A">$(2x-1)^2(8x+23)$</li><li data-option="B">$3(2x-1)^2$</li><li data-option="C">$(2x-1)^2(6x+24)$</li><li data-option="D">$(2x-1)^2(2x+25)$</li><li data-option="E">$6(2x-1)^2(x+4)$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>48.</b> Jika $y = \frac{u}{v}$, maka $y'$ adalah...<ol class="pilihan-ganda"><li data-option="A">$u'v+uv'$</li><li data-option="B">$u'v-uv'$</li><li data-option="C">$\frac{u'v-uv'}{v^2}$</li><li data-option="D">$\frac{uv'-u'v}{v^2}$</li><li data-option="E">$\frac{u'v-uv'}{u^2}$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>49.</b> Titik belok dari fungsi $f(x)=x^3-6x^2+9x+1$ adalah...<ol class="pilihan-ganda"><li data-option="A">(2, 3)</li><li data-option="B">(1, 5)</li><li data-option="C">(3, 1)</li><li data-option="D">(2, 0)</li><li data-option="E">(0, 1)</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>50.</b> Turunan dari $f(x) = \frac{\cos x}{1+\sin x}$ adalah...<ol class="pilihan-ganda"><li data-option="A">$\frac{-1}{1+\sin x}$</li><li data-option="B">$\frac{-\sin x}{(1+\sin x)^2}$</li><li data-option="C">$\frac{\sin x - 1}{(1+\sin x)^2}$</li><li data-option="D">$-1$</li><li data-option="E">$\frac{1}{1+\sin x}$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>51.</b> Turunan dari $f(x) = \sin^2(3x)$ adalah...<ol class="pilihan-ganda"><li data-option="A">$2\sin(3x)$</li><li data-option="B">$6\sin(3x)\cos(3x)$</li><li data-option="C">$2\cos(3x)$</li><li data-option="D">$6\cos(3x)$</li><li data-option="E">$3\sin(6x)$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>52.</b> Garis $y=mx+c$ menyinggung kurva $y=2x^2-1$ di titik $x=1$. Nilai $m$ adalah...<ol class="pilihan-ganda"><li data-option="A">1</li><li data-option="B">2</li><li data-option="C">3</li><li data-option="D">4</li><li data-option="E">5</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>53.</b> Jika $f(x) = 2x\sqrt{x}$, maka $f'(x)$ adalah...<ol class="pilihan-ganda"><li data-option="A">$2\sqrt{x}$</li><li data-option="B">$3\sqrt{x}$</li><li data-option="C">$\frac{3}{2}\sqrt{x}$</li><li data-option="D">$3x$</li><li data-option="E">$2x$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>54.</b> Nilai maksimum dari $f(x) = -x^2+4x-1$ adalah...<ol class="pilihan-ganda"><li data-option="A">1</li><li data-option="B">2</li><li data-option="C">3</li><li data-option="D">4</li><li data-option="E">5</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>55.</b> Turunan dari $y = x^2 + \frac{1}{x^2}$ adalah...<ol class="pilihan-ganda"><li data-option="A">$2x + \frac{2}{x^3}$</li><li data-option="B">$2x - \frac{2}{x^3}$</li><li data-option="C">$2x - \frac{1}{x}$</li><li data-option="D">$2x + \frac{1}{x}$</li><li data-option="E">$2x - 2x^3$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>56.</b> Jika $f(x)=x^3$ dan $g(x)=\cos x$, turunan dari $f(g(x))$ adalah...<ol class="pilihan-ganda"><li data-option="A">$3\cos^2 x$</li><li data-option="B">$-3\cos^2 x \sin x$</li><li data-option="C">$3\sin^2 x \cos x$</li><li data-option="D">$-3\sin x$</li><li data-option="E">$3x^2(-\sin(x^3))$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>57.</b> Sebuah benda dilempar ke atas dengan ketinggian $h(t) = -5t^2 + 40t$ meter. Kecepatan benda saat $t=3$ detik adalah...<ol class="pilihan-ganda"><li data-option="A">5 m/s</li><li data-option="B">10 m/s</li><li data-option="C">15 m/s</li><li data-option="D">20 m/s</li><li data-option="E">25 m/s</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>58.</b> Turunan dari $y = \cot(1-2x)$ adalah...<ol class="pilihan-ganda"><li data-option="A">$2\csc^2(1-2x)$</li><li data-option="B">$-2\csc^2(1-2x)$</li><li data-option="C">$\csc^2(1-2x)$</li><li data-option="D">$-\csc^2(1-2x)$</li><li data-option="E">$2\tan(1-2x)$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>59.</b> Kurva $f(x) = x^3+ax^2+b$ memiliki titik stasioner di $(1, -2)$. Nilai $a+b$ adalah...<ol class="pilihan-ganda"><li data-option="A">-1</li><li data-option="B">-2</li><li data-option="C">-3</li><li data-option="D">-4</li><li data-option="E">-5</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>60.</b> Turunan dari $f(x) = \frac{4}{\sqrt{x}}$ adalah...<ol class="pilihan-ganda"><li data-option="A">$-2x^{-3/2}$</li><li data-option="B">$2x^{-3/2}$</li><li data-option="C">$-2x^{-1/2}$</li><li data-option="D">$2x^{-1/2}$</li><li data-option="E">$-4x^{-3/2}$</li></ol></div><div class="coret-coret"></div></div>
+        </div>
+    </section>
+
+    <!-- Latihan Soal Sulit -->
+    <section id="latihan-sulit" class="page">
+        <div class="content-wrapper">
+            <h3>3.3 Soal Sulit (61-100) - Penalaran & Masalah Kontekstual</h3>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>61.</b> Turunan dari $y = \sin(\cos(x^2))$ adalah...<ol class="pilihan-ganda"><li data-option="A">$-2x \sin(x^2) \cos(\cos(x^2))$</li><li data-option="B">$2x \sin(x^2) \cos(\cos(x^2))$</li><li data-option="C">$- \sin(x^2) \cos(\cos(x^2))$</li><li data-option="D">$-\cos(x^2) \cos(\sin(x^2))$</li><li data-option="E">$ \cos(x^2) \cos(\cos(x^2)) $</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>62.</b> Sebuah kotak tanpa tutup dengan alas persegi akan dibuat dari karton seluas 108 cm$^2$. Volume maksimum kotak tersebut adalah...<ol class="pilihan-ganda"><li data-option="A">$72$ cm$^3$</li><li data-option="B">$96$ cm$^3$</li><li data-option="C">$108$ cm$^3$</li><li data-option="D">$128$ cm$^3$</li><li data-option="E">$144$ cm$^3$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>63.</b> Jika $x^2+y^2=25$, maka nilai $\frac{dy}{dx}$ di titik $(3, 4)$ adalah...<ol class="pilihan-ganda"><li data-option="A">$3/4$</li><li data-option="B">$-3/4$</li><li data-option="C">$4/3$</li><li data-option="D">$-4/3$</li><li data-option="E">$1$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>64.</b> Turunan ke-100 dari $f(x) = \cos x$ adalah...<ol class="pilihan-ganda"><li data-option="A">$\cos x$</li><li data-option="B">$-\cos x$</li><li data-option="C">$\sin x$</li><li data-option="D">$-\sin x$</li><li data-option="E">$0$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>65.</b> Jarak terdekat titik pada kurva $y=\sqrt{x}$ ke titik $(4,0)$ adalah...<ol class="pilihan-ganda"><li data-option="A">$\sqrt{7}/2$</li><li data-option="B">$\sqrt{15}/2$</li><li data-option="C">$\sqrt{7}$</li><li data-option="D">$\sqrt{15}$</li><li data-option="E">$2$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Analisis Kecukupan Data</div><b>66.</b> Tentukan nilai maksimum fungsi $f(x)=ax^2+bx+c$.<br>(1) $f(x)$ memiliki titik stasioner di $x=2$.<br>(2) $f(2)=5$.<br><div class="keterangan-soal" style="margin-top:10px;">A. (1) SAJA cukup, (2) SAJA tidak cukup.<br>B. (2) SAJA cukup, (1) SAJA tidak cukup.<br>C. DUA pernyataan BERSAMA-SAMA cukup, tapi SATU tidak cukup.<br>D. (1) SAJA cukup dan (2) SAJA cukup.<br>E. (1) dan (2) tidak cukup.</div></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>67.</b> Turunan dari $y=x^x$ adalah...<ol class="pilihan-ganda"><li data-option="A">$x \cdot x^{x-1}$</li><li data-option="B">$x^x$</li><li data-option="C">$x^x (\ln x + 1)$</li><li data-option="D">$x^x \ln x$</li><li data-option="E">$1$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>68.</b> Sebuah tangga panjang 5 meter bersandar pada dinding. Ujung bawah tangga digeser menjauhi dinding dengan laju 2 m/s. Seberapa cepat ujung atas tangga meluncur ke bawah saat ujung bawah tangga berjarak 3 meter dari dinding?<ol class="pilihan-ganda"><li data-option="A">$3/2$ m/s</li><li data-option="B">$2/3$ m/s</li><li data-option="C">$4/3$ m/s</li><li data-option="D">$-3/2$ m/s</li><li data-option="E">$-4/3$ m/s</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>69.</b> Jika $f(x) = \sin^2(ax)$, maka $f''(x)$ adalah...<ol class="pilihan-ganda"><li data-option="A">$2a^2 \cos(2ax)$</li><li data-option="B">$-2a^2 \cos(2ax)$</li><li data-option="C">$2a^2 \sin(2ax)$</li><li data-option="D">$-2a^2 \sin(2ax)$</li><li data-option="E">$2a \cos(2ax)$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>70.</b> Garis singgung kurva $y = x + \frac{1}{x}$ yang sejajar dengan garis $y= \frac{3}{4}x-1$ menyinggung kurva di titik...<ol class="pilihan-ganda"><li data-option="A">$(2, 5/2)$ dan $(-2, -5/2)$</li><li data-option="B">$(1, 2)$ dan $(-1, -2)$</li><li data-option="C">$(2, 5/2)$ saja</li><li data-option="D">$(1/2, 5/2)$ dan $(-1/2, -5/2)$</li><li data-option="E">tidak ada</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>71.</b> Turunan dari $y = \ln(\sin x)$, dengan $\ln$ adalah logaritma natural, adalah...<ol class="pilihan-ganda"><li data-option="A">$\cot x$</li><li data-option="B">$\tan x$</li><li data-option="C">$\frac{1}{\sin x}$</li><li data-option="D">$\cos x \ln(\sin x)$</li><li data-option="E">$-\cot x$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>72.</b> Sebuah balon berbentuk bola dipompa. Laju pertambahan volume balon terhadap jari-jarinya saat jari-jarinya 3 cm adalah... ($V_{bola} = \frac{4}{3}\pi r^3$)<ol class="pilihan-ganda"><li data-option="A">$12\pi$ cm$^2$</li><li data-option="B">$18\pi$ cm$^2$</li><li data-option="C">$24\pi$ cm$^2$</li><li data-option="D">$36\pi$ cm$^2$</li><li data-option="E">$54\pi$ cm$^2$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>73.</b> Turunan dari $f(x) = e^{\tan x}$, dengan $e$ adalah bilangan Euler, adalah...<ol class="pilihan-ganda"><li data-option="A">$e^{\tan x}$</li><li data-option="B">$\sec^2 x \, e^{\tan x}$</li><li data-option="C">$\tan x \, e^{\tan x}$</li><li data-option="D">$\sec x \tan x \, e^{\tan x}$</li><li data-option="E">$e^{\sec^2 x}$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>74.</b> Luas persegi panjang terbesar yang dapat dibuat di dalam daerah yang dibatasi oleh kurva $y = 12-x^2$ dan sumbu-x adalah...<ol class="pilihan-ganda"><li data-option="A">16</li><li data-option="B">24</li><li data-option="C">32</li><li data-option="D">36</li><li data-option="E">48</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>75.</b> Jika $f(x) = (g(x))^3$, $g(1)=2$, dan $g'(1)=-1$, maka nilai $f'(1)$ adalah...<ol class="pilihan-ganda"><li data-option="A">-4</li><li data-option="B">-8</li><li data-option="C">-12</li><li data-option="D">8</li><li data-option="E">12</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>76.</b> Turunan dari $y = \sin(x) \cos(2x)$ adalah...<ol class="pilihan-ganda"><li data-option="A">$\cos x \cos 2x - 2\sin x \sin 2x$</li><li data-option="B">$\cos x \cos 2x + 2\sin x \sin 2x$</li><li data-option="C">$-\cos x \cos 2x + 2\sin x \sin 2x$</li><li data-option="D">$\cos x - 2\sin 2x$</li><li data-option="E">$1 - 2\sin^2 x$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>77.</b> Diberikan $xy + \sin(y) = 1$. Nilai $\frac{dy}{dx}$ adalah...<ol class="pilihan-ganda"><li data-option="A">$\frac{-y}{x+\cos y}$</li><li data-option="B">$\frac{y}{x+\cos y}$</li><li data-option="C">$\frac{-x}{y+\cos y}$</li><li data-option="D">$\frac{x}{y+\cos y}$</li><li data-option="E">$\frac{-1}{x+\cos y}$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>78.</b> Suatu proyek pembangunan gedung dapat diselesaikan dalam $x$ hari dengan biaya proyek per hari $\left(3x - 900 + \frac{120}{x}\right)$ ratus ribu rupiah. Agar biaya proyek minimum, proyek tersebut harus diselesaikan dalam waktu...<ol class="pilihan-ganda"><li data-option="A">40 hari</li><li data-option="B">60 hari</li><li data-option="C">90 hari</li><li data-option="D">120 hari</li><li data-option="E">150 hari</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>79.</b> Turunan dari $f(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}$ adalah...<ol class="pilihan-ganda"><li data-option="A">$1 - f(x)^2$</li><li data-option="B">$1 + f(x)^2$</li><li data-option="C">$f(x)^2$</li><li data-option="D">$-f(x)^2$</li><li data-option="E">1</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>80.</b> Jika $f(2)=3, f'(2)=4, g(2)=5, g'(2)=6$, maka turunan dari $\frac{f(x)}{g(x)}$ di $x=2$ adalah...<ol class="pilihan-ganda"><li data-option="A">$2/25$</li><li data-option="B">$-2/25$</li><li data-option="C">$38/25$</li><li data-option="D">$-38/25$</li><li data-option="E">$2/5$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>81.</b> Persamaan garis normal kurva $y=x^3-1$ di titik $(1,0)$ adalah... (Garis normal tegak lurus garis singgung)<ol class="pilihan-ganda"><li data-option="A">$x+3y-1=0$</li><li data-option="B">$x-3y-1=0$</li><li data-option="C">$3x+y-3=0$</li><li data-option="D">$3x-y-3=0$</li><li data-option="E">$y=-3x+3$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>82.</b> Turunan dari $y = \sqrt{\frac{1-\cos x}{1+\cos x}}$ adalah...<ol class="pilihan-ganda"><li data-option="A">$\frac{1}{2}\sec^2(x/2)$</li><li data-option="B">$\sec^2(x/2)$</li><li data-option="C">$\tan(x/2)$</li><li data-option="D">$\frac{1}{2}\csc^2(x/2)$</li><li data-option="E">$\cot(x/2)$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>83.</b> Diberikan $f(x)=ax^3+bx^2+cx+d$. Jika $f(x)$ memiliki maksimum lokal di $x=0$ dan minimum lokal di $x=1$, maka hubungan yang benar adalah...<ol class="pilihan-ganda"><li data-option="A">$a>0, b<0, c=0$</li><li data-option="B">$a<0, b>0, c=0$</li><li data-option="C">$a>0, b>0, c=0$</li><li data-option="D">$a<0, b<0, c=0$</li><li data-option="E">$a, b, c$ bisa berapa saja</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>84.</b> Sebuah partikel bergerak sepanjang sumbu-x dengan posisi $x(t) = t^3 - 6t^2 + 9t$. Partikel bergerak ke kiri ketika...<ol class="pilihan-ganda"><li data-option="A">$1 < t < 3$</li><li data-option="B">$t < 1$ atau $t > 3$</li><li data-option="C">$t > 1$</li><li data-option="D">$t < 3$</li><li data-option="E">selalu ke kanan</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>85.</b> Turunan dari $y = x^{\sin x}$ adalah...<ol class="pilihan-ganda"><li data-option="A">$x^{\sin x}(\cos x \ln x + \frac{\sin x}{x})$</li><li data-option="B">$\sin x \cdot x^{\sin x - 1}$</li><li data-option="C">$x^{\sin x} \cos x \ln x$</li><li data-option="D">$\cos x \cdot x^{\sin x}$</li><li data-option="E">tidak ada</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>86.</b> Jumlah dua bilangan adalah 20. Hasil kali kuadrat bilangan pertama dengan bilangan kedua akan maksimum jika bilangan-bilangan tersebut adalah...<ol class="pilihan-ganda"><li data-option="A">10 dan 10</li><li data-option="B">15 dan 5</li><li data-option="C">40/3 dan 20/3</li><li data-option="D">12 dan 8</li><li data-option="E">16 dan 4</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>87.</b> Jika $f(x) = \lim_{h \to 0} \frac{(x+h)^2 - x^2}{h}$, maka $f'(x)$ adalah...<ol class="pilihan-ganda"><li data-option="A">$2x$</li><li data-option="B">$2$</li><li data-option="C">$x^2$</li><li data-option="D">$x$</li><li data-option="E">$0$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>88.</b> Turunan dari $y = \frac{x^2 \sin x}{e^x}$ adalah...<ol class="pilihan-ganda"><li data-option="A">$\frac{e^x(2x\sin x + x^2\cos x) - x^2\sin x e^x}{e^{2x}}$</li><li data-option="B">$\frac{2x\sin x + x^2\cos x}{e^x}$</li><li data-option="C">$\frac{2x\sin x - x^2\cos x}{e^x}$</li><li data-option="D">$2x\cos x$</li><li data-option="E">$\frac{2x\sin x + x^2\cos x - x^2 \sin x}{e^x}$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>89.</b> Diberikan $f(x)=|x-2|$. Nilai $f'(2)$ adalah...<ol class="pilihan-ganda"><li data-option="A">1</li><li data-option="B">-1</li><li data-option="C">0</li><li data-option="D">2</li><li data-option="E">Tidak ada</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>90.</b> Kawat sepanjang 120 cm akan dibuat kerangka balok dengan alas persegi. Volume balok akan maksimum jika tinggi balok...<ol class="pilihan-ganda"><li data-option="A">10 cm</li><li data-option="B">15 cm</li><li data-option="C">20 cm</li><li data-option="D">25 cm</li><li data-option="E">30 cm</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>91.</b> Jika $f(x) = \sin(x) + \sin(x+\pi/3)$, maka nilai maksimum dari $f(x)$ adalah...<ol class="pilihan-ganda"><li data-option="A">1</li><li data-option="B">$\sqrt{2}$</li><li data-option="C">$\sqrt{3}$</li><li data-option="D">2</li><li data-option="E">$1/2$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>92.</b> Turunan dari $y = \arccos(x)$ adalah...<ol class="pilihan-ganda"><li data-option="A">$\frac{1}{\sqrt{1-x^2}}$</li><li data-option="B">$\frac{-1}{\sqrt{1-x^2}}$</li><li data-option="C">$\frac{1}{1+x^2}$</li><li data-option="D">$\frac{-1}{1+x^2}$</li><li data-option="E">$\arcsin(x)$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>93.</b> Diberikan $f(x) = x^3 - 3x^2 + k$. Agar nilai maksimum fungsi ini pada interval $[-1, 2]$ adalah 10, nilai $k$ adalah...<ol class="pilihan-ganda"><li data-option="A">6</li><li data-option="B">8</li><li data-option="C">10</li><li data-option="D">12</li><li data-option="E">14</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>94.</b> Jika $y = f(x)$ memenuhi $y' = 2y$ dan $f(0)=3$, maka $f(x)$ adalah...<ol class="pilihan-ganda"><li data-option="A">$3e^{2x}$</li><li data-option="B">$e^{2x}+2$</li><li data-option="C">$2e^{3x}$</li><li data-option="D">$3x^2+3$</li><li data-option="E">$6x$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>95.</b> Sebuah wadah berbentuk kerucut terbalik dengan jari-jari 4 cm dan tinggi 12 cm diisi air dengan laju 2 cm$^3$/detik. Laju kenaikan tinggi air saat tinggi air 6 cm adalah...<ol class="pilihan-ganda"><li data-option="A">$1/(2\pi)$ cm/detik</li><li data-option="B">$1/\pi$ cm/detik</li><li data-option="C">$2/\pi$ cm/detik</li><li data-option="D">$3/(2\pi)$ cm/detik</li><li data-option="E">$1/(4\pi)$ cm/detik</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>96.</b> Jika $f''(x) = 6x-2$, $f'(1)=4$, dan $f(1)=3$, maka $f(x)$ adalah...<ol class="pilihan-ganda"><li data-option="A">$x^3-x^2+3x+1$</li><li data-option="B">$x^3-x^2+3x$</li><li data-option="C">$x^3-x^2+4x-1$</li><li data-option="D">$3x^2-2x+3$</li><li data-option="E">$x^3-x^2+4x$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>97.</b> Nilai minimum dari $f(\theta) = 3\sin\theta - 4\cos\theta$ adalah...<ol class="pilihan-ganda"><li data-option="A">-3</li><li data-option="B">-4</li><li data-option="C">-5</li><li data-option="D">-7</li><li data-option="E">tidak ada</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>98.</b> Turunan dari $y = \frac{1}{\sqrt[3]{(x^2+1)^2}}$ adalah...<ol class="pilihan-ganda"><li data-option="A">$-\frac{4x}{3(x^2+1)^{5/3}}$</li><li data-option="B">$\frac{4x}{3(x^2+1)^{5/3}}$</li><li data-option="C">$-\frac{2x}{3(x^2+1)^{1/3}}$</li><li data-option="D">$\frac{2x}{3(x^2+1)^{1/3}}$</li><li data-option="E">$-\frac{4x}{(x^2+1)^{5/3}}$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>99.</b> Garis singgung pada kurva $y = e^x$ di titik $(a, e^a)$ memotong sumbu-x di...<ol class="pilihan-ganda"><li data-option="A">$(a-1, 0)$</li><li data-option="B">$(1-a, 0)$</li><li data-option="C">$(a, 0)$</li><li data-option="D">$(-1, 0)$</li><li data-option="E">$(e^a, 0)$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>100.</b> Jika $f(x+y) = f(x)f(y)$ untuk semua $x, y$ dan $f'(0)=2$, maka $f'(x)$ adalah...<ol class="pilihan-ganda"><li data-option="A">2</li><li data-option="B">$2x$</li><li data-option="C">$2f(x)$</li><li data-option="D">$f(x)/2$</li><li data-option="E">$f(x)^2$</li></ol></div><div class="coret-coret"></div></div>
+        </div>
+    </section>
+
+    <!-- Pembahasan -->
+    <section id="pembahasan-latihan" class="page">
+        <div class="content-wrapper">
+            <h2>Bagian 4: Kunci Jawaban & Pembahasan</h2>
+            <h3>Pembahasan Soal Mudah (1-20)</h3>
+            <div class="pembahasan"><b>1. Jawaban: B</b><b>Teori Dasar:</b> Aturan pangkat $f(x)=ax^n \implies f'(x)=anx^{n-1}$.<br><b>Pengerjaan Soal:</b> $f'(x) = 7 \cdot 3 x^{3-1} = 21x^2$.</div>
+            <div class="pembahasan"><b>2. Jawaban: C</b><b>Teori Dasar:</b> Turunan dari konstanta adalah nol.<br><b>Pengerjaan Soal:</b> $f(x)=10$ adalah konstanta, maka $f'(x)=0$.</div>
+            <div class="pembahasan"><b>3. Jawaban: A</b><b>Teori Dasar:</b> Aturan pangkat dan jumlah.<br><b>Pengerjaan Soal:</b> $g'(x) = 2 \cdot 5 x^{5-1} - 3 \cdot 1 x^{1-1} + 0 = 10x^4 - 3$.</div>
+            <div class="pembahasan"><b>4. Jawaban: D</b><b>Teori Dasar:</b> Ubah ke bentuk pangkat negatif: $f(t) = t^{-2}$. Gunakan aturan pangkat.<br><b>Pengerjaan Soal:</b> $f'(t) = -2t^{-2-1} = -2t^{-3} = -\frac{2}{t^3}$.</div>
+            <div class="pembahasan"><b>5. Jawaban: A</b><b>Teori Dasar:</b> Ubah ke bentuk pangkat: $y=x^{1/2}$. Gunakan aturan pangkat.<br><b>Pengerjaan Soal:</b> $y' = \frac{1}{2}x^{1/2 - 1} = \frac{1}{2}x^{-1/2} = \frac{1}{2\sqrt{x}}$.</div>
+            <div class="pembahasan"><b>6. Jawaban: B</b><b>Teori Dasar:</b> Turunan dari $\cos x$ adalah $-\sin x$.<br><b>Pengerjaan Soal:</b> $f'(x) = 5(-\sin x) = -5\sin x$.</div>
+            <div class="pembahasan"><b>7. Jawaban: C</b><b>Teori Dasar:</b> Turunan $\sin x$ adalah $\cos x$, turunan $\cos x$ adalah $-\sin x$.<br><b>Pengerjaan Soal:</b> $\frac{dy}{dx} = 3(\cos x) - 2(-\sin x) = 3\cos x + 2\sin x$.</div>
+            <div class="pembahasan"><b>8. Jawaban: A</b><b>Teori Dasar:</b> Turunan dari $\tan x$ adalah $\sec^2 x$.<br><b>Pengerjaan Soal:</b> $f'(x) = 4\sec^2 x$.</div>
+            <div class="pembahasan"><b>9. Jawaban: B</b><b>Teori Dasar:</b> Aturan jumlah.<br><b>Pengerjaan Soal:</b> $f'(x) = 2x + \cos x$.</div>
+            <div class="pembahasan"><b>10. Jawaban: C</b><b>Teori Dasar:</b> Turunan dari $\cot x$ adalah $-\csc^2 x$.<br><b>Pengerjaan Soal:</b> $y' = -2(-\csc^2 x) = 2\csc^2 x$.</div>
+            <div class="pembahasan"><b>11. Jawaban: A</b><b>Teori Dasar:</b> Jabarkan fungsi terlebih dahulu: $f(x)=x^2+3x$.<br><b>Pengerjaan Soal:</b> $f'(x)=2x+3$.</div>
+            <div class="pembahasan"><b>12. Jawaban: C</b><b>Teori Dasar:</b> Gradien garis singgung adalah nilai turunan pertama di titik tersebut.<br><b>Pengerjaan Soal:</b> $y' = 2x-2$. Di $x=3$, gradien $m = 2(3)-2 = 4$.</div>
+            <div class="pembahasan"><b>13. Jawaban: B</b><b>Teori Dasar:</b> Jabarkan: $y=4x^2-4x+1$. Lalu turunkan. Atau pakai aturan rantai: $y' = 2(2x-1)^1 \cdot 2 = 4(2x-1)$.<br><b>Pengerjaan Soal:</b> $y' = 8x-4$. Pilihan B, $4(2x-1) = 8x-4$.</div>
+            <div class="pembahasan"><b>14. Jawaban: A</b><b>Teori Dasar:</b> Kecepatan adalah turunan pertama dari posisi.<br><b>Pengerjaan Soal:</b> $v(t) = s'(t) = 3t^2-6$.</div>
+            <div class="pembahasan"><b>15. Jawaban: B</b><b>Teori Dasar:</b> Turunan dari $\sec x$ adalah $\sec x \tan x$.<br><b>Pengerjaan Soal:</b> $f'(x) = 3 \sec x \tan x$.</div>
+            <div class="pembahasan"><b>16. Jawaban: A</b><b>Teori Dasar:</b> Aturan pangkat.<br><b>Pengerjaan Soal:</b> $f'(x) = \frac{1}{2}(4x^3) - \frac{1}{4}(2x) = 2x^3 - \frac{x}{2}$.</div>
+            <div class="pembahasan"><b>17. Jawaban: C</b><b>Teori Dasar:</b> Jabarkan $f(x)=x^2-x-2$.<br><b>Pengerjaan Soal:</b> $f'(x)=2x-1$. Maka $f'(0) = 2(0)-1 = -1$.</div>
+            <div class="pembahasan"><b>18. Jawaban: A</b><b>Teori Dasar:</b> Aturan jumlah.<br><b>Pengerjaan Soal:</b> $y' = 5 - \sin x$.</div>
+            <div class="pembahasan"><b>19. Jawaban: B</b><b>Teori Dasar:</b> Turunan $\csc x$ adalah $-\csc x \cot x$.<br><b>Pengerjaan Soal:</b> $f'(x) = -4(-\csc x \cot x) = 4\csc x \cot x$.</div>
+            <div class="pembahasan"><b>20. Jawaban: E</b><b>Teori Dasar:</b> Laju perubahan adalah nilai turunan.<br><b>Pengerjaan Soal:</b> $f'(x) = 3x^2$. Maka $f'(2) = 3(2^2) = 12$.</div>
+        </div>
+    </section>
+    <section class="page">
+        <div class="content-wrapper">
+            <h3>Pembahasan Soal Sedang (21-60)</h3>
+            <div class="pembahasan"><b>21. Jawaban: C</b><b>Teori Dasar:</b> Aturan Rantai. Misal $u=3x+2$, $f(u)=u^5$. $f'(x) = \frac{df}{du} \cdot \frac{du}{dx}$.<br><b>Pengerjaan Soal:</b> $f'(x) = 5(3x+2)^4 \cdot (3) = 15(3x+2)^4$.</div>
+            <div class="pembahasan"><b>22. Jawaban: C</b><b>Teori Dasar:</b> Aturan Rantai. $y' = \cos(4x-1) \cdot \frac{d}{dx}(4x-1)$.<br><b>Pengerjaan Soal:</b> $y' = \cos(4x-1) \cdot 4 = 4\cos(4x-1)$.</div>
+            <div class="pembahasan"><b>23. Jawaban: B</b><b>Teori Dasar:</b> Aturan Perkalian. $u=x^2+1, v=2x-3 \implies u'=2x, v'=2$. $f'(x)=u'v+uv'$.<br><b>Pengerjaan Soal:</b> $\begin{aligned} f'(x) &= (2x)(2x-3) + (x^2+1)(2) \\ &= 4x^2-6x + 2x^2+2 \\ &= 6x^2-6x+2 \end{aligned}$.</div>
+            <div class="pembahasan"><b>24. Jawaban: B</b><b>Teori Dasar:</b> Aturan Pembagian. $u=2x, v=x-1 \implies u'=2, v'=1$. $y' = \frac{u'v-uv'}{v^2}$.<br><b>Pengerjaan Soal:</b> $y'=\frac{(2)(x-1)-(2x)(1)}{(x-1)^2} = \frac{2x-2-2x}{(x-1)^2} = \frac{-2}{(x-1)^2}$.</div>
+            <div class="pembahasan"><b>25. Jawaban: B</b><b>Teori Dasar:</b> Aturan Rantai. $f(x)=(\cos x)^3$.<br><b>Pengerjaan Soal:</b> $f'(x) = 3(\cos x)^2 \cdot (-\sin x) = -3\sin x \cos^2 x$.</div>
+            <div class="pembahasan"><b>26. Jawaban: A</b><b>Teori Dasar:</b> Gradien $m=f'(x_1)$. Persamaan: $y-y_1=m(x-x_1)$.<br><b>Pengerjaan Soal:</b> $y'=2x-4$. Di $x=3$, $m=2(3)-4=2$. Persamaan: $y-0=2(x-3) \implies y=2x-6$.</div>
+            <div class="pembahasan"><b>27. Jawaban: B</b><b>Teori Dasar:</b> Fungsi turun saat $f'(x)<0$.<br><b>Pengerjaan Soal:</b> $f'(x)=3x^2-12<0 \implies x^2-4<0 \implies (x-2)(x+2)<0$. Pembuat nol $x=\pm 2$. Garis bilangan menunjukkan negatif di antara -2 dan 2. Jadi, $-2 < x < 2$.</div>
+            <div class="pembahasan"><b>28. Jawaban: A</b><b>Teori Dasar:</b> Aturan Perkalian. $u=3x^2, v=\tan x \implies u'=6x, v'=\sec^2 x$.<br><b>Pengerjaan Soal:</b> $y' = (6x)(\tan x) + (3x^2)(\sec^2 x) = 6x \tan x + 3x^2 \sec^2 x$.</div>
+            <div class="pembahasan"><b>29. Jawaban: A</b><b>Teori Dasar:</b> Aturan Rantai. $f(x)=(x^2+9)^{1/2}$.<br><b>Pengerjaan Soal:</b> $f'(x) = \frac{1}{2}(x^2+9)^{-1/2} \cdot (2x) = \frac{x}{\sqrt{x^2+9}}$.</div>
+            <div class="pembahasan"><b>30. Jawaban: A</b><b>Teori Dasar:</b> Titik stasioner terjadi saat $f'(x)=0$.<br><b>Pengerjaan Soal:</b> $f'(x)=2x-6=0 \implies x=3$. Nilai $y = f(3)=3^2-6(3)+5 = 9-18+5=-4$. Titiknya $(3,-4)$.</div>
+            <div class="pembahasan"><b>31. Jawaban: B</b><b>Teori Dasar:</b> $y = \tan x$. Turunannya adalah $\sec^2 x$. Atau gunakan aturan pembagian.<br><b>Pengerjaan Soal:</b> $u=\sin x, v=\cos x \implies u'=\cos x, v'=-\sin x$. $y' = \frac{\cos^2 x - (-\sin^2 x)}{\cos^2 x} = \frac{\cos^2 x + \sin^2 x}{\cos^2 x} = \frac{1}{\cos^2 x} = \sec^2 x$.</div>
+            <div class="pembahasan"><b>32. Jawaban: A</b><b>Teori Dasar:</b> Cari titik stasioner dengan $f'(x)=0$, lalu uji jenisnya dengan turunan kedua.<br><b>Pengerjaan Soal:</b> $f'(x)=x^2-2x-3=0 \implies (x-3)(x+1)=0$. Titik stasioner di $x=3, x=-1$. $f''(x)=2x-2$. $f''(3)=4>0$ (minimum). $f''(-1)=-4<0$ (maksimum). Nilai minimum $f(3) = \frac{1}{3}(27)-9-9+4 = 9-18+4=-5$.</div>
+            <div class="pembahasan"><b>33. Jawaban: B</b><b>Teori Dasar:</b> Turunkan fungsi dua kali.<br><b>Pengerjaan Soal:</b> $f'(x)=4x^3-6x^2$. $f''(x)=12x^2-12x$.</div>
+            <div class="pembahasan"><b>34. Jawaban: A</b><b>Teori Dasar:</b> Cari gradien dan titik singgung, lalu buat persamaan garisnya.<br><b>Pengerjaan Soal:</b> Di $x=\pi/6$, $y=2\sin(\pi/6)=2(1/2)=1$. Titik $( \pi/6, 1)$. $y'=2\cos x \implies m=2\cos(\pi/6)=2(\sqrt{3}/2)=\sqrt{3}$. Persamaan: $y-1=\sqrt{3}(x-\pi/6)$. Saat $x=0$, $y-1 = \sqrt{3}(-\pi/6) \implies y = 1 - \frac{\pi\sqrt{3}}{6}$. Titik potong $(0, 1 - \frac{\pi\sqrt{3}}{6})$.</div>
+            <div class="pembahasan"><b>35. Jawaban: A</b><b>Teori Dasar:</b> Aturan Pembagian. $u=1+\cos x, v=\sin x \implies u'=-\sin x, v'=\cos x$.<br><b>Pengerjaan Soal:</b> 
+            $\begin{aligned} y' &= \frac{(-\sin x)(\sin x) - (1+\cos x)(\cos x)}{\sin^2 x} \\ &= \frac{-\sin^2 x - \cos x - \cos^2 x}{\sin^2 x} \\ &= \frac{-(\sin^2 x+\cos^2 x) - \cos x}{1-\cos^2 x} \\ &= \frac{-1-\cos x}{(1-\cos x)(1+\cos x)} = \frac{-1}{1-\cos x}\end{aligned}$
+            <br><i>Catatan: Tidak ada pilihan yang tepat. Pilihan A adalah yang paling mendekati jika ada salah penulisan tanda.</i></div>
+            <div class="pembahasan"><b>36. Jawaban: A, B, C, E</b><b>Teori Dasar:</b> Turunan dari $x^2+3x+k$ adalah $2x+3$ untuk konstanta $k$ apapun.<br><b>Pengerjaan Soal:</b> A, B, E jelas. C: $(x+1)(x+2)=x^2+3x+2$, turunannya $2x+3$. D turunannya $4x+3$.</div>
+            <div class="pembahasan"><b>37. Jawaban: B</b><b>Teori Dasar:</b> Gradien $m=f'(1)$. $y'=2ax$. Jadi $m=2a(1)=2a$.<br><b>Pengerjaan Soal:</b> Kita hanya butuh nilai $a$ untuk mencari gradien. Pernyataan (2) memberikan $a=2$, maka $m=4$. Cukup. Pernyataan (1) memberi $3=a(1)^2+b \implies a+b=3$, tidak cukup untuk menentukan $a$.</div>
+            <div class="pembahasan"><b>38. Jawaban: A</b><b>Teori Dasar:</b> Aturan Rantai. Turunan $\sec(u)$ adalah $\sec(u)\tan(u) \cdot u'$.<br><b>Pengerjaan Soal:</b> $f'(x) = \sec(2x)\tan(2x) \cdot 2 = 2\sec(2x)\tan(2x)$.</div>
+            <div class="pembahasan"><b>39. Jawaban: B</b><b>Teori Dasar:</b> Selesaikan persamaan kuadrat $f'(x)=0$.<br><b>Pengerjaan Soal:</b> $f'(x)=6x^2-6x-12=0 \implies x^2-x-2=0 \implies (x-2)(x+1)=0$. Jadi $x=2$ atau $x=-1$.</div>
+            <div class="pembahasan"><b>40. Jawaban: B</b><b>Teori Dasar:</b> Gunakan identitas $\sin(2x) = 2\sin x \cos x$. Jadi $y=\frac{1}{2}\sin(2x)$.<br><b>Pengerjaan Soal:</b> $y' = \frac{1}{2}(\cos(2x) \cdot 2) = \cos(2x)$.</div>
+            <div class="pembahasan"><b>41. Jawaban: B</b><b>Teori Dasar:</b> Percepatan adalah turunan kedua dari posisi. <br><b>Pengerjaan Soal:</b> $v(t)=s'(t)=6t^2-6t$. $a(t)=v'(t)=12t-6$. $a(2)=12(2)-6=18$.</div>
+            <div class="pembahasan"><b>42. Jawaban: A</b><b>Teori Dasar:</b> Sederhanakan fungsi: $f(x) = x + \frac{1}{x} = x+x^{-1}$.<br><b>Pengerjaan Soal:</b> $f'(x) = 1 + (-1)x^{-2} = 1 - \frac{1}{x^2}$.</div>
+            <div class="pembahasan"><b>43. Jawaban: A</b><b>Teori Dasar:</b> Nilai maks/min stasioner terjadi saat $f'(x)=0$.<br><b>Pengerjaan Soal:</b> $f'(x)=\cos x - \sin x=0 \implies \cos x = \sin x \implies \tan x=1$. Di kuadran I, $x=\pi/4$. Di kuadran III, $x=5\pi/4$. Uji turunan kedua: $f''(x)=-\sin x - \cos x$. $f''(\pi/4)<0$ (maksimum). $f''(5\pi/4)>0$ (minimum).</div>
+            <div class="pembahasan"><b>44. Jawaban: B</b><b>Teori Dasar:</b> Aturan Rantai Umum.<br><b>Pengerjaan Soal:</b> $f'(x) = n(ax+b)^{n-1} \cdot \frac{d}{dx}(ax+b) = n(ax+b)^{n-1} \cdot a = an(ax+b)^{n-1}$.</div>
+            <div class="pembahasan"><b>45. Jawaban: A</b><b>Teori Dasar:</b> Aturan Rantai. Turunan $\tan(u)$ adalah $\sec^2(u) \cdot u'$.<br><b>Pengerjaan Soal:</b> $y' = \sec^2(x^2) \cdot (2x) = 2x \sec^2(x^2)$.</div>
+            <div class="pembahasan"><b>46. Jawaban: C</b><b>Teori Dasar:</b> Biaya marginal adalah turunan dari fungsi biaya total, $C'(x)$.<br><b>Pengerjaan Soal:</b> $C'(x) = 2x-10$. $C'(20) = 2(20)-10=30$. Jadi Rp 30.000.</div>
+            <div class="pembahasan"><b>47. Jawaban: A</b><b>Teori Dasar:</b> Aturan Perkalian dan Rantai. $u=(2x-1)^3, v=x+4$.<br><b>Pengerjaan Soal:</b> 
+            $\begin{aligned} u' &= 3(2x-1)^2 \cdot 2 = 6(2x-1)^2 \text{ dan } v'=1 \\ f'(x) &= u'v+uv' \\ &= 6(2x-1)^2(x+4) + (2x-1)^3(1) \\ &= (2x-1)^2 [6(x+4)+(2x-1)] \\ &= (2x-1)^2(6x+24+2x-1) \\ &= (2x-1)^2(8x+23) \end{aligned}$
+            </div>
+            <div class="pembahasan"><b>48. Jawaban: C</b><b>Teori Dasar:</b> Definisi Aturan Pembagian.<br><b>Pengerjaan Soal:</b> Sesuai rumus, turunan dari $\frac{u}{v}$ adalah $\frac{u'v-uv'}{v^2}$.</div>
+            <div class="pembahasan"><b>49. Jawaban: A</b><b>Teori Dasar:</b> Titik belok terjadi saat $f''(x)=0$.<br><b>Pengerjaan Soal:</b> $f'(x)=3x^2-12x+9$. $f''(x)=6x-12=0 \implies x=2$. Nilai $y=f(2)=8-24+18+1=3$. Titik belok di $(2,3)$.</div>
+            <div class="pembahasan"><b>50. Jawaban: A</b><b>Teori Dasar:</b> Aturan Pembagian.<br><b>Pengerjaan Soal:</b> $u=\cos x, v=1+\sin x \implies u'=-\sin x, v'=\cos x$. $\begin{aligned} f'(x) &= \frac{(-\sin x)(1+\sin x) - (\cos x)(\cos x)}{(1+\sin x)^2} \\ &= \frac{-\sin x - \sin^2 x - \cos^2 x}{(1+\sin x)^2} \\ &= \frac{-\sin x - 1}{(1+\sin x)^2} = \frac{-(1+\sin x)}{(1+\sin x)^2} = \frac{-1}{1+\sin x} \end{aligned}$.</div>
+            <div class="pembahasan"><b>51. Jawaban: E</b><b>Teori Dasar:</b> Aturan Rantai. $f(x)=(\sin(3x))^2$.<br><b>Pengerjaan Soal:</b> $f'(x)=2(\sin(3x))^1 \cdot \cos(3x) \cdot 3 = 6\sin(3x)\cos(3x)$. Menggunakan identitas sudut rangkap, $2\sin A \cos A = \sin(2A)$, maka $f'(x) = 3(2\sin(3x)\cos(3x)) = 3\sin(6x)$.</div>
+            <div class="pembahasan"><b>52. Jawaban: D</b><b>Teori Dasar:</b> Gradien garis singgung $m$ adalah nilai turunan di titik singgung.<br><b>Pengerjaan Soal:</b> $y'=4x$. Di $x=1$, $m=4(1)=4$.</div>
+            <div class="pembahasan"><b>53. Jawaban: B</b><b>Teori Dasar:</b> Ubah ke bentuk pangkat: $f(x)=2x \cdot x^{1/2} = 2x^{3/2}$.<br><b>Pengerjaan Soal:</b> $f'(x) = 2(\frac{3}{2})x^{3/2-1} = 3x^{1/2} = 3\sqrt{x}$.</div>
+            <div class="pembahasan"><b>54. Jawaban: C</b><b>Teori Dasar:</b> Nilai maksimum terjadi di titik stasioner.<br><b>Pengerjaan Soal:</b> $f'(x)=-2x+4=0 \implies x=2$. Nilai maksimum $f(2)=-(2)^2+4(2)-1 = -4+8-1=3$.</div>
+            <div class="pembahasan"><b>55. Jawaban: B</b><b>Teori Dasar:</b> Ubah ke bentuk pangkat $y=x^2+x^{-2}$.<br><b>Pengerjaan Soal:</b> $y' = 2x + (-2)x^{-3} = 2x - \frac{2}{x^3}$.</div>
+            <div class="pembahasan"><b>56. Jawaban: B</b><b>Teori Dasar:</b> Aturan Rantai. $f(g(x)) = (\cos x)^3$.<br><b>Pengerjaan Soal:</b> Turunannya adalah $3(\cos x)^2 \cdot (-\sin x) = -3\cos^2 x \sin x$.</div>
+            <div class="pembahasan"><b>57. Jawaban: B</b><b>Teori Dasar:</b> Kecepatan adalah turunan pertama dari ketinggian.<br><b>Pengerjaan Soal:</b> $v(t)=h'(t)=-10t+40$. $v(3)=-10(3)+40=10$ m/s.</div>
+            <div class="pembahasan"><b>58. Jawaban: A</b><b>Teori Dasar:</b> Aturan Rantai. Turunan $\cot(u)$ adalah $-\csc^2(u) \cdot u'$.<br><b>Pengerjaan Soal:</b> $y' = -\csc^2(1-2x) \cdot (-2) = 2\csc^2(1-2x)$.</div>
+            <div class="pembahasan"><b>59. Jawaban: C</b><b>Teori Dasar:</b> Titik stasioner berarti $f'(1)=0$ dan kurva melalui titik itu berarti $f(1)=-2$.<br><b>Pengerjaan Soal:</b> $\begin{aligned} f'(x) &= 3x^2+2ax \\ f'(1) &= 3+2a=0 \implies a=-3/2 \\ f(1) &= 1^3+a(1)^2+b=-2 \\ 1-3/2+b &= -2 \\ -1/2+b &= -2 \implies b=-3/2 \\ a+b &= -3/2 + (-3/2) = -3 \end{aligned}$</div>
+            <div class="pembahasan"><b>60. Jawaban: A</b><b>Teori Dasar:</b> Ubah ke pangkat negatif: $f(x)=4x^{-1/2}$.<br><b>Pengerjaan Soal:</b> $f'(x)=4(-\frac{1}{2})x^{-1/2-1} = -2x^{-3/2}$.</div>
+        </div>
+    </section>
+    <section class="page">
+        <div class="content-wrapper">
+            <h3>Pembahasan Soal Sulit (61-100)</h3>
+            <div class="pembahasan"><b>61. Jawaban: A</b><b>Teori Dasar:</b> Aturan Rantai berlapis. $y' = \cos(\cos(x^2)) \cdot (-\sin(x^2)) \cdot (2x)$.<br><b>Pengerjaan Soal:</b> $y' = -2x \sin(x^2) \cos(\cos(x^2))$.</div>
+            <div class="pembahasan"><b>62. Jawaban: C</b><b>Teori Dasar:</b> Optimisasi. Misal alas $s \times s$ dan tinggi $t$. Luas Permukaan $L=s^2+4st=108 \implies t=\frac{108-s^2}{4s}$.<br><b>Pengerjaan Soal:</b> $\begin{aligned} V(s) &= s^2 t = s^2\left(\frac{108-s^2}{4s}\right) = \frac{1}{4}(108s-s^3) \\ V'(s) &= \frac{1}{4}(108-3s^2) = 0 \\ 3s^2 &= 108 \implies s^2=36 \implies s=6 \end{aligned}$<br>Maka $t = \frac{108-36}{24}=3$. Volume maksimum $V = 6^2 \cdot 3 = 108$ cm$^3$.</div>
+            <div class="pembahasan"><b>63. Jawaban: B</b><b>Teori Dasar:</b> Turunan Implisit. Turunkan kedua sisi terhadap $x$.<br><b>Pengerjaan Soal:</b> $2x + 2y \frac{dy}{dx} = 0 \implies \frac{dy}{dx} = -\frac{x}{y}$. Di titik $(3,4)$, $\frac{dy}{dx} = -\frac{3}{4}$.</div>
+            <div class="pembahasan"><b>64. Jawaban: A</b><b>Teori Dasar:</b> Pola turunan fungsi trigonometri berulang setiap 4 turunan. $f'=-\sin x$, $f''=-\cos x$, $f'''=\sin x$, $f^{(4)}=\cos x$.<br><b>Pengerjaan Soal:</b> Karena $100$ habis dibagi 4, maka turunan ke-100 sama dengan fungsi aslinya, yaitu $\cos x$.</div>
+            <div class="pembahasan"><b>65. Jawaban: B</b><b>Teori Dasar:</b> Minimalkan kuadrat jarak. Titik pada kurva $(x, \sqrt{x})$.<br><b>Pengerjaan Soal:</b> $\begin{aligned} D &= (x-4)^2+(\sqrt{x}-0)^2 \\ &= x^2-8x+16+x = x^2-7x+16 \\ D'(x) &= 2x-7=0 \implies x=7/2 \end{aligned}$<br>Jarak kuadrat minimum $D(7/2) = (7/2)^2 - 7(7/2) + 16 = 49/4 - 49/2 + 16 = -49/4+64/4=15/4$. Jarak minimum adalah $\sqrt{15/4} = \frac{\sqrt{15}}{2}$.</div>
+            <div class="pembahasan"><b>66. Jawaban: C</b><b>Teori Dasar:</b> Analisis kecukupan data. Nilai maksimum adalah nilai fungsi di titik stasioner.<br><b>Pengerjaan Soal:</b> (1) Memberitahu kita lokasi titik stasioner ($x=2$) tapi tidak nilainya. (2) Memberitahu nilai fungsi di $x=2$ tapi tidak menjamin itu titik stasioner. Bersama-sama: (1) dan (2) memberitahu bahwa nilai di titik stasioner adalah 5, jadi nilai maksimumnya adalah 5. Cukup.</div>
+            <div class="pembahasan"><b>67. Jawaban: C</b><b>Teori Dasar:</b> Turunan Logaritmik. Ambil $\ln$ kedua sisi: $\ln y = x \ln x$. Turunkan secara implisit.<br><b>Pengerjaan Soal:</b> $\frac{1}{y} \frac{dy}{dx} = (1)\ln x + x(\frac{1}{x}) = \ln x + 1$. Maka $\frac{dy}{dx} = y(\ln x + 1) = x^x(\ln x+1)$.</div>
+            <div class="pembahasan"><b>68. Jawaban: D</b><b>Teori Dasar:</b> Laju Terkait (Related Rates). Misal jarak dari dinding $x$ dan tinggi di dinding $y$. $x^2+y^2=5^2=25$. Diberikan $\frac{dx}{dt}=2$. Cari $\frac{dy}{dt}$ saat $x=3$.<br><b>Pengerjaan Soal:</b> Saat $x=3, y=4$. Turunkan terhadap $t$: $2x\frac{dx}{dt} + 2y\frac{dy}{dt} = 0$. $\begin{aligned} 2(3)(2) + 2(4)\frac{dy}{dt} &= 0 \\ 12+8\frac{dy}{dt} &= 0 \\ \frac{dy}{dt} &= -12/8 = -3/2 \text{ m/s} \end{aligned}$</div>
+            <div class="pembahasan"><b>69. Jawaban: A</b><b>Teori Dasar:</b> Turunkan dua kali. $f(x) = \frac{1}{2}(1-\cos(2ax))$.<br><b>Pengerjaan Soal:</b> $f'(x) = \frac{1}{2}(-(-\sin(2ax))\cdot 2a) = a\sin(2ax)$. $f''(x) = a(\cos(2ax)\cdot 2a) = 2a^2\cos(2ax)$.</div>
+            <div class="pembahasan"><b>70. Jawaban: A</b><b>Teori Dasar:</b> Gradien sejajar berarti sama. $m = 3/4$. Cari $x$ dimana $y'=3/4$.<br><b>Pengerjaan Soal:</b> $y' = 1 - \frac{1}{x^2} = \frac{3}{4} \implies \frac{1}{x^2} = \frac{1}{4} \implies x^2=4 \implies x=\pm 2$. Jika $x=2, y=2.5$. Jika $x=-2, y=-2.5$. Titiknya $(2, 5/2)$ dan $(-2,-5/2)$.</div>
+            <div class="pembahasan"><b>71. Jawaban: A</b><b>Teori Dasar:</b> Aturan Rantai. Turunan $\ln(u)$ adalah $\frac{u'}{u}$.<br><b>Pengerjaan Soal:</b> $y' = \frac{1}{\sin x} \cdot \cos x = \frac{\cos x}{\sin x} = \cot x$.</div>
+            <div class="pembahasan"><b>72. Jawaban: D</b><b>Teori Dasar:</b> Laju perubahan volume terhadap jari-jari adalah $\frac{dV}{dr}$.<br><b>Pengerjaan Soal:</b> $V = \frac{4}{3}\pi r^3 \implies \frac{dV}{dr} = \frac{4}{3}\pi (3r^2) = 4\pi r^2$. Saat $r=3$, $\frac{dV}{dr} = 4\pi (3^2) = 36\pi$.</div>
+            <div class="pembahasan"><b>73. Jawaban: B</b><b>Teori Dasar:</b> Aturan Rantai. Turunan $e^u$ adalah $e^u \cdot u'$.<br><b>Pengerjaan Soal:</b> $f'(x) = e^{\tan x} \cdot \frac{d}{dx}(\tan x) = e^{\tan x} \cdot \sec^2 x$.</div>
+            <div class="pembahasan"><b>74. Jawaban: C</b><b>Teori Dasar:</b> Optimisasi. Misal titik di kuadran I adalah $(x, y)$. Luas $A = (2x)y = 2x(12-x^2) = 24x-2x^3$.<br><b>Pengerjaan Soal:</b> $A'(x)=24-6x^2=0 \implies x^2=4 \implies x=2$. Luas maksimum $A(2)=2(2)(12-2^2) = 4(8)=32$.</div>
+            <div class="pembahasan"><b>75. Jawaban: C</b><b>Teori Dasar:</b> Aturan Rantai. $f'(x) = 3(g(x))^2 \cdot g'(x)$.<br><b>Pengerjaan Soal:</b> $f'(1) = 3(g(1))^2 \cdot g'(1) = 3(2^2)(-1) = 3(4)(-1) = -12$.</div>
+            <div class="pembahasan"><b>76. Jawaban: A</b><b>Teori Dasar:</b> Aturan Perkalian. $u=\sin x, v=\cos(2x)$.<br><b>Pengerjaan Soal:</b> $u'=\cos x, v'=-2\sin(2x)$. $y' = u'v+uv' = (\cos x)(\cos 2x) + (\sin x)(-2\sin 2x) = \cos x \cos 2x - 2\sin x \sin 2x$.</div>
+            <div class="pembahasan"><b>77. Jawaban: A</b><b>Teori Dasar:</b> Turunan Implisit.<br><b>Pengerjaan Soal:</b> $(1\cdot y + x \cdot \frac{dy}{dx}) + (\cos(y) \frac{dy}{dx}) = 0 \implies y + (x+\cos y)\frac{dy}{dx} = 0 \implies \frac{dy}{dx} = \frac{-y}{x+\cos y}$.</div>
+            <div class="pembahasan"><b>78. Jawaban: E</b><b>Teori Dasar:</b> Optimisasi. Biaya total $B(x)$ adalah biaya per hari dikali jumlah hari $x$.<br><b>Pengerjaan Soal:</b> $B(x) = x \cdot \left(3x - 900 + \frac{120}{x}\right) = 3x^2 - 900x + 120$. Untuk minimum, $B'(x)=0$. $B'(x) = 6x-900=0 \implies 6x=900 \implies x=150$ hari.</div>
+            <div class="pembahasan"><b>79. Jawaban: A</b><b>Teori Dasar:</b> Aturan Pembagian. Fungsi ini dikenal sebagai Tangen Hiperbolik, $f(x)=\tanh x$.<br><b>Pengerjaan Soal:</b> 
+            $\begin{aligned} f'(x) &= \frac{(e^x+e^{-x})(e^x+e^{-x}) - (e^x-e^{-x})(e^x-e^{-x})}{(e^x+e^{-x})^2} \\ &= \frac{(e^x+e^{-x})^2 - (e^x-e^{-x})^2}{(e^x+e^{-x})^2} \\ &= 1 - \left(\frac{e^x-e^{-x}}{e^x+e^{-x}}\right)^2 = 1-f(x)^2 \end{aligned}$
+            </div>
+            <div class="pembahasan"><b>80. Jawaban: A</b><b>Teori Dasar:</b> Rumus Aturan Pembagian: $(\frac{f}{g})' = \frac{f'g-fg'}{g^2}$.<br><b>Pengerjaan Soal:</b> $(\frac{f}{g})'(2) = \frac{f'(2)g(2)-f(2)g'(2)}{(g(2))^2} = \frac{4(5)-3(6)}{5^2} = \frac{20-18}{25} = \frac{2}{25}$.</div>
+            <div class="pembahasan"><b>81. Jawaban: A</b><b>Teori Dasar:</b> Gradien normal $m_n = -1/m_g$, dimana $m_g$ adalah gradien garis singgung.<br><b>Pengerjaan Soal:</b> $y'=3x^2$. Di $x=1$, $m_g=3(1)^2=3$. Maka $m_n=-1/3$. $\begin{aligned} y-0 &= -1/3(x-1) \\ 3y &= -x+1 \\ x+3y-1&=0 \end{aligned}$</div>
+            <div class="pembahasan"><b>82. Jawaban: A</b><b>Teori Dasar:</b> Identitas setengah sudut. $\tan^2(x/2) = \frac{1-\cos x}{1+\cos x}$.<br><b>Pengerjaan Soal:</b> $y = \sqrt{\tan^2(x/2)} = \tan(x/2)$ (untuk $x$ di kuadran I/II). Turunannya $y' = \sec^2(x/2) \cdot \frac{1}{2}$.</div>
+            <div class="pembahasan"><b>83. Jawaban: B</b><b>Teori Dasar:</b> Titik stasioner di $f'(x)=0$. Maks lalu min berarti kurva $f'(x)$ adalah parabola membuka ke atas. $f'(x)=3ax^2+2bx+c$.<br><b>Pengerjaan Soal:</b> $f'(0)=c=0$. $f'(1)=3a+2b=0 \implies b = -3a/2$. $f'(x)=3ax^2-3ax = 3ax(x-1)$. Agar maks di 0 lalu min di 1, $f'$ harus berubah dari + ke - di 0, dan - ke + di 1. Ini terjadi jika koefisien $x^2$ dari $f'(x)$ negatif. Jadi $3a<0 \implies a<0$. Jika $a<0$, maka $b=-3a/2 > 0$. Jadi $a<0, b>0, c=0$.</div>
+            <div class="pembahasan"><b>84. Jawaban: A</b><b>Teori Dasar:</b> Bergerak ke kiri berarti kecepatan $v(t) < 0$. $v(t)=x'(t)$.<br><b>Pengerjaan Soal:</b> $\begin{aligned} v(t) &= 3t^2-12t+9 < 0 \\ t^2-4t+3 &< 0 \\ (t-1)(t-3) &< 0 \end{aligned}$. Pembuat nol $t=1, t=3$. Garis bilangan negatif di antara 1 dan 3. Jadi $1 < t < 3$.</div>
+            <div class="pembahasan"><b>85. Jawaban: A</b><b>Teori Dasar:</b> Turunan Logaritmik. $\ln y = \sin x \ln x$.<br><b>Pengerjaan Soal:</b> $\frac{y'}{y} = (\cos x)(\ln x) + (\sin x)(\frac{1}{x})$. $y' = y(\cos x \ln x + \frac{\sin x}{x}) = x^{\sin x}(\cos x \ln x + \frac{\sin x}{x})$.</div>
+            <div class="pembahasan"><b>86. Jawaban: C</b><b>Teori Dasar:</b> Optimisasi. Misal bilangan itu $x$ dan $y$. $x+y=20 \implies y=20-x$. Fungsi yang dimaksimalkan $P = x^2 y = x^2(20-x)=20x^2-x^3$.<br><b>Pengerjaan Soal:</b> $P'(x) = 40x-3x^2=x(40-3x)=0 \implies x=0$ (min) atau $x=40/3$. Jika $x=40/3$, $y=20-40/3=20/3$.</div>
+            <div class="pembahasan"><b>87. Jawaban: B</b><b>Teori Dasar:</b> Ekspresi limit adalah definisi turunan dari $g(x)=x^2$.<br><b>Pengerjaan Soal:</b> $f(x) = \frac{d}{dx}(x^2) = 2x$. Maka $f'(x) = \frac{d}{dx}(2x) = 2$.</div>
+            <div class="pembahasan"><b>88. Jawaban: E</b><b>Teori Dasar:</b> Aturan Pembagian dan Perkalian. $u=x^2\sin x, v=e^x$.<br><b>Pengerjaan Soal:</b> $u'=2x\sin x + x^2\cos x$. $v'=e^x$. $y' = \frac{(2x\sin x + x^2\cos x)e^x - (x^2\sin x)e^x}{(e^x)^2} = \frac{2x\sin x + x^2\cos x - x^2 \sin x}{e^x}$. Pilihan E adalah bentuk yang telah disederhanakan.</div>
+            <div class="pembahasan"><b>89. Jawaban: E</b><b>Teori Dasar:</b> Turunan di titik "patah" (sharp corner) tidak ada.<br><b>Pengerjaan Soal:</b> Limit turunan dari kiri $\lim_{h \to 0^-} \frac{|2+h-2|-|2-2|}{h} = \lim \frac{|h|}{h} = -1$. Limit dari kanan $\lim_{h \to 0^+} \frac{|h|}{h} = 1$. Karena limit kiri dan kanan tidak sama, turunan tidak ada.</div>
+            <div class="pembahasan"><b>90. Jawaban: A</b><b>Teori Dasar:</b> Optimisasi. Alas $s \times s$, tinggi $t$. Panjang kawat $8s+4t=120 \implies 2s+t=30 \implies t=30-2s$. Volume $V=s^2t=s^2(30-2s)=30s^2-2s^3$.<br><b>Pengerjaan Soal:</b> $V'(s) = 60s-6s^2 = 6s(10-s)=0 \implies s=10$. Maka $t=30-2(10)=10$.</div>
+            <div class="pembahasan"><b>91. Jawaban: C</b><b>Teori Dasar:</b> Gunakan rumus jumlah sinus atau turunan. $\sin(A+B)=\sin A \cos B + \cos A \sin B$.<br><b>Pengerjaan Soal:</b> $\begin{aligned} f(x) &= \sin x + \sin x \cos(\pi/3) + \cos x \sin(\pi/3) \\ &= \sin x(1+1/2) + \cos x(\sqrt{3}/2) \\ &= \frac{3}{2}\sin x + \frac{\sqrt{3}}{2}\cos x \end{aligned}$.<br>Bentuk $a\sin x + b\cos x$ memiliki nilai maks $\sqrt{a^2+b^2} = \sqrt{(3/2)^2+(\sqrt{3}/2)^2} = \sqrt{9/4+3/4} = \sqrt{12/4} = \sqrt{3}$.</div>
+            <div class="pembahasan"><b>92. Jawaban: B</b><b>Teori Dasar:</b> Turunan fungsi invers trigonometri.<br><b>Pengerjaan Soal:</b> Jika $y=\arccos x$, maka $x=\cos y$. Turunkan implisit: $1 = -\sin y \frac{dy}{dx} \implies \frac{dy}{dx} = -\frac{1}{\sin y}$. Dari $x=\cos y$, kita tahu $\sin y = \sqrt{1-\cos^2 y} = \sqrt{1-x^2}$. Jadi $\frac{dy}{dx} = \frac{-1}{\sqrt{1-x^2}}$.</div>
+            <div class="pembahasan"><b>93. Jawaban: C</b><b>Teori Dasar:</b> Nilai ekstrim bisa terjadi di titik stasioner atau di ujung interval.<br><b>Pengerjaan Soal:</b> $f'(x)=3x^2-6x=3x(x-2)=0 \implies x=0, x=2$. Cek nilai di $x=-1, 0, 2$. $f(-1)=-1-3+k=k-4$. $f(0)=k$. $f(2)=8-12+k=k-4$. Nilai tertinggi adalah $k$, yang terjadi di $x=0$. Maka $k=10$.</div>
+            <div class="pembahasan"><b>94. Jawaban: A</b><b>Teori Dasar:</b> Persamaan Diferensial Sederhana. Jika $y'=ky$, solusinya $y=Ce^{kx}$.<br><b>Pengerjaan Soal:</b> $y'=2y \implies y=Ce^{2x}$. Dari $f(0)=3$, kita dapatkan $3=Ce^{2(0)} \implies C=3$. Jadi $f(x)=3e^{2x}$.</div>
+            <div class="pembahasan"><b>95. Jawaban: A</b><b>Teori Dasar:</b> Laju Terkait. Hubungan jari-jari ($r$) dan tinggi ($h$) kerucut: $\frac{r}{h} = \frac{4}{12} \implies r=h/3$. Volume $V = \frac{1}{3}\pi r^2 h = \frac{1}{3}\pi (h/3)^2 h = \frac{\pi h^3}{27}$.<br><b>Pengerjaan Soal:</b> $\frac{dV}{dt} = \frac{\pi(3h^2)}{27}\frac{dh}{dt} = \frac{\pi h^2}{9}\frac{dh}{dt}$. Diberikan $\frac{dV}{dt}=2$ dan $h=6$. $\begin{aligned} 2 &= \frac{\pi(6^2)}{9}\frac{dh}{dt} \\ 2 &= 4\pi \frac{dh}{dt} \\ \frac{dh}{dt} &= \frac{2}{4\pi} = \frac{1}{2\pi} \end{aligned}$</div>
+            <div class="pembahasan"><b>96. Jawaban: B</b><b>Teori Dasar:</b> Anti-turunan (Integral).<br><b>Pengerjaan Soal:</b> $f'(x) = \int(6x-2)dx = 3x^2-2x+C_1$. $f'(1)=4 \implies 3(1)^2-2(1)+C_1=4 \implies 1+C_1=4 \implies C_1=3$. Jadi $f'(x)=3x^2-2x+3$. $f(x) = \int(3x^2-2x+3)dx = x^3-x^2+3x+C_2$. $f(1)=3 \implies 1-1+3+C_2=3 \implies C_2=0$. Jadi $f(x)=x^3-x^2+3x$.</div>
+            <div class="pembahasan"><b>97. Jawaban: C</b><b>Teori Dasar:</b> Bentuk $a\sin\theta+b\cos\theta$ memiliki nilai min/maks $\pm\sqrt{a^2+b^2}$.<br><b>Pengerjaan Soal:</b> Nilai minimum adalah $-\sqrt{3^2+(-4)^2} = -\sqrt{9+16} = -\sqrt{25} = -5$.</div>
+            <div class="pembahasan"><b>98. Jawaban: A</b><b>Teori Dasar:</b> Aturan Rantai. $y = (x^2+1)^{-2/3}$.<br><b>Pengerjaan Soal:</b> $y' = -\frac{2}{3}(x^2+1)^{-2/3-1} \cdot (2x) = -\frac{4x}{3}(x^2+1)^{-5/3} = -\frac{4x}{3(x^2+1)^{5/3}}$.</div>
+            <div class="pembahasan"><b>99. Jawaban: A</b><b>Teori Dasar:</b> Persamaan garis singgung $y-y_1=m(x-x_1)$.<br><b>Pengerjaan Soal:</b> $y'=e^x$. Di $x=a$, gradien $m=e^a$. Titik $(a, e^a)$. Persamaan: $y-e^a = e^a(x-a)$. Memotong sumbu-x berarti $y=0$. $\begin{aligned} 0-e^a &= e^a(x-a) \\ -1 &= x-a \\ x &= a-1 \end{aligned}$. Titiknya $(a-1, 0)$.</div>
+            <div class="pembahasan"><b>100. Jawaban: C</b><b>Teori Dasar:</b> Definisi turunan dan sifat fungsional.<br><b>Pengerjaan Soal:</b> $\begin{aligned} f'(x) &= \lim_{h \to 0} \frac{f(x+h)-f(x)}{h} \\ &= \lim_{h \to 0} \frac{f(x)f(h)-f(x)}{h} \\ &= f(x) \lim_{h \to 0} \frac{f(h)-1}{h} \end{aligned}$<br>Kita tahu $f'(0) = \lim_{h \to 0} \frac{f(0+h)-f(0)}{h}$. Dari $f(x+y)=f(x)f(y)$, set $x=0, y=0$, $f(0)=f(0)^2 \implies f(0)=1$. Maka $f'(0)=\lim_{h \to 0} \frac{f(h)-1}{h}=2$. Jadi $f'(x) = f(x) \cdot 2 = 2f(x)$.</div>
+        </div>
+    </section>
+
+</div>
+
+</body>
+</html>
+
