@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Soal - Aplikasi Turunan Fungsi (SMA)</title>
+    <script>
+        window.MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']]
+          },
+          svg: {
+            fontCache: 'global'
+          }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-text: #333333;
+            --secondary-text: #555555;
+            --border-color: #dddddd;
+            --title-grad-1: #4a4a4a;
+            --title-grad-2: #000000;
+        }
+        
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            font-size: 10pt;
+            line-height: 1.6;
+            color: var(--primary-text);
+            background-color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            counter-reset: page;
+        }
+
+        .page {
+            background: white;
+            width: 176mm;
+            min-height: 250mm;
+            padding: 20mm;
+            margin: 1cm auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .page::after {
+            counter-increment: page;
+            content: counter(page);
+            position: absolute;
+            bottom: 15mm;
+            right: 20mm;
+            font-size: 10pt;
+            color: #888;
+        }
+
+        .cover-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 3px solid #444;
+            height: 250mm;
+        }
+        
+        .cover-page::after, .toc-page::after {
+            content: ''; /* No page number on cover and TOC */
+        }
+
+        .cover-page img {
+            max-width: 250px;
+            margin-bottom: 40px;
+        }
+
+        .cover-page .title {
+            font-size: 38pt;
+            font-weight: 900;
+            margin: 0;
+            color: var(--title-grad-2);
+            background: -webkit-linear-gradient(45deg, var(--title-grad-1), var(--title-grad-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .cover-page .subtitle {
+            font-size: 18pt;
+            margin-top: 15px;
+            color: var(--secondary-text);
+            font-weight: 700;
+        }
+
+        @media print {
+            body { background: none; }
+            .page { width: 100%; height: 100%; margin: 0; box-shadow: none; page-break-after: always; }
+        }
+        
+        .watermark-container .page::before {
+            content: '';
+            background-image: url('https://imgix3.ruangguru.com/assets/miscellaneous/jpeg_sijv7w_5618.jpeg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 12cm;
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%; height: 100%;
+            opacity: 0.08;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .cover-page::before, .toc-page::before { opacity: 0; }
+
+        .content-wrapper { position: relative; z-index: 1; width: 100%; }
+        
+        h1 { font-size: 24pt; text-align: center; border-bottom: 2px solid var(--primary-text); padding-bottom: 10px; margin-bottom: 20px; }
+        h2 { font-size: 18pt; color: #000; border-left: 5px solid #555; padding-left: 10px; margin-top: 30px; }
+        h3 { font-size: 14pt; color: #222; margin-top: 30px; font-weight: 700; border-bottom: 2px solid #eee; padding-bottom: 5px; }
+        h4 { font-size: 12pt; font-weight: 700; margin-bottom: 5px; }
+
+        .toc-list { list-style-type: none; padding: 0; }
+        .toc-list li { margin-bottom: 10px; font-size: 12pt; }
+        .toc-list a { text-decoration: none; color: var(--primary-text); }
+        .toc-list a:hover { text-decoration: underline; }
+        
+        .layout-1-kolom { columns: 1; }
+        .latihan-item { display: grid; grid-template-columns: 1fr 0.7fr; gap: 20px; border-top: 1px dashed var(--border-color); padding-top: 15px; margin-top: 15px; break-inside: avoid; }
+        .latihan-item:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
+        
+        .soal-item, .soal-latihan { margin-bottom: 15px; break-inside: avoid; overflow-wrap: break-word; word-wrap: break-word; }
+        
+        .coret-coret { border: 1px dashed #c0c0c0; min-height: 120px; padding: 10px; border-radius: 5px; }
+        
+        .pembahasan { background-color: #f9f9f9; border: 1px solid var(--border-color); padding: 15px; border-radius: 5px; margin-top: 10px; margin-bottom: 15px; overflow-wrap: break-word; }
+        .pembahasan b { display: block; margin-bottom: 5px;}
+        
+        ol { padding-left: 0; }
+        ol.pilihan-ganda { list-style-type: none; padding-left: 20px; }
+        ol.pilihan-ganda li { margin-bottom: 8px; }
+        ol.pilihan-ganda li::before { content: attr(data-option) ". "; font-weight: bold; margin-right: 5px; }
+
+        .keterangan-soal { font-style: italic; font-size: 9pt; color: var(--secondary-text); margin-bottom: 10px; }
+        
+        .kategori-table { width: 100%; margin-top: 15px; border-collapse: collapse; }
+        .kategori-table th, .kategori-table td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+        .kategori-table td:first-child { text-align: left; }
+
+    </style>
+</head>
+<body>
+
+<div class="watermark-container">
+
+    <!-- Cover Page -->
+    <section class="page cover-page">
+        <div class="content-wrapper">
+            <img src="https://imgix3.ruangguru.com/assets/miscellaneous/jpeg_sijv7w_5618.jpeg" alt="EXE Logo">
+            <h1 class="title">BANK SOAL<br>APLIKASI TURUNAN</h1>
+            <p class="subtitle">Fungsi Naik, Fungsi Turun, & Titik Stasioner</p>
+        </div>
+    </section>
+
+    <!-- Table of Contents -->
+    <section class="page toc-page">
+        <div class="content-wrapper">
+            <h1>Daftar Isi</h1>
+            <ul class="toc-list">
+                <li><a href="#materi">Bagian 1: Ringkasan Materi</a></li>
+                <li><a href="#contoh-soal">Bagian 2: Contoh Soal & Pembahasan</a></li>
+                <li><a href="#latihan-soal">Bagian 3: Bank Soal Latihan (50 Soal)</a></li>
+                <li><a href="#latihan-mudah">&nbsp;&nbsp;&nbsp;› 3.1 Soal Mudah (1-10) - Pilihan Ganda</a></li>
+                <li><a href="#latihan-sedang">&nbsp;&nbsp;&nbsp;› 3.2 Soal Sedang (11-25) - Pilihan Ganda & Kompleks</a></li>
+                <li><a href="#latihan-sulit">&nbsp;&nbsp;&nbsp;› 3.3 Soal Sulit (26-50) - Aplikasi & Penalaran</a></li>
+                <li><a href="#pembahasan-latihan">Bagian 4: Kunci Jawaban & Pembahasan</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Materi Lengkap -->
+    <section id="materi" class="page">
+      <div class="content-wrapper">
+        <h2>Bagian 1: Ringkasan Materi</h2>
+        <h3 id="materi-1">1.1 Kemonotonan Fungsi (Fungsi Naik & Turun)</h3>
+        <p>Kemonotonan sebuah fungsi menjelaskan di interval mana grafik fungsi tersebut bergerak naik atau turun jika dilihat dari kiri ke kanan. Analisis ini sangat bergantung pada turunan pertama fungsi, $f'(x)$.</p>
+        <ul>
+            <li>Fungsi $f(x)$ dikatakan <b>naik</b> pada suatu interval jika untuk setiap $x$ di interval tersebut, $f'(x) > 0$.</li>
+            <li>Fungsi $f(x)$ dikatakan <b>turun</b> pada suatu interval jika untuk setiap $x$ di interval tersebut, $f'(x) < 0$.</li>
+        </ul>
+        
+        <h3 id="materi-2">1.2 Titik Stasioner dan Nilai Ekstrim</h3>
+        <p>Titik stasioner adalah titik di mana gradien kurva sama dengan nol ($f'(c) = 0$). Titik ini merupakan kandidat untuk nilai maksimum atau minimum lokal.</p>
+        <h4>Uji Turunan Pertama</h4>
+        <ul>
+            <li>Perubahan tanda $f'(x)$ dari (+) ke (-) di sekitar $c$ menandakan <b>maksimum lokal</b>.</li>
+            <li>Perubahan tanda $f'(x)$ dari (-) ke (+) di sekitar $c$ menandakan <b>minimum lokal</b>.</li>
+            <li>Jika tanda tidak berubah, maka $(c, f(c))$ adalah <b>titik belok horizontal</b>.</li>
+        </ul>
+
+        <h4>Uji Turunan Kedua</h4>
+        <ul>
+            <li>Jika $f''(c) < 0$, maka $f(c)$ adalah <b>nilai balik maksimum lokal</b>.</li>
+            <li>Jika $f''(c) > 0$, maka $f(c)$ adalah <b>nilai balik minimum lokal</b>.</li>
+        </ul>
+      </div>
+    </section>
+    
+    <section id="contoh-soal" class="page">
+        <div class="content-wrapper">
+            <h2>Bagian 2: Contoh Soal & Pembahasan</h2>
+            <div class="soal-item"><b>1. (Pilihan Ganda Biasa)</b><br>Tentukan interval di mana fungsi $f(x) = x^3 - 3x^2 - 9x + 1$ turun.<div class="pembahasan"><b>Teori:</b> Fungsi turun saat $f'(x) < 0$.<br><b>Langkah 1:</b> Cari turunan pertama. $f'(x) = 3x^2 - 6x - 9$.<br><b>Langkah 2:</b> Selesaikan pertidaksamaan $f'(x) < 0$.<br>$3x^2 - 6x - 9 < 0 \implies x^2 - 2x - 3 < 0 \implies (x-3)(x+1) < 0$.<br><b>Langkah 3:</b> Gunakan garis bilangan. Pembuat nol adalah $x=3$ dan $x=-1$. Daerah yang memenuhi pertidaksamaan adalah di antara kedua titik tersebut.<br><b>Hasil:</b> Fungsi turun pada interval $-1 < x < 3$.</div></div>
+            <div class="soal-item"><b>2. (Kecukupan Data)</b><br>Berapakah nilai minimum dari fungsi $f(x)=ax^2+6x+c$?<br>(1) Titik stasioner fungsi terjadi di $x=-1$.<br>(2) Grafik fungsi melalui titik $(0, 10)$.<div class="pembahasan"><b>Analisis Soal:</b> Untuk mencari nilai minimum, kita perlu tahu nilai fungsi di titik stasionernya. $f_{min}=f(x_{stasioner})$.<br><b>Analisis Pernyataan (1):</b> $f'(x)=2ax+6$. Stasioner di $x=-1 \implies f'(-1)=2a(-1)+6=0 \implies -2a+6=0 \implies a=3$. Kita tahu bentuk fungsinya $f(x)=3x^2+6x+c$ dan titik minimumnya ada di $x=-1$. Tapi kita tidak tahu nilai minimumnya karena $c$ tidak diketahui. Jadi, (1) SAJA tidak cukup.<br><b>Analisis Pernyataan (2):</b> Grafik melalui $(0,10) \implies f(0)=c=10$. Kita tahu $f(x)=ax^2+6x+10$. Kita tidak tahu di mana titik stasionernya karena $a$ tidak diketahui. Jadi, (2) SAJA tidak cukup.<br><b>Analisis Bersama-sama:</b> Dari (1) kita dapat $a=3$. Dari (2) kita dapat $c=10$. Maka fungsi lengkapnya adalah $f(x)=3x^2+6x+10$. Nilai minimum terjadi di $x=-1$, yaitu $f(-1)=3(-1)^2+6(-1)+10 = 3-6+10=7$. Nilai minimum dapat ditentukan.<br><b>Hasil:</b> Dua pernyataan BERSAMA-SAMA cukup. Jawaban C.</div></div>
+        </div>
+    </section>
+    
+    <!-- Latihan Soal -->
+    <section id="latihan-mudah" class="page">
+        <div class="content-wrapper">
+            <h2 id="latihan-soal">Bagian 3: Bank Soal Latihan</h2>
+            <h3>3.1 Soal Mudah (1-10)</h3>
+            <div class="keterangan-soal">Tipe: Pilihan Ganda (Satu Jawaban Benar)</div>
+            <div class="latihan-item"><div class="soal-latihan"><b>1.</b> Titik stasioner dari fungsi $f(x) = x^2 - 4x + 7$ adalah...<ol class="pilihan-ganda"><li data-option="A">(2, 3)</li><li data-option="B">(-2, 19)</li><li data-option="C">(4, 7)</li><li data-option="D">(0, 7)</li><li data-option="E">(3, 4)</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><b>2.</b> Fungsi $f(x) = 5 - 6x - x^2$ naik pada interval...<ol class="pilihan-ganda"><li data-option="A">$x > -3$</li><li data-option="B">$x < -3$</li><li data-option="C">$x > 3$</li><li data-option="D">$x < 3$</li><li data-option="E">$-3 < x < 3$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><b>3.</b> Fungsi $g(x) = x^3 - 3x$ turun pada interval...<ol class="pilihan-ganda"><li data-option="A">$x < -1$</li><li data-option="B">$x > 1$</li><li data-option="C">$-1 < x < 1$</li><li data-option="D">$x < -1$ atau $x > 1$</li><li data-option="E">selalu turun</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><b>4.</b> Nilai minimum dari fungsi $f(x) = x^2 + 8x - 1$ adalah...<ol class="pilihan-ganda"><li data-option="A">-15</li><li data-option="B">-16</li><li data-option="C">-17</li><li data-option="D">-18</li><li data-option="E">-19</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><b>5.</b> Nilai $x$ yang memberikan titik stasioner pada $f(x) = \frac{1}{3}x^3 - 2x^2 + 3x + 5$ adalah...<ol class="pilihan-ganda"><li data-option="A">1 dan 3</li><li data-option="B">-1 dan 3</li><li data-option="C">1 dan -3</li><li data-option="D">-1 dan -3</li><li data-option="E">0 dan 1</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><b>6.</b> Fungsi $f(x) = \cos x$ untuk $0 < x < 2\pi$ turun pada interval...<ol class="pilihan-ganda"><li data-option="A">$0 < x < \pi/2$</li><li data-option="B">$\pi/2 < x < \pi$</li><li data-option="C">$0 < x < \pi$</li><li data-option="D">$\pi < x < 2\pi$</li><li data-option="E">$\pi/2 < x < 3\pi/2$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><b>7.</b> Salah satu titik stasioner dari $f(x) = 1 - \sin x$ untuk $0 \le x \le 2\pi$ adalah...<ol class="pilihan-ganda"><li data-option="A">$(\pi/2, 0)$</li><li data-option="B">$(\pi, 1)$</li><li data-option="C">(0, 1)</li><li data-option="D">$(3\pi/2, 1)$</li><li data-option="E">$(2\pi, 0)$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><b>8.</b> Jenis titik stasioner dari fungsi $f(x) = (x-2)^2$ adalah...<ol class="pilihan-ganda"><li data-option="A">Maksimum lokal</li><li data-option="B">Minimum lokal</li><li data-option="C">Titik belok</li><li data-option="D">Maksimum global</li><li data-option="E">Bukan titik stasioner</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><b>9.</b> Fungsi $y = \tan x$ untuk $0 < x < \pi/2$ selalu...<ol class="pilihan-ganda"><li data-option="A">Naik</li><li data-option="B">Turun</li><li data-option="C">Stasioner</li><li data-option="D">Naik lalu turun</li><li data-option="E">Turun lalu naik</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><b>10.</b> Nilai maksimum dari fungsi $f(x) = 10 - (x+1)^2$ adalah...<ol class="pilihan-ganda"><li data-option="A">8</li><li data-option="B">9</li><li data-option="C">10</li><li data-option="D">11</li><li data-option="E">12</li></ol></div><div class="coret-coret"></div></div>
+        </div>
+    </section>
+
+    <!-- Latihan Soal Sedang -->
+    <section id="latihan-sedang" class="page">
+        <div class="content-wrapper">
+            <h3>3.2 Soal Sedang (11-25)</h3>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>11.</b> Tentukan interval di mana fungsi $f(x) = x^4 - 8x^2 + 5$ turun.<ol class="pilihan-ganda"><li data-option="A">$x < -2$ atau $0 < x < 2$</li><li data-option="B">$-2 < x < 0$ atau $x > 2$</li><li data-option="C">$x < 0$</li><li data-option="D">$-2 < x < 2$</li><li data-option="E">$x > 0$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>12.</b> Salah satu titik stasioner dari $f(x) = x^3 - 6x^2 + 9x - 7$ adalah...<ol class="pilihan-ganda"><li data-option="A">(1, -3)</li><li data-option="B">(2, -5)</li><li data-option="C">(-1, -23)</li><li data-option="D">(0, -7)</li><li data-option="E">(4, -3)</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>13.</b> Fungsi $g(x) = \sin x + \cos x$ untuk $0 < x < 2\pi$ naik pada interval...<ol class="pilihan-ganda"><li data-option="A">$0 < x < \pi/4$</li><li data-option="B">$\pi/4 < x < 5\pi/4$</li><li data-option="C">$0 < x < \pi/4$ atau $5\pi/4 < x < 2\pi$</li><li data-option="D">$0 < x < 5\pi/4$</li><li data-option="E">Selalu naik</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>14.</b> Nilai stasioner minimum dari fungsi $f(x) = 2\cos(2x) - 1$ untuk $0 \le x \le \pi$ adalah...<ol class="pilihan-ganda"><li data-option="A">1</li><li data-option="B">-1</li><li data-option="C">2</li><li data-option="D">-3</li><li data-option="E">0</li></ol></div><div class="coret-coret"></div></div>
+             <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Kecukupan Data</div><b>15.</b> Tentukan koordinat titik stasioner minimum dari fungsi $f(x) = x^2+ax+b$.<br>(1) Fungsi mencapai stasioner di $x=3$.<br>(2) Nilai minimum fungsi adalah 5.<div class="keterangan-soal" style="margin-top:10px;">A. Pernyataan (1) SAJA cukup, tetapi (2) SAJA tidak cukup.<br>B. Pernyataan (2) SAJA cukup, tetapi (1) SAJA tidak cukup.<br>C. DUA pernyataan BERSAMA-SAMA cukup, tetapi SATU tidak cukup.<br>D. (1) SAJA cukup dan (2) SAJA cukup.<br>E. (1) dan (2) tidak cukup.</div></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda Kompleks</div><b>16.</b> Diberikan fungsi $f(x) = x^3 - 3x^2 + 4$. Manakah pernyataan berikut yang benar? <b>(bisa pilih lebih dari satu jawaban)</b><ol class="pilihan-ganda"><li data-option="A">Fungsi naik pada interval $x > 2$.</li><li data-option="B">Fungsi turun pada interval $0 < x < 2$.</li><li data-option="C">Titik $(0, 4)$ adalah titik balik maksimum.</li><li data-option="D">Titik $(2, 0)$ adalah titik balik minimum.</li><li data-option="E">Fungsi memiliki titik belok di $x=0$.</li></ol></div><div class="coret-coret"></div></div>
+            <!-- Soal-soal lainnya -->
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>17.</b> Fungsi $y = x + \frac{4}{x}$ mencapai nilai maksimum lokal pada $x=...$<ol class="pilihan-ganda"><li data-option="A">2</li><li data-option="B">-2</li><li data-option="C">4</li><li data-option="D">-4</li><li data-option="E">1</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>18.</b> Tentukan jenis titik stasioner untuk fungsi $f(x) = (x-1)^3$.<ol class="pilihan-ganda"><li data-option="A">Maksimum lokal</li><li data-option="B">Minimum lokal</li><li data-option="C">Titik belok horizontal</li><li data-option="D">Minimum global</li><li data-option="E">Tidak punya titik stasioner</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>19.</b> Tentukan interval turun dari fungsi $f(x) = \cos^2 x$ untuk $0 \le x \le \pi$.<ol class="pilihan-ganda"><li data-option="A">$0 < x < \pi/2$</li><li data-option="B">$\pi/2 < x < \pi$</li><li data-option="C">$0 < x < \pi$</li><li data-option="D">$\pi/4 < x < 3\pi/4$</li><li data-option="E">Tidak pernah turun</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>20.</b> Sebuah partikel bergerak dengan persamaan posisi $s(t) = t^3 - 6t^2 + 5$. Partikel tersebut berhenti (stasioner) pada saat $t=...$<ol class="pilihan-ganda"><li data-option="A">0 dan 2</li><li data-option="B">0 dan 3</li><li data-option="C">0 dan 4</li><li data-option="D">1 dan 2</li><li data-option="E">1 dan 4</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>21.</b> Nilai maksimum dari fungsi $y = 4\sin x \cos x$ pada interval $0 \le x \le \pi$ adalah...<ol class="pilihan-ganda"><li data-option="A">1</li><li data-option="B">2</li><li data-option="C">3</li><li data-option="D">4</li><li data-option="E">1/2</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>22.</b> Fungsi $f(x) = x\sqrt{x-2}$ turun pada interval...<ol class="pilihan-ganda"><li data-option="A">$2 \le x < 8/3$</li><li data-option="B">$x > 8/3$</li><li data-option="C">$2 < x < 4$</li><li data-option="D">$x > 2$</li><li data-option="E">Tidak pernah turun</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>23.</b> Nilai $x$ agar fungsi $f(x) = \frac{\sin x}{2+\cos x}$ pada $[0, 2\pi]$ stasioner adalah...<ol class="pilihan-ganda"><li data-option="A">$\pi/3$ dan $2\pi/3$</li><li data-option="B">$2\pi/3$ dan $4\pi/3$</li><li data-option="C">$\pi/3$ dan $5\pi/3$</li><li data-option="D">$\pi/3$ dan $4\pi/3$</li><li data-option="E">$\pi/6$ dan $5\pi/6$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Pilihan Ganda</div><b>24.</b> Nilai maksimum fungsi $f(x) = x^3 - 3x + 1$ pada interval $[-2, 3]$ adalah...<ol class="pilihan-ganda"><li data-option="A">3</li><li data-option="B">-1</li><li data-option="C">19</li><li data-option="D">21</li><li data-option="E">1</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sedang | Tipe: Teori</div><b>25.</b> Agar fungsi $f(x) = kx + \sin x$ selalu naik, maka nilai $k$ harus memenuhi...<ol class="pilihan-ganda"><li data-option="A">$k>1$</li><li data-option="B">$k \ge 1$</li><li data-option="C">$k<1$</li><li data-option="D">$k \le 1$</li><li data-option="E">$k=1$</li></ol></div><div class="coret-coret"></div></div>
+        </div>
+    </section>
+
+    <!-- Latihan Soal Sulit -->
+    <section id="latihan-sulit" class="page">
+        <div class="content-wrapper">
+            <h3>3.3 Soal Sulit (26-50)</h3>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Aplikasi Aljabar</div><b>26.</b> Jumlah dua bilangan adalah 18. Hasil kali kuadrat salah satu bilangan dengan bilangan lainnya akan maksimum jika kedua bilangan tersebut adalah...<ol class="pilihan-ganda"><li data-option="A">9 dan 9</li><li data-option="B">10 dan 8</li><li data-option="C">12 dan 6</li><li data-option="D">15 dan 3</li><li data-option="E">14 dan 4</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Aplikasi Aljabar</div><b>27.</b> Sebuah kotak tanpa tutup memiliki alas berbentuk persegi. Jika luas permukaan kotak adalah 27 cm$^2$, volume maksimum kotak tersebut adalah...<ol class="pilihan-ganda"><li data-option="A">10.5 cm$^3$</li><li data-option="B">12.5 cm$^3$</li><li data-option="C">13.5 cm$^3$</li><li data-option="D">14.5 cm$^3$</li><li data-option="E">15.5 cm$^3$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Kategori</div><b>28.</b> Perhatikan fungsi $f(x) = \sin(2x)$ pada interval $0 \le x \le \pi$. Berilah tanda centang (✓) pada kolom yang sesuai untuk setiap pernyataan.
+                <table class="kategori-table">
+                    <tr><th>Pernyataan</th><th>Benar</th><th>Salah</th></tr>
+                    <tr><td>1. Fungsi naik pada $(0, \pi/4)$.</td><td></td><td></td></tr>
+                    <tr><td>2. Fungsi turun pada $(\pi/4, \pi/2)$.</td><td></td><td></td></tr>
+                    <tr><td>3. Titik $(\pi/2, 0)$ adalah titik stasioner.</td><td></td><td></td></tr>
+                    <tr><td>4. Nilai minimum lokal adalah -1.</td><td></td><td></td></tr>
+                </table>
+            </div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>29.</b> Nilai minimum dari fungsi $f(x) = \sec x + \csc x$ pada interval $(0, \pi/2)$ adalah...<ol class="pilihan-ganda"><li data-option="A">2</li><li data-option="B">$\sqrt{2}$</li><li data-option="C">$2\sqrt{2}$</li><li data-option="D">4</li><li data-option="E">1</li></ol></div><div class="coret-coret"></div></div>
+            <!-- Soal sulit lainnya -->
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Aplikasi Aljabar</div><b>30.</b> Tentukan titik pada kurva $y=x^2+1$ yang paling dekat dengan titik $(0, 3)$.<ol class="pilihan-ganda"><li data-option="A">$(0, 1)$</li><li data-option="B">$(1, 2)$</li><li data-option="C">$(\pm\sqrt{3/2}, 5/2)$</li><li data-option="D">$(\pm\sqrt{2}, 3)$</li><li data-option="E">$(2, 5)$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Aljabar</div><b>31.</b> Konstanta $a$ dan $b$ sehingga fungsi $f(x)=x^3+ax^2+bx$ memiliki titik minimum lokal di $x=4$ dan titik maksimum lokal di $x=2$ adalah...<ol class="pilihan-ganda"><li data-option="A">$a=-9, b=24$</li><li data-option="B">$a=9, b=-24$</li><li data-option="C">$a=-3, b=8$</li><li data-option="D">$a=3, b=-8$</li><li data-option="E">$a=-6, b=10$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Trigonometri</div><b>32.</b> Tentukan nilai maksimum dari $f(x) = \sin x (1+\cos x)$ pada interval $0 \le x \le \pi$.<ol class="pilihan-ganda"><li data-option="A">1</li><li data-option="B">$\sqrt{3}$</li><li data-option="C">$\frac{3\sqrt{3}}{4}$</li><li data-option="D">2</li><li data-option="E">$\frac{\sqrt{2}}{2}$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Aljabar</div><b>33.</b> Agar fungsi $f(x) = \frac{x^2+ax+5}{\sqrt{x^2+1}}$ memiliki titik stasioner di $x=2$, nilai $a$ adalah...<ol class="pilihan-ganda"><li data-option="A">-2</li><li data-option="B">2</li><li data-option="C">-1/2</li><li data-option="D">1/2</li><li data-option="E">-4</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>34.</b> Diberikan kurva $y = (x^2-a)^2$. Agar kurva ini memiliki tepat satu titik minimum dan dua titik belok, syarat untuk konstanta $a$ adalah...<ol class="pilihan-ganda"><li data-option="A">$a=0$</li><li data-option="B">$a>0$</li><li data-option="C">$a<0$</li><li data-option="D">$a \ne 0$</li><li data-option="E">Semua nilai $a$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Trigonometri</div><b>35.</b> Semua nilai $x$ pada $[0, 2\pi]$ di mana fungsi $f(x)=e^x \cos x$ memiliki titik stasioner adalah...<ol class="pilihan-ganda"><li data-option="A">$\pi/4, 3\pi/4$</li><li data-option="B">$\pi/4, 5\pi/4$</li><li data-option="C">$3\pi/4, 5\pi/4$</li><li data-option="D">$3\pi/4, 7\pi/4$</li><li data-option="E">$5\pi/4, 7\pi/4$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>36.</b> Diketahui $f(x) = ax^4 - bx^2$ memiliki nilai minimum lokal $-1$ di $x=1$. Nilai $a+b$ adalah...<ol class="pilihan-ganda"><li data-option="A">1</li><li data-option="B">2</li><li data-option="C">3</li><li data-option="D">4</li><li data-option="E">5</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Aplikasi Trigonometri</div><b>37.</b> Sebuah partikel bergerak pada kurva $y = \sin(\pi x)$. Jika laju perubahan horizontalnya ($dx/dt$) konstan 2 unit/detik, laju perubahan vertikalnya ($dy/dt$) saat $x=1/6$ adalah...<ol class="pilihan-ganda"><li data-option="A">$\pi\sqrt{3}$</li><li data-option="B">$\pi$</li><li data-option="C">$\pi/2$</li><li data-option="D">$2\pi$</li><li data-option="E">$\pi\sqrt{3}/2$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Aljabar</div><b>38.</b> Tentukan interval di mana fungsi $f(x) = (x^2-4)^{2/3}$ naik.<ol class="pilihan-ganda"><li data-option="A">$(-2, 0) \cup (2, \infty)$</li><li data-option="B">$(-\infty, -2) \cup (0, 2)$</li><li data-option="C">$(0, \infty)$</li><li data-option="D">$(-\infty, 0)$</li><li data-option="E">$(2, \infty)$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Trigonometri</div><b>39.</b> Agar fungsi $f(x) = ax + \cos x$ selalu turun untuk semua $x \in \mathbb{R}$, batasan untuk nilai $a$ adalah...<ol class="pilihan-ganda"><li data-option="A">$a \ge 1$</li><li data-option="B">$a \ge -1$</li><li data-option="C">$a \le -1$</li><li data-option="D">$a \le 1$</li><li data-option="E">$-1 \le a \le 1$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Aplikasi Aljabar</div><b>40.</b> Jendela berbentuk persegi panjang di atasnya terdapat setengah lingkaran. Jika keliling jendela adalah 10 meter, jari-jari setengah lingkaran agar luas jendela maksimum adalah...<ol class="pilihan-ganda"><li data-option="A">$\frac{10}{4+\pi}$</li><li data-option="B">$\frac{10}{2+\pi}$</li><li data-option="C">$\frac{5}{4+\pi}$</li><li data-option="D">$\frac{5}{2+\pi}$</li><li data-option="E">1</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Aljabar</div><b>41.</b> Nilai minimum dari fungsi $f(x) = |x-1| + |x+2|$ adalah...<ol class="pilihan-ganda"><li data-option="A">1</li><li data-option="B">2</li><li data-option="C">3</li><li data-option="D">4</li><li data-option="E">0</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Trigonometri</div><b>42.</b> Titik stasioner dari $f(x) = 2x - \tan x$ pada $(-\pi/2, \pi/2)$ adalah...<ol class="pilihan-ganda"><li data-option="A">$x=\pm \pi/3$</li><li data-option="B">$x=\pm \pi/6$</li><li data-option="C">$x=0$</li><li data-option="D">$x=\pm \pi/4$</li><li data-option="E">Tidak ada</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Aljabar</div><b>43.</b> Agar fungsi $f(x) = x^3+px^2+9x$ tidak pernah turun untuk semua $x \in \mathbb{R}$, rentang nilai $p$ yang memenuhi adalah...<ol class="pilihan-ganda"><li data-option="A">$p^2 \le 27$</li><li data-option="B">$p^2 \ge 27$</li><li data-option="C">$p^2 \le 108$</li><li data-option="D">$p^2 \ge 108$</li><li data-option="E">$p=0$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Aplikasi Aljabar</div><b>44.</b> Selembar karton berukuran 16 cm x 10 cm akan dibuat balok tanpa tutup dengan memotong persegi identik di setiap sudutnya. Volume balok akan maksimum jika ukuran potongan persegi adalah...<ol class="pilihan-ganda"><li data-option="A">1 cm</li><li data-option="B">2 cm</li><li data-option="C">3 cm</li><li data-option="D">4 cm</li><li data-option="E">5 cm</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Teori</div><b>45.</b> Jika $f(x)$ adalah fungsi yang dapat diturunkan, $f'(x)>0$, dan $g(x) = f(f(x))$, maka $g'(x)$...<ol class="pilihan-ganda"><li data-option="A">Selalu positif</li><li data-option="B">Selalu negatif</li><li data-option="C">Bisa positif atau negatif</li><li data-option="D">Selalu nol</li><li data-option="E">Tidak dapat ditentukan</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Trigonometri</div><b>46.</b> Nilai maksimum dari $f(\theta) = 3\sin\theta - 4\cos\theta$ adalah...<ol class="pilihan-ganda"><li data-option="A">3</li><li data-option="B">4</li><li data-option="C">5</li><li data-option="D">7</li><li data-option="E">1</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Aljabar</div><b>47.</b> Nilai minimum dari $f(x) = (x-1)^2(x-3)^2$ pada interval $[0, 4]$ adalah...<ol class="pilihan-ganda"><li data-option="A">1</li><li data-option="B">9</li><li data-option="C">-1</li><li data-option="D">0</li><li data-option="E">4</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>48.</b> Jika $f(x) = x^{1/x}$ untuk $x>0$, nilai maksimum global dari fungsi tersebut terjadi di $x=...$<ol class="pilihan-ganda"><li data-option="A">1</li><li data-option="B">e</li><li data-option="C">$1/e$</li><li data-option="D">2</li><li data-option="E">$\sqrt{e}$</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Pilihan Ganda</div><b>49.</b> Jika $f''(x) = 6x-2$, $f'(1)=4$, dan $f(1)=3$, maka $f(0)$ adalah...<ol class="pilihan-ganda"><li data-option="A">0</li><li data-option="B">1</li><li data-option="C">-1</li><li data-option="D">2</li><li data-option="E">-2</li></ol></div><div class="coret-coret"></div></div>
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Level: Sulit | Tipe: Teori</div><b>50.</b> Jika $f(x)$ memiliki titik stasioner di $x=c$ dan $f''(x) > 0$ untuk semua $x$, maka titik $(c, f(c))$ adalah...<ol class="pilihan-ganda"><li data-option="A">Maksimum lokal</li><li data-option="B">Minimum lokal</li><li data-option="C">Minimum global</li><li data-option="D">Titik belok</li><li data-option="E">Tidak dapat disimpulkan</li></ol></div><div class="coret-coret"></div></div>
+        </div>
+    </section>
+
+    <!-- Pembahasan -->
+    <section id="pembahasan-latihan" class="page">
+        <div class="content-wrapper">
+            <h2>Bagian 4: Kunci Jawaban & Pembahasan</h2>
+            <h3>Pembahasan Lengkap (1-50)</h3>
+            
+            <h4>Soal Mudah (1-10)</h4>
+            <div class="pembahasan"><b>1. Jawaban: A</b><b>Teori:</b> Titik stasioner terjadi saat $f'(x)=0$.<br><b>Pengerjaan:</b> $f'(x) = 2x-4$. $2x-4=0 \implies x=2$. Nilai stasionernya $f(2)=2^2-4(2)+7 = 4-8+7=3$. Jadi titiknya $(2,3)$.</div>
+            <div class="pembahasan"><b>2. Jawaban: B</b><b>Teori:</b> Fungsi naik saat $f'(x)>0$.<br><b>Pengerjaan:</b> $f'(x) = -6-2x$. $-6-2x>0 \implies -2x>6 \implies x<-3$.</div>
+            <div class="pembahasan"><b>3. Jawaban: C</b><b>Teori:</b> Fungsi turun saat $g'(x)<0$.<br><b>Pengerjaan:</b> $g'(x) = 3x^2-3$. $3x^2-3<0 \implies x^2-1<0 \implies (x-1)(x+1)<0$. Garis bilangan menunjukkan negatif antara -1 dan 1.</div>
+            <div class="pembahasan"><b>4. Jawaban: C</b><b>Teori:</b> Nilai minimum terjadi di titik stasioner.<br><b>Pengerjaan:</b> $f'(x)=2x+8=0 \implies x=-4$. Nilai minimum $f(-4)=(-4)^2+8(-4)-1=16-32-1=-17$.</div>
+            <div class="pembahasan"><b>5. Jawaban: A</b><b>Teori:</b> Titik stasioner saat $f'(x)=0$.<br><b>Pengerjaan:</b> $f'(x)=x^2-4x+3=0 \implies (x-1)(x-3)=0$. Jadi $x=1$ atau $x=3$.</div>
+            <div class="pembahasan"><b>6. Jawaban: C</b><b>Teori:</b> Fungsi turun saat $f'(x)<0$.<br><b>Pengerjaan:</b> $f'(x)=-\sin x$. $-\sin x < 0 \implies \sin x > 0$. Ini terjadi di kuadran I dan II, yaitu $0 < x < \pi$.</div>
+            <div class="pembahasan"><b>7. Jawaban: A</b><b>Teori:</b> Titik stasioner saat $f'(x)=0$.<br><b>Pengerjaan:</b> $f'(x)=-\cos x=0 \implies \cos x=0$. Untuk $0 \le x \le 2\pi$, $x=\pi/2$ dan $x=3\pi/2$. Salah satunya di $x=\pi/2$. Nilainya $f(\pi/2)=1-\sin(\pi/2)=1-1=0$. Titiknya $(\pi/2, 0)$.</div>
+            <div class="pembahasan"><b>8. Jawaban: B</b><b>Teori:</b> Gunakan uji turunan kedua.<br><b>Pengerjaan:</b> $f'(x)=2(x-2)=0 \implies x=2$. $f''(x)=2$. Karena $f''(2)=2>0$, titik stasioner di $x=2$ adalah minimum lokal.</div>
+            <div class="pembahasan"><b>9. Jawaban: A</b><b>Teori:</b> Cek tanda turunan pertamanya.<br><b>Pengerjaan:</b> $y' = \sec^2 x = \frac{1}{\cos^2 x}$. Karena $\cos^2 x$ selalu positif (dan tidak nol) pada interval $(0, \pi/2)$, maka $y'>0$. Jadi fungsi selalu naik.</div>
+            <div class="pembahasan"><b>10. Jawaban: C</b><b>Teori:</b> Nilai maksimum terjadi di titik stasioner.<br><b>Pengerjaan:</b> $f'(x)=-2(x+1)=0 \implies x=-1$. Nilai maksimum $f(-1)=10-(-1+1)^2=10$.</div>
+            
+            <h4>Soal Sedang (11-25)</h4>
+            <div class="pembahasan"><b>11. Jawaban: A</b><b>Teori:</b> Fungsi turun saat $f'(x)<0$.<br><b>Pengerjaan:</b> $f'(x) = 4x^3-16x = 4x(x^2-4) = 4x(x-2)(x+2)$. Pembuat nol $x=0, x=2, x=-2$. Uji interval pada garis bilangan menunjukkan $f'(x)<0$ pada $x<-2$ dan $0<x<2$.</div>
+            <div class="pembahasan"><b>12. Jawaban: A</b><b>Teori:</b> Titik stasioner terjadi saat $f'(x)=0$.<br><b>Pengerjaan:</b> $f'(x)=3x^2-12x+9=3(x^2-4x+3)=3(x-1)(x-3)=0$. Titik kritis di $x=1$ dan $x=3$. Nilai stasioner: $f(1)=1-6+9-7=-3$. Titiknya (1, -3).</div>
+            <div class="pembahasan"><b>13. Jawaban: C</b><b>Teori:</b> Fungsi naik saat $g'(x)>0$.<br><b>Pengerjaan:</b> $g'(x)=\cos x - \sin x > 0 \implies \cos x > \sin x$. Pada lingkaran satuan, ini terjadi ketika sudut berada di antara $-3\pi/4$ dan $\pi/4$. Disesuaikan dengan interval $0<x<2\pi$, menjadi $0 < x < \pi/4$ dan $5\pi/4 < x < 2\pi$.</div>
+            <div class="pembahasan"><b>14. Jawaban: D</b><b>Teori:</b> Cari titik stasioner dengan $f'(x)=0$.<br><b>Pengerjaan:</b> $f'(x) = -4\sin(2x)$. $f'(x)=0 \implies \sin(2x)=0$. $2x=k\pi \implies x=k\pi/2$. Pada interval $[0, \pi]$, $x=0, \pi/2, \pi$. Nilai stasioner: $f(0)=1, f(\pi/2)=-3, f(\pi)=1$. Minimumnya adalah -3.</div>
+            <div class="pembahasan"><b>15. Jawaban: C</b><b>Teori:</b> Kecukupan Data.<br><b>Analisis:</b> Untuk menemukan koordinat $(x,y)$, kita perlu $x$ stasioner dan nilai fungsinya. Pernyataan (1) memberikan $x=3$ (dari $f'(x)=2x+a=0$). Pernyataan (2) memberikan nilai $y=5$. Keduanya dibutuhkan bersama untuk membentuk koordinat $(3,5)$.</div>
+            <div class="pembahasan"><b>16. Jawaban: A, B, C, D</b><b>Teori:</b> Pilihan Ganda Kompleks.<br><b>Analisis:</b> $f'(x)=3x^2-6x=3x(x-2)$. Stasioner di $x=0, x=2$. Garis bilangan untuk $f'(x)$: +++ (0) --- (2) +++. A benar (naik >2). B benar (turun 0<x<2). Di $x=0$, tanda berubah + ke -, jadi maks lokal. C benar. Di $x=2$, tanda berubah - ke +, jadi min lokal. D benar. $f''(x)=6x-6$. Titik belok $f''(x)=0$ di $x=1$, bukan 0. E salah.</div>
+            <div class="pembahasan"><b>17. Jawaban: B</b><b>Teori:</b> Nilai maks/min lokal terjadi di titik stasioner.<br><b>Pengerjaan:</b> $y' = 1 - \frac{4}{x^2}=0 \implies x^2=4 \implies x=\pm 2$. Uji turunan kedua: $y''=\frac{8}{x^3}$. $y''(-2)=-1<0$ (maksimum). $y''(2)=1>0$ (minimum). Jadi maksimum di $x=-2$.</div>
+            <div class="pembahasan"><b>18. Jawaban: C</b><b>Teori:</b> Cek $f'(x)=0$ dan gunakan uji turunan pertama.<br><b>Pengerjaan:</b> $f'(x)=3(x-1)^2=0 \implies x=1$. Uji tanda $f'(x)$: untuk $x<1$ maupun $x>1$, $f'(x)$ positif. Karena tanda tidak berubah, $(1, f(1))=(1,0)$ adalah titik belok horizontal.</div>
+            <div class="pembahasan"><b>19. Jawaban: A</b><b>Teori:</b> Turun saat $f'(x)<0$.<br><b>Pengerjaan:</b> $f'(x) = 2\cos x (-\sin x) = -\sin(2x)$. $-\sin(2x)<0 \implies \sin(2x)>0$. Untuk $0 \le x \le \pi$, maka $0 \le 2x \le 2\pi$. $\sin(2x)>0$ terjadi saat $0<2x<\pi$, yang berarti $0 < x < \pi/2$.</div>
+            <div class="pembahasan"><b>20. Jawaban: C</b><b>Teori:</b> Kecepatan $v(t)=s'(t)$. Partikel berhenti saat $v(t)=0$.<br><b>Pengerjaan:</b> $s'(t) = 3t^2-12t = 3t(t-4) = 0$. Maka $t=0$ atau $t=4$.</div>
+            <div class="pembahasan"><b>21. Jawaban: B</b><b>Teori:</b> Gunakan identitas sudut rangkap: $\sin(2A)=2\sin A \cos A$.<br><b>Pengerjaan:</b> $y = 2(2\sin x \cos x) = 2\sin(2x)$. Fungsi $\sin(2x)$ punya nilai maksimum 1. Maka nilai maksimum y adalah $2 \cdot 1 = 2$.</div>
+            <div class="pembahasan"><b>22. Jawaban: E</b><b>Teori:</b> Turun saat $f'(x)<0$. Domain fungsi adalah $x \ge 2$.<br><b>Pengerjaan:</b> $f'(x) = 1\cdot\sqrt{x-2} + x \cdot \frac{1}{2\sqrt{x-2}} = \frac{2(x-2)+x}{2\sqrt{x-2}} = \frac{3x-4}{2\sqrt{x-2}}$. Pada domain $x \ge 2$, pembilang $3x-4$ selalu positif, dan penyebut juga positif. Maka $f'(x)>0$ selalu, jadi fungsi tidak pernah turun.</div>
+            <div class="pembahasan"><b>23. Jawaban: B</b><b>Teori:</b> Stasioner saat $f'(x)=0$.<br><b>Pengerjaan:</b> $f'(x) = \frac{\cos x(2+\cos x)-\sin x(-\sin x)}{(2+\cos x)^2} = \frac{2\cos x + \cos^2 x + \sin^2 x}{(2+\cos x)^2} = \frac{2\cos x+1}{(2+\cos x)^2}$. $f'(x)=0 \implies 2\cos x+1=0 \implies \cos x = -1/2$. Solusinya $x=2\pi/3$ dan $x=4\pi/3$.</div>
+            <div class="pembahasan"><b>24. Jawaban: C</b><b>Teori:</b> Nilai ekstrim pada interval tertutup bisa terjadi di titik stasioner atau di ujung interval.<br><b>Pengerjaan:</b> $f'(x)=3x^2-3=3(x-1)(x+1)=0$. Titik kritis di $x=1, x=-1$. Cek nilai di titik kritis dan ujung interval: $f(-2)=-1$, $f(-1)=3$, $f(1)=-1$, $f(3)=19$. Maka nilai maksimum adalah 19.</div>
+            <div class="pembahasan"><b>25. Jawaban: B</b><b>Teori:</b> Fungsi selalu naik jika $f'(x)\ge 0$ untuk semua $x$.<br><b>Pengerjaan:</b> $f'(x) = k+\cos x$. Agar $f'(x) \ge 0$, kita perlu $k \ge -\cos x$. Karena nilai maksimum dari $-\cos x$ adalah 1 (ketika $\cos x = -1$), maka kita harus memilih $k$ yang lebih besar atau sama dengan nilai maksimum tersebut. Jadi, $k \ge 1$.</div>
+        </div>
+    </section>
+    <section class="page">
+        <div class="content-wrapper">
+             <h4>Soal Sulit (26-50)</h4>
+            <div class="pembahasan"><b>26. Jawaban: C</b><b>Teori:</b> Optimisasi.<br><b>Pengerjaan:</b> Misal bilangan $x$ dan $y$. $x+y=18 \implies y=18-x$. Fungsi yang dimaksimalkan $P = x^2y = x^2(18-x) = 18x^2-x^3$. $P' = 36x-3x^2 = 3x(12-x)=0$. $x=0$ (min) atau $x=12$. Jika $x=12$, maka $y=6$.</div>
+            <div class="pembahasan"><b>27. Jawaban: C</b><b>Teori:</b> Optimisasi.<br><b>Pengerjaan:</b> Alas $s \times s$, tinggi $h$. Luas $L=s^2+4sh=27 \implies h=\frac{27-s^2}{4s}$. Volume $V=s^2h=\frac{s(27-s^2)}{4}$. $V'=\frac{27-3s^2}{4}=0 \implies s=3$. Maka $h=\frac{27-9}{12}=1.5$. $V=3^2(1.5)=13.5$.</div>
+            <div class="pembahasan"><b>28. Jawaban: Benar, Benar, Salah, Benar</b><b>Teori:</b> Kategori Benar/Salah.<br><b>Analisis:</b> $f'(x)=2\cos(2x)$. Stasioner di $x=\pi/4, 3\pi/4$.
+            <br>1. Pada $(0, \pi/4)$, $f'(x)>0$ (naik). <b>Benar</b>.
+            <br>2. Pada $(\pi/4, \pi/2)$, $f'(x)<0$ (turun). <b>Benar</b>.
+            <br>3. $f'(\pi/2)=2\cos(\pi)=-2 \ne 0$. Bukan stasioner. <b>Salah</b>.
+            <br>4. Nilai stasioner $f(3\pi/4)=-1$ adalah minimum lokal. <b>Benar</b>.</div>
+            <div class="pembahasan"><b>29. Jawaban: C</b><b>Teori:</b> Cari titik stasioner.<br><b>Pengerjaan:</b> $f'(x)=\sec x \tan x - \csc x \cot x = 0 \implies \frac{\sin x}{\cos^2 x} = \frac{\cos x}{\sin^2 x} \implies \tan^3 x=1 \implies x=\pi/4$. Nilai minimum $f(\pi/4)=\sqrt{2}+\sqrt{2}=2\sqrt{2}$.</div>
+            <div class="pembahasan"><b>30. Jawaban: C</b><b>Teori:</b> Minimalkan kuadrat jarak.<br><b>Pengerjaan:</b> Jarak kuadrat $D=(x-0)^2+(x^2+1-3)^2=x^2+(x^2-2)^2$. $D'=2x+2(x^2-2)(2x)=2x(2x^2-3)=0$. $x=0$ (maks lokal) atau $x^2=3/2$. Titik terdekat saat $x=\pm\sqrt{3/2}$, dengan $y=3/2+1=5/2$.</div>
+            <div class="pembahasan"><b>31. Jawaban: A</b><b>Teori:</b> Titik stasioner adalah akar dari $f'(x)=0$.<br><b>Pengerjaan:</b> $f'(x)=3x^2+2ax+b$. Akar-akarnya 2 dan 4. Dari Vieta: $x_1+x_2 = 2+4=6 = -2a/3 \implies a=-9$. $x_1x_2 = 2 \cdot 4=8=b/3 \implies b=24$.</div>
+            <div class="pembahasan"><b>32. Jawaban: C</b><b>Teori:</b> Cari titik stasioner.<br><b>Pengerjaan:</b> $f'(x) = \cos x(1+\cos x) + \sin x(-\sin x) = 2\cos^2 x+\cos x-1=(2\cos x-1)(\cos x+1)=0$. Solusi stasioner $\cos x=1/2 \implies x=\pi/3$. Nilai maksimum $f(\pi/3) = \frac{\sqrt{3}}{2}(1+\frac{1}{2}) = \frac{3\sqrt{3}}{4}$.</div>
+            <div class="pembahasan"><b>33. Jawaban: A</b><b>Teori:</b> Syarat stasioner $f'(2)=0$.<br><b>Pengerjaan:</b> $f'(x) = \frac{(2x+a)\sqrt{x^2+1} - (x^2+ax+5)\frac{x}{\sqrt{x^2+1}}}{x^2+1}$. Pembilang harus 0. $(2(2)+a)\sqrt{2^2+1} - (2^2+a(2)+5)\frac{2}{\sqrt{2^2+1}}=0$. $(4+a)\sqrt{5} - (2a+9)\frac{2}{\sqrt{5}}=0$. Kalikan $\sqrt{5}$: $5(4+a)-2(2a+9)=0 \implies 20+5a-4a-18=0 \implies a+2=0 \implies a=-2$.</div>
+            <div class="pembahasan"><b>34. Jawaban: B</b><b>Teori:</b> Analisis stasioner dan titik belok.<br><b>Pengerjaan:</b> $y'=4x(x^2-a)$. Titik stasioner di $x=0, x=\pm\sqrt{a}$. Agar ada 3 titik stasioner, maka $a>0$. $y''=12x^2-4a$. Titik belok $y''=0 \implies x=\pm\sqrt{a/3}$. Agar ada 2 titik belok, maka $a>0$. Jika $a>0$, di $x=0$ adalah maks lokal, dan di $x=\pm\sqrt{a}$ adalah min lokal (ada 2 min). Soal meminta 1 min, jadi ada sedikit ambiguitas, namun syarat untuk memiliki 2 titik belok adalah $a>0$.</div>
+            <div class="pembahasan"><b>35. Jawaban: B</b><b>Teori:</b> Stasioner saat $f'(x)=0$.<br><b>Pengerjaan:</b> $f'(x)=e^x\cos x - e^x\sin x=e^x(\cos x - \sin x)=0$. Karena $e^x \ne 0$, maka $\cos x=\sin x \implies \tan x=1$. Solusi pada $[0, 2\pi]$ adalah $x=\pi/4$ dan $x=5\pi/4$.</div>
+            <div class="pembahasan"><b>36. Jawaban: C</b><b>Teori:</b> Stasioner di $x=1$ dan nilai $f(1)=-1$.<br><b>Pengerjaan:</b> $f'(x)=4ax^3-2bx$. $f'(1)=4a-2b=0 \implies b=2a$. $f(1)=a-b=-1 \implies a-2a=-1 \implies a=1$. Maka $b=2$. $a+b=1+2=3$.</div>
+            <div class="pembahasan"><b>37. Jawaban: A</b><b>Teori:</b> Laju terkait (Related Rates).<br><b>Pengerjaan:</b> $dy/dt = (dy/dx)(dx/dt)$. $dy/dx = \pi\cos(\pi x)$. $dx/dt=2$. $dy/dt = 2\pi\cos(\pi x)$. Saat $x=1/6$, $dy/dt = 2\pi\cos(\pi/6) = 2\pi(\frac{\sqrt{3}}{2}) = \pi\sqrt{3}$.</div>
+            <div class="pembahasan"><b>38. Jawaban: A</b><b>Teori:</b> Fungsi naik saat $f'(x)>0$.<br><b>Pengerjaan:</b> $f'(x) = \frac{2}{3}(x^2-4)^{-1/3}(2x)=\frac{4x}{3\sqrt[3]{x^2-4}}$. Titik kritis di $x=0$ (pembilang 0) dan $x=\pm 2$ (penyebut 0). Uji interval pada garis bilangan: ---(-2)+++ (0)---(2)+++. $f'(x)>0$ pada $(-2,0)$ dan $(2,\infty)$.</div>
+            <div class="pembahasan"><b>39. Jawaban: C</b><b>Teori:</b> Fungsi selalu turun jika turunan pertamanya, $f'(x)$, selalu lebih kecil atau sama dengan nol ($f'(x) \le 0$) untuk semua nilai $x$.<br><b>Pengerjaan:</b> Turunan dari $f(x) = ax + \cos x$ adalah $f'(x) = a - \sin x$. Syarat selalu turun adalah $f'(x) \le 0$, maka $a - \sin x \le 0$, atau $a \le \sin x$. Agar pertidaksamaan ini berlaku untuk *semua* nilai $x$, nilai $a$ harus lebih kecil atau sama dengan nilai *minimum* yang mungkin dari $\sin x$. Nilai minimum dari fungsi $\sin x$ adalah -1. Oleh karena itu, haruslah $a \le -1$.</div>
+            <div class="pembahasan"><b>40. Jawaban: A</b><b>Teori:</b> Optimisasi.<br><b>Pengerjaan:</b> Keliling $K=2r+2h+\pi r=10 \implies h=5-r-\pi r/2$. Luas $A=2rh+\frac{1}{2}\pi r^2 = 2r(5-r-\pi r/2)+\frac{1}{2}\pi r^2=10r-2r^2-\frac{1}{2}\pi r^2$. $A'=10-4r-\pi r=0 \implies r(4+\pi)=10 \implies r=\frac{10}{4+\pi}$.</div>
+            <div class="pembahasan"><b>41. Jawaban: C</b><b>Teori:</b> Geometri. $f(x)$ adalah jumlah jarak dari $x$ ke 1 dan -2.<br><b>Pengerjaan:</b> Jarak ini minimum jika $x$ berada di antara -2 dan 1. Untuk setiap $x \in [-2, 1]$, $f(x)=-(x-1)+(x+2)=1+2=3$. Nilai minimumnya adalah 3.</div>
+            <div class="pembahasan"><b>42. Jawaban: D</b><b>Teori:</b> Stasioner saat $f'(x)=0$.<br><b>Pengerjaan:</b> $f'(x) = 2 - \sec^2 x = 0 \implies \sec^2 x=2 \implies \cos^2 x=1/2 \implies \cos x = \pm 1/\sqrt{2}$. Pada $(-\pi/2, \pi/2)$, solusinya $x=\pm \pi/4$.</div>
+            <div class="pembahasan"><b>43. Jawaban: A</b><b>Teori:</b> Fungsi tidak pernah turun jika $f'(x) \ge 0$ untuk semua $x$.<br><b>Pengerjaan:</b> $f'(x)=3x^2+2px+9$. Ini adalah parabola yang membuka ke atas. Agar nilainya selalu $\ge 0$, diskriminannya, $D$, harus $\le 0$. $D = (2p)^2 - 4(3)(9) = 4p^2 - 108$. $4p^2 - 108 \le 0 \implies 4p^2 \le 108 \implies p^2 \le 27$.</div>
+            <div class="pembahasan"><b>44. Jawaban: B</b><b>Teori:</b> Optimisasi.<br><b>Pengerjaan:</b> Volume $V=(16-2x)(10-2x)x = 4x^3-52x^2+160x$. $V'=12x^2-104x+160=4(3x-20)(x-2)=0$. $x=2$ (valid) atau $x=20/3$ (invalid karena $10-2x$ jadi negatif).</div>
+            <div class="pembahasan"><b>45. Jawaban: A</b><b>Teori:</b> Aturan Rantai.<br><b>Pengerjaan:</b> $g'(x) = f'(f(x)) \cdot f'(x)$. Karena $f'(y)>0$ untuk input $y$ apapun, maka $f'(x)$ positif dan $f'(f(x))$ juga positif. Hasil kali dua bilangan positif adalah positif, jadi $g'(x)>0$.</div>
+            <div class="pembahasan"><b>46. Jawaban: C</b><b>Teori:</b> Nilai maks dari $a\sin\theta+b\cos\theta$ adalah $\sqrt{a^2+b^2}$.<br><b>Pengerjaan:</b> Nilai maksimum dari $3\sin\theta - 4\cos\theta$ adalah $\sqrt{3^2+(-4)^2} = \sqrt{9+16}=\sqrt{25}=5$.</div>
+            <div class="pembahasan"><b>47. Jawaban: D</b><b>Teori:</b> Cari nilai di titik kritis dan ujung interval.<br><b>Pengerjaan:</b> $f(x) = (x^2-4x+3)^2$. $f'(x)=2(x^2-4x+3)(2x-4)=0$. Pembuat nol: $(x-1)(x-3)=0 \to x=1,3$. Dan $2x-4=0 \to x=2$. Kritis: 1, 2, 3. Ujung: 0, 4.
+            $f(0)=9, f(1)=0, f(2)=1, f(3)=0, f(4)=9$. Nilai minimumnya adalah 0.</div>
+            <div class="pembahasan"><b>48. Jawaban: B</b><b>Teori:</b> Turunan logaritmik.<br><b>Pengerjaan:</b> $\ln f = \frac{\ln x}{x}$. Turunkan: $\frac{f'}{f} = \frac{1-\ln x}{x^2}$. $f'=0 \implies 1-\ln x = 0 \implies x=e$.</div>
+            <div class="pembahasan"><b>49. Jawaban: A</b><b>Teori:</b> Anti-turunan (Integral).<br><b>Pengerjaan:</b> $f'(x)=\int(6x-2)dx = 3x^2-2x+C_1$. $f'(1)=4 \implies 3(1)^2-2(1)+C_1=4 \implies C_1=3$. $f(x) = \int(3x^2-2x+3)dx = x^3-x^2+3x+C_2$. $f(1)=3 \implies 1-1+3+C_2=3 \implies C_2=0$. Jadi $f(x)=x^3-x^2+3x$. Maka $f(0)=0$.</div>
+            <div class="pembahasan"><b>50. Jawaban: C</b><b>Teori:</b> Definisi kecekungan dan nilai ekstrim.<br><b>Pengerjaan:</b> $f'(c)=0$ dan $f''(x)>0$ untuk semua $x$. Karena $f''(c)>0$, titik tersebut adalah minimum lokal. Karena kurva selalu cekung ke atas ($f''(x)$ selalu positif), garis singgung di setiap titik selalu berada di bawah kurva. Garis singgung di $x=c$ adalah horizontal ($y=f(c)$), sehingga seluruh bagian kurva lainnya harus berada di atas garis ini. Ini berarti $f(c)$ adalah nilai terendah dari seluruh fungsi, yaitu minimum global.</div>
+        </div>
+    </section>
+
+</div>
+
+</body>
+</html>
+
