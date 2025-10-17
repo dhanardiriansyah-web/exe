@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul Lengkap - Matriks & Vektor (TKA)</title>
+    <script>
+        window.MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']]
+          },
+          svg: {
+            fontCache: 'global'
+          }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-text: #333333;
+            --secondary-text: #555555;
+            --border-color: #dddddd;
+            --title-grad-1: #4a4a4a;
+            --title-grad-2: #000000;
+            --info-bg: #e7f3fe;
+            --info-border: #90caf9;
+        }
+        
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            font-size: 11pt;
+            line-height: 1.6;
+            color: var(--primary-text);
+            background-color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            counter-reset: page;
+        }
+
+        .page {
+            background: white;
+            width: 210mm;
+            min-height: 297mm;
+            padding: 20mm;
+            margin: 1cm auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .page::after {
+            counter-increment: page;
+            content: counter(page);
+            position: absolute;
+            bottom: 15mm;
+            right: 20mm;
+            font-size: 10pt;
+            color: #888;
+        }
+
+        .cover-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 3px solid #444;
+            height: 297mm;
+        }
+        
+        .cover-page::after, .toc-page::after {
+            content: ''; /* No page number on cover and TOC */
+        }
+
+        .cover-page img {
+            max-width: 300px;
+            margin-bottom: 40px;
+        }
+
+        .cover-page .title {
+            font-size: 42pt;
+            font-weight: 900;
+            margin: 0;
+            color: var(--title-grad-2);
+            background: -webkit-linear-gradient(45deg, var(--title-grad-1), var(--title-grad-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .cover-page .subtitle {
+            font-size: 18pt;
+            margin-top: 15px;
+            color: var(--secondary-text);
+            font-weight: 700;
+        }
+
+        @media print {
+            body { background: none; }
+            .page { width: 100%; height: 100%; margin: 0; box-shadow: none; page-break-after: always; }
+        }
+        
+        .watermark-container .page::before {
+            content: '';
+            background-image: url('https://imgix3.ruangguru.com/assets/miscellaneous/jpeg_sijv7w_5618.jpeg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 12cm;
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%; height: 100%;
+            opacity: 0.08;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .cover-page::before, .toc-page::before { opacity: 0; }
+
+        .content-wrapper { position: relative; z-index: 1; width: 100%; }
+        
+        h1 { font-size: 24pt; text-align: center; border-bottom: 2px solid var(--primary-text); padding-bottom: 10px; margin-bottom: 20px; }
+        h2 { font-size: 18pt; color: #000; border-left: 5px solid #555; padding-left: 10px; margin-top: 30px; }
+        h3 { font-size: 14pt; color: #222; margin-top: 30px; font-weight: 700; }
+        h4 { font-size: 12pt; font-weight: 700; margin-bottom: 5px; }
+
+        .toc-list { list-style-type: none; padding: 0; }
+        .toc-list li { margin-bottom: 10px; font-size: 12pt; }
+        .toc-list a { text-decoration: none; color: var(--primary-text); }
+        .toc-list a:hover { text-decoration: underline; }
+        
+        .soal-latihan { margin-bottom: 15px; break-inside: avoid; overflow-wrap: break-word; word-wrap: break-word; }
+                
+        .pembahasan { background-color: #f9f9f9; border: 1px solid var(--border-color); padding: 15px; border-radius: 5px; margin-top: 10px; margin-bottom: 20px; }
+        
+        ol.pilihan-ganda { list-style-type: none; padding-left: 20px; }
+        ol.pilihan-ganda li { margin-bottom: 8px; }
+        ol.pilihan-ganda li::before { content: attr(data-option) ". "; font-weight: bold; margin-right: 5px; }
+
+        .keterangan-soal { font-style: italic; font-size: 9pt; color: var(--secondary-text); margin-bottom: 5px; }
+        .info-box { background-color: var(--info-bg); border-left: 4px solid var(--info-border); padding: 10px 15px; margin: 15px 0; font-size: 10pt; }
+        .bold-note { font-weight: 700; background-color: #fffbe6; padding: 2px 5px; border-radius: 3px; }
+
+        .category-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .category-table th, .category-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        .category-table th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<div class="watermark-container">
+
+    <!-- Cover Page -->
+    <section class="page cover-page">
+        <div class="content-wrapper">
+            <img src="https://imgix3.ruangguru.com/assets/miscellaneous/jpeg_sijv7w_5618.jpeg" alt="Math Specialist Logo">
+            <h1 class="title">MODUL TKA MATRIKS & VEKTOR</h1>
+            <p class="subtitle">Kumpulan Soal & Materi Persiapan Ujian Tulis</p>
+        </div>
+    </section>
+
+    <!-- Table of Contents -->
+    <section class="page toc-page">
+        <div class="content-wrapper">
+            <h1>Daftar Isi</h1>
+            <ul class="toc-list">
+                <li><a href="#materi-matriks"><b>BAGIAN 1: MATRIKS</b></a></li>
+                <li><a href="#materi-matriks">BAB 1: Materi Ringkas Matriks</a></li>
+                <li><a href="#latihan-matriks">BAB 2: Soal Latihan Matriks</a></li>
+                <li><a href="#matriks-mudah">&nbsp;&nbsp;&nbsp;› 2.1 Soal Mudah (1-5)</a></li>
+                <li><a href="#matriks-sedang">&nbsp;&nbsp;&nbsp;› 2.2 Soal Sedang (6-15)</a></li>
+                <li><a href="#matriks-sulit">&nbsp;&nbsp;&nbsp;› 2.3 Soal Sulit (16-25)</a></li>
+                <li><a href="#pembahasan-matriks">BAB 3: Pembahasan Soal Matriks</a></li>
+                <li><a href="#materi-vektor"><b>BAGIAN 2: VEKTOR</b></a></li>
+                <li><a href="#materi-vektor">BAB 4: Materi Ringkas Vektor</a></li>
+                <li><a href="#latihan-vektor">BAB 5: Soal Latihan Vektor</a></li>
+                <li><a href="#vektor-mudah">&nbsp;&nbsp;&nbsp;› 5.1 Soal Mudah (26-30)</a></li>
+                <li><a href="#vektor-sedang">&nbsp;&nbsp;&nbsp;› 5.2 Soal Sedang (31-40)</a></li>
+                <li><a href="#vektor-sulit">&nbsp;&nbsp;&nbsp;› 5.3 Soal Sulit (41-50)</a></li>
+                <li><a href="#pembahasan-vektor">BAB 6: Pembahasan Soal Vektor</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- BAGIAN 1: MATRIKS -->
+    
+    <!-- Materi Matriks -->
+    <section id="materi-matriks" class="page">
+      <div class="content-wrapper">
+        <h2>BAGIAN 1: MATRIKS</h2>
+        <h2>BAB 1: Materi Ringkas Matriks</h2>
+        <h3>1.1 Pengenalan & Operasi Matriks</h3>
+        <p><b>Matriks</b> adalah susunan bilangan dalam baris dan kolom. Ordo matriks $A_{m \times n}$ berarti memiliki $m$ baris dan $n$ kolom.</p>
+        <ul>
+            <li><b>Penjumlahan & Pengurangan:</b> Hanya untuk matriks berordo sama. Operasi dilakukan pada elemen yang seletak.</li>
+            <li><b>Perkalian Skalar:</b> Mengalikan setiap elemen matriks dengan sebuah bilangan (skalar). Misal $k \cdot \begin{pmatrix} a & b \\ c & d \end{pmatrix} = \begin{pmatrix} ka & kb \\ kc & kd \end{pmatrix}$.</li>
+            <li><b>Transpose ($A^T$):</b> Mengubah baris menjadi kolom dan sebaliknya.</li>
+        </ul>
+
+        <h3>1.2 Perkalian Matriks</h3>
+        <p>Matriks $A_{m \times n}$ dapat dikalikan dengan $B_{n \times p}$ menghasilkan matriks $C_{m \times p}$. Syarat: jumlah kolom A = jumlah baris B.</p>
+        
+        <h3>1.3 Determinan dan Invers Matriks</h3>
+        <p>Hanya berlaku untuk matriks persegi (jumlah baris = kolom).</p>
+        <h4>Matriks Ordo 2x2</h4>
+        <p>Untuk matriks $A = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$:</p>
+        <ul>
+            <li><b>Determinan:</b> $\det(A) = |A| = ad - bc$.</li>
+            <li><b>Invers:</b> $A^{-1} = \frac{1}{\det(A)} \begin{pmatrix} d & -b \\ -c & a \end{pmatrix}$, dengan syarat $\det(A) \neq 0$.</li>
+        </ul>
+        <p>Jika $\det(A)=0$, matriks A disebut <b>matriks singular</b> dan tidak memiliki invers.</p>
+
+        <h4>Matriks Ordo 3x3</h4>
+        <p>Untuk matriks $A = \begin{pmatrix} a & b & c \\ d & e & f \\ g & h & i \end{pmatrix}$, determinan dapat dihitung dengan <b>Metode Sarrus</b>:</p>
+        $$ |A| = (aei + bfg + cdh) - (ceg + afh + bdi) $$
+        
+        <h4>Sifat Penting</h4>
+        <ul>
+          <li>$A \cdot A^{-1} = A^{-1} \cdot A = I$ (I adalah matriks identitas)</li>
+          <li>$(AB)^{-1} = B^{-1} A^{-1}$</li>
+          <li>$(A^T)^{-1} = (A^{-1})^T$</li>
+          <li>$\det(AB) = \det(A) \cdot \det(B)$</li>
+          <li>$\det(A^{-1}) = 1 / \det(A)$</li>
+          <li>$\det(kA) = k^n \det(A)$, dengan $n$ adalah ordo matriks.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Latihan Soal Matriks -->
+    <section id="latihan-matriks" class="page">
+        <div class="content-wrapper">
+            <h2>BAB 2: Soal Latihan Matriks</h2>
+            <h3 id="matriks-mudah">2.1 Soal Mudah</h3>
+            
+            <div class="soal-latihan">
+                <b>1. (Pilihan Ganda)</b><br>
+                Diketahui matriks $P = \begin{pmatrix} 5 & -2 & 1 \\ 0 & 3 & 7 \end{pmatrix}$. Nilai dari elemen $p_{23}$ adalah...
+                <ol class="pilihan-ganda">
+                    <li data-option="A"> -2 </li>
+                    <li data-option="B"> 0 </li>
+                    <li data-option="C"> 1 </li>
+                    <li data-option="D"> 3 </li>
+                    <li data-option="E"> 7 </li>
+                </ol>
+            </div>
+
+            <div class="soal-latihan">
+                <b>2. (Pilihan Ganda)</b><br>
+                Jika $A = \begin{pmatrix} 2 & 1 \\ 3 & 5 \end{pmatrix}$ dan $B = \begin{pmatrix} -1 & 0 \\ 4 & 2 \end{pmatrix}$, maka hasil dari $A + B$ adalah...
+                <ol class="pilihan-ganda">
+                    <li data-option="A">$\begin{pmatrix} 1 & 1 \\ 7 & 7 \end{pmatrix}$</li>
+                    <li data-option="B">$\begin{pmatrix} 3 & 1 \\ -1 & 3 \end{pmatrix}$</li>
+                    <li data-option="C">$\begin{pmatrix} 1 & 1 \\ 1 & 3 \end{pmatrix}$</li>
+                    <li data-option="D">$\begin{pmatrix} 3 & 1 \\ 7 & 7 \end{pmatrix}$</li>
+                    <li data-option="E">$\begin{pmatrix} -2 & 0 \\ 12 & 10 \end{pmatrix}$</li>
+                </ol>
+            </div>
+
+            <div class="soal-latihan">
+                <b>3. (Pilihan Ganda)</b><br>
+                Determinan dari matriks $K = \begin{pmatrix} 6 & 5 \\ 2 & 2 \end{pmatrix}$ adalah...
+                <ol class="pilihan-ganda">
+                    <li data-option="A"> 2 </li>
+                    <li data-option="B"> -2 </li>
+                    <li data-option="C"> 12 </li>
+                    <li data-option="D"> 10 </li>
+                    <li data-option="E"> 22 </li>
+                </ol>
+            </div>
+
+            <div class="soal-latihan">
+                <b>4. (Pilihan Ganda)</b><br>
+                Sebuah pabrik garmen mencatat data produksi kaos dalam 2 hari (dalam lusin) dalam bentuk matriks $P = \begin{pmatrix} 10 & 15 \\ 12 & 18 \end{pmatrix}$, di mana baris menunjukkan hari dan kolom menunjukkan jenis kaos (polos, bergambar). Jika karena permintaan tinggi, produksi setiap jenis kaos pada setiap hari ditingkatkan menjadi 3 kali lipat, matriks produksi yang baru adalah...
+                <ol class="pilihan-ganda">
+                    <li data-option="A">$\begin{pmatrix} 13 & 18 \\ 15 & 21 \end{pmatrix}$</li>
+                    <li data-option="B">$\begin{pmatrix} 30 & 45 \\ 36 & 54 \end{pmatrix}$</li>
+                    <li data-option="C">$\begin{pmatrix} 30 & 15 \\ 12 & 54 \end{pmatrix}$</li>
+                    <li data-option="D">$\begin{pmatrix} 7 & 12 \\ 9 & 15 \end{pmatrix}$</li>
+                    <li data-option="E">$\begin{pmatrix} 10 & 45 \\ 36 & 18 \end{pmatrix}$</li>
+                </ol>
+            </div>
+            
+            <div class="soal-latihan">
+                <b>5. (Pilihan Ganda)</b><br>
+                Transpose dari matriks $M = \begin{pmatrix} 4 & 1 & 7 \\ 0 & -5 & 2 \end{pmatrix}$ adalah...
+                <ol class="pilihan-ganda">
+                    <li data-option="A">$\begin{pmatrix} 4 & 0 \\ 1 & -5 \\ 7 & 2 \end{pmatrix}$</li>
+                    <li data-option="B">$\begin{pmatrix} 0 & -5 & 2 \\ 4 & 1 & 7 \end{pmatrix}$</li>
+                    <li data-option="C">$\begin{pmatrix} 2 & 7 & 1 \\ -5 & 0 & 4 \end{pmatrix}$</li>
+                    <li data-option="D">$\begin{pmatrix} 4 & 1 \\ 0 & -5 \end{pmatrix}$</li>
+                    <li data-option="E">$\begin{pmatrix} 7 & 2 \end{pmatrix}$</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <section class="page">
+        <div class="content-wrapper">
+            <h3 id="matriks-sedang">2.2 Soal Sedang</h3>
+
+            <div class="soal-latihan">
+                <b>6. (Pilihan Ganda)</b><br>
+                Jika $A = \begin{pmatrix} 2 & 1 \\ -1 & 0 \end{pmatrix}$ dan $B = \begin{pmatrix} 3 & -2 \\ 1 & 4 \end{pmatrix}$, maka hasil dari $AB$ adalah...
+                <ol class="pilihan-ganda">
+                    <li data-option="A">$\begin{pmatrix} 6 & -2 \\ -1 & 0 \end{pmatrix}$</li>
+                    <li data-option="B">$\begin{pmatrix} 7 & 0 \\ -3 & 2 \end{pmatrix}$</li>
+                    <li data-option="C">$\begin{pmatrix} 7 & -3 \\ 0 & 2 \end{pmatrix}$</li>
+                    <li data-option="D">$\begin{pmatrix} 5 & -1 \\ 0 & 4 \end{pmatrix}$</li>
+                    <li data-option="E">$\begin{pmatrix} 6 & 0 \\ -3 & 0 \end{pmatrix}$</li>
+                </ol>
+            </div>
+
+            <div class="soal-latihan">
+                <b>7. (Pilihan Ganda)</b><br>
+                Invers dari matriks $P = \begin{pmatrix} 4 & 1 \\ 7 & 2 \end{pmatrix}$ adalah...
+                <ol class="pilihan-ganda">
+                    <li data-option="A">$\begin{pmatrix} 2 & -1 \\ -7 & 4 \end{pmatrix}$</li>
+                    <li data-option="B">$\begin{pmatrix} 4 & -1 \\ -7 & 2 \end{pmatrix}$</li>
+                    <li data-option="C">$\begin{pmatrix} -4 & 1 \\ 7 & -2 \end{pmatrix}$</li>
+                    <li data-option="D">$\begin{pmatrix} 2 & 1 \\ 7 & 4 \end{pmatrix}$</li>
+                    <li data-option="E">$\begin{pmatrix} 1/4 & 1 \\ 1/7 & 1/2 \end{pmatrix}$</li>
+                </ol>
+            </div>
+            
+            <div class="soal-latihan">
+                <b>8. (Pilihan Ganda)</b><br>
+                Diketahui $A = \begin{pmatrix} 3 & y \\ 5 & -1 \end{pmatrix}$, $B = \begin{pmatrix} x & 5 \\ -3 & 6 \end{pmatrix}$, dan $C = \begin{pmatrix} 8 & 2 \\ 3 & 5 \end{pmatrix}$. Jika $A+B = C^T$, maka nilai $x+y$ adalah...
+                <ol class="pilihan-ganda">
+                    <li data-option="A"> -5 </li>
+                    <li data-option="B"> -1 </li>
+                    <li data-option="C"> 1 </li>
+                    <li data-option="D"> 3 </li>
+                    <li data-option="E"> 5 </li>
+                </ol>
+            </div>
+            
+             <div class="soal-latihan">
+                <b>9. (Pilihan Ganda)</b><br>
+                Toko A dan B menjual buku tulis dan pensil. Data penjualan dalam seminggu disajikan dalam matriks:
+                $J = \begin{pmatrix} 50 & 30 \\ 40 & 25 \end{pmatrix}$ (Baris A/B, Kolom Buku/Pensil).
+                Harga jual per item disajikan dalam matriks:
+                $H = \begin{pmatrix} 5000 \\ 2000 \end{pmatrix}$ (Baris Buku/Pensil).
+                Matriks yang merepresentasikan total pendapatan masing-masing toko adalah...
+                <ol class="pilihan-ganda">
+                    <li data-option="A">$\begin{pmatrix} 310000 \\ 250000 \end{pmatrix}$</li>
+                    <li data-option="B">$\begin{pmatrix} 250000 & 60000 \\ 200000 & 50000 \end{pmatrix}$</li>
+                    <li data-option="C">$\begin{pmatrix} 560000 \end{pmatrix}$</li>
+                    <li data-option="D">$\begin{pmatrix} 310000 & 250000 \end{pmatrix}$</li>
+                    <li data-option="E">$\begin{pmatrix} 250000 \\ 310000 \end{pmatrix}$</li>
+                </ol>
+            </div>
+
+            <div class="soal-latihan">
+                <b>10. (Kecukupan Data)</b><br>
+                Diketahui matriks $A = \begin{pmatrix} a & 2 \\ 1 & b \end{pmatrix}$. Berapakah nilai dari $ab$?
+                <br>(1) Matriks A adalah matriks singular.
+                <br>(2) $a + b = 3$.
+                <ol class="pilihan-ganda">
+                    <li data-option="A">Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (2) SAJA tidak cukup.</li>
+                    <li data-option="B">Pernyataan (2) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (1) SAJA tidak cukup.</li>
+                    <li data-option="C">DUA pernyataan BERSAMA-SAMA cukup untuk menjawab pertanyaan, tetapi SATU pernyataan SAJA tidak cukup.</li>
+                    <li data-option="D">Pernyataan (1) SAJA cukup, pernyataan (2) SAJA cukup.</li>
+                    <li data-option="E">Pernyataan (1) dan (2) tidak cukup untuk menjawab pertanyaan.</li>
+                </ol>
+            </div>
+
+            <div class="soal-latihan">
+                <b>11. (Kecukupan Data)</b><br>
+                Jika $M = \begin{pmatrix} 2 & x \\ 3 & 1 \end{pmatrix}$, apakah determinan dari $M^2$ positif?
+                <br>(1) $x < 2/3$
+                <br>(2) $x = -1$
+                <ol class="pilihan-ganda">
+                    <li data-option="A">Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (2) SAJA tidak cukup.</li>
+                    <li data-option="B">Pernyataan (2) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (1) SAJA tidak cukup.</li>
+                    <li data-option="C">DUA pernyataan BERSAMA-SAMA cukup untuk menjawab pertanyaan, tetapi SATU pernyataan SAJA tidak cukup.</li>
+                    <li data-option="D">Pernyataan (1) SAJA cukup, pernyataan (2) SAJA cukup.</li>
+                    <li data-option="E">Pernyataan (1) dan (2) tidak cukup untuk menjawab pertanyaan.</li>
+                </ol>
+            </div>
+            
+            <div class="soal-latihan">
+                <b>12. (Kecukupan Data)</b><br>
+                Jika $A = \begin{pmatrix} 1 & 0 \\ 1 & 1 \end{pmatrix}$, dan $AX=B$. Apakah matriks $X$ dapat ditentukan?
+                <br>(1) Matriks $B = \begin{pmatrix} 2 \\ 3 \end{pmatrix}$.
+                <br>(2) $\det(A) \neq 0$.
+                <ol class="pilihan-ganda">
+                    <li data-option="A">Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (2) SAJA tidak cukup.</li>
+                    <li data-option="B">Pernyataan (2) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (1) SAJA tidak cukup.</li>
+                    <li data-option="C">DUA pernyataan BERSAMA-SAMA cukup untuk menjawab pertanyaan, tetapi SATU pernyataan SAJA tidak cukup.</li>
+                    <li data-option="D">Pernyataan (1) SAJA cukup, pernyataan (2) SAJA cukup.</li>
+                    <li data-option="E">Pernyataan (1) dan (2) tidak cukup untuk menjawab pertanyaan.</li>
+                </ol>
+            </div>
+            
+            <div class="soal-latihan">
+                <b>13. (Pilihan Ganda Kompleks)</b><br>
+                Jika matriks $A = \begin{pmatrix} 1 & -2 \\ -1 & 3 \end{pmatrix}$, manakah pernyataan berikut yang benar? <span class="bold-note">Bisa pilih lebih dari satu jawaban.</span>
+                <ol class="pilihan-ganda">
+                    <li data-option="A"> $\det(A) = 1$ </li>
+                    <li data-option="B"> $A^{-1} = \begin{pmatrix} 3 & 2 \\ 1 & 1 \end{pmatrix}$ </li>
+                    <li data-option="C"> $A^2 = \begin{pmatrix} 3 & -8 \\ -4 & 11 \end{pmatrix}$ </li>
+                    <li data-option="D"> $\det(2A) = 4$ </li>
+                    <li data-option="E"> $A$ adalah matriks singular. </li>
+                </ol>
+            </div>
+            
+            <div class="soal-latihan">
+                <b>14. (Pilihan Ganda Kompleks)</b><br>
+                Diketahui persamaan matriks $\begin{pmatrix} 2 & -3 \\ 1 & 4 \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} 9 \\ -1 \end{pmatrix}$. Manakah pernyataan yang benar mengenai nilai $x$ dan $y$? <span class="bold-note">Bisa pilih lebih dari satu jawaban.</span>
+                <ol class="pilihan-ganda">
+                    <li data-option="A"> Nilai $x$ adalah bilangan positif. </li>
+                    <li data-option="B"> Nilai $y$ adalah bilangan bulat negatif. </li>
+                    <li data-option="C"> $x > y$ </li>
+                    <li data-option="D"> $x + y = 2$ </li>
+                    <li data-option="E"> $x - y = 4$ </li>
+                </ol>
+            </div>
+
+            <div class="soal-latihan">
+                <b>15. (Pilihan Ganda)</b><br>
+                Determinan dari matriks $B = \begin{pmatrix} 1 & 2 & 0 \\ 3 & -1 & 4 \\ -2 & 1 & 3 \end{pmatrix}$ adalah...
+                <ol class="pilihan-ganda">
+                    <li data-option="A"> -41 </li>
+                    <li data-option="B"> -25 </li>
+                    <li data-option="C"> -19 </li>
+                    <li data-option="D"> 25 </li>
+                    <li data-option="E"> 41 </li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <section class="page">
+        <div class="content-wrapper">
+            <h3 id="matriks-sulit">2.3 Soal Sulit</h3>
+            <div class="soal-latihan">
+                <b>16. (Pilihan Ganda)</b><br>
+                Matriks $X$ berordo $2 \times 2$ yang memenuhi persamaan $X \begin{pmatrix} 1 & 3 \\ -2 & 4 \end{pmatrix} = \begin{pmatrix} 10 & 10 \\ -5 & 15 \end{pmatrix}$ adalah...
+                <ol class="pilihan-ganda">
+                    <li data-option="A">$\begin{pmatrix} 6 & -2 \\ 1 & 3 \end{pmatrix}$</li>
+                    <li data-option="B">$\begin{pmatrix} 6 & 1 \\ -2 & 3 \end{pmatrix}$</li>
+                    <li data-option="C">$\begin{pmatrix} 3 & -2 \\ 1 & 6 \end{pmatrix}$</li>
+                    <li data-option="D">$\begin{pmatrix} -3 & 6 \\ -2 & 1 \end{pmatrix}$</li>
+                    <li data-option="E">$\begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$</li>
+                </ol>
+            </div>
+            
+            <div class="soal-latihan">
+                <b>17. (Pilihan Ganda)</b><br>
+                Jika $A = \begin{pmatrix} 2 & 1 \\ 3 & 4 \end{pmatrix}$ dan $B = \begin{pmatrix} 1 & 2 \\ 1 & 0 \end{pmatrix}$, maka nilai dari $\det((AB)^{-1})$ adalah...
+                <ol class="pilihan-ganda">
+                    <li data-option="A"> -10 </li>
+                    <li data-option="B"> -1/10 </li>
+                    <li data-option="C"> 1/10 </li>
+                    <li data-option="D"> 10 </li>
+                    <li data-option="E"> 7 </li>
+                </ol>
+            </div>
+            
+            <div class="soal-latihan">
+                <b>18. (Pilihan Ganda)</b><br>
+                Suatu populasi di dua kota A dan B mengikuti model transisi tahunan. Setiap tahun, 10% populasi kota A pindah ke B, dan 5% populasi kota B pindah ke A. Jika populasi awal kota A adalah 4000 dan kota B adalah 6000, berapa populasi kota A setelah 2 tahun?
+                <ol class="pilihan-ganda">
+                    <li data-option="A"> 3900 </li>
+                    <li data-option="B"> 3815 </li>
+                    <li data-option="C"> 3915 </li>
+                    <li data-option="D"> 4085 </li>
+                    <li data-option="E"> 4100 </li>
+                </ol>
+            </div>
+
+            <div class="soal-latihan">
+                <b>19. (Pilihan Ganda)</b><br>
+                Titik $(x,y)$ ditransformasikan oleh matriks $T_1 = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}$ dilanjutkan oleh matriks $T_2 = \begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix}$ menghasilkan bayangan $(4, -6)$. Koordinat titik awal $(x,y)$ adalah...
+                <ol class="pilihan-ganda">
+                    <li data-option="A"> $(3, 2)$ </li>
+                    <li data-option="B"> $(-3, -2)$ </li>
+                    <li data-option="C"> $(3, -2)$ </li>
+                    <li data-option="D"> $(-2, 3)$ </li>
+                    <li data-option="E"> $(2, 3)$ </li>
+                </ol>
+            </div>
+
+            <div class="soal-latihan">
+                <b>20. (Kecukupan Data)</b><br>
+                Diketahui $A, B, C$ adalah matriks $2 \times 2$. Jika $AC = B$, apakah matriks $C$ dapat ditentukan?
+                <br>(1) Matriks $A$ memiliki invers.
+                <br>(2) Matriks $B$ bukan matriks nol.
+                <ol class="pilihan-ganda">
+                    <li data-option="A">Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (2) SAJA tidak cukup.</li>
+                    <li data-option="B">Pernyataan (2) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (1) SAJA tidak cukup.</li>
+                    <li data-option="C">DUA pernyataan BERSAMA-SAMA cukup untuk menjawab pertanyaan, tetapi SATU pernyataan SAJA tidak cukup.</li>
+                    <li data-option="D">Pernyataan (1) SAJA cukup, pernyataan (2) SAJA cukup.</li>
+                    <li data-option="E">Pernyataan (1) dan (2) tidak cukup untuk menjawab pertanyaan.</li>
+                </ol>
+            </div>
+            
+            <div class="soal-latihan">
+                <b>21. (Kecukupan Data)</b><br>
+                Jika $A = \begin{pmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{pmatrix}$, apakah $A^4=I$?
+                <br>(1) $\theta = \pi/2$
+                <br>(2) $\theta$ adalah sudut di kuadran pertama.
+                <ol class="pilihan-ganda">
+                    <li data-option="A">Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (2) SAJA tidak cukup.</li>
+                    <li data-option="B">Pernyataan (2) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (1) SAJA tidak cukup.</li>
+                    <li data-option="C">DUA pernyataan BERSAMA-SAMA cukup untuk menjawab pertanyaan, tetapi SATU pernyataan SAJA tidak cukup.</li>
+                    <li data-option="D">Pernyataan (1) SAJA cukup, pernyataan (2) SAJA cukup.</li>
+                    <li data-option="E">Pernyataan (1) dan (2) tidak cukup untuk menjawab pertanyaan.</li>
+                </ol>
+            </div>
+            
+            <div class="soal-latihan">
+                <b>22. (Kecukupan Data)</b><br>
+                Apakah matriks $M = \begin{pmatrix} k-3 & 2 \\ 8 & k \end{pmatrix}$ memiliki invers?
+                <br>(1) $k^2 - 3k - 16 \neq 0$
+                <br>(2) $k$ bukan bilangan bulat.
+                <ol class="pilihan-ganda">
+                     <li data-option="A">Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (2) SAJA tidak cukup.</li>
+                    <li data-option="B">Pernyataan (2) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (1) SAJA tidak cukup.</li>
+                    <li data-option="C">DUA pernyataan BERSAMA-SAMA cukup untuk menjawab pertanyaan, tetapi SATU pernyataan SAJA tidak cukup.</li>
+                    <li data-option="D">Pernyataan (1) SAJA cukup, pernyataan (2) SAJA cukup.</li>
+                    <li data-option="E">Pernyataan (1) dan (2) tidak cukup untuk menjawab pertanyaan.</li>
+                </ol>
+            </div>
+            
+            <div class="soal-latihan">
+                <b>23. (Kategori Benar/Salah)</b><br>
+                Diketahui $A$ dan $B$ adalah matriks berordo $2 \times 2$. Tentukan apakah pernyataan-pernyataan berikut Benar atau Salah.
+                <table class="category-table">
+                    <tr><th>Pernyataan</th><th>Benar/Salah</th></tr>
+                    <tr><td>Jika $AB = 0$, maka $A=0$ atau $B=0$.</td><td></td></tr>
+                    <tr><td>$(A+B)^2 = A^2 + 2AB + B^2$</td><td></td></tr>
+                    <tr><td>$\det(A+B) = \det(A) + \det(B)$</td><td></td></tr>
+                </table>
+            </div>
+
+            <div class="soal-latihan">
+                <b>24. (Kategori Benar/Salah)</b><br>
+                Diberikan matriks $A = \begin{pmatrix} 3 & 4 \\ 2 & 3 \end{pmatrix}$. Tentukan apakah pernyataan berikut Benar atau Salah.
+                <table class="category-table">
+                    <tr><th>Pernyataan</th><th>Benar/Salah</th></tr>
+                    <tr><td>$A^{-1} = \begin{pmatrix} 3 & -4 \\ -2 & 3 \end{pmatrix}$</td><td></td></tr>
+                    <tr><td>$A^2 - 6A + I = 0$, di mana $I$ adalah matriks identitas dan $0$ adalah matriks nol.</td><td></td></tr>
+                    <tr><td>Determinan dari $A^3$ adalah 1.</td><td></td></tr>
+                </table>
+            </div>
+            
+            <div class="soal-latihan">
+                <b>25. (Kategori Benar/Salah)</b><br>
+                Terkait sifat-sifat matriks persegi, tentukan apakah pernyataan berikut Benar atau Salah.
+                <table class="category-table">
+                    <tr><th>Pernyataan</th><th>Benar/Salah</th></tr>
+                    <tr><td>Setiap matriks persegi pasti memiliki invers.</td><td></td></tr>
+                    <tr><td>Jika $A$ memiliki invers, maka $\det(A^{-1}) = \det(A^T)$.</td><td></td></tr>
+                    <tr><td>$(AB)^T = B^T A^T$</td><td></td></tr>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pembahasan Matriks -->
+    <section id="pembahasan-matriks" class="page">
+        <div class="content-wrapper">
+            <h2>BAB 3: Pembahasan Soal Matriks</h2>
+            <h3>Soal Mudah</h3>
+            <div class="pembahasan"><b>1. Jawaban: E</b><br>$p_{23}$ berarti elemen pada baris ke-2, kolom ke-3, yaitu 7.</div>
+            <div class="pembahasan"><b>2. Jawaban: A</b><br>$A+B = \begin{pmatrix} 2+(-1) & 1+0 \\ 3+4 & 5+2 \end{pmatrix} = \begin{pmatrix} 1 & 1 \\ 7 & 7 \end{pmatrix}$.</div>
+            <div class="pembahasan"><b>3. Jawaban: A</b><br>$\det(K) = (6)(2) - (5)(2) = 12 - 10 = 2$.</div>
+            <div class="pembahasan"><b>4. Jawaban: B</b><br>Operasi perkalian skalar: $3P = 3 \begin{pmatrix} 10 & 15 \\ 12 & 18 \end{pmatrix} = \begin{pmatrix} 30 & 45 \\ 36 & 54 \end{pmatrix}$.</div>
+            <div class="pembahasan"><b>5. Jawaban: A</b><br>Transpose ($M^T$) mengubah baris menjadi kolom. Baris 1 $\begin{pmatrix} 4 & 1 & 7 \end{pmatrix}$ menjadi kolom 1. Baris 2 $\begin{pmatrix} 0 & -5 & 2 \end{pmatrix}$ menjadi kolom 2.</div>
+
+            <h3>Soal Sedang</h3>
+            <div class="pembahasan"><b>6. Jawaban: B</b><br>$AB = \begin{pmatrix} 2(3)+1(1) & 2(-2)+1(4) \\ -1(3)+0(1) & -1(-2)+0(4) \end{pmatrix} = \begin{pmatrix} 7 & 0 \\ -3 & 2 \end{pmatrix}$.</div>
+            <div class="pembahasan"><b>7. Jawaban: A</b><br>$\det(P) = (4)(2) - (1)(7) = 8-7=1$. $P^{-1} = \frac{1}{1}\begin{pmatrix} 2 & -1 \\ -7 & 4 \end{pmatrix} = \begin{pmatrix} 2 & -1 \\ -7 & 4 \end{pmatrix}$.</div>
+            <div class="pembahasan"><b>8. Jawaban: D</b><br>
+            $A+B = \begin{pmatrix} 3 & y \\ 5 & -1 \end{pmatrix} + \begin{pmatrix} x & 5 \\ -3 & 6 \end{pmatrix} = \begin{pmatrix} 3+x & y+5 \\ 2 & 5 \end{pmatrix}$.<br>
+            $C^T = \begin{pmatrix} 8 & 3 \\ 2 & 5 \end{pmatrix}$.<br>
+            Dari kesamaan matriks $A+B = C^T$:<br>
+            Elemen (1,1): $3+x = 8 \implies x=5$.<br>
+            Elemen (1,2): $y+5 = 3 \implies y=-2$.<br>
+            Maka, $x+y = 5 + (-2) = 3$.
+            </div>
+            <div class="pembahasan"><b>9. Jawaban: A</b><br>Total pendapatan adalah perkalian matriks $J \times H$.
+            $JH = \begin{pmatrix} 50 & 30 \\ 40 & 25 \end{pmatrix} \begin{pmatrix} 5000 \\ 2000 \end{pmatrix} = \begin{pmatrix} 50(5000)+30(2000) \\ 40(5000)+25(2000) \end{pmatrix} = \begin{pmatrix} 250000+60000 \\ 200000+50000 \end{pmatrix} = \begin{pmatrix} 310000 \\ 250000 \end{pmatrix}$. Baris 1 adalah pendapatan toko A, baris 2 adalah pendapatan toko B.</div>
+            <div class="pembahasan"><b>10. Jawaban: A</b><br>(1) Matriks A singular berarti $\det(A)=0$. $ab - 2(1) = 0 \implies ab = 2$. Pernyataan (1) SAJA cukup.
+            <br>(2) $a+b=3$. Kita tidak bisa menentukan nilai $ab$ secara unik. Bisa $a=1, b=2 \implies ab=2$. Bisa $a=0, b=3 \implies ab=0$. Pernyataan (2) SAJA tidak cukup.</div>
+            <div class="pembahasan"><b>11. Jawaban: D</b><br>Kita tahu $\det(M^2) = (\det(M))^2$. Karena kuadrat, hasilnya pasti non-negatif. Pertanyaannya adalah apakah positif, artinya $\det(M^2) > 0$, yang berarti $\det(M) \neq 0$.
+            $\det(M) = 2(1) - 3x = 2-3x$. Kita perlu tahu apakah $2-3x \neq 0$.
+            <br>(1) $x < 2/3$. Ini berarti $3x < 2$, atau $2-3x > 0$. Jadi $\det(M)$ pasti tidak nol (bahkan positif). Cukup.
+            <br>(2) $x=-1$. Maka $\det(M) = 2-3(-1) = 5 \neq 0$. Cukup.
+            </div>
+            <div class="pembahasan"><b>12. Jawaban: D</b><br>Untuk menentukan $X$ dari $AX=B$, kita butuh $X=A^{-1}B$. Ini hanya mungkin jika $A$ punya invers, yaitu $\det(A) \neq 0$.
+            <br>(1) Diberikan $B$. Kita bisa menghitung $A^{-1}$ karena $\det(A)=1(1)-0(1)=1 \neq 0$. Maka $X$ bisa ditentukan. Cukup.
+            <br>(2) Diberitahu $\det(A) \neq 0$. Ini adalah syarat untuk $A$ memiliki invers. Dengan adanya $B$ (yang diketahui dari soal utama), kita bisa menentukan $X$. Cukup.
+            </div>
+            <div class="pembahasan"><b>13. Jawaban: A, B, C, D</b><br>
+            A. $\det(A) = 1(3) - (-2)(-1) = 3 - 2 = 1$. (Benar)
+            <br>B. $A^{-1} = \frac{1}{1}\begin{pmatrix} 3 & 2 \\ 1 & 1 \end{pmatrix} = \begin{pmatrix} 3 & 2 \\ 1 & 1 \end{pmatrix}$. (Benar)
+            <br>C. $A^2 = \begin{pmatrix} 1 & -2 \\ -1 & 3 \end{pmatrix}\begin{pmatrix} 1 & -2 \\ -1 & 3 \end{pmatrix} = \begin{pmatrix} 1+2 & -2-6 \\ -1-3 & 2+9 \end{pmatrix} = \begin{pmatrix} 3 & -8 \\ -4 & 11 \end{pmatrix}$. (Benar)
+            <br>D. $\det(2A) = 2^2 \det(A) = 4 \cdot 1 = 4$. (Benar)
+            <br>E. Karena $\det(A) \neq 0$, A bukan singular. (Salah)
+            </div>
+            <div class="pembahasan"><b>14. Jawaban: A, B, C, E</b><br>
+            Sistem persamaan: $2x-3y=9$ dan $x+4y=-1$. Kalikan persamaan kedua dengan 2: $2x+8y=-2$.
+            Kurangkan dari persamaan pertama: $(2x-3y)-(2x+8y) = 9-(-2) \implies -11y = 11 \implies y = -1$.
+            Substitusi: $x+4(-1)=-1 \implies x-4=-1 \implies x=3$.
+            <br>A. $x=3$ adalah positif. (Benar)
+            <br>B. $y=-1$ adalah bilangan bulat negatif. (Benar)
+            <br>C. $x > y$ karena $3 > -1$. (Benar)
+            <br>D. $x+y = 3+(-1)=2$. (Salah)
+            <br>E. $x-y = 3-(-1)=4$. (Benar)
+            </div>
+            <div class="pembahasan"><b>15. Jawaban: A</b><br>Menggunakan metode Sarrus:
+            $|B| = [1(-1)(3) + 2(4)(-2) + 0(3)(1)] - [0(-1)(-2) + 1(4)(1) + 2(3)(3)]$
+            $= [-3 - 16 + 0] - [0 + 4 + 18] = -19 - 22 = -41$.
+            </div>
+        </div>
+    </section>
+    
+    <section class="page">
+        <div class="content-wrapper">
+            <h3>Soal Sulit</h3>
+            <div class="pembahasan"><b>16. Jawaban: A</b><br>
+            $XA = B \implies X = BA^{-1}$.
+            $A = \begin{pmatrix} 1 & 3 \\ -2 & 4 \end{pmatrix}$, $\det(A) = 4 - (-6) = 10$.
+            $A^{-1} = \frac{1}{10}\begin{pmatrix} 4 & -3 \\ 2 & 1 \end{pmatrix}$.
+            $X = \begin{pmatrix} 10 & 10 \\ -5 & 15 \end{pmatrix} \frac{1}{10}\begin{pmatrix} 4 & -3 \\ 2 & 1 \end{pmatrix} = \frac{1}{10} \begin{pmatrix} 10 & 10 \\ -5 & 15 \end{pmatrix} \begin{pmatrix} 4 & -3 \\ 2 & 1 \end{pmatrix}$
+            $X = \frac{1}{10} \begin{pmatrix} 40+20 & -30+10 \\ -20+30 & 15+15 \end{pmatrix} = \frac{1}{10} \begin{pmatrix} 60 & -20 \\ 10 & 30 \end{pmatrix} = \begin{pmatrix} 6 & -2 \\ 1 & 3 \end{pmatrix}$.
+            </div>
+            <div class="pembahasan"><b>17. Jawaban: B</b><br>
+            $\det((AB)^{-1}) = 1/\det(AB) = 1/(\det(A)\det(B))$.
+            $\det(A) = 2(4)-1(3) = 8-3 = 5$.
+            $\det(B) = 1(0)-2(1) = -2$.
+            $\det(AB) = 5 \times (-2) = -10$.
+            $\det((AB)^{-1}) = 1/(-10) = -1/10$.
+            </div>
+            <div class="pembahasan"><b>18. Jawaban: B</b><br>
+            Matriks transisi $T = \begin{pmatrix} 0.90 & 0.05 \\ 0.10 & 0.95 \end{pmatrix}$. (Kolom 1 dari A/B, Baris 1 ke A/B).
+            Populasi awal $P_0 = \begin{pmatrix} 4000 \\ 6000 \end{pmatrix}$.
+            $P_1 = TP_0 = \begin{pmatrix} 0.90 & 0.05 \\ 0.10 & 0.95 \end{pmatrix} \begin{pmatrix} 4000 \\ 6000 \end{pmatrix} = \begin{pmatrix} 3600+300 \\ 400+5700 \end{pmatrix} = \begin{pmatrix} 3900 \\ 6100 \end{pmatrix}$.
+            $P_2 = TP_1 = \begin{pmatrix} 0.90 & 0.05 \\ 0.10 & 0.95 \end{pmatrix} \begin{pmatrix} 3900 \\ 6100 \end{pmatrix} = \begin{pmatrix} 3510+305 \\ 390+5795 \end{pmatrix} = \begin{pmatrix} 3815 \\ 6185 \end{pmatrix}$.
+            Populasi kota A setelah 2 tahun adalah 3815.
+            </div>
+             <div class="pembahasan"><b>19. Jawaban: A</b><br>
+            Transformasi total $T = T_2 T_1 = \begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix} \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix} = \begin{pmatrix} 0 & 2 \\ -2 & 0 \end{pmatrix}$.
+            Bayangan $(x', y')$ diberikan oleh $\begin{pmatrix} x' \\ y' \end{pmatrix} = T \begin{pmatrix} x \\ y \end{pmatrix}$.
+            Maka, titik awal adalah $\begin{pmatrix} x \\ y \end{pmatrix} = T^{-1} \begin{pmatrix} x' \\ y' \end{pmatrix}$.
+            $\det(T) = 0 - (-4) = 4$.
+            $T^{-1} = \frac{1}{4} \begin{pmatrix} 0 & -2 \\ 2 & 0 \end{pmatrix}$.
+            $\begin{pmatrix} x \\ y \end{pmatrix} = \frac{1}{4} \begin{pmatrix} 0 & -2 \\ 2 & 0 \end{pmatrix} \begin{pmatrix} 4 \\ -6 \end{pmatrix} = \frac{1}{4} \begin{pmatrix} 12 \\ 8 \end{pmatrix} = \begin{pmatrix} 3 \\ 2 \end{pmatrix}$.
+            Jadi, titik awalnya adalah $(3, 2)$.
+            </div>
+            <div class="pembahasan"><b>20. Jawaban: A</b><br>
+            Dari $AC=B$, untuk mencari $C$, kita perlu mengalikan dengan $A^{-1}$ dari kiri: $A^{-1}AC = A^{-1}B \implies C=A^{-1}B$.
+            <br>(1) Matriks $A$ memiliki invers. Ini adalah syarat yang diperlukan untuk melakukan operasi di atas. Jadi, $C$ dapat ditentukan. Cukup.
+            <br>(2) Matriks $B$ bukan matriks nol. Ini tidak memberi informasi apakah $A$ punya invers atau tidak. Jika $A$ singular, $C$ tidak dapat ditentukan secara unik. Tidak cukup.
+            </div>
+            <div class="pembahasan"><b>21. Jawaban: A</b><br>
+            Matriks $A$ adalah matriks rotasi sebesar $\theta$. $A^n$ adalah matriks rotasi sebesar $n\theta$.
+            Pertanyaannya adalah apakah $A^4=I$, yang berarti apakah rotasi sebesar $4\theta$ sama dengan rotasi $0$ atau kelipatan $2\pi$. Apakah $4\theta = 2k\pi$ untuk suatu bilangan bulat $k$?
+            <br>(1) $\theta = \pi/2$. Maka $4\theta = 4(\pi/2) = 2\pi$. Ini adalah rotasi penuh, sehingga $A^4=I$. Cukup.
+            <br>(2) $\theta$ di kuadran pertama, $0 < \theta < \pi/2$. Ini tidak menjamin $4\theta=2k\pi$. Misalnya $\theta=\pi/4$, $4\theta=\pi$, $A^4 \neq I$. Misalnya $\theta=\pi/3$, $4\theta=4\pi/3$, $A^4 \neq I$. Tidak cukup.
+            </div>
+            <div class="pembahasan"><b>22. Jawaban: A</b><br>
+            Matriks $M$ memiliki invers jika dan hanya jika $\det(M) \neq 0$.
+            $\det(M) = k(k-3) - 2(8) = k^2 - 3k - 16$.
+            Pertanyaannya adalah, apakah $k^2 - 3k - 16 \neq 0$?
+            <br>(1) Diberikan $k^2 - 3k - 16 \neq 0$. Ini secara langsung menjawab pertanyaan. Cukup.
+            <br>(2) $k$ bukan bilangan bulat. Akar-akar dari $k^2-3k-16=0$ adalah $k = \frac{3 \pm \sqrt{9-4(1)(-16)}}{2} = \frac{3 \pm \sqrt{73}}{2}$. Akar-akarnya bukan bilangan bulat. Jadi jika $k$ bukan bilangan bulat, masih ada kemungkinan $k$ sama dengan salah satu akar ini. Tidak cukup.
+            </div>
+            <div class="pembahasan"><b>23. Jawaban:</b><br>
+            1. <b>Salah.</b> Sifat ini tidak berlaku pada matriks. Contoh: $A=\begin{pmatrix}1&0\\0&0\end{pmatrix}, B=\begin{pmatrix}0&0\\0&1\end{pmatrix}$. $AB=0$ tapi A dan B bukan matriks nol.
+            <br>2. <b>Salah.</b> Sifat ini hanya berlaku jika $AB=BA$ (komutatif). Secara umum, $(A+B)^2 = A^2+AB+BA+B^2$.
+            <br>3. <b>Salah.</b> Tidak ada sifat distributif untuk determinan terhadap penjumlahan.
+            </div>
+            <div class="pembahasan"><b>24. Jawaban:</b><br>
+            $\det(A) = 3(3)-4(2)=1$.
+            <br>1. <b>Benar.</b> $A^{-1} = \frac{1}{1}\begin{pmatrix} 3 & -4 \\ -2 & 3 \end{pmatrix}$.
+            <br>2. <b>Benar.</b> Ini adalah aplikasi dari Teorema Cayley-Hamilton. Polinomial karakteristiknya adalah $\lambda^2 - \text{trace}(A)\lambda + \det(A) = 0$. Trace(A)=3+3=6. $\det(A)=1$. Jadi $\lambda^2-6\lambda+1=0$. Teorema menyatakan $A^2-6A+I=0$.
+            <br>3. <b>Benar.</b> $\det(A^3) = (\det(A))^3 = 1^3=1$.
+            </div>
+            <div class="pembahasan"><b>25. Jawaban:</b><br>
+            1. <b>Salah.</b> Matriks persegi yang determinannya nol (matriks singular) tidak memiliki invers.
+            <br>2. <b>Salah.</b> $\det(A^{-1}) = 1/\det(A)$, sedangkan $\det(A^T)=\det(A)$. Keduanya hanya sama jika $\det(A) = \pm 1$.
+            <br>3. <b>Benar.</b> Ini adalah sifat dasar dari transpose perkalian matriks.
+            </div>
+        </div>
+    </section>
+
+    <!-- BAGIAN 2: VEKTOR -->
+
+    <!-- Halaman Pembatas -->
+    <section class="page">
+        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; height: 100%;">
+            <h1 class="title">BAGIAN 2<br>VEKTOR</h1>
+        </div>
+    </section>
+
+    <!-- Materi Vektor -->
+    <section id="materi-vektor" class="page">
+        <div class="content-wrapper">
+            <h2>BAB 4: Materi Ringkas Vektor</h2>
+            <h3>4.1 Pengenalan & Operasi Vektor</h3>
+            <p><b>Vektor</b> adalah besaran yang memiliki besar (panjang) dan arah. Vektor di R<sup>2</sup> (bidang) ditulis sebagai $\vec{u} = \begin{pmatrix} x \\ y \end{pmatrix} = x\mathbf{i} + y\mathbf{j}$. Di R<sup>3</sup> (ruang) ditulis sebagai $\vec{v} = \begin{pmatrix} x \\ y \\ z \end{pmatrix} = x\mathbf{i} + y\mathbf{j} + z\mathbf{k}$.</p>
+            <ul>
+                <li><b>Panjang Vektor:</b> $|\vec{u}| = \sqrt{x^2+y^2}$ dan $|\vec{v}| = \sqrt{x^2+y^2+z^2}$.</li>
+                <li><b>Penjumlahan & Pengurangan:</b> Dilakukan per komponen. $\vec{u}+\vec{v} = \begin{pmatrix} u_1+v_1 \\ u_2+v_2 \end{pmatrix}$.</li>
+                <li><b>Perkalian Skalar:</b> $k\vec{u} = \begin{pmatrix} ku_1 \\ ku_2 \end{pmatrix}$.</li>
+            </ul>
+            
+            <h3>4.2 Perkalian Vektor</h3>
+            <h4>Perkalian Titik (Dot Product)</h4>
+            <p>Hasilnya adalah skalar. Digunakan untuk mencari sudut antara dua vektor atau proyeksi.</p>
+            <p>$\vec{a} \cdot \vec{b} = a_1 b_1 + a_2 b_2 + a_3 b_3$</p>
+            <p>$\vec{a} \cdot \vec{b} = |\vec{a}| |\vec{b}| \cos\theta$, di mana $\theta$ adalah sudut antara $\vec{a}$ dan $\vec{b}$.</p>
+            <div class="info-box">Dua vektor saling tegak lurus jika $\vec{a} \cdot \vec{b} = 0$.</div>
+
+            <h4>Proyeksi Vektor</h4>
+            <ul>
+                <li><b>Proyeksi Skalar Ortogonal</b> $\vec{a}$ pada $\vec{b}$: $ |\vec{c}| = \frac{\vec{a} \cdot \vec{b}}{|\vec{b}|} $</li>
+                <li><b>Proyeksi Vektor Ortogonal</b> $\vec{a}$ pada $\vec{b}$: $ \vec{c} = \left( \frac{\vec{a} \cdot \vec{b}}{|\vec{b}|^2} \right) \vec{b} $</li>
+            </ul>
+            
+            <h4>Perkalian Silang (Cross Product)</h4>
+            <p>Hanya untuk vektor di R<sup>3</sup>. Hasilnya adalah vektor baru yang tegak lurus terhadap kedua vektor awal.</p>
+            $$ \vec{a} \times \vec{b} = \begin{vmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ a_1 & a_2 & a_3 \\ b_1 & b_2 & b_3 \end{vmatrix} = (a_2b_3 - a_3b_2)\mathbf{i} - (a_1b_3 - a_3b_1)\mathbf{j} + (a_1b_2 - a_2b_1)\mathbf{k} $$
+            <div class="info-box">Besar dari vektor hasil cross product, $|\vec{a} \times \vec{b}|$, sama dengan luas jajar genjang yang dibentuk oleh vektor $\vec{a}$ dan $\vec{b}$.</div>
+            <div class="info-box">Dua vektor saling sejajar jika $\vec{a} \times \vec{b} = \vec{0}$.</div>
+
+        </div>
+    </section>
+    
+    <!-- Latihan Soal Vektor -->
+    <section id="latihan-vektor" class="page">
+        <div class="content-wrapper">
+            <h2>BAB 5: Soal Latihan Vektor</h2>
+            <h3 id="vektor-mudah">5.1 Soal Mudah</h3>
+            
+            <div class="soal-latihan">
+                <b>26. (Pilihan Ganda)</b><br>
+                Diketahui vektor $\vec{u} = 3\mathbf{i} - 4\mathbf{j}$. Panjang dari vektor $\vec{u}$ adalah...
+                <ol class="pilihan-ganda">
+                    <li data-option="A"> 1 </li>
+                    <li data-option="B"> 5 </li>
+                    <li data-option="C"> 7 </li>
+                    <li data-option="D"> 12 </li>
+                    <li data-option="E"> 25 </li>
+                </ol>
+            </div>
+            
+             <div class="soal-latihan">
+                <b>27. (Pilihan Ganda)</b><br>
+                Jika $\vec{a} = \begin{pmatrix} 2 \\ 5 \end{pmatrix}$ dan $\vec{b} = \begin{pmatrix} -1 \\ 3 \end{pmatrix}$, maka vektor $\vec{a} + \vec{b}$ adalah...
+                <ol class="pilihan-ganda">
+                    <li data-option="A"> $\begin{pmatrix} 1 \\ 8 \end{pmatrix}$ </li>
+                    <li data-option="B"> $\begin{pmatrix} 3 \\ 2 \end{pmatrix}$ </li>
+                    <li data-option="C"> $\begin{pmatrix} 1 \\ 2 \end{pmatrix}$ </li>
+                    <li data-option="D"> $\begin{pmatrix} 3 \\ 8 \end{pmatrix}$ </li>
+                    <li data-option="E"> $\begin{pmatrix} -2 \\ 15 \end{pmatrix}$ </li>
+                </ol>
+            </div>
+            
+             <div class="soal-latihan">
+                <b>28. (Pilihan Ganda)</b><br>
+                Diberikan vektor $\vec{p} = 4\mathbf{i} - 2\mathbf{j} + \mathbf{k}$. Hasil dari $3\vec{p}$ adalah...
+                <ol class="pilihan-ganda">
+                    <li data-option="A"> $7\mathbf{i} + \mathbf{j} + 4\mathbf{k}$ </li>
+                    <li data-option="B"> $12\mathbf{i} - 6\mathbf{j} + 3\mathbf{k}$ </li>
+                    <li data-option="C"> $4\mathbf{i} - 6\mathbf{j} + 3\mathbf{k}$ </li>
+                    <li data-option="D"> $12\mathbf{i} - 2\mathbf{j} + \mathbf{k}$ </li>
+                    <li data-option="E"> $12\mathbf{i} + 6\mathbf{j} + 3\mathbf{k}$ </li>
+                </ol>
+            </div>
+            
+             <div class="soal-latihan">
+                <b>29. (Pilihan Ganda)</b><br>
+                Hasil dari perkalian titik (dot product) vektor $\vec{u} = \begin{pmatrix} 2 \\ 3 \end{pmatrix}$ dan $\vec{v} = \begin{pmatrix} 4 \\ -1 \end{pmatrix}$ adalah...
+                <ol class="pilihan-ganda">
+                    <li data-option="A"> 5 </li>
+                    <li data-option="B"> 8 </li>
+                    <li data-option="C"> -3 </li>
+                    <li data-option="D"> 11 </li>
+                    <li data-option="E"> 1 </li>
+                </ol>
+            </div>
+            
+             <div class="soal-latihan">
+                <b>30. (Pilihan Ganda)</b><br>
+                Sebuah partikel berpindah dari titik A(1, 2) ke titik B(5, 5). Vektor perpindahan $\vec{AB}$ adalah...
+                <ol class="pilihan-ganda">
+                    <li data-option="A"> $6\mathbf{i} + 7\mathbf{j}$ </li>
+                    <li data-option="B"> $4\mathbf{i} + 3\mathbf{j}$ </li>
+                    <li data-option="C"> $-4\mathbf{i} - 3\mathbf{j}$ </li>
+                    <li data-option="D"> $5\mathbf{i} + 10\mathbf{j}$ </li>
+                    <li data-option="E"> $3\mathbf{i} + 4\mathbf{j}$ </li>
+                </ol>
+            </div>
+        </div>
+    </section>
+    
+     <section class="page">
+        <div class="content-wrapper">
+            <h3 id="vektor-sedang">5.2 Soal Sedang</h3>
+            <div class="soal-latihan">
+                <b>31. (Pilihan Ganda)</b><br>
+                Diketahui vektor $\vec{a} = 2\mathbf{i} + 2\mathbf{j} - \mathbf{k}$ dan $\vec{b} = 6\mathbf{i} - 3\mathbf{j} + 2\mathbf{k}$. Nilai dari $\vec{a} \cdot \vec{b}$ adalah...
+                <ol class="pilihan-ganda">
+                    <li data-option="A"> 20 </li>
+                    <li data-option="B"> 12 </li>
+                    <li data-option="C"> 8 </li>
+                    <li data-option="D"> 4 </li>
+                    <li data-option="E"> -4 </li>
+                </ol>
+            </div>
+
+            <div class="soal-latihan">
+                <b>32. (Pilihan Ganda)</b><br>
+                Jika vektor $\vec{u} = \begin{pmatrix} 3 \\ -1 \\ 2 \end{pmatrix}$ dan $\vec{v} = \begin{pmatrix} 1 \\ p \\ 4 \end{pmatrix}$ saling tegak lurus, maka nilai $p$ adalah...
+                <ol class="pilihan-ganda">
+                    <li data-option="A"> 11 </li>
+                    <li data-option="B"> 7 </li>
+                    <li data-option="C"> 5 </li>
+                    <li data-option="D"> -7 </li>
+                    <li data-option="E"> -11 </li>
+                </ol>
+            </div>
+            
+            <div class="soal-latihan">
+                <b>33. (Pilihan Ganda)</b><br>
+                Besar sudut antara vektor $\vec{p} = \mathbf{i} + \mathbf{j}$ dan $\vec{q} = \mathbf{i} - \mathbf{k}$ adalah...
+                <ol class="pilihan-ganda">
+                    <li data-option="A"> 30° </li>
+                    <li data-option="B"> 45° </li>
+                    <li data-option="C"> 60° </li>
+                    <li data-option="D"> 90° </li>
+                    <li data-option="E"> 120° </li>
+                </ol>
+            </div>
+
+            <div class="soal-latihan">
+                <b>34. (Pilihan Ganda)</b><br>
+                Proyeksi skalar ortogonal vektor $\vec{a} = \begin{pmatrix} 4 \\ -2 \\ 2 \end{pmatrix}$ pada vektor $\vec{b} = \begin{pmatrix} 2 \\ 2 \\ 1 \end{pmatrix}$ adalah...
+                <ol class="pilihan-ganda">
+                    <li data-option="A"> 2 </li>
+                    <li data-option="B"> 3 </li>
+                    <li data-option="C"> 4 </li>
+                    <li data-option="D"> 6 </li>
+                    <li data-option="E"> 9 </li>
+                </ol>
+            </div>
+
+            <div class="soal-latihan">
+                <b>35. (Kecukupan Data)</b><br>
+                Diberikan titik A, B, dan C. Apakah ketiga titik tersebut segaris (kolinear)?
+                <br>(1) Vektor $\vec{AB}$ adalah kelipatan dari vektor $\vec{BC}$.
+                <br>(2) $\vec{AB} \times \vec{AC} = \vec{0}$.
+                <ol class="pilihan-ganda">
+                     <li data-option="A">Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (2) SAJA tidak cukup.</li>
+                    <li data-option="B">Pernyataan (2) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (1) SAJA tidak cukup.</li>
+                    <li data-option="C">DUA pernyataan BERSAMA-SAMA cukup untuk menjawab pertanyaan, tetapi SATU pernyataan SAJA tidak cukup.</li>
+                    <li data-option="D">Pernyataan (1) SAJA cukup, pernyataan (2) SAJA cukup.</li>
+                    <li data-option="E">Pernyataan (1) dan (2) tidak cukup untuk menjawab pertanyaan.</li>
+                </ol>
+            </div>
+            
+            <div class="soal-latihan">
+                <b>36. (Kecukupan Data)</b><br>
+                Berapakah panjang proyeksi vektor $\vec{u}$ pada $\vec{v}$?
+                <br>(1) $\vec{u} = 2\mathbf{i} - \mathbf{j}$ dan $\vec{v} = 3\mathbf{i} + 4\mathbf{j}$.
+                <br>(2) Sudut antara $\vec{u}$ dan $\vec{v}$ adalah $\theta$ dan $|\vec{u}| = 5$.
+                <ol class="pilihan-ganda">
+                     <li data-option="A">Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (2) SAJA tidak cukup.</li>
+                    <li data-option="B">Pernyataan (2) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (1) SAJA tidak cukup.</li>
+                    <li data-option="C">DUA pernyataan BERSAMA-SAMA cukup untuk menjawab pertanyaan, tetapi SATU pernyataan SAJA tidak cukup.</li>
+                    <li data-option="D">Pernyataan (1) SAJA cukup, pernyataan (2) SAJA cukup.</li>
+                    <li data-option="E">Pernyataan (1) dan (2) tidak cukup untuk menjawab pertanyaan.</li>
+                </ol>
+            </div>
+            
+            <div class="soal-latihan">
+                <b>37. (Kecukupan Data)</b><br>
+                Diketahui $|\vec{a}|=3, |\vec{b}|=4$. Berapakah nilai $|\vec{a}+\vec{b}|$?
+                <br>(1) $\vec{a} \cdot \vec{b} = 0$.
+                <br>(2) Vektor $\vec{a}$ dan $\vec{b}$ membentuk sudut 60°.
+                <ol class="pilihan-ganda">
+                     <li data-option="A">Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (2) SAJA tidak cukup.</li>
+                    <li data-option="B">Pernyataan (2) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (1) SAJA tidak cukup.</li>
+                    <li data-option="C">DUA pernyataan BERSAMA-SAMA cukup untuk menjawab pertanyaan, tetapi SATU pernyataan SAJA tidak cukup.</li>
+                    <li data-option="D">Pernyataan (1) SAJA cukup, pernyataan (2) SAJA cukup.</li>
+                    <li data-option="E">Pernyataan (1) dan (2) tidak cukup untuk menjawab pertanyaan.</li>
+                </ol>
+            </div>
+            
+            <div class="soal-latihan">
+                <b>38. (Pilihan Ganda Kompleks)</b><br>
+                Jika $\vec{a} = \mathbf{i} + \mathbf{j}$ dan $\vec{b} = 2\mathbf{j} - 3\mathbf{k}$, dan $\vec{c} = 2\vec{a} - \vec{b}$, manakah pernyataan yang benar? <span class="bold-note">Bisa pilih lebih dari satu jawaban.</span>
+                <ol class="pilihan-ganda">
+                    <li data-option="A"> $\vec{c} = 2\mathbf{i} + 3\mathbf{k}$ </li>
+                    <li data-option="B"> $|\vec{c}| = \sqrt{13}$ </li>
+                    <li data-option="C"> Vektor satuan dari $\vec{a}$ adalah $\frac{1}{\sqrt{2}}(\mathbf{i} + \mathbf{j})$ </li>
+                    <li data-option="D"> $\vec{a} \cdot \vec{b} = 2$ </li>
+                    <li data-option="E"> $\vec{a}$ dan $\vec{b}$ saling tegak lurus. </li>
+                </ol>
+            </div>
+
+            <div class="soal-latihan">
+                <b>39. (Pilihan Ganda Kompleks)</b><br>
+                Diberikan titik P(1,0,2), Q(2,1,1) dan R(0,2,3). Manakah pernyataan berikut yang benar? <span class="bold-note">Bisa pilih lebih dari satu jawaban.</span>
+                <ol class="pilihan-ganda">
+                    <li data-option="A"> Vektor $\vec{PQ} = \mathbf{i}+\mathbf{j}-\mathbf{k}$ </li>
+                    <li data-option="B"> Panjang vektor $\vec{PR}$ adalah $\sqrt{6}$ </li>
+                    <li data-option="C"> $\vec{PQ} \cdot \vec{PR} = 0$ </li>
+                    <li data-option="D"> Segitiga PQR adalah segitiga siku-siku di P. </li>
+                    <li data-option="E"> Jarak antara Q dan R adalah 3 </li>
+                </ol>
+            </div>
+            
+            <div class="soal-latihan">
+                <b>40. (Pilihan Ganda)</b><br>
+                Sebuah gaya $\vec{F} = 2\mathbf{i} + 4\mathbf{j}$ Newton menyebabkan benda berpindah sejauh $\vec{s} = 5\mathbf{i} + 2\mathbf{j}$ meter. Usaha (Work) yang dilakukan oleh gaya tersebut adalah... (Ingat: $W = \vec{F} \cdot \vec{s}$)
+                <ol class="pilihan-ganda">
+                    <li data-option="A"> 10 Joule </li>
+                    <li data-option="B"> 12 Joule </li>
+                    <li data-option="C"> 18 Joule </li>
+                    <li data-option="D"> 28 Joule </li>
+                    <li data-option="E"> 36 Joule </li>
+                </ol>
+            </div>
+        </div>
+    </section>
+    
+    <section class="page">
+        <div class="content-wrapper">
+             <h3 id="vektor-sulit">5.3 Soal Sulit</h3>
+             <div class="soal-latihan">
+                <b>41. (Pilihan Ganda)</b><br>
+                Proyeksi vektor ortogonal $\vec{u} = 6\mathbf{i} + 4\mathbf{j} - 5\mathbf{k}$ pada $\vec{v} = \mathbf{i} - 2\mathbf{j} + 2\mathbf{k}$ adalah...
+                <ol class="pilihan-ganda">
+                    <li data-option="A"> $-\frac{4}{3}(\mathbf{i}-2\mathbf{j}+2\mathbf{k})$ </li>
+                    <li data-option="B"> $-4(\mathbf{i}-2\mathbf{j}+2\mathbf{k})$ </li>
+                    <li data-option="C"> $-\frac{12}{9}(\mathbf{i}-2\mathbf{j}+2\mathbf{k})$ </li>
+                    <li data-option="D"> $\frac{4}{3}(\mathbf{i}-2\mathbf{j}+2\mathbf{k})$ </li>
+                    <li data-option="E"> $4(\mathbf{i}-2\mathbf{j}+2\mathbf{k})$ </li>
+                </ol>
+            </div>
+            
+            <div class="soal-latihan">
+                <b>42. (Pilihan Ganda)</b><br>
+                Hasil dari $(\mathbf{i} + 2\mathbf{j}) \times (3\mathbf{j} - \mathbf{k})$ adalah...
+                <ol class="pilihan-ganda">
+                    <li data-option="A"> $-2\mathbf{i} + \mathbf{j} - 3\mathbf{k}$ </li>
+                    <li data-option="B"> $2\mathbf{i} - \mathbf{j} + 3\mathbf{k}$ </li>
+                    <li data-option="C"> $-2\mathbf{i} - \mathbf{j} - 3\mathbf{k}$ </li>
+                    <li data-option="D"> $-2\mathbf{i} + \mathbf{j} + 3\mathbf{k}$ </li>
+                    <li data-option="E"> $2\mathbf{i} + \mathbf{j} - 3\mathbf{k}$ </li>
+                </ol>
+            </div>
+            
+            <div class="soal-latihan">
+                <b>43. (Pilihan Ganda)</b><br>
+                Luas jajar genjang yang dibentuk oleh vektor $\vec{a} = \begin{pmatrix} 2 \\ 1 \\ -1 \end{pmatrix}$ dan $\vec{b} = \begin{pmatrix} 1 \\ 3 \\ 2 \end{pmatrix}$ adalah...
+                <ol class="pilihan-ganda">
+                    <li data-option="A"> $\sqrt{25}$ </li>
+                    <li data-option="B"> $\sqrt{50}$ </li>
+                    <li data-option="C"> $\sqrt{75}$ </li>
+                    <li data-option="D"> $\sqrt{99}$ </li>
+                    <li data-option="E"> $\sqrt{111}$ </li>
+                </ol>
+            </div>
+            
+            <div class="soal-latihan">
+                <b>44. (Pilihan Ganda)</b><br>
+                Diketahui vektor $\vec{u}$ dan $\vec{v}$ membentuk sudut $\theta$. Jika $|\vec{u}|=4$, $|\vec{v}|=6$, dan $|\vec{u}+\vec{v}|=8$, maka nilai dari $|\vec{u}-\vec{v}|$ adalah...
+                <ol class="pilihan-ganda">
+                    <li data-option="A"> $2\sqrt{10}$ </li>
+                    <li data-option="B"> $2\sqrt{13}$ </li>
+                    <li data-option="C"> $4\sqrt{5}$ </li>
+                    <li data-option="D"> $4\sqrt{7}$ </li>
+                    <li data-option="E"> 10 </li>
+                </ol>
+            </div>
+            
+            <div class="soal-latihan">
+                <b>45. (Kecukupan Data)</b><br>
+                Apakah vektor $\vec{w}$ terletak pada bidang yang dibentuk oleh vektor $\vec{u}$ dan $\vec{v}$ (koplanar)?
+                <br>(1) $\vec{w} \cdot (\vec{u} \times \vec{v}) = 0$.
+                <br>(2) $\vec{w}$ dapat ditulis sebagai kombinasi linear dari $\vec{u}$ dan $\vec{v}$.
+                 <ol class="pilihan-ganda">
+                     <li data-option="A">Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (2) SAJA tidak cukup.</li>
+                    <li data-option="B">Pernyataan (2) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (1) SAJA tidak cukup.</li>
+                    <li data-option="C">DUA pernyataan BERSAMA-SAMA cukup untuk menjawab pertanyaan, tetapi SATU pernyataan SAJA tidak cukup.</li>
+                    <li data-option="D">Pernyataan (1) SAJA cukup, pernyataan (2) SAJA cukup.</li>
+                    <li data-option="E">Pernyataan (1) dan (2) tidak cukup untuk menjawab pertanyaan.</li>
+                </ol>
+            </div>
+            
+            <div class="soal-latihan">
+                <b>46. (Kecukupan Data)</b><br>
+                Diberikan vektor $\vec{a} = \begin{pmatrix} 1 \\ 1 \\ 0 \end{pmatrix}$ dan $\vec{b} = \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix}$. Berapakah luas segitiga yang dibentuk oleh $\vec{a}$ dan $\vec{b}$?
+                <br>(1) $|\vec{a} \times \vec{b}| = \sqrt{3}$.
+                <br>(2) Sudut antara $\vec{a}$ dan $\vec{b}$ adalah 60°.
+                 <ol class="pilihan-ganda">
+                     <li data-option="A">Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (2) SAJA tidak cukup.</li>
+                    <li data-option="B">Pernyataan (2) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (1) SAJA tidak cukup.</li>
+                    <li data-option="C">DUA pernyataan BERSAMA-SAMA cukup untuk menjawab pertanyaan, tetapi SATU pernyataan SAJA tidak cukup.</li>
+                    <li data-option="D">Pernyataan (1) SAJA cukup, pernyataan (2) SAJA cukup.</li>
+                    <li data-option="E">Pernyataan (1) dan (2) tidak cukup untuk menjawab pertanyaan.</li>
+                </ol>
+            </div>
+            
+            <div class="soal-latihan">
+                <b>47. (Kecukupan Data)</b><br>
+                Jika $\vec{c}$ adalah proyeksi vektor $\vec{a}$ pada $\vec{b}$, apakah $\vec{c} = \vec{a}$?
+                <br>(1) Vektor $\vec{a}$ dan $\vec{b}$ searah.
+                <br>(2) $|\vec{a}| = |\vec{b}|$.
+                 <ol class="pilihan-ganda">
+                     <li data-option="A">Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (2) SAJA tidak cukup.</li>
+                    <li data-option="B">Pernyataan (2) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (1) SAJA tidak cukup.</li>
+                    <li data-option="C">DUA pernyataan BERSAMA-SAMA cukup untuk menjawab pertanyaan, tetapi SATU pernyataan SAJA tidak cukup.</li>
+                    <li data-option="D">Pernyataan (1) SAJA cukup, pernyataan (2) SAJA cukup.</li>
+                    <li data-option="E">Pernyataan (1) dan (2) tidak cukup untuk menjawab pertanyaan.</li>
+                </ol>
+            </div>
+            
+            <div class="soal-latihan">
+                <b>48. (Kategori Benar/Salah)</b><br>
+                Untuk sembarang vektor $\vec{u}, \vec{v}, \vec{w}$ di R<sup>3</sup>, tentukan apakah pernyataan berikut Benar atau Salah.
+                <table class="category-table">
+                    <tr><th>Pernyataan</th><th>Benar/Salah</th></tr>
+                    <tr><td>$\vec{u} \cdot \vec{v} = \vec{v} \cdot \vec{u}$</td><td></td></tr>
+                    <tr><td>$\vec{u} \times \vec{v} = \vec{v} \times \vec{u}$</td><td></td></tr>
+                    <tr><td>$\vec{u} \cdot (\vec{v} \times \vec{w}) = (\vec{u} \times \vec{v}) \cdot \vec{w}$</td><td></td></tr>
+                </table>
+            </div>
+
+            <div class="soal-latihan">
+                <b>49. (Kategori Benar/Salah)</b><br>
+                Diberikan vektor-vektor satuan $\mathbf{i}, \mathbf{j}, \mathbf{k}$ yang saling tegak lurus. Tentukan apakah pernyataan berikut Benar atau Salah.
+                <table class="category-table">
+                    <tr><th>Pernyataan</th><th>Benar/Salah</th></tr>
+                    <tr><td>$\mathbf{i} \cdot \mathbf{j} = 1$</td><td></td></tr>
+                    <tr><td>$\mathbf{i} \times \mathbf{j} = \mathbf{k}$</td><td></td></tr>
+                    <tr><td>$|\mathbf{i} + \mathbf{j} + \mathbf{k}| = \sqrt{3}$</td><td></td></tr>
+                </table>
+            </div>
+            
+            <div class="soal-latihan">
+                <b>50. (Kategori Benar/Salah)</b><br>
+                Diberikan vektor posisi titik A, B, C adalah $\vec{a}, \vec{b}, \vec{c}$. Tentukan apakah pernyataan berikut Benar atau Salah.
+                <table class="category-table">
+                    <tr><th>Pernyataan</th><th>Benar/Salah</th></tr>
+                    <tr><td>Vektor $\vec{AB} = \vec{a} - \vec{b}$</td><td></td></tr>
+                    <tr><td>Jika titik P membagi AB dengan rasio 1:1, maka $\vec{p} = \frac{\vec{a}+\vec{b}}{2}$</td><td></td></tr>
+                    <tr><td>Jika A, B, C segaris, maka $\vec{AB} = k \cdot \vec{AC}$ untuk skalar $k$.</td><td></td></tr>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pembahasan Vektor -->
+    <section id="pembahasan-vektor" class="page">
+        <div class="content-wrapper">
+            <h2>BAB 6: Pembahasan Soal Vektor</h2>
+            <h3>Soal Mudah</h3>
+            <div class="pembahasan"><b>26. Jawaban: B</b><br>$|\vec{u}| = \sqrt{3^2 + (-4)^2} = \sqrt{9+16} = \sqrt{25} = 5$.</div>
+            <div class="pembahasan"><b>27. Jawaban: A</b><br>$\vec{a}+\vec{b} = \begin{pmatrix} 2+(-1) \\ 5+3 \end{pmatrix} = \begin{pmatrix} 1 \\ 8 \end{pmatrix}$.</div>
+            <div class="pembahasan"><b>28. Jawaban: B</b><br>$3\vec{p} = 3(4\mathbf{i} - 2\mathbf{j} + \mathbf{k}) = 12\mathbf{i} - 6\mathbf{j} + 3\mathbf{k}$.</div>
+            <div class="pembahasan"><b>29. Jawaban: A</b><br>$\vec{u} \cdot \vec{v} = (2)(4) + (3)(-1) = 8 - 3 = 5$.</div>
+            <div class="pembahasan"><b>30. Jawaban: B</b><br>$\vec{AB} = B - A = (5-1)\mathbf{i} + (5-2)\mathbf{j} = 4\mathbf{i} + 3\mathbf{j}$.</div>
+            <h3>Soal Sedang</h3>
+            <div class="pembahasan"><b>31. Jawaban: D</b><br>$\vec{a} \cdot \vec{b} = (2)(6) + (2)(-3) + (-1)(2) = 12 - 6 - 2 = 4$.</div>
+            <div class="pembahasan"><b>32. Jawaban: A</b><br>Syarat tegak lurus: $\vec{u} \cdot \vec{v} = 0$.
+            $(3)(1) + (-1)(p) + (2)(4) = 0 \implies 3 - p + 8 = 0 \implies 11 - p = 0 \implies p = 11$.</div>
+            <div class="pembahasan"><b>33. Jawaban: C</b><br>$\vec{p} = (1, 1, 0), \vec{q}=(1,0,-1)$.
+            $\cos\theta = \frac{\vec{p}\cdot\vec{q}}{|\vec{p}||\vec{q}|} = \frac{1(1)+1(0)+0(-1)}{\sqrt{1^2+1^2} \sqrt{1^2+(-1)^2}} = \frac{1}{\sqrt{2}\sqrt{2}} = \frac{1}{2}$. Maka $\theta=60°$.</div>
+            <div class="pembahasan"><b>34. Jawaban: A</b><br>Proyeksi skalar = $\frac{\vec{a}\cdot\vec{b}}{|\vec{b}|} = \frac{4(2)+(-2)(2)+2(1)}{\sqrt{2^2+2^2+1^2}} = \frac{8-4+2}{\sqrt{9}} = \frac{6}{3}=2$.</div>
+            <div class="pembahasan"><b>35. Jawaban: D</b><br>(1) Syarat kolinear adalah $\vec{AB} = k \cdot \vec{BC}$. Ini adalah definisi. Cukup.
+            <br>(2) $\vec{AB} \times \vec{AC} = \vec{0}$ berarti $\vec{AB}$ dan $\vec{AC}$ sejajar dan berpangkal di titik yang sama (A), artinya A, B, C segaris. Cukup.</div>
+            <div class="pembahasan"><b>36. Jawaban: A</b><br>Panjang proyeksi (proyeksi skalar) rumusnya $|\vec{c}| = \frac{|\vec{u} \cdot \vec{v}|}{|\vec{v}|}$.
+            <br>(1) Diberikan $\vec{u}$ dan $\vec{v}$. Kita bisa hitung $\vec{u}\cdot\vec{v}$ dan $|\vec{v}|$, jadi panjang proyeksi bisa dihitung. Cukup.
+            <br>(2) Diberikan $|\vec{u}|$ dan $\theta$. Rumus lain panjang proyeksi adalah $|\vec{u}||\cos\theta|$. Kita tidak tahu nilai $\theta$ atau $\cos\theta$. Tidak cukup.</div>
+            <div class="pembahasan"><b>37. Jawaban: D</b><br>
+            $|\vec{a}+\vec{b}|^2 = (\vec{a}+\vec{b})\cdot(\vec{a}+\vec{b}) = |\vec{a}|^2 + 2(\vec{a}\cdot\vec{b}) + |\vec{b}|^2$.
+            <br>(1) $\vec{a}\cdot\vec{b}=0$. Maka $|\vec{a}+\vec{b}|^2 = 3^2+0+4^2=25 \implies |\vec{a}+\vec{b}|=5$. Cukup.
+            <br>(2) Sudut 60°. Maka $\vec{a}\cdot\vec{b} = |\vec{a}||\vec{b}|\cos60° = 3 \cdot 4 \cdot (1/2) = 6$.
+            $|\vec{a}+\vec{b}|^2 = 3^2+2(6)+4^2 = 9+12+16=37 \implies |\vec{a}+\vec{b}|=\sqrt{37}$. Cukup.</div>
+            <div class="pembahasan"><b>38. Jawaban: A, B, C, D</b><br>
+            A. $\vec{c} = 2(\mathbf{i}+\mathbf{j}) - (2\mathbf{j}-3\mathbf{k}) = 2\mathbf{i}+2\mathbf{j}-2\mathbf{j}+3\mathbf{k} = 2\mathbf{i}+3\mathbf{k}$. (Benar)
+            <br>B. $|\vec{c}| = \sqrt{2^2+3^2} = \sqrt{4+9}=\sqrt{13}$. (Benar)
+            <br>C. $|\vec{a}| = \sqrt{1^2+1^2}=\sqrt{2}$. Vektor satuan = $\frac{\vec{a}}{|\vec{a}|} = \frac{1}{\sqrt{2}}(\mathbf{i}+\mathbf{j})$. (Benar)
+            <br>D. $\vec{a} \cdot \vec{b} = (1,1,0)\cdot(0,2,-3) = 0+2+0 = 2$. (Benar)
+            <br>E. Karena $\vec{a}\cdot\vec{b} \neq 0$, mereka tidak tegak lurus. (Salah)
+            </div>
+            <div class="pembahasan"><b>39. Jawaban: A, C, D, E</b><br>
+            A. $\vec{PQ} = Q-P = (2-1, 1-0, 1-2) = (1,1,-1) = \mathbf{i}+\mathbf{j}-\mathbf{k}$. (Benar)
+            <br>B. $\vec{PR} = R-P = (0-1, 2-0, 3-2) = (-1,2,1)$. $|\vec{PR}|=\sqrt{(-1)^2+2^2+1^2}=\sqrt{1+4+1}=\sqrt{6}$. (Pilihan B salah, seharusnya $\sqrt{6}$)
+            <br>C. $\vec{PQ} \cdot \vec{PR} = (1)(-1)+(1)(2)+(-1)(1) = -1+2-1 = 0$. (Benar)
+            <br>D. Karena dot productnya 0, $\vec{PQ}$ tegak lurus $\vec{PR}$, maka segitiga PQR siku-siku di P. (Benar)
+            <br>E. $\vec{QR} = R-Q = (0-2, 2-1, 3-1) = (-2,1,2)$. Jarak QR = $|\vec{QR}|=\sqrt{(-2)^2+1^2+2^2}=\sqrt{4+1+4}=\sqrt{9}=3$. (Benar)
+            </div>
+             <div class="pembahasan"><b>40. Jawaban: C</b><br>$W = \vec{F} \cdot \vec{s} = (2)(5) + (4)(2) = 10 + 8 = 18$ Joule.</div>
+            <h3>Soal Sulit</h3>
+            <div class="pembahasan"><b>41. Jawaban: A</b><br>Proyeksi vektor $\vec{c} = (\frac{\vec{u}\cdot\vec{v}}{|\vec{v}|^2})\vec{v}$.
+            $\vec{u}\cdot\vec{v} = 6(1)+4(-2)+(-5)(2) = 6-8-10=-12$.
+            $|\vec{v}|^2 = 1^2+(-2)^2+2^2 = 1+4+4=9$.
+            $\vec{c} = (\frac{-12}{9})\vec{v} = -\frac{4}{3}(\mathbf{i}-2\mathbf{j}+2\mathbf{k})$.</div>
+            <div class="pembahasan"><b>42. Jawaban: D</b><br>$\vec{u}=\begin{pmatrix}1\\2\\0\end{pmatrix}, \vec{v}=\begin{pmatrix}0\\3\\-1\end{pmatrix}$.
+            $\vec{u}\times\vec{v} = \begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\1&2&0\\0&3&-1\end{vmatrix} = \mathbf{i}(2(-1)-0(3)) - \mathbf{j}(1(-1)-0(0)) + \mathbf{k}(1(3)-2(0)) = -2\mathbf{i} + \mathbf{j} + 3\mathbf{k}$.</div>
+            <div class="pembahasan"><b>43. Jawaban: C</b><br>Luas = $|\vec{a}\times\vec{b}|$.
+            $\vec{a}\times\vec{b} = \begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\2&1&-1\\1&3&2\end{vmatrix} = \mathbf{i}(2-(-3)) - \mathbf{j}(4-(-1)) + \mathbf{k}(6-1) = 5\mathbf{i}-5\mathbf{j}+5\mathbf{k}$.
+            Luas = $\sqrt{5^2+(-5)^2+5^2} = \sqrt{25+25+25}=\sqrt{75}$.</div>
+            <div class="pembahasan"><b>44. Jawaban: A</b><br>
+            $|\vec{u}+\vec{v}|^2 = |\vec{u}|^2 + |\vec{v}|^2 + 2\vec{u}\cdot\vec{v} \implies 8^2 = 4^2+6^2+2\vec{u}\cdot\vec{v}$
+            $64 = 16+36+2\vec{u}\cdot\vec{v} \implies 64 = 52+2\vec{u}\cdot\vec{v} \implies 2\vec{u}\cdot\vec{v} = 12$.
+            $|\vec{u}-\vec{v}|^2 = |\vec{u}|^2 + |\vec{v}|^2 - 2\vec{u}\cdot\vec{v} = 4^2+6^2-12 = 16+36-12=40$.
+            $|\vec{u}-\vec{v}| = \sqrt{40} = 2\sqrt{10}$.
+            </div>
+            <div class="pembahasan"><b>45. Jawaban: D</b><br>(1) $\vec{w}\cdot(\vec{u}\times\vec{v})$ adalah volume paralelepipedum. Jika volumenya 0, artinya ketiga vektor terletak pada bidang yang sama (koplanar). Cukup.
+            <br>(2) $\vec{w}$ adalah kombinasi linear dari $\vec{u}$ dan $\vec{v}$ (misal $\vec{w}=k\vec{u}+m\vec{v}$) adalah definisi dari koplanar. Cukup.</div>
+            <div class="pembahasan"><b>46. Jawaban: D</b><br>Luas segitiga = $\frac{1}{2}|\vec{a}\times\vec{b}| = \frac{1}{2}|\vec{a}||\vec{b}|\sin\theta$.
+            <br>(1) Diberikan $|\vec{a}\times\vec{b}|=\sqrt{3}$. Luas segitiga = $\frac{\sqrt{3}}{2}$. Cukup.
+            <br>(2) Diberikan $\theta=60°$. $|\vec{a}|=\sqrt{1^2+1^2}=\sqrt{2}$, $|\vec{b}|=\sqrt{1^2+1^2}=\sqrt{2}$. Luas = $\frac{1}{2}(\sqrt{2})(\sqrt{2})\sin60° = \frac{1}{2}(2)(\frac{\sqrt{3}}{2}) = \frac{\sqrt{3}}{2}$. Cukup.</div>
+            <div class="pembahasan"><b>47. Jawaban: C</b><br>
+            Agar proyeksi $\vec{a}$ pada $\vec{b}$ menghasilkan $\vec{a}$ itu sendiri, maka vektor $\vec{a}$ harus sudah berada pada garis yang sama dengan $\vec{b}$ dan memiliki panjang yang sama dengan proyeksinya.
+            Rumus proyeksi: $\vec{c} = (\frac{\vec{a}\cdot\vec{b}}{|\vec{b}|^2})\vec{b}$. Agar $\vec{c}=\vec{a}$, maka $\vec{a} = (\frac{\vec{a}\cdot\vec{b}}{|\vec{b}|^2})\vec{b}$.
+            <br>(1) Vektor $\vec{a}$ dan $\vec{b}$ searah. Ini berarti $\vec{a} = k\vec{b}$ untuk $k>0$, dan $\vec{a}\cdot\vec{b}=|\vec{a}||\vec{b}|$. Persamaan menjadi $\vec{a} = \frac{|\vec{a}||\vec{b}|}{|\vec{b}|^2}\vec{b} = \frac{|\vec{a}|}{|\vec{b}|}\vec{b}$. Ini hanya benar jika skalar $\frac{|\vec{a}|}{|\vec{b}|}=1$, yaitu $|\vec{a}|=|\vec{b}|$. Jadi pernyataan (1) saja tidak cukup.
+            <br>(2) $|\vec{a}|=|\vec{b}|$. Ini saja tidak cukup karena arahnya bisa berbeda.
+            <br>Dengan (1) dan (2) bersama-sama (searah dan sama panjang), maka $\vec{a}=\vec{b}$. Proyeksi $\vec{a}$ pada $\vec{a}$ adalah $\vec{a}$ itu sendiri. Cukup.
+            </div>
+            <div class="pembahasan"><b>48. Jawaban:</b><br>
+            1. <b>Benar.</b> Sifat komutatif berlaku untuk dot product.
+            <br>2. <b>Salah.</b> Sifat anti-komutatif: $\vec{u}\times\vec{v} = -(\vec{v}\times\vec{u})$.
+            <br>3. <b>Benar.</b> Ini adalah identitas dari scalar triple product.
+            </div>
+            <div class="pembahasan"><b>49. Jawaban:</b><br>
+            1. <b>Salah.</b> Karena $\mathbf{i}$ dan $\mathbf{j}$ tegak lurus (sudut 90°), $\mathbf{i}\cdot\mathbf{j}=|\mathbf{i}||\mathbf{j}|\cos90° = 1 \cdot 1 \cdot 0 = 0$.
+            <br>2. <b>Benar.</b> Ini adalah definisi dasar dari cross product pada basis ortonormal (aturan tangan kanan).
+            <br>3. <b>Benar.</b> $|\mathbf{i}+\mathbf{j}+\mathbf{k}| = \sqrt{1^2+1^2+1^2}=\sqrt{3}$.
+            </div>
+            <div class="pembahasan"><b>50. Jawaban:</b><br>
+            1. <b>Salah.</b> Vektor posisi dari A ke B adalah posisi akhir dikurangi posisi awal: $\vec{AB}=\vec{b}-\vec{a}$.
+            <br>2. <b>Benar.</b> Ini adalah rumus titik tengah.
+            <br>3. <b>Benar.</b> Jika segaris, vektor $\vec{AB}$ dan $\vec{AC}$ sejajar, yang berarti satu adalah kelipatan skalar dari yang lain.
+            </div>
+        </div>
+    </section>
+
+</div>
+
+</body>
+</html>
+
+
+
