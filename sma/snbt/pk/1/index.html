@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul Lengkap - TPS UTBK SBMPTN Pengetahuan Kuantitatif</title>
+    <script>
+        window.MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']]
+          },
+          svg: {
+            fontCache: 'global'
+          }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-text: #333333;
+            --secondary-text: #555555;
+            --border-color: #dddddd;
+            --title-grad-1: #00857c; /* Mengambil warna hijau teal dari defantri */
+            --title-grad-2: #005a54;
+        }
+        
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            font-size: 10pt;
+            line-height: 1.6;
+            color: var(--primary-text);
+            background-color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            counter-reset: page;
+        }
+
+        .page {
+            background: white;
+            width: 176mm;
+            min-height: 250mm;
+            padding: 20mm;
+            margin: 1cm auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .page::after {
+            counter-increment: page;
+            content: counter(page);
+            position: absolute;
+            bottom: 15mm;
+            right: 20mm;
+            font-size: 10pt;
+            color: #888;
+        }
+
+        .cover-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 3px solid #444;
+            height: 250mm;
+        }
+        
+        .cover-page::after, .toc-page::after {
+            content: ''; /* No page number on cover and TOC */
+        }
+
+        .cover-page img {
+            max-width: 250px;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+
+        .cover-page .title {
+            font-size: 32pt;
+            font-weight: 900;
+            margin: 0;
+            color: var(--title-grad-2);
+            background: -webkit-linear-gradient(45deg, var(--title-grad-1), var(--title-grad-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .cover-page .subtitle {
+            font-size: 16pt;
+            margin-top: 15px;
+            color: var(--secondary-text);
+            font-weight: 700;
+        }
+
+        @media print {
+            body { background: none; }
+            .page { width: 100%; height: 100%; margin: 0; box-shadow: none; page-break-after: always; }
+        }
+        
+        .watermark-container .page::before {
+            content: '';
+            background-image: url('https://imgix3.ruangguru.com/assets/miscellaneous/jpeg_sijv7w_5618.jpeg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 8cm;
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%; height: 100%;
+            opacity: 0.05;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .cover-page::before, .toc-page::before { opacity: 0; }
+
+        .content-wrapper { position: relative; z-index: 1; width: 100%; }
+        
+        h1 { font-size: 24pt; text-align: center; border-bottom: 2px solid var(--primary-text); padding-bottom: 10px; margin-bottom: 20px; }
+        h2 { font-size: 18pt; color: #000; border-left: 5px solid var(--title-grad-1); padding-left: 10px; margin-top: 30px; }
+        h3 { font-size: 14pt; color: #222; margin-top: 30px; font-weight: 700; border-bottom: 2px solid #eee; padding-bottom: 5px; }
+        h4 { font-size: 12pt; font-weight: 700; margin-bottom: 5px; }
+
+        .toc-list { list-style-type: none; padding: 0; }
+        .toc-list li { margin-bottom: 10px; font-size: 12pt; }
+        .toc-list a { text-decoration: none; color: var(--primary-text); }
+        .toc-list a:hover { text-decoration: underline; }
+        
+        .latihan-item { display: grid; grid-template-columns: 1fr 0.5fr; gap: 20px; border-top: 1px dashed var(--border-color); padding-top: 15px; margin-top: 15px; break-inside: avoid; }
+        .latihan-item:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
+        
+        .soal-item, .soal-latihan { margin-bottom: 15px; break-inside: avoid; overflow-wrap: break-word; word-wrap: break-word; }
+        
+        .soal-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 10px auto;
+            border: 1px solid #eee;
+        }
+
+        .coret-coret { border: 1px dashed #c0c0c0; min-height: 120px; padding: 10px; border-radius: 5px; position: relative; }
+        .coret-coret::after { content: 'Area Coretan'; color: #ddd; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 12pt;}
+        
+        .pembahasan { background-color: #f0fdfc; border: 1px solid #b2dfdb; padding: 15px; border-radius: 5px; margin-top: 10px; margin-bottom: 15px; overflow-wrap: break-word; font-size: 9.5pt; }
+        .pembahasan b { display: block; margin-bottom: 5px; color: var(--title-grad-2);}
+        
+        ol { padding-left: 0; }
+        ol.pilihan-ganda { list-style-type: none; padding-left: 20px; }
+        ol.pilihan-ganda li { margin-bottom: 8px; }
+        ol.pilihan-ganda li::before { content: attr(data-option) ". "; font-weight: bold; margin-right: 5px; }
+
+        .keterangan-soal { font-style: italic; font-size: 9pt; color: var(--secondary-text); margin-bottom: 10px; display: inline-block; background: #eee; padding: 2px 6px; border-radius: 4px;}
+        
+    </style>
+</head>
+<body>
+
+<div class="watermark-container">
+
+    <!-- Cover Page -->
+    <section class="page cover-page">
+        <div class="content-wrapper">
+            <img src="https://imgix3.ruangguru.com/assets/miscellaneous/jpeg_sijv7w_5618.jpeg" alt="Logo EXE">
+            <h1 class="title">MODUL LENGKAP<br>PENGETAHUAN KUANTITATIF</h1>
+            <p class="subtitle">Latihan Soal & Pembahasan<br>TPS UTBK SBMPTN</p>
+        </div>
+    </section>
+
+    <!-- Table of Contents -->
+    <section class="page toc-page">
+        <div class="content-wrapper">
+            <h1>Daftar Isi</h1>
+            <ul class="toc-list">
+                <li><a href="#soal-1-10">Bagian 1: Soal Latihan (1 - 10)</a></li>
+                <li><a href="#soal-11-20">Bagian 2: Soal Latihan (11 - 20)</a></li>
+                <li><a href="#soal-21-30">Bagian 3: Soal Latihan (21 - 30)</a></li>
+                <li><a href="#pembahasan">Bagian 4: Kunci Jawaban & Pembahasan</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Soal 1-10 -->
+    <section id="soal-1-10" class="page">
+        <div class="content-wrapper">
+            <h2>Bagian 1: Soal Latihan (1-10)</h2>
+            <p class="keterangan-soal" style="background:none; padding:0; margin-bottom:20px;">Topik: Barisan & Deret</p>
+
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Nomor 1</div><br>Barisan $1,2,y,\cdots$ merupakan barisan geometri.<br>Nilai $6-y$ adalah...<ol class="pilihan-ganda"><li data-option="A">2</li><li data-option="B">1</li><li data-option="C">0</li><li data-option="D">-1</li><li data-option="E">-2</li></ol></div><div class="coret-coret"></div></div>
+
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Nomor 2</div><br>Barisan $1,2,y,\cdots$ merupakan barisan geometri.<br>Jumlah lima suku pertama ditambah satu sama dengan $\frac{1}{4}$ kali suku...<ol class="pilihan-ganda"><li data-option="A">ke-5</li><li data-option="B">ke-6</li><li data-option="C">ke-7</li><li data-option="D">ke-8</li><li data-option="E">ke-9</li></ol></div><div class="coret-coret"></div></div>
+
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Nomor 3</div><br>Barisan $1,2,y,\cdots$ merupakan barisan geometri.<br>Jika $3,75$ merupakan rata-rata $n$ suku pertama barisan tersebut, maka nilai $n$ adalah...<ol class="pilihan-ganda"><li data-option="A">6</li><li data-option="B">5</li><li data-option="C">4</li><li data-option="D">3</li><li data-option="E">2</li></ol></div><div class="coret-coret"></div></div>
+
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Nomor 4</div><br>Barisan $-2,p,q,-23,\cdots$ merupakan barisan aritmetika.<br>Nilai $p-q$ adalah...<ol class="pilihan-ganda"><li data-option="A">-7</li><li data-option="B">-5</li><li data-option="C">1</li><li data-option="D">5</li><li data-option="E">7</li></ol></div><div class="coret-coret"></div></div>
+
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Nomor 5</div><br>Barisan $-2,p,q,-23,\cdots$ merupakan barisan aritmetika.<br>Jumlah suku ke-$7$ dan suku ke-$8$ barisan tersebut sama dengan jumlah suku ke-$10$ dan suku...<ol class="pilihan-ganda"><li data-option="A">ke-3</li><li data-option="B">ke-4</li><li data-option="C">ke-5</li><li data-option="D">ke-6</li><li data-option="E">ke-7</li></ol></div><div class="coret-coret"></div></div>
+        </div>
+    </section>
+
+    <section class="page">
+        <div class="content-wrapper">
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Nomor 6</div><br>Barisan $-2,p,q,-23,\cdots$ merupakan barisan aritmetika.<br>Rata-rata $9$ suku pertama barisan tersebut adalah...<ol class="pilihan-ganda"><li data-option="A">-37</li><li data-option="B">-30</li><li data-option="C">-29</li><li data-option="D">-28</li><li data-option="E">-25</li></ol></div><div class="coret-coret"></div></div>
+
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Nomor 7</div><br>Barisan $14,(p-1),6,2,-2,\cdots$ adalah barisan aritmetika.<br>Nilai $p$ adalah...<ol class="pilihan-ganda"><li data-option="A">7</li><li data-option="B">8</li><li data-option="C">9</li><li data-option="D">10</li><li data-option="E">11</li></ol></div><div class="coret-coret"></div></div>
+
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Nomor 8</div><br>Barisan $14,(p-1),6,2,-2,\cdots$ adalah barisan aritmetika.<br>Jumlah suku ke-$11$ dan suku... adalah empat kali suku ke-$7$.<ol class="pilihan-ganda"><li data-option="A">ke-5</li><li data-option="B">ke-6</li><li data-option="C">ke-7</li><li data-option="D">ke-8</li><li data-option="E">ke-9</li></ol></div><div class="coret-coret"></div></div>
+
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Nomor 9</div><br>Barisan $14,(p-1),6,2,-2,\cdots$ adalah barisan aritmetika.<br>Jika barisan baru dibentuk dengan membagi dua setiap suku barisan tersebut, maka rata-rata sepuluh suku pertama barisan yang baru adalah...<ol class="pilihan-ganda"><li data-option="A">-2</li><li data-option="B">-3</li><li data-option="C">-4</li><li data-option="D">-5</li><li data-option="E">-6</li></ol></div><div class="coret-coret"></div></div>
+
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Nomor 10</div><br>Pada trapesium $ABCD$ dengan $AB \parallel CD$, $\angle DAB=45^{\circ}$, $\angle DCB=60^{\circ}$, $\angle ABC=120^{\circ}$, $BC=4$, dan $DC=\sqrt{3}$. Titik $E$ dan $F$ terletak pada garis $AB$ sehingga $DE \perp AB$ dan $CF \parallel DE$.<br><img class="soal-image" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiLw8CDrWxA55YUtROy6_rNFV5-cbeMwluqzMX2BC_Ahq5xsxWHyYNOt7k7P_lQGOedrVhdERxeoAFMSUtpVV4Q7EtVuKXh1jKF8Q5Yrk-hf3EOvlml5RLtAUD7YAOXRrW13SALzvl7DgTrGxh8F5jbjfW9LNT4dtsjPwjbUT9hiXFOiauG0LMvH45oLA/s1600/trapesium%20tps%20utbk%20sbmptn%202022.jpg" alt="Trapesium"><br>$\angle ADC=\cdots$<ol class="pilihan-ganda"><li data-option="A">$100^{\circ}$</li><li data-option="B">$105^{\circ}$</li><li data-option="C">$120^{\circ}$</li><li data-option="D">$135^{\circ}$</li><li data-option="E">$145^{\circ}$</li></ol></div><div class="coret-coret"></div></div>
+        </div>
+    </section>
+
+    <!-- Soal 11-20 -->
+    <section id="soal-11-20" class="page">
+        <div class="content-wrapper">
+            <h2>Bagian 2: Soal Latihan (11-20)</h2>
+            <p class="keterangan-soal" style="background:none; padding:0; margin-bottom:20px;">Topik: Geometri & Bangun Datar</p>
+
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Nomor 11</div><br>Menggunakan gambar trapesium pada soal nomor 10 (sebelumnya).<br>Panjang $AE=\cdots$<ol class="pilihan-ganda"><li data-option="A">$\sqrt{2}$</li><li data-option="B">$\sqrt{3}$</li><li data-option="C">$2\sqrt{2}$</li><li data-option="D">$2\sqrt{3}$</li><li data-option="E">$3$</li></ol></div><div class="coret-coret"></div></div>
+
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Nomor 12</div><br>Menggunakan gambar trapesium pada soal nomor 10.<br>Luas segiempat $AFCD$ adalah...<ol class="pilihan-ganda"><li data-option="A">$5$</li><li data-option="B">$5\sqrt{3}$</li><li data-option="C">$9$</li><li data-option="D">$3\sqrt{15}$</li><li data-option="E">$12$</li></ol></div><div class="coret-coret"></div></div>
+
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Nomor 13</div><br>Titik $A$, $B$, dan $D$ berturut-turut terletak pada sisi $EF$, $CE$, dan $CF$ dari segitiga sama sisi $ECF$ sehingga $ABCD$ merupakan jajaran genjang dengan $AB=5$ dan $AF=4$.<br><img class="soal-image" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhBfpMyS_4jxPDl2ztMOpHKIEuMgnE0BDBnaQv6zzM-W9p0elqJLHaSm-SOSuGVoQy1CAhW1VuHq42Pi7rzHbKse5FG6EaCFtJcjTSlddfpKQ7shc_MawFruHDxFs5Tm91r7obR7PSbypksFL3CeXb0xSrIuJpIZSpJCToGh-0Pn9B6o72DEJx_SlVKTw/s1600/jajargenjang%20tps%20utbk%20sbmptn.jpg" alt="Jajar Genjang"><br>Besar $\angle EAD$ adalah...<ol class="pilihan-ganda"><li data-option="A">$60^{\circ}$</li><li data-option="B">$80^{\circ}$</li><li data-option="C">$100^{\circ}$</li><li data-option="D">$120^{\circ}$</li><li data-option="E">$150^{\circ}$</li></ol></div><div class="coret-coret"></div></div>
+
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Nomor 14</div><br>Menggunakan gambar pada soal nomor 13.<br>Tinggi $\bigtriangleup ECF$ adalah...<ol class="pilihan-ganda"><li data-option="A">$\frac{5}{2}\sqrt{3}$</li><li data-option="B">$5$</li><li data-option="C">$\frac{9}{2}\sqrt{3}$</li><li data-option="D">$8$</li><li data-option="E">$9\sqrt{3}$</li></ol></div><div class="coret-coret"></div></div>
+
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Nomor 15</div><br>Menggunakan gambar pada soal nomor 13.<br>Luas $\bigtriangleup EFC$ adalah...<ol class="pilihan-ganda"><li data-option="A">$\frac{81}{2}\sqrt{3}$</li><li data-option="B">$\frac{81}{4}\sqrt{3}$</li><li data-option="C">$20\sqrt{3}$</li><li data-option="D">$10\sqrt{3}$</li><li data-option="E">$8\sqrt{3}$</li></ol></div><div class="coret-coret"></div></div>
+        </div>
+    </section>
+
+    <section class="page">
+        <div class="content-wrapper">
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Nomor 16</div><br>$\bigtriangleup ABC$ sama kaki dengan $AB=AC$. Titik $E$ terletak di tengah ruas garis $AB$. Titik $D$ dan $F$ terletak di ruas garis $AC$ sehingga $ED \perp AC$, $BF \perp AC$, $DE=10$, $\angle BED=120^{\circ}$.<br><img class="soal-image" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg_EKWi-mUwNG_sqkXn05k3nJjjkKbexyaeUB-Ev9Tr7luOLTvIkyhLNulwSsQzVU3jO67wIGRwu95P4oQ2_WjEclZJyDJquORsO_S3XtrSQZzRnNeVqr4ydsonfRhA0o1OyczaX8--CoyfZGJO7q1neG9tRstsJSukPC7oA8k63InmfBBV5_UpYSLo1g/s1600/segitiga%20sama%20kaki%20tps%20utbk%20sbmptn.jpg" alt="Segitiga Sama Kaki"><br>$\angle ABC=\cdots$<ol class="pilihan-ganda"><li data-option="A">$15^{\circ}$</li><li data-option="B">$30^{\circ}$</li><li data-option="C">$45^{\circ}$</li><li data-option="D">$60^{\circ}$</li><li data-option="E">$75^{\circ}$</li></ol></div><div class="coret-coret"></div></div>
+
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Nomor 17</div><br>Menggunakan gambar pada soal nomor 16.<br>Panjang $BF=\cdots$<ol class="pilihan-ganda"><li data-option="A">$20 \sqrt{3}$</li><li data-option="B">$20$</li><li data-option="C">$10 \sqrt{2}$</li><li data-option="D">$10$</li><li data-option="E">$5\sqrt{3}$</li></ol></div><div class="coret-coret"></div></div>
+
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Nomor 18</div><br>Menggunakan gambar pada soal nomor 16.<br>Luas $\bigtriangleup AEC$ adalah...<ol class="pilihan-ganda"><li data-option="A">$200$</li><li data-option="B">$100\sqrt{3}$</li><li data-option="C">$100\sqrt{2}$</li><li data-option="D">$100$</li><li data-option="E">$50\sqrt{3}$</li></ol></div><div class="coret-coret"></div></div>
+
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Nomor 19</div><br>Fungsi $g$ dan $h$ didefinisikan sebagai berikut:<br>$g(x)=2-bx$ dan $h(x)=1-bx+x^{2}$.<br>Grafik fungsi $g$ memotong sumbu $x$ di titik $(1,0)$.<br>Koordinat salah satu titik potong grafik fungsi $g$ dan $h$ adalah...<ol class="pilihan-ganda"><li data-option="A">$(-1,-4)$</li><li data-option="B">$(-1, 4)$</li><li data-option="C">$(1,-2)$</li><li data-option="D">$(1, 4)$</li><li data-option="E">$(1,9)$</li></ol></div><div class="coret-coret"></div></div>
+
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Nomor 20</div><br>Menggunakan fungsi $g$ dan $h$ pada soal nomor 19.<br>$\int (g(x)-h(x)) dx=\cdots$<ol class="pilihan-ganda"><li data-option="A">$-2x^{3}+x+C$</li><li data-option="B">$-\frac{1}{2}x^{3}-x+C$</li><li data-option="C">$-\frac{1}{3}x^{3}+x+C$</li><li data-option="D">$\frac{1}{3}x^{3}-x+C$</li><li data-option="E">$2x^{3}-x+C$</li></ol></div><div class="coret-coret"></div></div>
+        </div>
+    </section>
+
+    <!-- Soal 21-30 -->
+    <section id="soal-21-30" class="page">
+        <div class="content-wrapper">
+            <h2>Bagian 3: Soal Latihan (21-30)</h2>
+            <p class="keterangan-soal" style="background:none; padding:0; margin-bottom:20px;">Topik: Fungsi Kuadrat & Kalkulus (Integral/Luas)</p>
+
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Nomor 21</div><br>Menggunakan fungsi $g$ dan $h$ pada soal nomor 19.<br>Luas daerah yang dibatasi oleh grafik fungsi $g$ dan $h$ adalah...<ol class="pilihan-ganda"><li data-option="A">$2$</li><li data-option="B">$\frac{3}{2}$</li><li data-option="C">$\frac{4}{3}$</li><li data-option="D">$1$</li><li data-option="E">$\frac{2}{3}$</li></ol></div><div class="coret-coret"></div></div>
+
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Nomor 22</div><br>Fungsi $f$ dan $g$ didefinisikan sebagai berikut:<br>$f(x)=x^{2}+x-2$ dan $g(x)=x+2$.<br>Salah satu absis titik potong grafik fungsi $f$ dan $g$ adalah...<ol class="pilihan-ganda"><li data-option="A">-3</li><li data-option="B">-2</li><li data-option="C">-1</li><li data-option="D">0</li><li data-option="E">1</li></ol></div><div class="coret-coret"></div></div>
+
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Nomor 23</div><br>Menggunakan fungsi $f$ dan $g$ pada soal nomor 22.<br>$\int (g(x)-f(x)) dx=\cdots$<ol class="pilihan-ganda"><li data-option="A">$x^{3}-4x+C$</li><li data-option="B">$\frac{1}{3}x^{3}+4x+C$</li><li data-option="C">$-\frac{1}{3}x^{3}+4x+C$</li><li data-option="D">$-\frac{1}{3}x^{3}-4x+C$</li><li data-option="E">$-x^{3}+4x+C$</li></ol></div><div class="coret-coret"></div></div>
+
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Nomor 24</div><br>Menggunakan fungsi $f$ dan $g$ pada soal nomor 22.<br>Luas daerah yang dibatasi oleh grafik fungsi $f$ dan $g$ adalah...<ol class="pilihan-ganda"><li data-option="A">$\frac{64}{3}$</li><li data-option="B">$16$</li><li data-option="C">$\frac{32}{3}$</li><li data-option="D">$8$</li><li data-option="E">$\frac{16}{3}$</li></ol></div><div class="coret-coret"></div></div>
+
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Nomor 25</div><br>Fungsi $f$ dan $g$ didefinisikan sebagai berikut:<br>$f(x)=-2(x-5)$ dan $g(x)=(x-2)^{2}-2$.<br>Ordinat terkecil titik potong grafik fungsi $f$ dan $g$ adalah...<ol class="pilihan-ganda"><li data-option="A">-14</li><li data-option="B">-2</li><li data-option="C">0</li><li data-option="D">2</li><li data-option="E">14</li></ol></div><div class="coret-coret"></div></div>
+        </div>
+    </section>
+
+    <section class="page">
+        <div class="content-wrapper">
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Nomor 26</div><br>Menggunakan fungsi $f$ dan $g$ pada soal nomor 25.<br>$\int (g(x)-f(x)) dx=\cdots$<ol class="pilihan-ganda"><li data-option="A">$\frac{x^{3}}{3}+4x^{2}-8x+C$</li><li data-option="B">$\frac{x^{3}}{3}-x^{2}-8x+C$</li><li data-option="C">$-\frac{x^{3}}{3}+4x^{2}+8x+C$</li><li data-option="D">$\frac{x^{3}}{3}+2x^{2}+8x+C$</li><li data-option="E">$-\frac{x^{3}}{3}+2x^{2}+8x+C$</li></ol></div><div class="coret-coret"></div></div>
+
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Nomor 27</div><br>Menggunakan fungsi $f$ dan $g$ pada soal nomor 25.<br>Luas daerah yang dibatasi oleh grafik fungsi $f$ dan $g$, serta berada di sebelah kanan sumbu-$y$ adalah...<ol class="pilihan-ganda"><li data-option="A">$\frac{70}{3}$</li><li data-option="B">$24$</li><li data-option="C">$25$</li><li data-option="D">$\frac{80}{3}$</li><li data-option="E">$27$</li></ol></div><div class="coret-coret"></div></div>
+
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Nomor 28</div><br><img class="soal-image" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjTivJVpMAZ4tf_8PtZh5a9aQSK5v7rFNUJSbLBqK54AhHRWYWf5mnaMuFL53B1sD7QpZ9kAo3CC6fy2_Xx1OtyeCQsehwCV_NTxgHT7mnYXPXv-PH6K8XfItZGvYICRUIqCSJCMBft1AdeqOzvJ0yojk0yKTZ_9iVN81IkFULLO7Mt5vWEniddwoul8A/s1600/flowchart%20tps%20utbk%20sbmptn1.jpg" alt="Flowchart 1"><br>Jika diberikan input $x=7$, manakah pernyataan berikut yang benar?<br>(1) $y-2x$ bilangan ganjil<br>(2) $w < 20$<br>(3) $x \times y$ bilangan ganjil<br>(4) $w$ kelipatan 3<ol class="pilihan-ganda"><li data-option="A">(1), (2), dan (3) SAJA yang benar.</li><li data-option="B">(1) dan (3) SAJA yang benar.</li><li data-option="C">(2) dan (4) SAJA yang benar.</li><li data-option="D">HANYA (4) yang benar.</li><li data-option="E">SEMUA pilihan benar.</li></ol></div><div class="coret-coret"></div></div>
+
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Nomor 29</div><br><img class="soal-image" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj3boNg413nmZV-0VUS1aHzEUsiG3oV_2NJh1G7jFxmVHdsCa7aOs7BxTjXFV8tiAkMm97ZdCQ8LrOyBGf44FjwrNZ-NSkIso2lRl7V8UotQBi0_J8MGxaD3nen_u5HxBtwWqQtmRDRU3YkAl8k9nFWP7oXLJ14YmJvq0pacosIH8g-6C7XAfVxe0kLEQ/s1600/flowchart%20tps%20utbk%20sbmptn2.jpg" alt="Flowchart 2"><br>Jika diberikan input $x=7$, manakah pernyataan berikut yang benar?<br>(1) $w$ bilangan prima<br>(2) $w$ habis dibagi 2<br>(3) $w$ lebih kecil daripada 7<br>(4) 10 habis dibagi $w$<ol class="pilihan-ganda"><li data-option="A">(1), (2), dan (3) SAJA yang benar.</li><li data-option="B">(1) dan (3) SAJA yang benar.</li><li data-option="C">(2) dan (4) SAJA yang benar.</li><li data-option="D">HANYA (4) yang benar.</li><li data-option="E">SEMUA pilihan benar.</li></ol></div><div class="coret-coret"></div></div>
+
+            <div class="latihan-item"><div class="soal-latihan"><div class="keterangan-soal">Nomor 30</div><br><img class="soal-image" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiCZpzskoaXUvrC9UqMEVHmfwRfNL0roYl0Ob2OiMbPptlPilY2JHECcvhacan-8U0nEF9g1F33pAJTq-7LvSmSXuVy1isP012FAFP7X-NdSn0qSr7UiLvbNZ30pbPJNmH-tBECeAXfPC9i4RXgzkktlbhLU8EFYEvg3PQl_EO5EkFys0JOnFK0i4qRbQ/s1600/flowchart%20tps%20utbk%20sbmptn3.jpg" alt="Flowchart 3"><br>Jika diberikan input $x=7$, manakah pernyataan berikut yang benar?<br>(1) $z$ lebih besar daripada 50<br>(2) $z$ habis dibagi 5<br>(3) $x+y+z$ bilangan ganjil<br>(4) $x \times y$ bilangan ganjil<ol class="pilihan-ganda"><li data-option="A">(1), (2), dan (3) SAJA yang benar.</li><li data-option="B">(1) dan (3) SAJA yang benar.</li><li data-option="C">(2) dan (4) SAJA yang benar.</li><li data-option="D">HANYA (4) yang benar.</li><li data-option="E">SEMUA pilihan benar.</li></ol></div><div class="coret-coret"></div></div>
+        </div>
+    </section>
+
+    <!-- Pembahasan -->
+    <section id="pembahasan" class="page">
+        <div class="content-wrapper">
+            <h2>Bagian 4: Kunci Jawaban & Pembahasan</h2>
+            
+            <div class="pembahasan"><b>1. Jawaban: A</b>
+            <b>Konsep:</b> Barisan Geometri.
+            <br>Diketahui $U_1=1$, $U_2=2$, $U_3=y$. Rasio $r = \frac{U_2}{U_1} = 2$.
+            <br>Maka $y = U_2 \times r = 2 \times 2 = 4$.
+            <br>Nilai $6-y = 6-4 = 2$.
+            </div>
+
+            <div class="pembahasan"><b>2. Jawaban: D</b>
+            <b>Konsep:</b> Deret Geometri.
+            <br>Barisan: $1, 2, 4, 8, 16, 32, 64, 128...$
+            <br>Jumlah 5 suku pertama: $S_5 = \frac{1(2^5-1)}{2-1} = 31$.
+            <br>Ditanya: $S_5 + 1 = 32$.
+            <br>Diketahui $32 = \frac{1}{4} \times U_n \Rightarrow U_n = 128$.
+            <br>Suku bernilai 128 adalah suku ke-8 ($1 \cdot 2^{8-1} = 128$).
+            </div>
+
+            <div class="pembahasan"><b>3. Jawaban: C</b>
+            <b>Konsep:</b> Rata-rata Deret Geometri.
+            <br>Barisan: $1, 2, 4...$
+            <br>Rata-rata = $\frac{S_n}{n} = 3,75$.
+            <br>$\frac{1(2^n-1)}{n} = \frac{15}{4}$. Uji nilai $n$: Jika $n=4$, $\frac{15}{4} = 3,75$. Benar.
+            </div>
+
+            <div class="pembahasan"><b>4. Jawaban: E</b>
+            <b>Konsep:</b> Barisan Aritmetika.
+            <br>$U_1=-2, U_4=-23$. Beda $b = \frac{-23 - (-2)}{4-1} = \frac{-21}{3} = -7$.
+            <br>Barisan: $-2, -9, -16, -23$. Maka $p=-9, q=-16$.
+            <br>$p-q = -9 - (-16) = 7$.
+            </div>
+
+            <div class="pembahasan"><b>5. Jawaban: C</b>
+            <b>Konsep:</b> Sifat Suku Aritmetika.
+            <br>$U_7 + U_8 = U_{10} + U_n$.
+            <br>$(a+6b) + (a+7b) = (a+9b) + (a+(n-1)b)$.
+            <br>$13b = 9b + (n-1)b \Rightarrow 4b = (n-1)b \Rightarrow n-1=4 \Rightarrow n=5$.
+            <br>Jadi sama dengan suku ke-5.
+            </div>
+
+            <div class="pembahasan"><b>6. Jawaban: B</b>
+            <b>Konsep:</b> Rata-rata Aritmetika.
+            <br>Rata-rata $n$ suku pertama aritmetika = Suku Tengah ($U_{\text{tengah}}$) jika $n$ ganjil.
+            <br>Rata-rata 9 suku = $U_5$.
+            <br>$U_5 = a + 4b = -2 + 4(-7) = -2 - 28 = -30$.
+            </div>
+
+            <div class="pembahasan"><b>7. Jawaban: E</b>
+            <b>Konsep:</b> Beda Aritmetika.
+            <br>$U_3=6, U_4=2 \Rightarrow b = 2-6 = -4$.
+            <br>$U_1=14, U_2=p-1$.
+            <br>$U_2 = 14 + (-4) = 10 \Rightarrow p-1=10 \Rightarrow p=11$.
+            </div>
+
+            <div class="pembahasan"><b>8. Jawaban: D</b>
+            <b>Konsep:</b> Persamaan Aritmetika.
+            <br>$b=-4$. $U_7 = 14 + 6(-4) = -10$.
+            <br>$U_{11} + U_n = 4 \cdot U_7 \Rightarrow (14+10(-4)) + U_n = 4(-10)$.
+            <br>$-26 + U_n = -40 \Rightarrow U_n = -14$.
+            <br>$U_n = a+(n-1)b \Rightarrow -14 = 14 + (n-1)(-4) \Rightarrow -28 = -4(n-1) \Rightarrow 7 = n-1 \Rightarrow n=8$.
+            </div>
+
+            <div class="pembahasan"><b>9. Jawaban: A</b>
+            <b>Konsep:</b> Transformasi Data.
+            <br>Barisan lama: $14, 10, 6...$ ($b=-4$). Rata-rata 10 suku = $\frac{U_1+U_{10}}{2}$.
+            <br>$U_{10} = 14 + 9(-4) = -22$. Rata-rata lama = $\frac{14+(-22)}{2} = -4$.
+            <br>Barisan baru dibagi 2, maka rata-rata baru = $\frac{-4}{2} = -2$.
+            </div>
+
+            <div class="pembahasan"><b>10. Jawaban: D</b>
+            <b>Konsep:</b> Sudut Segiempat.
+            <br>Total sudut segiempat $360^{\circ}$.
+            <br>$\angle ADC = 360^{\circ} - (45^{\circ} + 120^{\circ} + 60^{\circ}) = 360^{\circ} - 225^{\circ} = 135^{\circ}$.
+            </div>
+
+            <div class="pembahasan"><b>11. Jawaban: D</b>
+            <b>Konsep:</b> Trigonometri Dasar.
+            <br>Tarik garis tinggi dari C ke F pada AB. Segitiga $CFB$ siku-siku di F. $\angle B = 120^{\circ}$ (tumpul), pelurusnya $60^{\circ}$ dalam segitiga imajiner, atau gunakan aturan sinus.
+            <br>Dari soal: $\angle DCB=60^{\circ}$. Karena sejajar, tinggi $CF = BC \sin(180-120) = 4 \sin 60^{\circ} = 2\sqrt{3}$.
+            <br>$DE = CF = 2\sqrt{3}$.
+            <br>Segitiga $ADE$ siku-siku, $\angle A=45^{\circ}$. Maka $AE = DE / \tan 45^{\circ} = 2\sqrt{3}$.
+            </div>
+
+            <div class="pembahasan"><b>12. Jawaban: E</b>
+            <b>Konsep:</b> Luas Bangun Datar.
+            <br>$AFCD$ terdiri dari persegi panjang $EFCD$ dan segitiga $ADE$.
+            <br>Luas $EFCD = DC \times DE = \sqrt{3} \times 2\sqrt{3} = 6$.
+            <br>Luas $ADE = \frac{1}{2} \times AE \times DE = \frac{1}{2} \times 2\sqrt{3} \times 2\sqrt{3} = 6$.
+            <br>Total = $6+6=12$.
+            </div>
+
+            <div class="pembahasan"><b>13. Jawaban: D</b>
+            <b>Konsep:</b> Segitiga Sama Sisi & Jajar Genjang.
+            <br>Segitiga ECF sama sisi, semua sudut $60^{\circ}$.
+            <br>Di jajar genjang $ABCD$, $\angle C = 60^{\circ}$. Maka $\angle A = 60^{\circ}$.
+            <br>$\angle B = 180^{\circ} - 60^{\circ} = 120^{\circ}$.
+            <br>Dalam jajar genjang, $\angle EAD$ berseberangan atau sepihak? Perhatikan posisi titik.
+            <br>Dari geometri, $\angle EAD = 120^{\circ}$.
+            </div>
+
+            <div class="pembahasan"><b>14. Jawaban: C</b>
+            <b>Konsep:</b> Tinggi Segitiga Sama Sisi.
+            <br>Sisi segitiga $EF = EA + AF = 5 + 4 = 9$.
+            <br>Tinggi = $s \times \frac{1}{2}\sqrt{3} = \frac{9}{2}\sqrt{3}$.
+            </div>
+
+            <div class="pembahasan"><b>15. Jawaban: B</b>
+            <b>Konsep:</b> Luas Segitiga Sama Sisi.
+            <br>Luas = $\frac{1}{4} s^2 \sqrt{3}$.
+            <br>$s=9 \Rightarrow \frac{81}{4}\sqrt{3}$.
+            </div>
+        </div>
+    </section>
+
+    <section class="page">
+        <div class="content-wrapper">
+            <div class="pembahasan"><b>16. Jawaban: E</b>
+            <b>Konsep:</b> Sudut Segitiga.
+            <br>$\bigtriangleup ABC$ sama kaki. $\angle BED = 120^{\circ}$.
+            <br>Perhatikan segiempat $BCDE$. Sudut pusat dan keliling atau jumlah sudut.
+            <br>Hitungan detail: $\angle ABC = 75^{\circ}$.
+            </div>
+
+            <div class="pembahasan"><b>17. Jawaban: B</b>
+            <b>Konsep:</b> Kesebangunan.
+            <br>$\bigtriangleup ADE \sim \bigtriangleup ABF$.
+            <br>$E$ tengah $AB$, maka $AB = 2AE$.
+            <br>Perbandingan sisi: $\frac{BF}{DE} = \frac{AB}{AE} = 2$.
+            <br>$BF = 2 \times 10 = 20$.
+            </div>
+
+            <div class="pembahasan"><b>18. Jawaban: A</b>
+            <b>Konsep:</b> Luas Segitiga.
+            <br>Luas $\bigtriangleup AEC = \frac{1}{2} \times AC \times DE$.
+            <br>Kita perlu cari $AC$. Dari soal 17, $BF=20$. Sudut A bisa dicari.
+            <br>Atau gunakan $AB=AC$. Dari $\triangle ABF$, $AF = BF/\tan A$.
+            <br>Dari sudut $120^{\circ}$ di $E$, pelurusnya $60^{\circ}$. $\triangle ADE$ siku-siku, $\angle A = 30^{\circ}$.
+            <br>$AC = AB = BF / \sin 30^{\circ} = 20 / 0.5 = 40$.
+            <br>Luas = $\frac{1}{2} \times 40 \times 10 = 200$.
+            </div>
+
+            <div class="pembahasan"><b>19. Jawaban: B</b>
+            <b>Konsep:</b> Titik Potong Fungsi.
+            <br>$g(1)=0 \Rightarrow 2-b(1)=0 \Rightarrow b=2$.
+            <br>$g(x) = 2-2x$, $h(x) = 1-2x+x^2$.
+            <br>Potong: $2-2x = 1-2x+x^2 \Rightarrow x^2-1=0 \Rightarrow x=\pm 1$.
+            <br>Jika $x=-1$, $y = 2-2(-1) = 4$. Titik $(-1, 4)$.
+            </div>
+
+            <div class="pembahasan"><b>20. Jawaban: C</b>
+            <b>Konsep:</b> Integral Tentu.
+            <br>$\int ( (2-2x) - (1-2x+x^2) ) dx = \int (1 - x^2) dx$.
+            <br>$= x - \frac{1}{3}x^3 + C$.
+            </div>
+
+            <div class="pembahasan"><b>21. Jawaban: C</b>
+            <b>Konsep:</b> Luas Daerah Integral.
+            <br>Batas integrasi dari titik potong $x=-1$ sampai $x=1$.
+            <br>$\int_{-1}^{1} (1-x^2) dx = [x - \frac{1}{3}x^3]_{-1}^{1}$.
+            <br>$= (1-1/3) - (-1+1/3) = 2/3 - (-2/3) = 4/3$.
+            </div>
+
+            <div class="pembahasan"><b>22. Jawaban: B</b>
+            <b>Konsep:</b> Persamaan Kuadrat.
+            <br>$x^2+x-2 = x+2 \Rightarrow x^2-4=0 \Rightarrow x=\pm 2$.
+            <br>Absis salah satunya -2.
+            </div>
+
+            <div class="pembahasan"><b>23. Jawaban: C</b>
+            <b>Konsep:</b> Integral Aljabar.
+            <br>$\int ((x+2) - (x^2+x-2)) dx = \int (4-x^2) dx$.
+            <br>$= 4x - \frac{1}{3}x^3 + C$.
+            </div>
+
+            <div class="pembahasan"><b>24. Jawaban: C</b>
+            <b>Konsep:</b> Luas Daerah.
+            <br>Batas -2 sampai 2.
+            <br>$\int_{-2}^{2} (4-x^2) dx = [4x - \frac{1}{3}x^3]_{-2}^{2}$.
+            <br>$= (8 - 8/3) - (-8 + 8/3) = 16 - 16/3 = 32/3$.
+            </div>
+
+            <div class="pembahasan"><b>25. Jawaban: D</b>
+            <b>Konsep:</b> Titik Potong.
+            <br>$-2x+10 = (x^2-4x+4)-2 \Rightarrow -2x+10 = x^2-4x+2$.
+            <br>$x^2-2x-8=0 \Rightarrow (x-4)(x+2)=0$. $x=4, -2$.
+            <br>$y$ saat $x=4 \to g(4) = 2$. $y$ saat $x=-2 \to g(-2)=14$.
+            <br>Terkecil adalah 2.
+            </div>
+
+            <div class="pembahasan"><b>26. Jawaban: B</b>
+            <b>Konsep:</b> Integral.
+            <br>$g(x)-f(x) = (x^2-4x+2) - (-2x+10) = x^2-2x-8$.
+            <br>$\int (x^2-2x-8) dx = \frac{1}{3}x^3 - x^2 - 8x + C$.
+            </div>
+
+            <div class="pembahasan"><b>27. Jawaban: D</b>
+            <b>Konsep:</b> Luas Daerah (Sebelah Kanan Sumbu Y).
+            <br>Batas dari $x=0$ sampai $x=4$ (titik potong positif).
+            <br>$\int_{0}^{4} (f(x)-g(x)) dx = \int_{0}^{4} (-x^2+2x+8) dx$.
+            <br>$= [-\frac{1}{3}x^3 + x^2 + 8x]_0^4 = -64/3 + 16 + 32 = 48 - 21.33 = 80/3$.
+            </div>
+
+            <div class="pembahasan"><b>28. Jawaban: B</b>
+            <b>Konsep:</b> Algoritma/Flowchart.
+            <br>$x=7 \to x^2=49 > 40$ (Tidak).
+            <br>$y = x+4 = 11$.
+            <br>$z = 2y = 22$.
+            <br>$z$ habis dibagi 4? (Tidak).
+            <br>$w = (5z-6)/4 = (110-6)/4 = 104/4 = 26$.
+            <br>(1) $y-2x = 11-14 = -3$ (Ganjil/Benar).
+            <br>(2) $w < 20$ (26 < 20 Salah).
+            <br>(3) $x \cdot y = 77$ (Ganjil/Benar).
+            <br>(4) $w$ kelipatan 3 (26 bukan kelipatan 3/Salah).
+            <br>Benar: (1) dan (3).
+            </div>
+
+            <div class="pembahasan"><b>29. Jawaban: E</b>
+            <b>Konsep:</b> Algoritma.
+            <br>$x=7$. $y=x+3=10$.
+            <br>$y$ genap? Ya. $z=2x-y = 14-10=4$.
+            <br>$z < y$? (4 < 10 Ya).
+            <br>$w = z/2 = 2$.
+            <br>Semua pernyataan (prima, genap, <7, faktor 10) Benar.
+            </div>
+
+            <div class="pembahasan"><b>30. Jawaban: E</b>
+            <b>Konsep:</b> Algoritma.
+            <br>$x=7$. $x$ kelipatan 2? Tidak.
+            <br>$y = 2x-1 = 13$.
+            <br>$y$ genap? Tidak.
+            <br>$z = 5y-10 = 65-10 = 55$.
+            <br>(1) $z>50$ (Benar).
+            <br>(2) $z$ habis dibagi 5 (Benar).
+            <br>(3) $x+y+z = 7+13+55 = 75$ (Ganjil/Benar).
+            <br>(4) $xy = 91$ (Ganjil/Benar).
+            </div>
+        </div>
+    </section>
+
+</div>
+
+</body>
+</html>
