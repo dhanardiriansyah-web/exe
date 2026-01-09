@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul Matematika SMA - Persamaan Kuadrat</title>
+    
+    <!-- Konfigurasi MathJax untuk Matematika -->
+    <script>
+        window.MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']]
+          },
+          svg: {
+            fontCache: 'global'
+          }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    
+    <!-- Font Google: Nunito -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-text: #333333;
+            --secondary-text: #555555;
+            --border-color: #dddddd;
+            --title-grad-1: #00857c;
+            --title-grad-2: #005a54;
+            --bg-color: #e0e0e0;
+            --page-bg: #ffffff;
+        }
+        
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            font-size: 10pt;
+            line-height: 1.6;
+            color: var(--primary-text);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            counter-reset: page;
+        }
+
+        /* Layout Halaman Kertas (A4 style) */
+        .page {
+            background: var(--page-bg);
+            width: 176mm;
+            min-height: 250mm;
+            padding: 20mm;
+            margin: 1cm auto;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        /* Penomoran Halaman */
+        .page::after {
+            counter-increment: page;
+            content: counter(page);
+            position: absolute;
+            bottom: 15mm;
+            right: 20mm;
+            font-size: 10pt;
+            color: #888;
+            font-weight: bold;
+        }
+
+        /* Halaman Cover */
+        .cover-page {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 5px double #333;
+            height: 250mm;
+        }
+        
+        .cover-page::after, .toc-page::after {
+            content: '';
+        }
+
+        .cover-page img {
+            max-width: 200px;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+
+        .cover-page .title {
+            font-size: 32pt;
+            font-weight: 900;
+            margin: 0;
+            color: var(--title-grad-2);
+            background: -webkit-linear-gradient(45deg, var(--title-grad-1), var(--title-grad-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cover-page .subtitle {
+            font-size: 16pt;
+            margin-top: 15px;
+            color: var(--secondary-text);
+            font-weight: 700;
+        }
+
+        /* Watermark Background */
+        .watermark-container .page::before {
+            content: '';
+            background-image: url('https://imgix3.ruangguru.com/assets/miscellaneous/jpeg_sijv7w_5618.jpeg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 8cm;
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%; height: 100%;
+            opacity: 0.03;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .cover-page::before, .toc-page::before { opacity: 0; }
+
+        .content-wrapper { position: relative; z-index: 1; width: 100%; }
+        
+        /* Typography */
+        h1 { font-size: 24pt; text-align: center; border-bottom: 3px solid var(--primary-text); padding-bottom: 10px; margin-bottom: 30px; }
+        h2 { font-size: 18pt; color: #000; border-left: 6px solid var(--title-grad-1); padding-left: 15px; margin-top: 10px; margin-bottom: 20px; }
+        
+        /* Daftar Isi */
+        .toc-list { list-style-type: none; padding: 0; }
+        .toc-list li { margin-bottom: 15px; font-size: 14pt; border-bottom: 1px dotted #ccc; padding-bottom: 5px; }
+        .toc-list a { text-decoration: none; color: var(--primary-text); display: flex; justify-content: space-between; }
+        .toc-list a:hover { color: var(--title-grad-1); font-weight: bold; }
+        
+        /* Item Soal */
+        .latihan-item { 
+            display: grid; 
+            grid-template-columns: 1fr 0.4fr;
+            gap: 20px; 
+            border-bottom: 1px dashed var(--border-color); 
+            padding-bottom: 20px; 
+            margin-bottom: 20px; 
+            break-inside: avoid; 
+        }
+        
+        .soal-latihan { overflow-wrap: break-word; word-wrap: break-word; }
+        
+        .soal-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 15px 0;
+            border: 1px solid #eee;
+            border-radius: 4px;
+        }
+
+        /* Area Coretan */
+        .coret-coret { 
+            border: 2px dashed #d1d1d1; 
+            border-radius: 8px; 
+            position: relative; 
+            background-color: #fafafa;
+        }
+        .coret-coret::after { 
+            content: 'Area Coretan'; 
+            color: #e0e0e0; 
+            position: absolute; 
+            top: 50%; left: 50%; 
+            transform: translate(-50%, -50%) rotate(-15deg); 
+            font-size: 14pt;
+            font-weight: bold;
+            pointer-events: none;
+        }
+        
+        /* Pembahasan Box */
+        .pembahasan { 
+            background-color: #f0fdfc; 
+            border-left: 4px solid var(--title-grad-1); 
+            padding: 15px; 
+            border-radius: 0 5px 5px 0; 
+            margin-top: 15px; 
+            margin-bottom: 20px; 
+            font-size: 9.5pt; 
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+        }
+        .pembahasan b { color: var(--title-grad-2); }
+        
+        /* Pilihan Ganda List */
+        ol.pilihan-ganda { list-style-type: none; padding-left: 0; margin-top: 10px; }
+        ol.pilihan-ganda li { margin-bottom: 5px; display: flex; }
+        ol.pilihan-ganda li::before { 
+            content: attr(data-option) ". "; 
+            font-weight: bold; 
+            margin-right: 10px; 
+            min-width: 20px;
+        }
+
+        .keterangan-soal { 
+            font-weight: bold; 
+            font-size: 9pt; 
+            color: #fff; 
+            background: var(--title-grad-1); 
+            padding: 3px 10px; 
+            border-radius: 15px; 
+            display: inline-block; 
+            margin-bottom: 10px;
+        }
+
+        /* Media Query untuk Cetak */
+        @media print {
+            body { background: none; }
+            .page { width: 100%; height: auto; margin: 0; box-shadow: none; page-break-after: always; border: none; }
+            .latihan-item { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="watermark-container">
+
+    <!-- Cover Page -->
+    <section class="page cover-page">
+        <div class="content-wrapper">
+            <img src="https://imgix3.ruangguru.com/assets/miscellaneous/jpeg_sijv7w_5618.jpeg" alt="Logo">
+            <h1 class="title">MODUL MATEMATIKA<br>SMA</h1>
+            <p class="subtitle">Latihan Soal & Pembahasan<br>Persamaan Kuadrat</p>
+            <div style="margin-top: 50px; font-size: 12pt; color: #666;">
+                <strong>Materi:</strong><br>
+                Persamaan Kuadrat | Diskriminan | Akar-akar | SBMPTN/UM-UGM/SIMAK UI
+            </div>
+        </div>
+    </section>
+
+    <!-- Table of Contents -->
+    <section class="page toc-page">
+        <div class="content-wrapper">
+            <h1>Daftar Isi</h1>
+            <ul class="toc-list">
+                <li><a href="#soal-1-5">Bagian 1: Soal Latihan (1 - 5) <span>Halaman 1</span></a></li>
+                <li><a href="#soal-6-10">Bagian 2: Soal Latihan (6 - 10) <span>Halaman 2</span></a></li>
+                <li><a href="#soal-11-15">Bagian 3: Soal Latihan (11 - 15) <span>Halaman 3</span></a></li>
+                <li><a href="#soal-16-20">Bagian 4: Soal Latihan (16 - 20) <span>Halaman 4</span></a></li>
+                <li><a href="#pembahasan">Bagian 5: Kunci Jawaban & Pembahasan <span>Halaman 5</span></a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Soal 1-5 -->
+    <section id="soal-1-5" class="page">
+        <div class="content-wrapper">
+            <h2>Bagian 1: Soal Latihan (1-5)</h2>
+            <p style="color:var(--secondary-text); margin-bottom:20px; font-style:italic;">Topik: Persamaan Kuadrat (SBMPTN, SIMAK UI, UM UGM)</p>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal UM UGM 2019 Kode 934</div><br>
+                    Salah satu akar persamaan kuadrat $x^{2}- \left( 3a-5 \right)x+3=0$ adalah tiga kali akar yang lain. Perkalian dari nilai-nilai $a$ yang memenuhi persamaan tersebut adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">2</li>
+                        <li data-option="B">1</li>
+                        <li data-option="C">0</li>
+                        <li data-option="D">-1</li>
+                        <li data-option="E">-2</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal SIMAK UI 2018 Kode 631</div><br>
+                    Misalkan $p$ dan $q$ adalah bilangan-bilangan riil tidak nol dalam persamaan kuadrat $x^{2}+px+q=0$ mempunyai solusi $p$ dan $q$ maka $p^{2}-2q=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">2</li>
+                        <li data-option="B">3</li>
+                        <li data-option="C">4</li>
+                        <li data-option="D">5</li>
+                        <li data-option="E">8</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal UM UGM 2017 Kode 723</div><br>
+                    Selisih akar-akar persamaan $x^{2}+2ax+\dfrac{4}{3}a=0$ adalah $1$. Selisih $a$ dan $\dfrac{4}{6}$ adalah$\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$\frac{1}{2}$</li>
+                        <li data-option="B">$\frac{2}{3}$</li>
+                        <li data-option="C">$\frac{5}{6}$</li>
+                        <li data-option="D">1</li>
+                        <li data-option="E">$\frac{5}{3}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal SIMAK UI 2017 Kode 723</div><br>
+                    Jika $x_{1}$ dan $x_{2}$ adalah akar-akar $2x^{2}-(2c-1)x-c^{3}+4=0$, maka nilai maksimum $x_{1}^{2}+x_{2}^{2}$ adalah$\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$-4\frac{3}{4}$</li>
+                        <li data-option="B">$-3\frac{3}{4}$</li>
+                        <li data-option="C">$-2\frac{3}{4}$</li>
+                        <li data-option="D">$2\frac{3}{4}$</li>
+                        <li data-option="E">$3\frac{3}{4}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal SBMPTN 2016 Kode 255</div><br>
+                    Diketahui $x_{1}$ dan $x_{2}$ adalah akar-akar dari persamaan $x^{2}+5ax+a^{3}-4a+1=0$. Nilai $a$ sehingga $x_{1}+x_{1}x_{2}+x_{2}$ maksimum pada interval $[-3,3]$ adalah$\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$-3$</li>
+                        <li data-option="B">$-\sqrt{3}$</li>
+                        <li data-option="C">$0$</li>
+                        <li data-option="D">$\sqrt{3}$</li>
+                        <li data-option="E">$3$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Soal 6-10 -->
+    <section id="soal-6-10" class="page">
+        <div class="content-wrapper">
+            <h2>Bagian 2: Soal Latihan (6-10)</h2>
+            <p style="color:var(--secondary-text); margin-bottom:20px; font-style:italic;">Topik: Persamaan Kuadrat (Lanjutan)</p>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal SBMPTN 2015 Kode 634</div><br>
+                    Jika semua akar-akar persamaan $x^{2}-6x+q=0$ merupakan bilangan bulat positif, maka jumlah semua nilai $q$ yang mungkin adalah$\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">5</li>
+                        <li data-option="B">8</li>
+                        <li data-option="C">9</li>
+                        <li data-option="D">17</li>
+                        <li data-option="E">22</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal UM UGM 2018 Kode 286</div><br>
+                    Jika $a \gt 0$ dan selisih akar-akar persamaan kuadrat $5x^{2}-10ax+8a=0$ sama dengan $3$ maka $a^{2}-a=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$1\frac{1}{9}$</li>
+                        <li data-option="B">$3\frac{3}{4}$</li>
+                        <li data-option="C">$4\frac{4}{9}$</li>
+                        <li data-option="D">$7\frac{1}{2}$</li>
+                        <li data-option="E">$8\frac{3}{4}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal SIMAK UI 2015</div><br>
+                    Perkalian akar-akar real dari persamaan $\dfrac{1}{x^{2}-10x-29}+\dfrac{1}{x^{2}-10x-45}-\dfrac{2}{x^{2}-10x-69}=0$ adalah$\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">-39</li>
+                        <li data-option="B">-10</li>
+                        <li data-option="C">2</li>
+                        <li data-option="D">10</li>
+                        <li data-option="E">39</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal SBMPTN 2018 Kode 517</div><br>
+                    Diketahui $x^{2}+a^{2}x+b^{2}=0$ dengan $a \gt 0$, $b \gt 0$. Jika jumlah akar persamaan tersebut sama dengan $-\left(b+1 \right)$ dan hasil perkalian akar-akarnya $a^{2}+5$, maka nilai $a+b-ab$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">2</li>
+                        <li data-option="B">1</li>
+                        <li data-option="C">0</li>
+                        <li data-option="D">-1</li>
+                        <li data-option="E">-2</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal SIMAK UI 2013</div><br>
+                    Jika $r$ dan $s$ adalah akar-akar persamaan kuadrat $ax^{2}+bx+c=0$ dan $D$ adalah diskriminan dari persamaan tersebut, nilai dari $\dfrac{1}{r^{2}}+\dfrac{1}{s^{2}}$ adalah$\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$\frac{D}{c^{2}}+\frac{2a}{c}$</li>
+                        <li data-option="B">$\frac{D}{2a}+c$</li>
+                        <li data-option="C">$\frac{D}{c^{2}}$</li>
+                        <li data-option="D">$\frac{D}{2a}$</li>
+                        <li data-option="E">$D$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Soal 11-15 -->
+    <section id="soal-11-15" class="page">
+        <div class="content-wrapper">
+            <h2>Bagian 3: Soal Latihan (11-15)</h2>
+            <p style="color:var(--secondary-text); margin-bottom:20px; font-style:italic;">Topik: Persamaan Kuadrat (Lanjutan)</p>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal SBMPTN 2018 Kode 526</div><br>
+                    Diketahui $x_{1}$ dan $x_{2}$ merupakan akar-akar $x^{2}+2ax+b^{2}=0$. Jika $x_{1}^{2}+x_{2}^{2}=10$, maka nilai $b^{2}$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$4a^{2}+10$</li>
+                        <li data-option="B">$4a^{2}-10$</li>
+                        <li data-option="C">$2a^{2}+5$</li>
+                        <li data-option="D">$2a^{2}-5$</li>
+                        <li data-option="E">$-2a^{2}+5$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal SBMPTN 2018 Kode 527</div><br>
+                    Diketahui $p \gt 0$, serta $p$ dan $p^{2}-2$ merupakan akar $x^{2}-10x+c=0$. Jika $c$ merupakan salah satu akar $x^{2}+ax+42=0$, maka nilai $a$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">-23</li>
+                        <li data-option="B">-21</li>
+                        <li data-option="C">-12</li>
+                        <li data-option="D">21</li>
+                        <li data-option="E">23</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal SIMAK UI 2018 Kode 641</div><br>
+                    Hasil perkalian semua solusi bilangan real yang memenuhi $\sqrt[3]{x}=\dfrac{2}{1+\sqrt[3]{x}}$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">-8</li>
+                        <li data-option="B">-6</li>
+                        <li data-option="C">4</li>
+                        <li data-option="D">6</li>
+                        <li data-option="E">8</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal SIMAK UI 2018 Kode 636</div><br>
+                    Jika persamaan kuadrat $x^{2}-px+q=0$ memiliki akar yang berkebalikan dan merupakan bilangan negatif, nilai maksimum $p-q$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">2</li>
+                        <li data-option="B">1</li>
+                        <li data-option="C">-1</li>
+                        <li data-option="D">-2</li>
+                        <li data-option="E">-3</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal UM UGM 2017 Kode 713</div><br>
+                    Misalkan $x_{1}$ dan $x_{2}$ merupakan akar-akar persamaan $px^{2}+qx-1=0$, $p \neq 0$. Jika $\dfrac{1}{x_{1}}+\dfrac{1}{x_{2}}=-1$ dan $x_{1}= -\dfrac{3}{2}x_{2}$ maka $p+q=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">7</li>
+                        <li data-option="B">5</li>
+                        <li data-option="C">0</li>
+                        <li data-option="D">-5</li>
+                        <li data-option="E">-7</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Soal 16-20 -->
+    <section id="soal-16-20" class="page">
+        <div class="content-wrapper">
+            <h2>Bagian 4: Soal Latihan (16-20)</h2>
+            <p style="color:var(--secondary-text); margin-bottom:20px; font-style:italic;">Topik: Persamaan Kuadrat (Lanjutan)</p>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal UM UGM 2017 Kode 823</div><br>
+                    Diketahui $p$ dan $q$ akar-akar persamaan $x^{2}+3x+k=0$, dengan $p \lt q$. Jika $\dfrac{q+1}{p+1}-\dfrac{p-1}{q-1}=-\dfrac{3}{2}$ maka jumlah semua nilai $k$ yang mungkin adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">4</li>
+                        <li data-option="B">2</li>
+                        <li data-option="C">1</li>
+                        <li data-option="D">-4</li>
+                        <li data-option="E">-2</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal SBMPTN 2014 Kode 651</div><br>
+                    Persamaan kuadrat $2x^{2}-px+1 =0$ dengan $p \gt 0$ mempunyai akar-akar $\alpha$ dan $\beta$. Jika $x^{2}-5x+q =0$ mempunyai akar-akar $\dfrac{1}{\alpha^{2}}$ dan $\dfrac{1}{\beta^{2}}$, maka $q-p=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">-2</li>
+                        <li data-option="B">$-\frac{1}{2}$</li>
+                        <li data-option="C">$\frac{1}{2}$</li>
+                        <li data-option="D">1</li>
+                        <li data-option="E">2</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal SBMPTN 2014 Kode 663</div><br>
+                    Jika $a$ dan $b$ akar-akar persamaan kuadrat $x^{2}+x-3 =0$ maka $2a^{2}+b^{2}+a=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">10</li>
+                        <li data-option="B">9</li>
+                        <li data-option="C">7</li>
+                        <li data-option="D">6</li>
+                        <li data-option="E">4</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal SBMPTN 2014 Kode 663</div><br>
+                    Diketahui $m$ dan $n$ akar-akar persamaan kuadrat $ax^{2}+bx+c =0$. Jika $m+2$ dan $n+2$ akar-akar persamaan kuadrat $ax^{2}+qx+r=0$, maka $q+r=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$c+3b$</li>
+                        <li data-option="B">$c-b+4a$</li>
+                        <li data-option="C">$c-b$</li>
+                        <li data-option="D">$c-b+8a$</li>
+                        <li data-option="E">$c+3b+8a$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal SBMPTN 2014 Kode 614</div><br>
+                    Jika $x_{1}$ dan $x_{2}$ adalah akar-akar $ x^{2}+3x+1=0$, maka persamaan kuadrat yang akar-akarnya $2+\dfrac{x_{2}}{x_{1}}$ dan $2+\dfrac{x_{1}}{x_{2}}$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$x^{2}-11x+19=0$</li>
+                        <li data-option="B">$x^{2}+11x+19=0$</li>
+                        <li data-option="C">$x^{2}-11x-19=0$</li>
+                        <li data-option="D">$x^{2}-19x+11=0$</li>
+                        <li data-option="E">$x^{2}+19x+11=0$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pembahasan -->
+    <section id="pembahasan" class="page">
+        <div class="content-wrapper">
+            <h2>Bagian 5: Kunci Jawaban & Pembahasan</h2>
+            
+            <div class="pembahasan">
+                <b>1. Jawaban: B</b>
+                <b>Konsep:</b> Akar Persamaan Kuadrat
+                <br>Jika akar-akar $x^{2}- \left( 3a-5 \right)x+3=0$ dimisalkan $m$ dan $n$ dimana $m=3n$:
+                <br>Hasil kali akar: $m \cdot n = \frac{c}{a} \Rightarrow m \cdot 3m = 3 \Rightarrow 3m^2=3 \Rightarrow m=\pm 1$.
+                <br>Hasil jumlah: $m+n = -\frac{b}{a} \Rightarrow 4m = 3a-5$.
+                <br>Jika $m=-1 \Rightarrow -4=3a-5 \Rightarrow a=1/3$.
+                <br>Jika $m=1 \Rightarrow 4=3a-5 \Rightarrow a=3$.
+                <br>Perkalian nilai $a$: $1/3 \times 3 = 1$.
+            </div>
+
+            <div class="pembahasan">
+                <b>2. Jawaban: D</b>
+                <b>Konsep:</b> Sifat Akar-Akar
+                <br>$x^{2}+px+q=0$ akarnya $p$ dan $q$.
+                <br>$p \cdot q = q \Rightarrow p=1$.
+                <br>$p+q = -p \Rightarrow 1+q=-1 \Rightarrow q=-2$.
+                <br>$p^2-2q = 1^2 - 2(-2) = 1+4 = 5$.
+            </div>
+
+            <div class="pembahasan">
+                <b>3. Jawaban: C</b>
+                <b>Konsep:</b> Selisih Akar
+                <br>Rumus selisih akar: $|x_1-x_2| = \frac{\sqrt{D}}{a}$.
+                <br>$1 = \sqrt{(2a)^2 - 4(1)(4/3a)}$.
+                <br>$1 = 4a^2 - \frac{16}{3}a \Rightarrow 12a^2 - 16a - 3 = 0$.
+                <br>Faktor: $(6a+1)(2a-3)=0 \Rightarrow a=-1/6$ atau $a=3/2$.
+                <br>Soal meminta selisih $a$ dan $4/6$. Untuk $a=3/2$: $3/2 - 4/6 = 9/6 - 4/6 = 5/6$.
+            </div>
+
+            <div class="pembahasan">
+                <b>4. Jawaban: C</b>
+                <b>Konsep:</b> Nilai Maksimum Fungsi
+                <br>Misal $M = x_1^2 + x_2^2 = (x_1+x_2)^2 - 2x_1x_2$.
+                <br>$M = (\frac{2c-1}{2})^2 - 2(\frac{-c^3+4}{2}) = c^3+c^2-c - 15/4$.
+                <br>Turunan $M' = 3c^2+2c-1 = 0 \Rightarrow (3c-1)(c+1)=0$. $c=1/3, -1$.
+                <br>Uji turunan kedua, $M'' = 6c+2$. Saat $c=-1$, $M'' < 0$ (Maksimum).
+                <br>Substitusi $c=-1$ ke $M$: $-1 + 1 - (-1) - 15/4 = 1 - 3.75 = -2.75 = -2\frac{3}{4}$.
+            </div>
+
+            <div class="pembahasan">
+                <b>5. Jawaban: B</b>
+                <b>Konsep:</b> Aplikasi Turunan pada PK
+                <br>$N = x_1+x_2+x_1x_2 = -5a + (a^3-4a+1) = a^3-9a+1$.
+                <br>Turunan $N' = 3a^2-9=0 \Rightarrow a^2=3 \Rightarrow a=\pm \sqrt{3}$.
+                <br>Cek interval $[-3,3]$. Nilai maksimum tercapai saat $a=-\sqrt{3}$.
+            </div>
+
+            <div class="pembahasan">
+                <b>6. Jawaban: E</b>
+                <b>Konsep:</b> Bilangan Bulat & PK
+                <br>$x_1+x_2 = 6$ dan $x_1x_2 = q$.
+                <br>Pasangan bulat positif $(x_1, x_2)$ yang jumlahnya 6: $(1,5), (2,4), (3,3)$.
+                <br>$q$ yang mungkin: $1\cdot5=5, 2\cdot4=8, 3\cdot3=9$.
+                <br>Jumlah semua $q$: $5+8+9=22$.
+            </div>
+
+            <div class="pembahasan">
+                <b>7. Jawaban: B</b>
+                <b>Konsep:</b> Diskriminan & Selisih Akar
+                <br>Selisih akar $= \frac{\sqrt{D}}{a} = 3$.
+                <br>$\frac{\sqrt{(-10a)^2 - 4(5)(8a)}}{5} = 3 \Rightarrow \sqrt{100a^2-160a} = 15$.
+                <br>$100a^2-160a = 225 \Rightarrow 20a^2-32a-45=0$.
+                <br>Faktor: $(2a-5)(10a+9)=0$. Karena $a>0$, maka $a=5/2$.
+                <br>$a^2-a = (5/2)^2 - 5/2 = 25/4 - 10/4 = 15/4 = 3\frac{3}{4}$.
+            </div>
+
+            <div class="pembahasan">
+                <b>8. Jawaban: A</b>
+                <b>Konsep:</b> Substitusi Variabel
+                <br>Misal $y = x^2-10x$. Persamaan: $\frac{1}{y-29} + \frac{1}{y-45} - \frac{2}{y-69} = 0$.
+                <br>Setelah disederhanakan, ditemukan $y=39$.
+                <br>Kembalikan ke $x$: $x^2-10x = 39 \Rightarrow x^2-10x-39=0$.
+                <br>Perkalian akar $x_1x_2 = c/a = -39$.
+            </div>
+
+            <div class="pembahasan">
+                <b>9. Jawaban: B</b>
+                <b>Konsep:</b> Operasi Akar
+                <br>Jumlah akar: $-(b+1) = -a^2 \Rightarrow b+1=a^2$.
+                <br>Kali akar: $a^2+5 = b^2$. Substitusi $a^2$: $(b+1)+5=b^2 \Rightarrow b^2-b-6=0$.
+                <br>$(b-3)(b+2)=0$. Karena $b>0 \Rightarrow b=3$.
+                <br>$a^2 = 3+1=4 \Rightarrow a=2$ (karena $a>0$).
+                <br>$a+b-ab = 2+3-(2)(3) = 5-6 = -1$.
+            </div>
+
+            <div class="pembahasan">
+                <b>10. Jawaban: A</b>
+                <b>Konsep:</b> Identitas Aljabar
+                <br>$\frac{1}{r^2} + \frac{1}{s^2} = \frac{s^2+r^2}{(rs)^2} = \frac{(r+s)^2-2rs}{(rs)^2}$.
+                <br>$= \frac{(-b/a)^2 - 2(c/a)}{(c/a)^2} = \frac{b^2/a^2 - 2ac/a^2}{c^2/a^2}$.
+                <br>$= \frac{b^2-2ac}{c^2} = \frac{(b^2-4ac)+2ac}{c^2} = \frac{D+2ac}{c^2} = \frac{D}{c^2} + \frac{2a}{c}$.
+            </div>
+
+            <div class="pembahasan">
+                <b>11. Jawaban: D</b>
+                <b>Konsep:</b> Identitas Aljabar
+                <br>$x_1^2 + x_2^2 = (x_1+x_2)^2 - 2x_1x_2$.
+                <br>$10 = (-2a)^2 - 2(b^2) \Rightarrow 10 = 4a^2 - 2b^2$.
+                <br>$2b^2 = 4a^2 - 10 \Rightarrow b^2 = 2a^2 - 5$.
+            </div>
+
+            <div class="pembahasan">
+                <b>12. Jawaban: A</b>
+                <b>Konsep:</b> Substitusi Akar
+                <br>Jumlah akar: $p + (p^2-2) = -(-10) = 10 \Rightarrow p^2+p-12=0 \Rightarrow (p+4)(p-3)=0$.
+                <br>$p>0 \Rightarrow p=3$. Akar-akar: $3$ dan $7$. $c = 3 \cdot 7 = 21$.
+                <br>$c=21$ akar dari $x^2+ax+42=0 \Rightarrow 21^2 + 21a + 42 = 0$.
+                <br>$21a = -483 \Rightarrow a = -23$.
+            </div>
+
+            <div class="pembahasan">
+                <b>13. Jawaban: A</b>
+                <b>Konsep:</b> Substitusi Variabel
+                <br>Misal $y=\sqrt[3]{x}$. $y(1+y)=2 \Rightarrow y^2+y-2=0 \Rightarrow (y+2)(y-1)=0$.
+                <br>$y=-2 \Rightarrow x = (-2)^3 = -8$.
+                <br>$y=1 \Rightarrow x = (1)^3 = 1$.
+                <br>Hasil kali: $(-8) \cdot 1 = -8$.
+            </div>
+
+            <div class="pembahasan">
+                <b>14. Jawaban: E</b>
+                <b>Konsep:</b> Sifat Akar Berkebalikan
+                <br>Akar $m$ dan $1/m$. Kali akar: $m \cdot 1/m = q \Rightarrow q=1$.
+                <br>Jumlah: $m + 1/m = p$. Karena akar negatif, misal $m=-k (k>0)$.
+                <br>$p = -(k+1/k)$. Nilai min $k+1/k$ adalah 2 (saat $k=1$). Maka max $p = -2$.
+                <br>Nilai max $p-q = -2 - 1 = -3$.
+            </div>
+
+            <div class="pembahasan">
+                <b>15. Jawaban: B</b>
+                <b>Konsep:</b> Operasi Akar
+                <br>$\frac{1}{x_1}+\frac{1}{x_2} = \frac{x_1+x_2}{x_1x_2} = \frac{-q/p}{-1/p} = q = -1$.
+                <br>$x_1x_2 = -1/p \Rightarrow (-1.5x_2)x_2 = -1/p \Rightarrow x_2^2 = \frac{2}{3p}$.
+                <br>$x_1+x_2 = -q/p = 1/p$. $-0.5x_2 = 1/p \Rightarrow x_2 = -2/p$.
+                <br>$(-2/p)^2 = 2/3p \Rightarrow 4/p^2 = 2/3p \Rightarrow p=6$.
+                <br>$p+q = 6 + (-1) = 5$.
+            </div>
+
+            <div class="pembahasan">
+                <b>16. Jawaban: E</b>
+                <b>Konsep:</b> Persamaan Kuadrat
+                <br>$\frac{q+1}{p+1} - \frac{p-1}{q-1} = -\frac{3}{2}$.
+                <br>Setelah disederhanakan (lihat pembahasan detail di soal asli), persamaan dalam $k$: $k^2+2k-8=0$.
+                <br>Jumlah nilai $k = -2$.
+            </div>
+
+            <div class="pembahasan">
+                <b>17. Jawaban: D</b>
+                <b>Konsep:</b> Persamaan Kuadrat Baru
+                <br>$\frac{1}{\alpha^2} + \frac{1}{\beta^2} = 5 \Rightarrow p^2-4=5 \Rightarrow p=3$ (karena $p>0$).
+                <br>$\frac{1}{\alpha^2\beta^2} = q \Rightarrow q = 1/(1/2)^2 = 4$.
+                <br>Nilai $q-p = 4-3 = 1$.
+            </div>
+
+            <div class="pembahasan">
+                <b>18. Jawaban: A</b>
+                <b>Konsep:</b> Substitusi Akar
+                <br>$a^2 = 3-a$ dan $b^2 = 3-b$.
+                <br>$2a^2+b^2+a = 2(3-a) + (3-b) + a = 6-2a+3-b+a = 9-(a+b)$.
+                <br>$a+b=-1$, jadi $9-(-1) = 10$.
+            </div>
+
+            <div class="pembahasan">
+                <b>19. Jawaban: C</b>
+                <b>Konsep:</b> Transformasi Akar
+                <br>Jumlah akar baru: $(m+2)+(n+2) = (m+n)+4 = -b/a+4$.
+                <br>$-q/a = -b/a+4 \Rightarrow q = b-4a$.
+                <br>Kali akar baru: $(m+2)(n+2) = mn+2(m+n)+4 = c/a - 2b/a + 4$.
+                <br>$r/a = c/a - 2b/a + 4 \Rightarrow r = c-2b+4a$.
+                <br>$q+r = b-4a + c-2b+4a = c-b$.
+            </div>
+
+            <div class="pembahasan">
+                <b>20. Jawaban: A</b>
+                <b>Konsep:</b> PK Baru
+                <br>$x_1+x_2=-3, x_1x_2=1$.
+                <br>Akar baru $y_1, y_2$. $y_1+y_2 = 4 + \frac{x_1^2+x_2^2}{x_1x_2} = 4 + \frac{(-3)^2-2}{1} = 11$.
+                <br>$y_1y_2 = (2+\frac{x_2}{x_1})(2+\frac{x_1}{x_2}) = 4 + 2(\frac{x_1^2+x_2^2}{x_1x_2}) + 1 = 5 + 2(7) = 19$.
+                <br>$x^2 - 11x + 19 = 0$.
+            </div>
+
+        </div>
+    </section>
+
+</div>
+
+</body>
+</html>
