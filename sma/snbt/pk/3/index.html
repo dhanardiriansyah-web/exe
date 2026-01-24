@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul Matematika SMA - Fungsi Komposisi & Invers</title>
+    
+    <!-- Konfigurasi MathJax untuk Matematika -->
+    <script>
+        window.MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']]
+          },
+          svg: {
+            fontCache: 'global'
+          }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    
+    <!-- Font Google: Nunito -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-text: #333333;
+            --secondary-text: #555555;
+            --border-color: #dddddd;
+            --title-grad-1: #00857c;
+            --title-grad-2: #005a54;
+            --bg-color: #e0e0e0;
+            --page-bg: #ffffff;
+        }
+        
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            font-size: 10pt;
+            line-height: 1.6;
+            color: var(--primary-text);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            counter-reset: page;
+        }
+
+        /* Layout Halaman Kertas (A4 style) */
+        .page {
+            background: var(--page-bg);
+            width: 210mm; /* A4 Width */
+            min-height: 297mm; /* A4 Height */
+            padding: 20mm;
+            margin: 1cm auto;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        /* Penomoran Halaman */
+        .page:not(.cover-page)::after {
+            counter-increment: page;
+            content: counter(page);
+            position: absolute;
+            bottom: 15mm;
+            right: 20mm;
+            font-size: 10pt;
+            color: #888;
+            font-weight: bold;
+        }
+
+        /* Halaman Cover */
+        .cover-page {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 5px double #333;
+            height: 297mm;
+        }
+        
+        .logo-container {
+            margin-bottom: 40px;
+        }
+
+        .cover-img {
+            max-width: 50%; /* Adjusted for logo size */
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .logo-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--title-grad-1);
+            display: none; /* Hide secondary logo to focus on the main requested logo */
+        }
+
+        .cover-page .title {
+            font-size: 28pt;
+            font-weight: 900;
+            margin: 0;
+            color: var(--title-grad-2);
+            background: -webkit-linear-gradient(45deg, var(--title-grad-1), var(--title-grad-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cover-page .subtitle {
+            font-size: 16pt;
+            margin-top: 15px;
+            color: var(--secondary-text);
+            font-weight: 700;
+        }
+
+        /* Watermark Background */
+        .watermark-container .page::before {
+            content: '';
+            background-image: url('https://imgix3.ruangguru.com/assets/miscellaneous/jpeg_sijv7w_5618.jpeg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 8cm;
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%; height: 100%;
+            opacity: 0.05;
+            z-index: 0;
+            pointer-events: none;
+            filter: grayscale(100%);
+        }
+        
+        .cover-page::before, .toc-page::before { opacity: 0; }
+
+        .content-wrapper { position: relative; z-index: 1; width: 100%; }
+        
+        /* Typography */
+        h1 { font-size: 24pt; text-align: center; border-bottom: 3px solid var(--primary-text); padding-bottom: 10px; margin-bottom: 30px; }
+        h2 { font-size: 18pt; color: #000; border-left: 6px solid var(--title-grad-1); padding-left: 15px; margin-top: 10px; margin-bottom: 20px; }
+        
+        /* Daftar Isi */
+        .toc-list { list-style-type: none; padding: 0; }
+        .toc-list li { margin-bottom: 15px; font-size: 14pt; border-bottom: 1px dotted #ccc; padding-bottom: 5px; }
+        .toc-list a { text-decoration: none; color: var(--primary-text); display: flex; justify-content: space-between; }
+        .toc-list a:hover { color: var(--title-grad-1); font-weight: bold; }
+        
+        /* Item Soal */
+        .latihan-item { 
+            display: grid; 
+            grid-template-columns: 1fr 0.3fr;
+            gap: 20px; 
+            border-bottom: 1px dashed var(--border-color); 
+            padding-bottom: 20px; 
+            margin-bottom: 20px; 
+            break-inside: avoid; 
+        }
+        
+        .soal-latihan { overflow-wrap: break-word; word-wrap: break-word; }
+        
+        /* Area Coretan */
+        .coret-coret { 
+            border: 2px dashed #d1d1d1; 
+            border-radius: 8px; 
+            position: relative; 
+            background-color: #fafafa;
+            min-height: 150px;
+        }
+        .coret-coret::after { 
+            content: 'Area Coretan'; 
+            color: #e0e0e0; 
+            position: absolute; 
+            top: 50%; left: 50%; 
+            transform: translate(-50%, -50%) rotate(-15deg); 
+            font-size: 14pt; 
+            font-weight: bold; 
+            pointer-events: none; 
+        }
+        
+        /* Pembahasan Box */
+        .pembahasan { 
+            background-color: #f0fdfc; 
+            border-left: 4px solid var(--title-grad-1); 
+            padding: 15px; 
+            border-radius: 0 5px 5px 0; 
+            margin-top: 15px; 
+            margin-bottom: 20px; 
+            font-size: 9.5pt; 
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+            break-inside: avoid;
+        }
+        .pembahasan b { color: var(--title-grad-2); }
+        
+        /* Pilihan Ganda List */
+        ol.pilihan-ganda { list-style-type: none; padding-left: 0; margin-top: 10px; }
+        ol.pilihan-ganda li { margin-bottom: 5px; display: flex; }
+        ol.pilihan-ganda li::before { 
+            content: attr(data-option) ". "; 
+            font-weight: bold; 
+            margin-right: 10px; 
+            min-width: 20px;
+        }
+
+        .keterangan-soal { 
+            font-weight: bold; 
+            font-size: 9pt; 
+            color: #fff; 
+            background: var(--title-grad-1); 
+            padding: 3px 10px; 
+            border-radius: 15px; 
+            display: inline-block; 
+            margin-bottom: 10px;
+        }
+
+        /* Media Query untuk Cetak */
+        @media print {
+            body { background: none; }
+            .page { width: 100%; height: auto; margin: 0; box-shadow: none; page-break-after: always; border: none; }
+            .latihan-item { break-inside: avoid; }
+            .pembahasan { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="watermark-container">
+
+    <!-- Cover Page -->
+    <section class="page cover-page">
+        <div class="content-wrapper">
+            <div class="logo-container">
+                <!-- Main Cover Image from Source -->
+                <img src="https://imgix3.ruangguru.com/assets/miscellaneous/jpeg_sijv7w_5618.jpeg" alt="Logo Utama" class="cover-img">
+            </div>
+            <h1 class="title">MODUL MATEMATIKA<br>SMA</h1>
+            <p class="subtitle">Soal Fungsi Komposisi dan Fungsi Invers (FKFI)<br>Matematika SMA dan Pembahasan</p>
+            <div style="margin-top: 50px; font-size: 12pt; color: #666;">
+                <strong>Sumber:</strong> defantri.com<br>
+                <em>(SNMPTN, SBMPTN, SIMAK UI, UM UGM, UNBK)</em>
+            </div>
+        </div>
+    </section>
+
+    <!-- Table of Contents -->
+    <section class="page toc-page">
+        <div class="content-wrapper">
+            <h1>Daftar Isi</h1>
+            <ul class="toc-list">
+                <li><a href="#soal-1-10">Bagian 1: Soal Latihan (1 - 10)</a></li>
+                <li><a href="#soal-11-20">Bagian 2: Soal Latihan (11 - 20)</a></li>
+                <li><a href="#soal-21-30">Bagian 3: Soal Latihan (21 - 30)</a></li>
+                <li><a href="#soal-31-40">Bagian 4: Soal Latihan (31 - 40)</a></li>
+                <li><a href="#soal-41-47">Bagian 5: Soal Latihan (41 - 47)</a></li>
+                <li><a href="#pembahasan">Kunci Jawaban & Pembahasan Lengkap</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Soal 1-10 -->
+    <section id="soal-1-10" class="page">
+        <div class="content-wrapper">
+            <h2>Bagian 1: Soal Latihan (1-10)</h2>
+            
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal SNMPTN 2011 Kode 879</div><br>
+                    Jika $f(x)=\dfrac{x-2011}{x-1}$, maka $(f \circ f \circ f \circ f \circ f)(x)$ adalah$\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$\frac{x+2011}{x-1}$</li>
+                        <li data-option="B">$\frac{x+2011}{x+1}$</li>
+                        <li data-option="C">$\frac{x-2011}{x+1}$</li>
+                        <li data-option="D">$\frac{x-2011}{x-1}$</li>
+                        <li data-option="E">$\frac{-x+2011}{x-1}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal SNMPTN 2012 Kode 421</div><br>
+                    Jika $f(x)=ax+3$, $a \neq 0$ dan $f^{-1}\left (f^{-1}\left ( 9 \right ) \right )=3$ maka nilai $a^{2}+a+1$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">11</li>
+                        <li data-option="B">9</li>
+                        <li data-option="C">7</li>
+                        <li data-option="D">5</li>
+                        <li data-option="E">3</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal SNMPTN 2012 Kode 122</div><br>
+                    Jika $f(x)=ax+3$, dan $f \left (f \left ( x \right ) \right )=4x+9$ maka nilai $a^{2}+3a+3$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">13</li>
+                        <li data-option="B">11</li>
+                        <li data-option="C">7</li>
+                        <li data-option="D">3</li>
+                        <li data-option="E">2</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal SBMPTN 2016 Kode 322</div><br>
+                    Jika fungsi $f$ dan fungsi $g$ mempunyai invers dan memenuhi $g\left ( x-2 \right)= f\left ( x+2 \right)$, maka $g^{-1}\left ( x \right)= \cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$f^{-1}\left ( x \right )+4$</li>
+                        <li data-option="B">$4-f^{-1}\left ( x \right)$</li>
+                        <li data-option="C">$f^{-1}\left ( x+4 \right)$</li>
+                        <li data-option="D">$-f^{-1}\left ( x \right)-4$</li>
+                        <li data-option="E">$f^{-1}\left ( x \right)-4$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal SBMPTN 2016 Kode 324</div><br>
+                    Jika fungsi $f$ dan fungsi $g$ mempunyai invers dan memenuhi $f\left ( x \right)= g\left ( 4+2x \right)$, maka $f^{-1}\left ( x \right)= \cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$g^{-1}\left ( x \right )-4$</li>
+                        <li data-option="B">$g^{-1}\left ( x \right)-2$</li>
+                        <li data-option="C">$\frac{1}{2}g^{-1}\left ( x \right)-2$</li>
+                        <li data-option="D">$\frac{1}{2}\left (g^{-1}\left ( x \right)-2 \right)$</li>
+                        <li data-option="E">$\frac{1}{2}g^{-1}\left ( x \right)-4$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal SBMPTN 2015 Kode 610</div><br>
+                    Jika $f\left ( 2-x \right)= \dfrac{x}{2}+3$, maka $f^{-1}\left ( x \right)= \cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$2x+8$</li>
+                        <li data-option="B">$2x-8$</li>
+                        <li data-option="C">$8-2x$</li>
+                        <li data-option="D">$\frac{x}{2}-4$</li>
+                        <li data-option="E">$4-\frac{x}{2}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal SBMPTN 2014 Kode 673</div><br>
+                    Diketahui $f \left ( x \right)= \dfrac{px+q}{x+2},\ q\neq 0$. Jika $f^{-1}$ menyatakan invers dari $f$ dan $f^{-1} \left ( q \right)=-1$, maka $f^{-1} \left ( 2q \right)= \cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">-3</li>
+                        <li data-option="B">-2</li>
+                        <li data-option="C">$-\frac{3}{2}$</li>
+                        <li data-option="D">$\frac{3}{2}$</li>
+                        <li data-option="E">3</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal SBMPTN 2013 Kode 427</div><br>
+                    Jika $f\left ( \dfrac{1}{x-1} \right)= \dfrac{x-6}{x+3}$, maka nilai $f^{-1}\left ( -2 \right)$ adalah $\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">-1</li>
+                        <li data-option="B">0</li>
+                        <li data-option="C">1</li>
+                        <li data-option="D">2</li>
+                        <li data-option="E">3</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal SBMPTN 2017 Kode 226</div><br>
+                    Jika $f(x)=x^{2}-1$, dan $g(x)=\dfrac{x-2}{x+1}$ maka daerah asal fungsi $f \cdot g$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$\left \{ x|-\infty \lt x \lt \infty \right \}$</li>
+                        <li data-option="B">$\left \{ x|x \neq -1 \right \}$</li>
+                        <li data-option="C">$\left \{ x|x \neq 2 \right \}$</li>
+                        <li data-option="D">$\left \{ x|x \lt -1 \right \}$</li>
+                        <li data-option="E">$\left \{ x|x \geq 2 \right \}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal SBMPTN 2017 Kode 226</div><br>
+                    Jika $f(x)=1-x^{2}$, dan $g(x)=\sqrt{5-x}$ maka daerah hasil fungsi komposisi $f \circ g$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$\left \{ y|-\infty \lt y \lt \infty \right \}$</li>
+                        <li data-option="B">$\left \{ y|y \leq -1\ \text{atau}\ y \geq 1 \right \}$</li>
+                        <li data-option="C">$\left \{ y|y \leq 5 \right \}$</li>
+                        <li data-option="D">$\left \{ x|y \leq 1 \right \}$</li>
+                        <li data-option="E">$\left \{ x|-1 \leq y \geq 1 \right \}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Soal 11-20 -->
+    <section id="soal-11-20" class="page">
+        <div class="content-wrapper">
+            <h2>Bagian 2: Soal Latihan (11-20)</h2>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal UNBK Matematika IPS 2018</div><br>
+                    Diketahui $f(x)=3x+2$ dan $g(x)=x^{2}-x+3$. Fungsi komposisi $(fog)(x)= \cdots $
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$3x^{2}+3x+11$</li>
+                        <li data-option="B">$3x^{2}-3x+11$</li>
+                        <li data-option="C">$3x^{2}-3x-11$</li>
+                        <li data-option="D">$9x^{2}-9x-5$</li>
+                        <li data-option="E">$9x^{2}-9x-5$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal UNBK Matematika IPS 2018</div><br>
+                    Daerah asal fungsi $f$ yang ditentukan oleh $f(x)=\frac{\sqrt{3x-18}}{2x-20}$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$\left \{x | x \geq 6,\ x\neq 10,\ x \in \mathbb{R} \right \}$</li>
+                        <li data-option="B">$\left \{x | x \geq 6,\ x\neq -10,\ x \in \mathbb{R} \right \}$</li>
+                        <li data-option="C">$\left \{x | x \geq -6,\ x \neq 10,\ x \in \mathbb{R} \right \}$</li>
+                        <li data-option="D">$\left \{x | x \leq 6,\ x\neq -10,\ x \in \mathbb{R} \right \}$</li>
+                        <li data-option="E">$\left \{x | x \leq -6,\ x\neq 10,\ x \in \mathbb{R} \right \}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal UNBK Matematika IPA 2018</div><br>
+                    Diketahui $f(x)=\frac{2-3x}{6x-5}$, $x \neq \frac{5}{6}$. Invers dari fungsi $f(x)$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$f^{-1}(x)=\frac{5x+2}{6x-3},\ x \neq \frac{1}{2}$</li>
+                        <li data-option="B">$f^{-1}(x)=\frac{5x-2}{6x+3},\ x \neq -\frac{1}{2}$</li>
+                        <li data-option="C">$f^{-1}(x)=\frac{6x+3}{5x+2},\ x \neq -\frac{5}{2}$</li>
+                        <li data-option="D">$f^{-1}(x)=\frac{5x+2}{6x+3},\ x \neq -\frac{1}{2}$</li>
+                        <li data-option="E">$f^{-1}(x)=\frac{6x-3}{5x+2},\ x \neq -\frac{5}{2}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal UNBK Matematika IPA 2018</div><br>
+                    Diketahui $f(x)=2x-1$ dan $(gof)(x)=x-3$. Nilai dari $g^{-1}(-2)$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">-2</li>
+                        <li data-option="B">-1</li>
+                        <li data-option="C">0</li>
+                        <li data-option="D">1</li>
+                        <li data-option="E">2</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal SBMPTN 2018 Kode 526</div><br>
+                    Jika $g(x)=\dfrac{1}{\sqrt{x-1}}$ dan $f(x)$ merupakan fungsi dengan $(f \circ g)(x)=\dfrac{2x-1}{x-1}$, maka himpunan penyelesaian $1 \leq f(x) \leq 6$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$\left \{ x | -2 \leq x \leq -1\ \text{atau}\ 1 \leq x \leq 2\ \right \}$</li>
+                        <li data-option="B">$\left \{ x | -2 \leq x \leq 0\ \text{atau}\ x \leq 2\ \right \}$</li>
+                        <li data-option="C">$\left \{ x | -2 \leq x \leq 2\ \right \}$</li>
+                        <li data-option="D">$\left \{ x | -1 \leq x \leq 2\ \right \}$</li>
+                        <li data-option="E">$\left \{ x | 0 \leq x \leq 2\ \right \}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal SBMPTN 2018 Kode 527</div><br>
+                    Jika $f(x)=\dfrac{1}{(x-1)^{2}}$ dan $g(x)=\dfrac{ 1}{x-2}$, maka himpunan penyelesaian $\dfrac{f(x)g(x)}{(f \circ g)(x)} \lt 0$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$\left \{ x | x \lt 1\ \text{atau}\  x \gt 2\ \right \}$</li>
+                        <li data-option="B">$\left \{ x | x \lt 1\ \text{atau}\  2 \lt x \lt 3 \right \}$</li>
+                        <li data-option="C">$\left \{ x | x \lt 1\ \text{atau}\  1 \lt x \lt 2 \right \}$</li>
+                        <li data-option="D">$\left \{ x | 1 \lt x \lt 2 \text{atau}\ x \gt 3\ \right \}$</li>
+                        <li data-option="E">$\left \{ x | 2 \lt x \lt 3 \text{atau}\ x \gt 3\ \right \}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal SBMPTN 2018 Kode 526</div><br>
+                    Diketahui $f$ dan $g$ merupakan fungsi yang mempunyai invers. Jika $f \left( g(x) \right)=2x-1$ dan $g(x+1)=x-3$, maka nilai $f^{-1}(3) \cdot g^{-1}(3)$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">14</li>
+                        <li data-option="B">9</li>
+                        <li data-option="C">0</li>
+                        <li data-option="D">-9</li>
+                        <li data-option="E">-14</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal SBMPTN 2018 Kode 527</div><br>
+                    Diketahui $f$ dan $g$ merupakan fungsi yang mempunyai invers. Jika $f \left( g(x) \right)=x+1$ dan $g(x+2)=x-4$, maka nilai $f^{-1}(2) + g^{-1}(2)$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">-5</li>
+                        <li data-option="B">-3</li>
+                        <li data-option="C">1</li>
+                        <li data-option="D">3</li>
+                        <li data-option="E">5</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal SIMAK UI 2018 Kode 641</div><br>
+                    Jika $g(x)=\dfrac{-ax-3}{-x-4}$ dan $h(x)=\dfrac{4x-3}{-x+a}$, nilai $(g \circ h)(3)$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">6</li>
+                        <li data-option="B">5</li>
+                        <li data-option="C">4</li>
+                        <li data-option="D">3</li>
+                        <li data-option="E">2</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal SIMAK UI 2018 Kode 641</div><br>
+                    Jika $f(x+1)=\dfrac{2x-7}{x+1}$, maka...<br>
+                    (1) $f(-1)=11$<br>
+                    (2) $f^{-1}(-1)=3$<br>
+                    (3) $(f \circ f)^{-1}(-1)=-9$<br>
+                    (4) $\dfrac{1}{f^{-1}(-2)}=\dfrac{4}{9}$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">(1), (2), dan (3) BENAR</li>
+                        <li data-option="B">(1) dan (3) BENAR</li>
+                        <li data-option="C">(2) dan (4) BENAR</li>
+                        <li data-option="D">Hanya (4) BENAR</li>
+                        <li data-option="E">SEMUA BENAR</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Soal 21-30 -->
+    <section id="soal-21-30" class="page">
+        <div class="content-wrapper">
+            <h2>Bagian 3: Soal Latihan (21-30)</h2>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal UM STIS 2011</div><br>
+                    Diketahui $f(x)=2x-1$ dan $g(x)=\dfrac{5x}{x+1}$. Jika $h$ adalah funsgi sehingga $\left ( g \circ h \right )(x)=x-2$ maka $\left ( h \circ f \right )(x)=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$\frac{2x-3}{2x+8}$</li>
+                        <li data-option="B">$\frac{2x-3}{-2x+6}$</li>
+                        <li data-option="C">$\frac{2x-3}{2x-8}$</li>
+                        <li data-option="D">$\frac{2x-3}{-2x+8}$</li>
+                        <li data-option="E">$\frac{2x-3}{-2x-8}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal UM STIS 2011</div><br>
+                    Jika $f(x)=3^{x-1}$ maka $f^{-1}(81)=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">1</li>
+                        <li data-option="B">2</li>
+                        <li data-option="C">3</li>
+                        <li data-option="D">4</li>
+                        <li data-option="E">5</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal UNBK Matematika IPA 2019</div><br>
+                    Daerah asal fungsi $h(x)= \sqrt{ \dfrac{x^{2}-3x+2}{x+2}}$ agar terdefinisi adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$\left \{x | -2 \lt x \leq 1\ \text{atau}\ x \geq 2,\ x \in \mathbb{R} \right \}$</li>
+                        <li data-option="B">$\left \{x | -2 \leq x \leq 1\ \text{atau}\ x \geq 2,\ x \in \mathbb{R} \right \}$</li>
+                        <li data-option="C">$\left \{x | -2 \lt x \leq 1\ \text{atau}\ x \geq 1,\ x \in \mathbb{R} \right \}$</li>
+                        <li data-option="D">$\left \{x | x \lt -2\ \text{atau}\ 1 \leq x \leq 2\ x \in \mathbb{R} \right \}$</li>
+                        <li data-option="E">$\left \{x | x \leq -2\ \text{atau}\ 1 \leq x \leq 2\ x \in \mathbb{R} \right \}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal UNBK Matematika IPA 2019</div><br>
+                    Fungsi $f:R \rightarrow R$ dan $g: R \rightarrow R$. Jika $g(x)=x-1$ dan $(fog)(x)=x^{3}-4x$, nilai dari $f(2)=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">9</li>
+                        <li data-option="B">13</li>
+                        <li data-option="C">15</li>
+                        <li data-option="D">17</li>
+                        <li data-option="E">25</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal UNBK Matematika IPA 2019</div><br>
+                    Diketahui fungsi $f(x)=\sqrt{5x+1}$, dengan $x \geq -\dfrac{1}{5}$. Jika $f^{-1}(x)$ adalah invers dari fungsi $f(x)$, nilai dari $f^{-1}(3)=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">0</li>
+                        <li data-option="B">$\frac{4}{5}$</li>
+                        <li data-option="C">1</li>
+                        <li data-option="D">$\frac{8}{5}$</li>
+                        <li data-option="E">2</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal UTBK-SBMPTN 2019</div><br>
+                    Jika fungsi $\sqrt{ \dfrac{x^{2}-8x+5}{x^{2}+x+12}}$ terdefinisi untuk $x \leq a$ atau $x \geq b$, maka nilai $a+b=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">8</li>
+                        <li data-option="B">5</li>
+                        <li data-option="C">0</li>
+                        <li data-option="D">-5</li>
+                        <li data-option="E">-8</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal UNBK Matematika SMA IPS 2019</div><br>
+                    Daerah hasil fungsi $y=x^{2}-2x-3$ untuk daerah asal $\left \{ x | -1 \leq x \leq 4,\ x \in R \right \}$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$\left \{ x | -4 \leq y \leq 0,\ y \in R \right \}$</li>
+                        <li data-option="B">$\left \{ x | -4 \leq y \leq 11,\ y \in R \right \}$</li>
+                        <li data-option="C">$\left \{ x | -4 \leq y \leq 5,\ y \in R \right \}$</li>
+                        <li data-option="D">$\left \{ x | 0 \leq y \leq 5,\ y \in R \right \}$</li>
+                        <li data-option="E">$\left \{ x | 0 \leq y \leq 11,\ y \in R \right \}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal UNBK Matematika SMA IPS 2019</div><br>
+                    Diketahui $f(x)=x^{2}+x+1$ dan $g(x)=2x-3$. Fungsi komposisi $(fog)(x)$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$4x^{2}-14x+7$</li>
+                        <li data-option="B">$4x^{2}-10x+7$</li>
+                        <li data-option="C">$4x^{2}-10x+5$</li>
+                        <li data-option="D">$4x^{2}+2x-11$</li>
+                        <li data-option="E">$4x^{2}+2x+7$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal UNBK Matematika SMA IPS 2019</div><br>
+                    Diketahui fungsi $f(x)=2x+1$ dan $g(x)=\dfrac{x}{3x-2}$. Daerah asal fungsi komposisi $(gof)(x)$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$\left \{ x\ |\ x \neq -\frac{1}{6},\ x \in R \right \}$</li>
+                        <li data-option="B">$\left \{ x\ |\ x \neq -\frac{1}{2},\ x \in R \right \}$</li>
+                        <li data-option="C">$\left \{ x\ |\ x \neq \frac{1}{6},\ x \in R \right \}$</li>
+                        <li data-option="D">$\left \{ x\ |\ x \neq \frac{2}{3},\ x \in R \right \}$</li>
+                        <li data-option="E">$\left \{ x\ |\ x \in R \right \}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal UNBK Matematika SMA IPS 2019</div><br>
+                    Pembuatan pakaian pada suatu industri dilakukan melalui dua tahap yaitu tahap pemotongan kain menjadi pola dan dilanjutkan dengan tahap penjahitan pola menjadi pakaian. Banyak unit pola yang terbentuk mengikuti $f(x)=\dfrac{3}{4}x+5$, sedangkan banyak pakaian mengikuti $g(x)=\dfrac{1}{2}x+6$. Jika tersedia $100\ m^{2}$ kain, banyak pakaian yang dihasilkan adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">38 pakaian</li>
+                        <li data-option="B">41 pakaian</li>
+                        <li data-option="C">42 pakaian</li>
+                        <li data-option="D">46 pakaian</li>
+                        <li data-option="E">47 pakaian</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Soal 31-40 -->
+    <section id="soal-31-40" class="page">
+        <div class="content-wrapper">
+            <h2>Bagian 4: Soal Latihan (31-40)</h2>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal UNBK Matematika SMA IPS 2019</div><br>
+                    Diketahui $f(x)=\dfrac{9x+17}{x+2};\ x \neq -2$ dan $f^{-1}(x)$ adalah invers dari $f(x)$. Nilai dari $f^{-1}(10)$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">-16</li>
+                        <li data-option="B">-3</li>
+                        <li data-option="C">-2</li>
+                        <li data-option="D">2</li>
+                        <li data-option="E">12</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal SIMAK UI 2019 Kode 539</div><br>
+                    Jika $f(x+1)=x^{2}+2x+1$ dengan $x \gt 0$, maka $f^{-1}\left(x-1+f(x-1)\right)=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$x-1$</li>
+                        <li data-option="B">$\sqrt{x}+1$</li>
+                        <li data-option="C">$\sqrt{x}-1$</li>
+                        <li data-option="D">$\sqrt{x(x+1)}$</li>
+                        <li data-option="E">$\sqrt{x(x-1)}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal SIMAK UI 2019 Kode 539</div><br>
+                    Jika $f(x)=2x^{2}-3x+1$, $g(x)=ax+b$ dan $(g \circ f)(x-1)=4x^{2}-14x+11$, maka...<br>
+                    (1) $a=2$<br>(2) $b=-1$<br>(3) $(fog)(1)=0$<br>(4) $\dfrac{f(x)}{g(x)}=x+1$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">(1), (2), dan (3) BENAR</li>
+                        <li data-option="B">(1) dan (3) BENAR</li>
+                        <li data-option="C">(2) dan (4) BENAR</li>
+                        <li data-option="D">Hanya (4) BENAR</li>
+                        <li data-option="E">SEMUA BENAR</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal UTBK-SBMPTN 2019</div><br>
+                    Diketahui $\left ( f \circ f \right )^{-1} \left( 11 \right)=2p$ dan $f \left ( 2x-4 \right )=3x-7$ maka nilai $p=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">1</li>
+                        <li data-option="B">2</li>
+                        <li data-option="C">3</li>
+                        <li data-option="D">4</li>
+                        <li data-option="E">5</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal UTBK-SBMPTN 2019</div><br>
+                    Diketahui $f \left ( \dfrac{1}{2x} \right ) = \dfrac{x}{3+x}$ dan $f^{-1} \left ( a \right )=-\dfrac{1}{3}$ maka nilai $a=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">2</li>
+                        <li data-option="B">1</li>
+                        <li data-option="C">0</li>
+                        <li data-option="D">-1</li>
+                        <li data-option="E">-2</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal UTBK-SBMPTN 2019</div><br>
+                    Jika $ f \left ( x-1 \right ) = 5x^{2}+6x-6$;  $g \left ( x \right )=ax+1$ dan $ \left ( g \circ f \right ) \left( 1 \right)=-51$ maka nilai $f \left ( a+1 \right )=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">-2</li>
+                        <li data-option="B">-6</li>
+                        <li data-option="C">-7</li>
+                        <li data-option="D">-11</li>
+                        <li data-option="E">-13</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal UTBK-SBMPTN 2019</div><br>
+                    Diketahui $f \left ( \dfrac{1}{x} \right ) = \dfrac{x}{2+3x}$ dan $f^{-1} \left ( a \right )=-1$ maka nilai $a=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">2</li>
+                        <li data-option="B">1</li>
+                        <li data-option="C">0</li>
+                        <li data-option="D">-1</li>
+                        <li data-option="E">-2</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal UTBK-SBMPTN 2019</div><br>
+                    Diketahui $f \left ( 2x \right ) = -\dfrac{1}{x+2}$ dan $f^{-1} \left ( \dfrac{2}{a} \right )=3a$ maka nilai $a=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">2</li>
+                        <li data-option="B">1</li>
+                        <li data-option="C">0</li>
+                        <li data-option="D">-1</li>
+                        <li data-option="E">-2</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal UTBK-SBMPTN 2019</div><br>
+                    Jika $ f \left ( x \right ) = 3x+a$ dan $ \left ( f \circ f \right ) \left( x \right)=9x+a+3$ maka nilai $f \left ( a \right )=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">6</li>
+                        <li data-option="B">5</li>
+                        <li data-option="C">4</li>
+                        <li data-option="D">3</li>
+                        <li data-option="E">2</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal UTBK-SBMPTN 2019</div><br>
+                    Jika $ f \left ( x \right ) = ax+3$ dan $ \left ( f \circ f \right ) \left( x \right)=4x-3$ maka nilai $f \left ( a \right )=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">1</li>
+                        <li data-option="B">3</li>
+                        <li data-option="C">5</li>
+                        <li data-option="D">7</li>
+                        <li data-option="E">9</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Soal 41-47 -->
+    <section id="soal-41-47" class="page">
+        <div class="content-wrapper">
+            <h2>Bagian 5: Soal Latihan (41-47)</h2>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal Simulasi UTBK-SBMPTN 2025</div><br>
+                    Jika $f \left ( x \right ) = \dfrac{x+1}{x-1}$ maka $f^{-1} \left ( \dfrac{1}{x} \right )$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$-f(x)$</li>
+                        <li data-option="B">$-f(-x)$</li>
+                        <li data-option="C">$\frac{1}{f(x)}$</li>
+                        <li data-option="D">$\frac{1}{f(-x)}$</li>
+                        <li data-option="E">$-\frac{1}{f(x)}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal SIMAK UI 2020</div><br>
+                    Diketahui $f(x)+3g^{-1}(x)=x^{2}+x-18$ dan $f(x)+2g^{-1}(x)=x^{2}-14$. Jika $f^{-1}(x)$ bernilai positif, maka $f^{-1}(2)+g^{-1}(2)=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">1</li>
+                        <li data-option="B">2</li>
+                        <li data-option="C">3</li>
+                        <li data-option="D">4</li>
+                        <li data-option="E">5</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal UM UNDIP 2019 Kode 324</div><br>
+                    Diberikan dua fungsi real $f(x)=x^{2}-2 \left| x \right|$ dan $g(x)=x^{2} +1 $. Jumlah semua nilai $x$ yang memenuhi persamaan $\left( fog \right)(x)=0$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">-2</li>
+                        <li data-option="B">-1</li>
+                        <li data-option="C">0</li>
+                        <li data-option="D">1</li>
+                        <li data-option="E">4</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal UM UGM 2019 Kode 634</div><br>
+                    Diberikan fungsi $f(x)=\dfrac{2x-1}{x+1}$. Nilai $\left( f^{-1} \circ f^{-1} \right)\left( \frac{1}{2} \right)$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">1</li>
+                        <li data-option="B">2</li>
+                        <li data-option="C">3</li>
+                        <li data-option="D">4</li>
+                        <li data-option="E">5</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal UM UGM 2019 Kode 934</div><br>
+                    Diketahui $f(x)=x^{2} +1$ dan $g(x)=ax+2$, dengan $a \neq 0$. Jika $\left( f \circ g^{-1} \right)(1)=5$ maka $4a^{2} -3 = \cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">-3</li>
+                        <li data-option="B">-2</li>
+                        <li data-option="C">-1</li>
+                        <li data-option="D">1</li>
+                        <li data-option="E">2</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Soal Simulasi UTBK-SNBT</div><br>
+                    Jika $f \left ( \dfrac{\sqrt{x+1}}{x-1} \right)= \dfrac{2x-1}{x+2}$, maka nilai $f^{-1}\left ( 1 \right)=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">-2</li>
+                        <li data-option="B">-1</li>
+                        <li data-option="C">0</li>
+                        <li data-option="D">1</li>
+                        <li data-option="E">2</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">Contoh Soal TKA Matematika SMA</div><br>
+                    Diketahui fungsi $f(x)=\sqrt{2x+3}$, dengan $x \geq -\frac{3}{2}$. Jika $f^{-1}(x)$ adalah invers dari fungsi $f(x)$, nilai dari $f^{-1}(3)=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">6</li>
+                        <li data-option="B">3</li>
+                        <li data-option="C">$\frac{3}{2}$</li>
+                        <li data-option="D">$-\frac{1}{2}$</li>
+                        <li data-option="E">-1</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pembahasan -->
+    <section id="pembahasan" class="page">
+        <div class="content-wrapper">
+            <h2>Kunci Jawaban & Pembahasan Lengkap</h2>
+            
+            <div class="pembahasan">
+                <b>1. Jawaban: D</b><br>
+                $\begin{align}f(x) & = \dfrac{x-2011}{x-1} \\(f \circ f)(x) & = f \left( f(x) \right) \\& = \dfrac{f(x)-2011}{f(x)-1} \\& = \dfrac{\dfrac{x-2011}{x-1}-2011}{\dfrac{x-2011}{x-1}-1} \\& = \dfrac{\dfrac{x-2011}{x-1}-\dfrac{2011x-2011}{x-1}}{\dfrac{x-2011}{x-1}-\dfrac{x-1}{x-1}} \\& = \dfrac{\dfrac{x-2011-2011x+2011}{x-1}}{\dfrac{x-2011-x+1}{x-1}} \\& = \dfrac{\dfrac{-2010x}{x-1}}{\dfrac{-2010}{x-1}} \\& = \dfrac{-2010x}{-2010} \\& = x \end{align}$
+                <br>Dari hasil di atas yaitu $(f \circ f)(x) = x$ maka:
+                <br>$\begin{align}(f \circ f \circ f)(x) &= f(x) \\(f \circ f \circ f \circ f)(x) &= x \\(f \circ f \circ f \circ f \circ f)(x) &= f(x) \\\end{align}$
+            </div>
+
+            <div class="pembahasan">
+                <b>2. Jawaban: E</b><br>
+                Untuk $f(x) = ax+3$ dapat kita tentukan $f^{-1}(x)$ dan $f^{-1}(9)$ yaitu:<br>$\begin{align}y & = ax+3 \\y - 3 & = ax \\\dfrac{y - 3}{a} & = x \\f^{-1}(x) & = \dfrac{x - 3}{a} \\f^{-1}(9) & = \dfrac{9 - 3}{a} \\f^{-1}(9) & = \dfrac{6}{a}\end{align}$
+                <br>Lalu kita substitusikan kepada $f^{-1}\left (f^{-1}\left ( 9 \right ) \right )=3$, sehingga kita peroleh:<br>$\begin{align}f^{-1}\left (f^{-1}\left ( 9 \right ) \right) & = f^{-1}\left ( \dfrac{6}{a} \right ) \\3 & = \dfrac{\dfrac{6}{a} - 3}{a} \\3a & = \dfrac{6-3a}{a} \\3a^{2} & = 6-3a \\3a^{2}+3a-6 & = 0 \\a^{2}+a-2 & = 0 \\a^{2}+a-2 +3 & = 0 +3 \\a^{2}+a+1 & = 3 \end{align}$
+            </div>
+
+            <div class="pembahasan">
+                <b>3. Jawaban: A</b><br>
+                Untuk $f(x) = ax+3$ dapat kita tentukan $f \left (f \left ( x \right ) \right )$ yaitu:<br>$\begin{align}f \left (f \left ( x \right ) \right ) & = af(x)+3 \\4x+9 & = a(ax+3)+3 \\4x+9 & = a^{2}x+3a+3\end{align}$
+                <br>Dari bentuk diatas dapat kita simpulkan $4x= a^{2}x$ dan $9 =3a+3$ sehingga<br>$a^{2}+3a+3=4+9$ <br>$a^{2}+3a+3=13$
+            </div>
+
+            <div class="pembahasan">
+                <b>4. Jawaban: E</b><br>
+                Untuk menyelesaikan soal di atas kita coba dengan memisalkan $g \left ( x-2 \right)= f\left ( x+2 \right)=a$ sehingga kita peroleh $g \left ( x-2 \right)=a$ atau $f\left ( x+2 \right)=a$
+                <br>$\begin{align}g\left ( x-2 \right) &=a \\g^{-1}\left ( a \right ) &=x-2 \\g^{-1}\left ( a \right )+2 &=x \\\hline f\left ( x+2 \right ) &=a \\f^{-1}\left ( a \right ) &=x+2 \\f^{-1}\left ( a \right ) &=g^{-1}\left ( a \right )+2+2 \\f^{-1}\left ( a \right ) &=g^{-1}\left ( a \right )+4 \\f^{-1}\left ( a \right )-4 &=g^{-1}\left ( a \right ) \\g^{-1}\left ( a \right ) &=f^{-1}\left ( a \right )-4 \end{align}$
+                <br>Dari hasil di atas dapat kita simpulkan bahwa $g^{-1}\left ( x \right ) =f^{-1}\left ( x \right )-4$
+            </div>
+
+            <div class="pembahasan">
+                <b>5. Jawaban: C</b><br>
+                Untuk menjawab soal ini kita butuh sedikit kreatifitas dengan memisalkan bahwa $ f \left ( x \right)= g\left ( 4+2x \right)=y$, sehingga kita peroleh $g\left ( 4+2x \right)=y$ dan $f\left ( x \right)=y$.
+                <br>$\begin{align}g\left ( 4+2x \right) &=y \\g^{-1}\left ( y \right ) &=4+2x \\g^{-1}\left ( y \right )-4 &=2x \\\dfrac{1}{2} \left (g^{-1}\left ( y \right )-4 \right ) &=x \\\dfrac{1}{2} g^{-1}\left ( y \right )-2 &=x \\\hline f\left ( x \right ) &=y \\f^{-1}\left ( y \right ) &=x \\f^{-1}\left ( y \right ) &=\dfrac{1}{2} g^{-1}\left ( y \right )-2 \\ \end{align}$
+                <br>Dari apa yang kita peroleh di atas dapat kita simpulkan $f^{-1}\left ( x \right )=\dfrac{1}{2} g^{-1}\left ( x \right )-2$
+            </div>
+
+            <div class="pembahasan">
+                <b>6. Jawaban: C</b><br>
+                Alternatif lain kita bisa kreatif dengan memakai sifat Jika $f\left ( a \right )=b$ maka $f^{-1}\left ( b \right )=a$.
+                <br>Jika $f\left ( 2-x \right)= \dfrac{x}{2}+3$, maka $f^{-1}\left ( \dfrac{x}{2}+3 \right)= 2-x$
+                <br>Kita misalkan <br>$\begin{align}\dfrac{x}{2}+3 &=a \\\dfrac{x}{2} &=a-3 \\x &=2a-6 \\\hline f^{-1}\left ( \dfrac{x}{2}+3 \right) &= 2-x \\f^{-1}\left ( a \right) &= 2-\left ( 2a-6 \right) \\f^{-1}\left ( a \right) &= 2-2a+6 \\f^{-1}\left ( a \right) &= 8-2a \end{align}$
+            </div>
+
+            <div class="pembahasan">
+                <b>7. Jawaban: C</b><br>
+                Jika $f^{-1} \left ( q \right)=-1$, maka $\left (f^{-1} \left ( -1 \right) \right )^{-1}=q$ atau bisa kita tulis $f\left ( -1 \right)=q$
+                <br>$\begin{align}f \left ( x \right) &= \dfrac{px+q}{x+2} \\f \left ( -1 \right) &= \dfrac{-p+q}{-1+2} \\q &= \dfrac{-p+q}{1} \\q &= -p+q \\p &=0 \\\hline f \left ( x \right) &= \dfrac{q}{x+2} \\f^{-1} \left ( \dfrac{q}{x+2} \right) &= x \ \end{align}$
+                <br>Kita dapat memisalkan $\dfrac{q}{x+2}=2q$ karena kita mau mencari $f^{-1} \left ( 2q \right)$ <br>$\begin{align}q &=2qx+4q \\-3q &=2qx \\x &=\dfrac{-3q}{2q} = -\dfrac{3}{2} \\ \end{align}$
+            </div>
+
+            <div class="pembahasan">
+                <b>8. Jawaban: A</b><br>
+                Jika $f\left ( \dfrac{1}{x-1} \right)= \dfrac{x-6}{x+3}$, maka $f^{-1}\left ( \dfrac{x-6}{x+3} \right)= \dfrac{1}{x-1}$
+                <br>Kita misalkan $\dfrac{x-6}{x+3}=-2$ karena kita mau menghitung $f^{-1}\left ( -2 \right)$ <br>$\begin{align}x-6 &=-2x-6 \\-6+6 &=-3x \\x &=0 \\\hline f^{-1}\left ( \dfrac{x-6}{x+3} \right) &= \dfrac{1}{x-1} \\f^{-1}\left ( -2 \right) &= \dfrac{1}{0-1} \\f^{-1}\left ( -2 \right) &= \dfrac{1}{-1}=-1 \end{align}$
+            </div>
+
+            <div class="pembahasan">
+                <b>9. Jawaban: B</b><br>
+                $\begin{align}f \cdot g & = x^{2}-1 \cdot \dfrac{x-2}{x+1} \\& = (x-1)(x+1) \cdot \dfrac{x-2}{x+1} \\& = \dfrac{(x-2)(x-1)(x+1)}{x+1} \\\end{align}$
+                <br>Agar fungsi $f \cdot g$ mempunyai hasil real, maka domain harus $\left \{ x|x \neq -1 \right \}$. Karena saat $x=-1$ nilai $f \cdot g$ adalah tak tentu.
+            </div>
+
+            <div class="pembahasan">
+                <b>10. Jawaban: A</b><br>
+                $\begin{align}(f \circ g)(x) & = f \left( g(x) \right) \\& = 1-\left( g(x) \right)^{2} \\& = 1-\left( \sqrt{5-x} \right)^{2} \\& = 1-(5-x) \\& = x-4\end{align}$
+                <br>Fungsi $(f \circ g)(x)=x-4$ adalah fungsi linear (garis lurus), sehingga untuk himpunan daerah asal $(x)$ yang tidak dibatasi maka daerah hasil $(y)$ merupakan himpunan tak hingga.
+            </div>
+
+            <div class="pembahasan">
+                <b>11. Jawaban: B</b><br>
+                $ \begin{align} (fog)(x) & = f \left( g(x) \right) \\& = 3g(x)+2 \\& = 3 \left( x^{2}-x+3 \right) +2 \\& = 3 x^{2} - 3x + 9 +2 \\& = 3 x^{2} - 3x + 11 \end{align} $
+            </div>
+
+            <div class="pembahasan">
+                <b>12. Jawaban: A</b><br>
+                Untuk fungsi pecahan agar mempunyai nilai Real syaratnya adalah penyebut tidak sama dengan nol.
+                <br>$ \begin{align}2x-20 & \neq 0 \\2x & \neq 20 \\x & \neq 10 \end{align} $
+                <br>Untuk fungsi bentuk akar, agar mempunyai nilai Real syaratnya adalah yang didalam akar harus lebih dari atau sama dengan nol.
+                <br>$ \begin{align}3x-18 & \geq 0 \\3x & \geq 18 \\x & \geq \frac{18}{3} \\ x & \geq 6 \end{align} $
+                <br>Gabungan: $x \geq 6, x \neq 10$.
+            </div>
+
+            <div class="pembahasan">
+                <b>13. Jawaban: D</b><br>
+                Invers fungsi $f(x)$;
+                <br>$f (x)=\frac{ax+b}{cx+d}$ maka $f^{-1}\left ( x \right )=\frac{-dx+b}{cx-a}$
+                <br>$ \begin{align}f(x) & =\frac{2-3x}{6x-5} = \frac{-3x+2}{6x-5} \\f^{-1}(x) & = \frac{5x+2}{6x+3}\end{align} $
+            </div>
+
+            <div class="pembahasan">
+                <b>14. Jawaban: D</b><br>
+                Berdasarkan informasi pada soal, diketahui $(gof)(x)=x-3$ maka
+                <br>$g \left (f(x) \right )=x-3$
+                <br>$g \left (2x-1 \right )=\frac{1}{2}(2x-1)+\frac{1}{2}-3$
+                <br>$g \left (2x-1 \right )=\frac{1}{2}(2x-1)-\frac{5}{2}$
+                <br>$g \left (a \right )=\frac{1}{2}(a)-\frac{5}{2}$
+                <br>Invers fungsi $g(a)$ adalah $g^{-1}(a)$ salah satu cara menentukan $g^{-1}(a)$ yaitu:
+                <br>$y=\frac{1}{2}(a)-\frac{5}{2}$
+                <br>$2y=a-5$
+                <br>$2y+5=a \implies g^{-1}(a)=2a+5$
+                <br>$g^{-1}(-2)=2(-2)+5=1$
+            </div>
+
+            <div class="pembahasan">
+                <b>15. Jawaban: C</b><br>
+                Pertama kita coba cari $g^{-1}(x)$ dari $g(x)=\dfrac{1}{\sqrt{x-1}}$.
+                <br>$\begin{align}y & = \dfrac{1}{\sqrt{x-1}} \\y^{2} & = \dfrac{1}{x-1} \\x-1 & = \dfrac{1}{y^{2}} \\x & = \dfrac{1}{y^{2}} +1 \\g^{-1}(x) & = \dfrac{1}{x^{2}} +1 = \dfrac{1+x^{2}}{x^{2}} \end{align}$
+                <br>Berikut kita cari $f(x)$ dengan mensubstitusi $g^{-1}(x)$ ke $(f \circ g)(x)$
+                <br>$\begin{align}f(x) & = (f \circ g)(g^{-1}(x)) \\& = \dfrac{2\left (g^{-1}(x) \right )-1}{\left (g^{-1}(x) \right )-1} \\& = \dfrac{2\left (\dfrac{1+x^{2}}{x^{2}} \right )-1}{\left (\dfrac{1+x^{2}}{x^{2}} \right )-1} = \dfrac{2+x^{2}}{1} = 2+x^{2}  \end{align}$
+                <br>Diketahui $1 \leq f(x) \leq 6$, maka $1 \leq 2+x^{2} \leq 6 \implies -1 \leq x^{2} \leq 4$.
+                <br>Karena $x^2 \geq 0$, maka cukup $x^2 \leq 4 \implies -2 \leq x \leq 2$.
+            </div>
+
+            <div class="pembahasan">
+                <b>16. Jawaban: C</b><br>
+                $\begin{align}f(x)g(x) & = \dfrac{1}{(x-1)^{2}} \times \dfrac{1}{x-2} = \dfrac{1}{(x-1)^{2}(x-2)} \end{align}$
+                <br>$(f \circ g)(x) = 1$ (berdasarkan perhitungan substitusi).
+                <br>$\begin{align}\dfrac{f(x)g(x)}{(f \circ g)(x)} & \lt 0 \\\dfrac{1}{(x-1)^{2}(x-2)} & \lt 0 \\(x-1)^{2}(x-2) & \lt 0 \end{align}$
+                <br>Karena $(x-1)^2$ selalu positif untuk $x \neq 1$, maka $x-2 < 0 \implies x < 2$. Syarat lain $x \neq 1$.
+                <br>Maka: $x < 1$ atau $1 < x < 2$.
+            </div>
+
+            <div class="pembahasan">
+                <b>17. Jawaban: E</b><br>
+                Dari $g(x+1)=x-3 \implies g(x)=x-4 \implies g^{-1}(x)=x+4 \implies g^{-1}(3)=7$.
+                <br>Dari $f \left( g(x) \right)=2x-1 \implies f(x-4)=2x-1$. Misal $x-4=a \implies x=a+4$.
+                <br>$f(a) = 2(a+4)-1 = 2a+7 \implies f(x)=2x+7$.
+                <br>$f^{-1}(x)=\frac{x-7}{2} \implies f^{-1}(3)=\frac{3-7}{2}=-2$.
+                <br>$f^{-1}(3) \cdot g^{-1}(3)= -2 \times 7=-14$.
+            </div>
+
+            <div class="pembahasan">
+                <b>18. Jawaban: D</b><br>
+                Dari $g(x+2)=x-4 \implies g(x)=x-6 \implies g^{-1}(x)=x+6 \implies g^{-1}(2)=8$.
+                <br>Dari $f(g(x))=x+1 \implies f(x-6)=x+1$. Misal $x-6=a \implies x=a+6$.
+                <br>$f(a)=a+6+1=a+7 \implies f(x)=x+7 \implies f^{-1}(x)=x-7 \implies f^{-1}(2)=-5$.
+                <br>Jumlah: $-5+8=3$.
+            </div>
+
+            <div class="pembahasan">
+                <b>19. Jawaban: D</b><br>
+                $(g \circ h)(x) = g(h(x)) = \dfrac{-a(\frac{4x-3}{-x+a})-3}{-(\frac{4x-3}{-x+a})-4} = \dots = x$.
+                <br>Karena komposisinya menghasilkan $x$, maka fungsi tersebut saling invers. $(g \circ h)(x)=x \implies (g \circ h)(3)=3$.
+            </div>
+
+            <div class="pembahasan">
+                <b>20. Jawaban: E</b><br>
+                $f(x+1)=\dfrac{2x-7}{x+1} = \dfrac{2(x+1)-9}{x+1} = 2 - \dfrac{9}{x+1}$.
+                <br>Maka $f(x) = 2 - \dfrac{9}{x}$.
+                <br>(1) $f(-1) = 2 - \dfrac{9}{-1} = 11$ (Benar).
+                <br>(2) $y = 2 - 9/x \implies 9/x = 2-y \implies x = \frac{9}{2-y}$. $f^{-1}(x) = \frac{9}{2-x}$. $f^{-1}(-1) = 9/3=3$ (Benar).
+                <br>(3) $(f \circ f)^{-1}(-1) = f^{-1}(f^{-1}(-1)) = f^{-1}(3) = \frac{9}{2-3} = -9$ (Benar).
+                <br>(4) $1/f^{-1}(-2) = 1/(9/4) = 4/9$ (Benar).
+            </div>
+
+            <div class="pembahasan">
+                <b>21. Jawaban: D</b><br>
+                $\begin{align}\left ( g \circ h \right )(x) &= x-2 \\\dfrac{5h(x)}{h(x)+1} &= x-2 \\5h(x) &= xh(x)-2h(x) +x-2 \\7h(x)-xh(x) &= x-2 \\h(x) &= \dfrac{x-2}{7-x} \end{align}$
+                <br>$\begin{align}\left ( h \circ f \right )(x) &= h\left ( f(x) \right ) \\&= \dfrac{f(x)-2}{7-f(x)} \\&= \dfrac{(2x-1)-2}{7-(2x-1)} \\&= \dfrac{2x-3}{8-2x}\end{align}$
+            </div>
+
+            <div class="pembahasan">
+                <b>22. Jawaban: E</b><br>
+                $\begin{align}f(x)&= 3^{x-1} \\y &= 3^{x-1} \\x-1 &= {}^3\!\log y \\x &= 1 + {}^3\!\log y \\f^{-1}(x) &= 1 + {}^3\!\log x \\f^{-1}(81) &= 1 + {}^3\!\log 81 = 1 + 4 = 5\end{align}$
+            </div>
+
+            <div class="pembahasan">
+                <b>23. Jawaban: A</b><br>
+                Syarat penyebut: $x \neq -2$.
+                <br>Syarat akar: $\dfrac{x^{2}-3x+2}{x+2} \geq 0 \implies \dfrac{(x-1)(x-2)}{x+2} \geq 0$.
+                <br>Garis bilangan: $-2 < x \leq 1$ atau $x \geq 2$.
+            </div>
+
+            <div class="pembahasan">
+                <b>24. Jawaban: C</b><br>
+                $f(g(x)) = x^3-4x \implies f(x-1) = x^3-4x$.
+                <br>Cari $f(2)$: $x-1=2 \implies x=3$.
+                <br>$f(2) = 3^3 - 4(3) = 27-12=15$.
+            </div>
+
+            <div class="pembahasan">
+                <b>25. Jawaban: D</b><br>
+                $y = \sqrt{5x+1} \implies y^2=5x+1 \implies x=\frac{y^2-1}{5}$.
+                <br>$f^{-1}(x) = \frac{x^2-1}{5}$.
+                <br>$f^{-1}(3) = \frac{3^2-1}{5} = \frac{8}{5}$.
+            </div>
+
+            <div class="pembahasan">
+                <b>26. Jawaban: A</b><br>
+                Penyebut $x^2+x+12$ definit positif ($D<0, a>0$).
+                <br>Maka pembilang $x^2-8x+5 \geq 0$.
+                <br>Akar-akar: $x = \frac{8 \pm \sqrt{64-20}}{2} = 4 \pm \sqrt{11}$.
+                <br>HP: $x \leq 4-\sqrt{11}$ atau $x \geq 4+\sqrt{11}$.
+                <br>$a=4-\sqrt{11}, b=4+\sqrt{11}$. $a+b=8$.
+            </div>
+
+            <div class="pembahasan">
+                <b>27. Jawaban: C</b><br>
+                $y=x^2-2x-3$. Titik puncak $x=-(-2)/2=1$. $y(1)=-4$ (Minimum).
+                <br>Batas interval: $y(-1) = 1+2-3=0$. $y(4) = 16-8-3=5$ (Maksimum).
+                <br>Range: $[-4, 5]$.
+            </div>
+
+            <div class="pembahasan">
+                <b>28. Jawaban: B</b><br>
+                $(fog)(x) = f(2x-3) = (2x-3)^2+(2x-3)+1 = 4x^2-12x+9 + 2x-2 = 4x^2-10x+7$.
+            </div>
+
+            <div class="pembahasan">
+                <b>29. Jawaban: A</b><br>
+                $(gof)(x) = \dfrac{2x+1}{3(2x+1)-2} = \dfrac{2x+1}{6x+1}$.
+                <br>Syarat: $6x+1 \neq 0 \implies x \neq -1/6$.
+            </div>
+
+            <div class="pembahasan">
+                <b>30. Jawaban: D</b><br>
+                $f(100) = \frac{3}{4}(100)+5 = 75+5=80$ pola.
+                <br>$g(80) = \frac{1}{2}(80)+6 = 40+6=46$ pakaian.
+            </div>
+
+            <div class="pembahasan">
+                <b>31. Jawaban: B</b><br>
+                $f^{-1}(10) = k \implies f(k)=10$.
+                <br>$\frac{9k+17}{k+2} = 10 \implies 9k+17 = 10k+20 \implies -k = 3 \implies k=-3$.
+            </div>
+
+            <div class="pembahasan">
+                <b>32. Jawaban: E</b><br>
+                $f(x+1) = (x+1)^2 \implies f(x)=x^2 \implies f^{-1}(x)=\sqrt{x}$.
+                <br>$f(x-1) = (x-1)^2$.
+                <br>$f^{-1}(x-1+(x-1)^2) = f^{-1}(x-1+x^2-2x+1) = f^{-1}(x^2-x) = \sqrt{x(x-1)}$.
+            </div>
+
+            <div class="pembahasan">
+                <b>33. Jawaban: A</b><br>
+                $(g \circ f)(x-1) = 4(x-1)^2-6(x-1)+1$. Maka $(g \circ f)(x) = 4x^2-6x+1$.
+                <br>$a(2x^2-3x+1)+b = 2ax^2-3ax+a+b = 4x^2-6x+1$.
+                <br>$2a=4 \implies a=2$. $a+b=1 \implies 2+b=1 \implies b=-1$.
+                <br>(1) $a=2$ (Benar). (2) $b=-1$ (Benar).
+                <br>(3) $(f \circ g)(1) = f(g(1)) = f(1) = 0$ (Benar).
+                <br>(4) $f(x)/g(x) = (2x-1)(x-1)/(2x-1) = x-1 \neq x+1$ (Salah).
+            </div>
+
+            <div class="pembahasan">
+                <b>34. Jawaban: C</b><br>
+                $f(2x-4)=3x-7 \implies f^{-1}(3x-7)=2x-4$.
+                <br>$3x-7=11 \implies x=6 \implies f^{-1}(11)=8$.
+                <br>$3x-7=8 \implies x=5 \implies f^{-1}(8)=6$.
+                <br>$(f \circ f)^{-1}(11) = f^{-1}(f^{-1}(11)) = f^{-1}(8) = 6 = 2p \implies p=3$.
+            </div>
+
+            <div class="pembahasan">
+                <b>35. Jawaban: B</b><br>
+                $f(1/2x) = \frac{x}{3+x}$. Misal $1/2x=m \implies x=1/2m$.
+                <br>$f(m) = \frac{1/2m}{3+1/2m} = \frac{1}{6m+1}$.
+                <br>$f(x) = \frac{1}{6x+1} \implies f^{-1}(x) = \frac{1-x}{6x}$.
+                <br>$f^{-1}(a) = -1/3 \implies \frac{1-a}{6a} = -1/3 \implies 3-3a = -6a \implies 3a=-3 \implies a=-1$. (Maaf, kunci soal D/B bervariasi, berdasarkan hitungan ini $a=-1$).
+                <br><em>Catatan: Kunci soal di sumber asli mungkin tertulis D (-1), namun ada opsi B (1). Sesuai perhitungan: -1.</em>
+            </div>
+
+            <div class="pembahasan">
+                <b>36. Jawaban: B</b><br>
+                $f(1) = f(2-1) = 5(4)+12-6=26$.
+                <br>$g(f(1)) = g(26) = 26a+1 = -51 \implies 26a=-52 \implies a=-2$.
+                <br>$f(a+1) = f(-1) = f(0-1) = 5(0)+0-6 = -6$.
+            </div>
+
+            <div class="pembahasan">
+                <b>37. Jawaban: B</b><br>
+                $f(1/x) = \frac{x}{2+3x} \implies f(m) = \frac{1/m}{2+3/m} = \frac{1}{2m+3}$.
+                <br>$f^{-1}(a)=-1 \implies f(-1)=a$.
+                <br>$a = \frac{1}{2(-1)+3} = 1$.
+            </div>
+
+            <div class="pembahasan">
+                <b>38. Jawaban: D</b><br>
+                $f(2x) = \frac{-1}{x+2}$. $f^{-1}(2/a)=3a \implies f(3a)=2/a$.
+                <br>Misal $2x=3a \implies x=3a/2$.
+                <br>$f(3a) = \frac{-1}{3a/2 + 2} = \frac{-2}{3a+4}$.
+                <br>$\frac{-2}{3a+4} = \frac{2}{a} \implies -2a = 6a+8 \implies -8a=8 \implies a=-1$.
+            </div>
+
+            <div class="pembahasan">
+                <b>39. Jawaban: C</b><br>
+                $f(f(x)) = 3(3x+a)+a = 9x+4a$.
+                <br>$9x+4a = 9x+a+3 \implies 3a=3 \implies a=1$.
+                <br>$f(a)=f(1)=3(1)+1=4$.
+            </div>
+
+            <div class="pembahasan">
+                <b>40. Jawaban: D</b><br>
+                $f(f(x)) = a(ax+3)+3 = a^2x+3a+3$.
+                <br>$a^2x+3a+3 = 4x-3 \implies a^2=4 (a=\pm 2)$ dan $3a+3=-3 \implies 3a=-6 \implies a=-2$.
+                <br>$f(a)=f(-2)=-2(-2)+3=7$.
+            </div>
+
+            <div class="pembahasan">
+                <b>41. Jawaban: A</b><br>
+                $f^{-1}(x) = \frac{x+1}{x-1}$.
+                <br>$f^{-1}(1/x) = \frac{1/x+1}{1/x-1} = \frac{1+x}{1-x} = -\frac{x+1}{x-1} = -f(x)$.
+            </div>
+
+            <div class="pembahasan">
+                <b>42. Jawaban: B</b><br>
+                Eliminasi: $g^{-1}(x) = (x^2+x-18)-(x^2-14) = x-4$. $g^{-1}(2)=-2$.
+                <br>$f(x) + 2(x-4) = x^2-14 \implies f(x) = x^2-2x-6$.
+                <br>$f^{-1}(2)=k \implies f(k)=2 \implies k^2-2k-8=0 \implies (k-4)(k+2)=0$.
+                <br>Karena $f^{-1}$ positif, $k=4$.
+                <br>Jumlah: $4+(-2)=2$.
+            </div>
+
+            <div class="pembahasan">
+                <b>43. Jawaban: C</b><br>
+                $(f \circ g)(x) = (x^2+1)^2 - 2|x^2+1| = (x^2+1)(x^2+1-2) = (x^2+1)(x^2-1)$.
+                <br>Pembuat nol: $x^2-1=0 \implies x=\pm 1$.
+                <br>Jumlah: $1+(-1)=0$.
+            </div>
+
+            <div class="pembahasan">
+                <b>44. Jawaban: B</b><br>
+                $f^{-1}(x) = \frac{-x-1}{x-2}$.
+                <br>$f^{-1}(1/2) = \frac{-1.5}{-1.5} = 1$.
+                <br>$f^{-1}(1) = \frac{-2}{-1} = 2$.
+            </div>
+
+            <div class="pembahasan">
+                <b>45. Jawaban: B</b><br>
+                $g^{-1}(1) = (1-2)/a = -1/a$.
+                <br>$f(-1/a) = (-1/a)^2+1 = 5 \implies 1/a^2=4 \implies a^2=1/4$.
+                <br>$4a^2-3 = 4(1/4)-3 = 1-3 = -2$.
+            </div>
+
+            <div class="pembahasan">
+                <b>46. Jawaban: D</b><br>
+                Cari $x$ agar $f(k)=1$. $\frac{2x-1}{x+2}=1 \implies 2x-1=x+2 \implies x=3$.
+                <br>Substitusi ke input: $\frac{\sqrt{3+1}}{3-1} = 2/2 = 1$.
+                <br>Jadi $f(1)=1 \implies f^{-1}(1)=1$.
+            </div>
+
+            <div class="pembahasan">
+                <b>47. Jawaban: B</b><br>
+                $y=\sqrt{2x+3} \implies y^2=2x+3 \implies x=\frac{y^2-3}{2}$.
+                <br>$f^{-1}(3) = \frac{3^2-3}{2} = \frac{6}{2} = 3$.
+            </div>
+        </div>
+    </section>
+
+</div>
+
+</body>
+</html>
