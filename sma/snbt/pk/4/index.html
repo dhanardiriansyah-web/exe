@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul Matematika SMA - Logaritma Lengkap</title>
+    
+    <!-- Konfigurasi MathJax untuk Matematika -->
+    <script>
+        window.MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']]
+          },
+          svg: {
+            fontCache: 'global'
+          }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    
+    <!-- Font Google: Nunito -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-text: #333333;
+            --secondary-text: #555555;
+            --border-color: #dddddd;
+            --title-grad-1: #00857c;
+            --title-grad-2: #005a54;
+            --bg-color: #e0e0e0;
+            --page-bg: #ffffff;
+        }
+        
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            font-size: 10pt;
+            line-height: 1.6;
+            color: var(--primary-text);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            counter-reset: page;
+        }
+
+        /* Layout Halaman Kertas (A4 style) */
+        .page {
+            background: var(--page-bg);
+            width: 210mm;
+            min-height: 297mm;
+            padding: 20mm;
+            margin: 1cm auto;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        /* Penomoran Halaman */
+        .page:not(.cover-page)::after {
+            counter-increment: page;
+            content: counter(page);
+            position: absolute;
+            bottom: 15mm;
+            right: 20mm;
+            font-size: 10pt;
+            color: #888;
+            font-weight: bold;
+        }
+
+        /* Halaman Cover */
+        .cover-page {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 5px double #333;
+            height: 297mm;
+        }
+        
+        .logo-container {
+            margin-bottom: 40px;
+        }
+
+        .cover-img {
+            max-width: 50%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .cover-page .title {
+            font-size: 28pt;
+            font-weight: 900;
+            margin: 0;
+            color: var(--title-grad-2);
+            background: -webkit-linear-gradient(45deg, var(--title-grad-1), var(--title-grad-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cover-page .subtitle {
+            font-size: 16pt;
+            margin-top: 15px;
+            color: var(--secondary-text);
+            font-weight: 700;
+        }
+
+        /* Watermark Background */
+        .watermark-container .page::before {
+            content: '';
+            background-image: url('https://imgix3.ruangguru.com/assets/miscellaneous/jpeg_sijv7w_5618.jpeg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 8cm;
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%; height: 100%;
+            opacity: 0.05;
+            z-index: 0;
+            pointer-events: none;
+            filter: grayscale(100%);
+        }
+        
+        .cover-page::before, .toc-page::before { opacity: 0; }
+
+        .content-wrapper { position: relative; z-index: 1; width: 100%; }
+        
+        /* Typography */
+        h1 { font-size: 24pt; text-align: center; border-bottom: 3px solid var(--primary-text); padding-bottom: 10px; margin-bottom: 30px; }
+        h2 { font-size: 18pt; color: #000; border-left: 6px solid var(--title-grad-1); padding-left: 15px; margin-top: 10px; margin-bottom: 20px; }
+        h3 { font-size: 14pt; color: var(--title-grad-2); margin-top: 20px; }
+        p { margin-bottom: 15px; text-align: justify; }
+        
+        /* Daftar Isi */
+        .toc-list { list-style-type: none; padding: 0; }
+        .toc-list li { margin-bottom: 15px; font-size: 14pt; border-bottom: 1px dotted #ccc; padding-bottom: 5px; }
+        .toc-list a { text-decoration: none; color: var(--primary-text); display: flex; justify-content: space-between; }
+        .toc-list a:hover { color: var(--title-grad-1); font-weight: bold; }
+        
+        /* Item Soal */
+        .latihan-item { 
+            display: grid; 
+            grid-template-columns: 1fr 0.4fr;
+            gap: 20px; 
+            border-bottom: 1px dashed var(--border-color); 
+            padding-bottom: 20px; 
+            margin-bottom: 20px; 
+            break-inside: avoid; 
+        }
+        
+        .soal-latihan { overflow-wrap: break-word; word-wrap: break-word; }
+        
+        /* Area Coretan */
+        .coret-coret { 
+            border: 2px dashed #d1d1d1; 
+            border-radius: 8px; 
+            position: relative; 
+            background-color: #fafafa;
+            min-height: 150px;
+        }
+        .coret-coret::after { 
+            content: 'Area Coretan'; 
+            color: #e0e0e0; 
+            position: absolute; 
+            top: 50%; left: 50%; 
+            transform: translate(-50%, -50%) rotate(-15deg); 
+            font-size: 14pt; 
+            font-weight: bold; 
+            pointer-events: none; 
+        }
+        
+        /* Pembahasan Box */
+        .pembahasan { 
+            background-color: #f0fdfc; 
+            border-left: 4px solid var(--title-grad-1); 
+            padding: 15px; 
+            border-radius: 0 5px 5px 0; 
+            margin-top: 15px; 
+            margin-bottom: 20px; 
+            font-size: 9.5pt; 
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+            break-inside: avoid;
+        }
+        .pembahasan b { color: var(--title-grad-2); }
+        
+        /* Pilihan Ganda List */
+        ol.pilihan-ganda { list-style-type: none; padding-left: 0; margin-top: 10px; }
+        ol.pilihan-ganda li { margin-bottom: 5px; display: flex; }
+        ol.pilihan-ganda li::before { 
+            content: attr(data-option) ". "; 
+            font-weight: bold; 
+            margin-right: 10px; 
+            min-width: 20px;
+        }
+
+        .keterangan-soal { 
+            font-weight: bold; 
+            font-size: 9pt; 
+            color: #fff; 
+            background: var(--title-grad-1); 
+            padding: 3px 10px; 
+            border-radius: 15px; 
+            display: inline-block; 
+            margin-bottom: 10px;
+        }
+
+        .info-box {
+            background: #eef7f6;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid var(--title-grad-1);
+        }
+
+        .step-list li { margin-bottom: 8px; }
+
+        @media print {
+            body { background: none; }
+            .page { width: 100%; height: auto; margin: 0; box-shadow: none; page-break-after: always; border: none; }
+            .latihan-item { break-inside: avoid; }
+            .pembahasan { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="watermark-container">
+
+    <!-- Cover Page -->
+    <section class="page cover-page">
+        <div class="content-wrapper">
+            <div class="logo-container">
+                <img src="https://imgix3.ruangguru.com/assets/miscellaneous/jpeg_sijv7w_5618.jpeg" alt="Logo Utama" class="cover-img">
+            </div>
+            <h1 class="title">MODUL MATEMATIKA<br>SMA</h1>
+            <p class="subtitle">Materi Lengkap & Bank Soal Logaritma<br>(Nomor 1 - 38)</p>
+            <div style="margin-top: 50px; font-size: 12pt; color: #666;">
+                <strong>Sumber Materi:</strong> defantri.com<br>
+                <em>Eksponen, Bentuk Akar, dan Logaritma</em>
+            </div>
+        </div>
+    </section>
+
+    <!-- Table of Contents -->
+    <section class="page toc-page">
+        <div class="content-wrapper">
+            <h1>Daftar Isi</h1>
+            <ul class="toc-list">
+                <li><a href="#materi">Pendahuluan & Sifat Logaritma</a></li>
+                <li><a href="#soal">Latihan Soal (1 - 38)</a></li>
+                <li><a href="#pembahasan">Kunci Jawaban & Pembahasan Lengkap</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Materi Page -->
+    <section id="materi" class="page">
+        <div class="content-wrapper">
+            <h2>Pendahuluan: Logaritma</h2>
+            <p>Logaritma tidak bisa kita lepaskan dari topik sebelumnya yaitu eksponen dan bentuk akar. Eksponen, bentuk akar, dan logaritma dapat kita istilahkan dengan "tiga serangkai" dalam matematika, karena jika dipelajari hanya salah satu belum lengkap rasanya.</p>
+            <p>Mempelajari dan menggunakan aturan-aturan pada logaritma tidaklah sulit, jika kita mengikuti step by step pembahasan yang kita diskusikan di bawah ini, maka kita akan dengan mudah memahami pembahasan soal logaritma dan kita harapkan dapat meningkatkan daya nalar atau cara berpikir kita untuk menyelesaikan soal-masalah yang kita hadapi pada kehidupan sehari-hari.</p>
+            
+            <div class="info-box">
+                <h3>Hubungan Eksponen, Akar, dan Logaritma</h3>
+                <p>Dari bentuk bilangan berpangkat $ {\color{Blue} a}^{\color{Red} b}={\color{Green} c} $:</p>
+                <ul>
+                    <li>Untuk mendapatkan bilangan ${\color{Blue} a}$ dengan menggunakan bilangan ${\color{Red} b}$ dan ${\color{Green} c}$ maka operasi yang kita gunakan adalah akar: $ \sqrt[{\color{Red} b}]{{\color{Green} c}}={\color{Blue} a}$</li>
+                    <li>Untuk mendapatkan bilangan ${\color{Red} b}$ dengan menggunakan bilangan ${\color{Blue} a}$ dan ${\color{Green} c}$ maka operasi yang kita gunakan adalah logaritma: $^{{\color{Blue} a}}\textrm{log}\ {\color{Green} c}={\color{Red} b}$</li>
+                </ul>
+                <p><strong>Contoh Sederhana:</strong></p>
+                <ul>
+                    <li>$ {\color{Blue} 2}^{\color{Red} 3}={\color{Green} 8} $ $\Leftrightarrow$ $^{{\color{Blue} 2}}\textrm{log}\ {\color{Green} 8}= {\color{Red}3}$</li>
+                    <li>$ \sqrt[{\color{Red} 3}]{{\color{Green} 8}}={\color{Blue} 2}$ $\Leftrightarrow$ $ {\color{Blue} 2}^{\color{Red} 3}={\color{Green} 8} $</li>
+                </ul>
+            </div>
+
+            <p><strong>Istilah-istilah pada logaritma $^{{\color{Blue} a}}\textrm{log}\ {\color{Green} b}={\color{Red}c}$:</strong></p>
+            <ul>
+                <li>${\color{Blue} a}$ disebut Basis (Bilangan Pokok). Batasan nilai ${\color{Blue} a}$ adalah ${\color{Blue} a} \gt 0$ dan ${\color{Blue} a}\neq 1$.</li>
+                <li>${\color{Green} b}$ disebut Numerus atau bilangan yang dicari logaritmanya. Batasan nilai ${\color{Green} b}$ adalah ${\color{Green} b} \gt 0$.</li>
+                <li>${\color{Red}c}$ disebut Hasil logaritma.</li>
+            </ul>
+
+            <h3>Sifat-Sifat Logaritma</h3>
+            <div class="info-box">
+                <ol class="step-list" style="columns: 2;">
+                    <li>${}^{a}\!\log a=1$</li>
+                    <li>${}^{a}\!\log 1=0$</li>
+                    <li>${}^{a}\!\log x+{}^{a}\!\log y={}^{a}\!\log \left (x \cdot y \right )$</li>
+                    <li>${}^{a}\!\log x-{}^{a}\!\log y={}^{a}\!\log \dfrac{x}{y}$</li>
+                    <li>${}^{a}\!\log x^{n}=n \cdot\ {}^{a}\!\log x$</li>
+                    <li>$^{a^{n}}\log x^{m}=\dfrac{m}{n} \cdot\ {}^{a}\!\log x$</li>
+                    <li>${}^{a}\!\log x= \dfrac{^{p}\log x}{^{p}\log a}$</li>
+                    <li>${}^{a}\!\log x= \dfrac{1}{{}^{x}\!\log a} $</li>
+                    <li>${}^{a}\!\log x \ \cdot \ {}^{x}\!\log b = {}^{a}\!\log b$</li>
+                    <li>$a^{{}^{a}\!\log x}= x$</li>
+                    <li>$a^{{}^{b}\!\log c}=c^{{}^{b}\!\log a}$</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <!-- Soal Page -->
+    <section id="soal" class="page">
+        <div class="content-wrapper">
+            <h2>Soal dan Pembahasan Logaritma</h2>
+            
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">1. Soal SBMPTN 2015 Kode 634</div><br>
+                    Diketahui ${}^{p}\!\log 2 =8$ dan ${}^{q}\!\log 8 =4$. Jika $s=p^{4}$ dan $t=q^{2}$, maka nilai ${}^t\log s =\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$\frac{1}{4}$</li>
+                        <li data-option="B">$\frac{1}{3}$</li>
+                        <li data-option="C">$\frac{2}{3}$</li>
+                        <li data-option="D">$\frac{3}{2}$</li>
+                        <li data-option="E">$3$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">2. Soal SBMPTN 2014 Kode 622</div><br>
+                    Diketahui $a={}^{4}\!\log x$ dan $b={}^{2}\!\log x$. Jika ${}^{4}\!\log b+{}^{2}\!\log a=2$, maka $a+b$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">4</li>
+                        <li data-option="B">6</li>
+                        <li data-option="C">8</li>
+                        <li data-option="D">12</li>
+                        <li data-option="E">16</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">3. Soal SBMPTN 2013 Kode 425</div><br>
+                    Jika ${}^{x}\!\log w=\dfrac{1}{2}$ dan ${}^{xy}\!\log w=\dfrac{2}{5}$ maka nilai ${}^{y}\!\log w$ adalah$\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">8</li>
+                        <li data-option="B">6</li>
+                        <li data-option="C">4</li>
+                        <li data-option="D">2</li>
+                        <li data-option="E">1</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">4. Soal SIMAK UI 2013 Kode 331</div><br>
+                    Diketahui bahwa:<br>
+                    ${}^{3}\!\log x \cdot\ ^{6}\log x \cdot\ {}^{9}\!\log x =$ ${}^{3}\!\log x\cdot\ ^{6}\log x + {}^{3}\!\log x \cdot\ {}^{9}\!\log x+ ^{6}\log x \cdot\ {}^{9}\!\log x$<br>
+                    maka nilai $x$ yang memenuhi ada pernyataan$\cdots$<br>
+                    (1) $\dfrac{1}{3}$ (2) $1$ (3) $4$ (4) $162$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">(1) (2) (3)</li>
+                        <li data-option="B">(1) (3)</li>
+                        <li data-option="C">(2) (4)</li>
+                        <li data-option="D">(4)</li>
+                        <li data-option="E">(1) (2) (3) (4)</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">5. Soal SIMAK UI 2012 Kode 222</div><br>
+                    Jika diketahui:<br>
+                    $f(n)={}^{2}\!\log 3 \cdot\ {}^{3}\!\log 4 \cdot\ {}^{4}\!\log 5 \cdots\ ^{n-1}\log n$ maka $f(8)+f(16)+f(32)+ \cdots +f(2^{30})=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">461</li>
+                        <li data-option="B">462</li>
+                        <li data-option="C">463</li>
+                        <li data-option="D">464</li>
+                        <li data-option="E">465</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">6. Soal SIMAK UI 2012 Kode 222</div><br>
+                    Sebuah lingkaran memiliki jari-jari $\log a^{2}$ dan keliling $\log b^{4}$, maka ${}^{a}\!\log b=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$\dfrac{1}{4\pi}$</li>
+                        <li data-option="B">$\dfrac{1}{\pi}$</li>
+                        <li data-option="C">$\pi$</li>
+                        <li data-option="D">$2\pi$</li>
+                        <li data-option="E">$10^{2\pi}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">7. Soal USM STIS 2015</div><br>
+                    Jika diketahui $x=\log a$, $y=\log b$ dan $z=\log c$. Maka bentuk sederhana dari $\log \left (\dfrac{a}{b^{2}}\sqrt{c} \right )$ dalam $x$, $y$ dan $z$ adalah$\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$log \left (\dfrac{x}{y^{2}}\sqrt{z} \right )$</li>
+                        <li data-option="B">$\log x-\log y^{2}+log \sqrt{z}$</li>
+                        <li data-option="C">$\dfrac{x}{y^{2}}\sqrt{z}$</li>
+                        <li data-option="D">$x-2y+ \dfrac{1}{2}z$</li>
+                        <li data-option="E">$x-y^{2}+\sqrt{c}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">8. Soal USM STIS 2017</div><br>
+                    $\dfrac{\left ({}^{5}\!\log 10 \right )^{2}-\left ({}^{5}\!\log 2 \right )^{2}}{{}^{5}\!\log \sqrt{20}}=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$\dfrac{1}{2}$</li>
+                        <li data-option="B">$1$</li>
+                        <li data-option="C">$2$</li>
+                        <li data-option="D">$4$</li>
+                        <li data-option="E">$5$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">9. Soal UM UNDIP 2015 Kode 517</div><br>
+                    Diketahui persamaan<br>
+                    ${}^{2}\!\log {}^{3}\!\log \left({}^{5}\!\log a\right ) ={}^{3}\!\log {}^{5}\!\log \left({}^{2}\!\log b\right ) ={}^{5}\!\log {}^{2}\!\log \left({}^{3}\!\log c\right ) =0$<br>
+                    maka nilai dari $a+b+c$ adalah$\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">145</li>
+                        <li data-option="B">146</li>
+                        <li data-option="C">166</li>
+                        <li data-option="D">178</li>
+                        <li data-option="E">200</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">10. Soal SIMAK UI 2010 Kode 203</div><br>
+                    Jika $(p,q)$ merupakan penyelesaian dari sistem berikut:<br>
+                    ${}^{3}\!\log x\ +\ {}^{2}\!\log y =4$<br>
+                    ${}^{3}\!\log x^{2}\ -\ {}^{4}\!\log 4y^{2} =1$<br>
+                    maka nilai $p-q=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">2</li>
+                        <li data-option="B">4</li>
+                        <li data-option="C">5</li>
+                        <li data-option="D">9</li>
+                        <li data-option="E">13</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">11. Soal SIMAK UI 2010 Kode 203</div><br>
+                    Nilai $\dfrac{{}^{2}\!\log 5 \cdot\ ^{6}\log 5+\ {}^{3}\!\log 5 \cdot\ ^{6}\log 5}{{}^{2}\!\log 5 \cdot {}^{3}\!\log 5}=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">0</li>
+                        <li data-option="B">1</li>
+                        <li data-option="C">2</li>
+                        <li data-option="D">5</li>
+                        <li data-option="E">6</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">12. Soal UM UGM 2017 Kode 723</div><br>
+                    Jika ${}^{2}\!\log (a-b)=4$, maka ${}^{4}\!\log \left (\dfrac{2}{\sqrt{a}+\sqrt{b}}+\dfrac{2}{\sqrt{a}-\sqrt{b}} \right )=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$\dfrac{{}^{2}\!\log a-4}{4}$</li>
+                        <li data-option="B">$\dfrac{{}^{2}\!\log a+4}{4}$</li>
+                        <li data-option="C">$\dfrac{{}^{2}\!\log a-2}{2}$</li>
+                        <li data-option="D">$\dfrac{{}^{2}\!\log a+2}{2}$</li>
+                        <li data-option="E">$\dfrac{{}^{2}\!\log a-1}{2}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">13. Soal SIMAK UI 2009 Kode 911</div><br>
+                    ${}^{3}\!\log x + 2\ {}^9 \log y = 3$ dan ${}^{3}\!\log \left( \dfrac{x-y}{2} \right) = 0 $, maka nilai $ x + y$ yang mungkin ada pada pernyataan...<br>
+                    (1) $2\sqrt{7}$ (2) $-4\sqrt{7}$ (3) $-2\sqrt{7}$ (4) $4\sqrt{7}$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">(1) (2) (3)</li>
+                        <li data-option="B">(1) (3)</li>
+                        <li data-option="C">(2) (4)</li>
+                        <li data-option="D">(4)</li>
+                        <li data-option="E">(1) (2) (3) (4)</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">14. Soal SBMPTN 2018 Kode 526</div><br>
+                    Jika $x_{1}$ dan $x_{2}$ memenuhi $\left ( {}^{(2-x)}\!\log 27 \right )^{2}=9$ maka nilai $x_{1}+x_{2}$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$\frac{8}{3}$</li>
+                        <li data-option="B">$\frac{5}{3}$</li>
+                        <li data-option="C">$\frac{2}{3}$</li>
+                        <li data-option="D">$-\frac{2}{3}$</li>
+                        <li data-option="E">$-\frac{8}{3}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">15. Soal SBMPTN 2018 Kode 527</div><br>
+                    Jika $x_{1}$ dan $x_{2}$ memenuhi $\left ( {}^{3}\!\log (x+1) \right )^{2}=4$ maka nilai $x_{1} x_{2}$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">8</li>
+                        <li data-option="B">$\frac{64}{9}$</li>
+                        <li data-option="C">$-\frac{8}{9}$</li>
+                        <li data-option="D">$-\frac{64}{9}$</li>
+                        <li data-option="E">$-\frac{80}{9}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">16. Soal SIMAK UI 2018 Kode 641</div><br>
+                    Jika $ ^{7}\log \left( {}^{3}\!\log \left( {}^{2}\!\log x \right ) \right ) =0$, nilai $2x+{}^{4}\!\log x^{2}$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">10</li>
+                        <li data-option="B">12</li>
+                        <li data-option="C">19</li>
+                        <li data-option="D">21</li>
+                        <li data-option="E">24</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">17. Soal SIMAK UI 2012 Kode 223</div><br>
+                    Jika diketahui $x$ dan $y$ adalah bilangan real dengan $x \gt 1$ dan $y \gt 0$. Jika $xy=x^{y}$ dan $\dfrac{x}{y}=x^{5y}$, maka $x^{2}+3y=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">29</li>
+                        <li data-option="B">28</li>
+                        <li data-option="C">27</li>
+                        <li data-option="D">26</li>
+                        <li data-option="E">25</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">18. Soal UM UGM 2014 Kode 521</div><br>
+                    Jika $4^{y+3x}=64$ dan ${}^{x}\!\log (x+12)-3{}^{x}\!\log 4=-1$ maka $x+2y=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">86</li>
+                        <li data-option="B">34</li>
+                        <li data-option="C">-5</li>
+                        <li data-option="D">-14</li>
+                        <li data-option="E">-34</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">19. Soal UM UGM 2014 Kode 521</div><br>
+                    Jika $f \left(x^{2}+3x+1 \right) = {}^{2}\!\log \left(2x^{3}-x^{2}+7 \right)$, $x \geq 0$ maka $f(5)=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">1</li>
+                        <li data-option="B">2</li>
+                        <li data-option="C">3</li>
+                        <li data-option="D">4</li>
+                        <li data-option="E">5</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">20. Soal UMB-PT 2014 Kode 672</div><br>
+                    Jika $a \gt 1$, $b \gt 1$ dan $c \gt 1$ maka $\left( {}^{a}\!\log \dfrac{1}{b} \right)\left( {}^{b}\!\log \dfrac{1}{c} \right)\left( {}^{c}\!\log \dfrac{1}{a} \right)=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$1-abc$</li>
+                        <li data-option="B">$abc$</li>
+                        <li data-option="C">$-abc$</li>
+                        <li data-option="D">1</li>
+                        <li data-option="E">-1</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">21. Soal SBMPTN 2014 Kode 683</div><br>
+                    Jika ${}^{b}\!\log a=-2$ dan ${}^{3}\!\log b=\left( {}^{3}\!\log 2 \right)\left(1+ {}^{2}\!\log 4a \right)$, maka $4a+b=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">768</li>
+                        <li data-option="B">72</li>
+                        <li data-option="C">36</li>
+                        <li data-option="D">12</li>
+                        <li data-option="E">3</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">22. Soal SIMAK UI 2010 Kode 208</div><br>
+                    Jika diketahui ${}^{a}\!\log b + \left( {}^{a}\!\log b \right)^{2} + \left( {}^{a}\!\log b \right)^{3} + \cdots =2$, maka $ {}^{a}\!\log b + {}^{b}\!\log \sqrt[3]{a^{2}}=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">1</li>
+                        <li data-option="B">$\frac{3}{2}$</li>
+                        <li data-option="C">$\frac{5}{3}$</li>
+                        <li data-option="D">2</li>
+                        <li data-option="E">3</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">23. Soal UM STIS 2011</div><br>
+                    Jika $\log x=6$ dan $\log y=12$, maka nilai $\sqrt{\log \sqrt{x\sqrt{y\sqrt{x\sqrt{y\sqrt{x\sqrt{y\cdots}}}}}}}$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">2</li>
+                        <li data-option="B">4</li>
+                        <li data-option="C">8</li>
+                        <li data-option="D">$\sqrt{2}$</li>
+                        <li data-option="E">$2\sqrt{2}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">24. Soal UTBK-SBMPTN 2019</div><br>
+                    Diketahui sistem persamaan<br>
+                    $4^{x}+5^{y}=6$<br>
+                    $4^{\frac{x}{y}} = 5$<br>
+                    Nilai $\dfrac{1}{x}+\dfrac{1}{y}=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">${}^{3}\!\log 4$</li>
+                        <li data-option="B">${}^{3}\!\log 20$</li>
+                        <li data-option="C">${}^{3}\!\log 5$</li>
+                        <li data-option="D">${}^{3}\!\log 25$</li>
+                        <li data-option="E">${}^{3}\!\log 6$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">25. Soal SIMAK UI 2019 Kode 539</div><br>
+                    Jika $x_{1}$ dan $x_{2}$ memenuhi ${}^{4}\!\log x-{}^{x}\!\log 16= \dfrac{7}{6} - {}^{x}\!\log 8$, nilai $x_{1} \cdot x_{2}$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$\sqrt[3]{2}$</li>
+                        <li data-option="B">$\sqrt {3}$</li>
+                        <li data-option="C">$2 \sqrt[3]{2}$</li>
+                        <li data-option="D">$2\sqrt{3}$</li>
+                        <li data-option="E">$4\sqrt[3]{2}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">26. Soal UM UGM 2010 Kode 461</div><br>
+                    Jika $2^{x}=2-\sqrt{3},$ maka $^{2+\sqrt{3}}\log 4^{x} =\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">-2</li>
+                        <li data-option="B">$-\dfrac{1}{2}$</li>
+                        <li data-option="C">1</li>
+                        <li data-option="D">$\dfrac{1}{2}$</li>
+                        <li data-option="E">2</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">27. Soal UTBK-SBMPTN 2019</div><br>
+                    Jika ${}^{3x}\!\log \left( \dfrac{4-x^{2}}{x-3} \right)$ terdefenisi untuk $a \lt x \lt b$, maka $a+b=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">1</li>
+                        <li data-option="B">2</li>
+                        <li data-option="C">3</li>
+                        <li data-option="D">4</li>
+                        <li data-option="E">5</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">28. Soal UTBK-SBMPTN 2019</div><br>
+                    Jika untuk semua bilangan real $x \lt 7$ sehingga ${}^{x}\!\log \left( \dfrac{x^{2}+x-12}{x^{2}+x+12} \right)$ terdefenisi untuk $a \lt x \lt b$, maka $b-a=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">1</li>
+                        <li data-option="B">2</li>
+                        <li data-option="C">3</li>
+                        <li data-option="D">4</li>
+                        <li data-option="E">5</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">29. Soal Latihan Logaritma</div><br>
+                    Bila $\log 2=p$, $\log 3=q$ dan $2^{x+1}=3^{2-3x}$, maka nilai $x+1$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$\frac{2q}{p+3q}$</li>
+                        <li data-option="B">$\frac{5q}{p+3q}$</li>
+                        <li data-option="C">$\frac{2q-p}{p+3q}$</li>
+                        <li data-option="D">$\frac{2p-q}{q+3p}$</li>
+                        <li data-option="E">$\frac{2pq}{q+3p}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">30. Soal UM UGM 2019 Kode 634</div><br>
+                    Jika $\left ( {}^{9}\!\log (x-1) \right )^{2}- {}^{9}\!\log (x-1)^{2}=a$ mempunyai tepat satu penyelesaian, yaitu $x=b$, maka $a+b=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$\frac{1}{3}$</li>
+                        <li data-option="B">1</li>
+                        <li data-option="C">3</li>
+                        <li data-option="D">9</li>
+                        <li data-option="E">27</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">31. Soal UM UGM 2019 Kode 634</div><br>
+                    Jika $2a+b =\ {}^{2}\!\log 45$ dan $a+2b =\ {}^{2}\!\log 75$, maka $a+b=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">${}^{2}\!\log 3$</li>
+                        <li data-option="B">${}^{2}\!\log 5$</li>
+                        <li data-option="C">${}^{2}\!\log 9$</li>
+                        <li data-option="D">${}^{2}\!\log 15$</li>
+                        <li data-option="E">${}^{2}\!\log 25$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">32. Soal UM UGM 2019 Kode 634</div><br>
+                    Jika ${}^\left(p^{2}+4 \right)\!\log \left( p+1 \right)=\dfrac{{}^{2}\!\log 5}{{}^{3}\!\log \sqrt{5} \cdot {}^{2}\!\log 81}$, maka $4p^{2}=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$\dfrac{3}{2}$</li>
+                        <li data-option="B">3</li>
+                        <li data-option="C">6</li>
+                        <li data-option="D">9</li>
+                        <li data-option="E">12</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">33. Soal UM UNDIP 2019 Kode 431</div><br>
+                    Banyaknya penyelesaian real dari persamaan: $\log \left(x^{2}+1 \right)+\log \left(x^{2}+2 \right)= \log \left(x^{2}+3 \right)$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">0</li>
+                        <li data-option="B">1</li>
+                        <li data-option="C">2</li>
+                        <li data-option="D">3</li>
+                        <li data-option="E">4</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">34. Soal UM UNDIP 2017 Kode 524/521</div><br>
+                    Nilai $x$ yang memenuhi persamaan ${}^{2}\!\log {}^{2}\!\log \left(2^{x+2}+5 \right ) = 1+{}^{2}\!\log x$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">${}^{5}\!\log 2$</li>
+                        <li data-option="B">${}^{2}\!\log 5$</li>
+                        <li data-option="C">$\log \frac{2}{5}$</li>
+                        <li data-option="D">$-1$ atau $5$</li>
+                        <li data-option="E">$-5$ atau $1$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">35. Soal UM UGM 2019 Kode 624</div><br>
+                    Jika ${}^{a^{2}} \log \left(3^{a} - 8 \right)^{-4} \cdot {}^{3}\!\log \sqrt{a} = a - 2 $, maka ${}^a \log \left( \frac{1}{8} \right) = \cdots $
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">0</li>
+                        <li data-option="B">-1</li>
+                        <li data-option="C">-2</li>
+                        <li data-option="D">-3</li>
+                        <li data-option="E">-4</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">36. Soal UM UGM 2019 Kode 923/924</div><br>
+                    Jika $\left( {}^{2}\!\log x \right)^{2} - \left( {}^{2}\!\log y \right)^{2} =\ {}^{2}\!\log 256$ dan ${}^{2}\!\log x^{2} - {}^{2}\!\log y^{2}={}^{2}\!\log 16$, maka nilai dari ${}^{2}\!\log x^{6}y^{-2}$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">24</li>
+                        <li data-option="B">20</li>
+                        <li data-option="C">16</li>
+                        <li data-option="D">8</li>
+                        <li data-option="E">4</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">37. Soal UM UGM 2019 Kode 934</div><br>
+                    Apabila $x$ dan $y$ memenuhi $\log x^{2} -\log y = 1$ dan $\log x + \log y = 8$, maka nilai $y-x = \cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">9</li>
+                        <li data-option="B">99</li>
+                        <li data-option="C">990</li>
+                        <li data-option="D">9900</li>
+                        <li data-option="E">99000</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">38. Soal UM UGM 2019 Kode 934</div><br>
+                    Hasil penjumlahan semua nilai $x$ yang memenuhi persamaan $x^{4 \log x}=\dfrac{x^{12}}{10^{8}}$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">1</li>
+                        <li data-option="B">11</li>
+                        <li data-option="C">101</li>
+                        <li data-option="D">110</li>
+                        <li data-option="E">1100</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Pembahasan Section -->
+    <section id="pembahasan" class="page">
+        <div class="content-wrapper">
+            <h1>Kunci Jawaban & Pembahasan Lengkap</h1>
+            
+            <div class="pembahasan">
+                <b>1. Jawaban: B</b><br>
+                ${}^{p}\!\log 2 =8 \implies p=2^{1/8}$.<br>
+                ${}^{q}\!\log 8 =4 \implies q=8^{1/4}=2^{3/4}$.<br>
+                $^t\log s = {}^{q^2}\log p^4 = \frac{4}{2} {}^q\log p = 2 \cdot {}^{2^{3/4}}\log 2^{1/8} = 2 \cdot \frac{1/8}{3/4} {}^2\log 2 = 2 \cdot \frac{1}{8} \cdot \frac{4}{3} = \frac{1}{3}$.
+            </div>
+
+            <div class="pembahasan">
+                <b>2. Jawaban: B</b><br>
+                $a={}^4\log x, b={}^2\log x \implies 2a=b$.<br>
+                ${}^4\log b + {}^2\log a = 2 \implies \frac{1}{2}{}^2\log b + {}^2\log a = 2 \implies {}^2\log(\sqrt{b}a)=2$.<br>
+                $\sqrt{b}a = 4$. Substitusi $b=2a \implies \sqrt{2a}a=4 \implies 2a^3=16 \implies a=2, b=4$. $a+b=6$.
+            </div>
+
+            <div class="pembahasan">
+                <b>3. Jawaban: D</b><br>
+                ${}^x\log w = 1/2 \implies {}^w\log x = 2$.<br>
+                ${}^{xy}\log w = 2/5 \implies {}^w\log xy = 5/2 \implies {}^w\log x + {}^w\log y = 5/2$.<br>
+                $2 + {}^w\log y = 2.5 \implies {}^w\log y = 0.5 \implies {}^y\log w = 2$.
+            </div>
+
+            <div class="pembahasan">
+                <b>4. Jawaban: C</b><br>
+                Jika $x=1$, semua log bernilai 0, persamaan $0=0$ benar.<br>
+                Bagi kedua ruas dengan ${}^x\log 3 \cdot {}^x\log 6 \cdot {}^x\log 9$. Atau sederhanakan hingga dapat $x=162$.<br>
+                Nilai $x$ yang memenuhi 1 dan 162.
+            </div>
+
+            <div class="pembahasan">
+                <b>5. Jawaban: B</b><br>
+                $f(n) = {}^{n-1}\log n$.<br>
+                $f(8) = {}^2\log 8 = 3$. $f(16)=4$. $f(2^{30})=30$.<br>
+                Jumlah $3+4+\dots+30$. Deret aritmatika. $S = \frac{28}{2}(3+30) = 14 \times 33 = 462$.
+            </div>
+
+            <div class="pembahasan">
+                <b>6. Jawaban: C</b><br>
+                Keliling $K = 2\pi r$. $\log b^4 = 2\pi \log a^2 \implies 4\log b = 4\pi \log a \implies \log b = \pi \log a \implies {}^a\log b = \pi$.
+            </div>
+
+            <div class="pembahasan">
+                <b>7. Jawaban: D</b><br>
+                $\log(\frac{a}{b^2}\sqrt{c}) = \log a - 2\log b + \frac{1}{2}\log c = x - 2y + \frac{1}{2}z$.
+            </div>
+
+            <div class="pembahasan">
+                <b>8. Jawaban: C</b><br>
+                $a^2-b^2=(a+b)(a-b)$.<br>
+                Pembilang: $({}^5\log 10 + {}^5\log 2)({}^5\log 10 - {}^5\log 2) = ({}^5\log 20)({}^5\log 5) = {}^5\log 20$.<br>
+                Penyebut: ${}^5\log 20^{1/2} = \frac{1}{2}{}^5\log 20$. Hasil: $1 / (1/2) = 2$.
+            </div>
+
+            <div class="pembahasan">
+                <b>9. Jawaban: C</b><br>
+                Dari persamaan berantai $=0$, diperoleh numerus logaritma terluar = 1.<br>
+                ${}^3\log({}^5\log a) = 1 \implies {}^5\log a = 3 \implies a=125$.<br>
+                ${}^5\log({}^2\log b) = 1 \implies {}^2\log b = 5 \implies b=32$.<br>
+                ${}^2\log({}^3\log c) = 1 \implies {}^3\log c = 2 \implies c=9$.<br>
+                Total: $125+32+9=166$.
+            </div>
+
+            <div class="pembahasan">
+                <b>10. Jawaban: C</b><br>
+                ${}^3\log x + {}^2\log y = 4$.<br>
+                ${}^3\log x^2 - {}^4\log 4y^2 = 1 \implies 2{}^3\log x - {}^2\log 2y = 1 \implies 2{}^3\log x - (1+{}^2\log y) = 1 \implies 2{}^3\log x - {}^2\log y = 2$.<br>
+                Misal $A={}^3\log x, B={}^2\log y$. $A+B=4, 2A-B=2$. Jumlahkan: $3A=6 \implies A=2, B=2$.<br>
+                $x=3^2=9, y=2^2=4$. $p-q = 9-4=5$.
+            </div>
+
+            <div class="pembahasan">
+                <b>11. Jawaban: B</b><br>
+                Sederhanakan bentuk menjadi 1.
+            </div>
+
+            <div class="pembahasan">
+                <b>12. Jawaban: A</b><br>
+                Penyebut disederhanakan: $\frac{2(\sqrt{a}-\sqrt{b}) + 2(\sqrt{a}+\sqrt{b})}{a-b} = \frac{4\sqrt{a}}{a-b}$.<br>
+                Log: ${}^4\log(4\sqrt{a}) - {}^4\log(a-b)$. Karena ${}^2\log(a-b)=4 \implies a-b=16$.<br>
+                $1 + \frac{1}{4}{}^2\log a - 2 = \frac{1}{4}{}^2\log a - 1 = \frac{{}^2\log a - 4}{4}$.
+            </div>
+
+            <div class="pembahasan">
+                <b>13. Jawaban: D</b><br>
+                Pers 1: ${}^3\log x + {}^3\log y = 3 \implies xy=27$.<br>
+                Pers 2: $\frac{x-y}{2}=1 \implies x-y=2$.<br>
+                $(x+y)^2 = (x-y)^2 + 4xy = 4 + 108 = 112$. $x+y = \sqrt{112} = 4\sqrt{7}$.
+            </div>
+
+            <div class="pembahasan">
+                <b>14. Jawaban: C</b><br>
+                ${}^{(2-x)}\log 27 = \pm 3$.<br>
+                Kasus 1: $(2-x)^3 = 3^3 \implies 2-x=3 \implies x=-1$.<br>
+                Kasus 2: $(2-x)^{-3} = 3^3 \implies 2-x=1/3 \implies x=5/3$.<br>
+                Jumlah: $-1 + 5/3 = 2/3$.
+            </div>
+
+            <div class="pembahasan">
+                <b>15. Jawaban: D</b><br>
+                ${}^3\log(x+1) = \pm 2$.<br>
+                $x+1=9 \implies x=8$.<br>
+                $x+1=1/9 \implies x=-8/9$.<br>
+                Hasil kali: $8 \times (-8/9) = -64/9$.
+            </div>
+
+            <div class="pembahasan">
+                <b>16. Jawaban: C</b><br>
+                Numerus log terluar harus 1. ${}^3\log({}^2\log x) = 1 \implies {}^2\log x = 3 \implies x=8$.<br>
+                $2x+{}^4\log x^2 = 16 + {}^4\log 64 = 16+3=19$.
+            </div>
+
+            <div class="pembahasan">
+                <b>17. Jawaban: B</b><br>
+                $xy=x^y \implies {}^x\log y = y-1$.<br>
+                $x/y=x^{5y} \implies {}^x\log y = 1-5y$.<br>
+                $y-1 = 1-5y \implies 6y=2 \implies y=1/3$.<br>
+                $x^{1/3} = x(1/3) \implies x^2=27$.<br>
+                $x^2+3y = 27 + 1 = 28$.
+            </div>
+
+            <div class="pembahasan">
+                <b>18. Jawaban: D</b><br>
+                ${}^x\log(x+12) - {}^x\log 64 = -1 \implies \frac{x+12}{64} = \frac{1}{x} \implies x^2+12x-64=0 \implies (x+16)(x-4)=0$. $x=4$.<br>
+                $4^{y+12}=64 \implies y+12=3 \implies y=-9$.<br>
+                $x+2y = 4-18=-14$.
+            </div>
+
+            <div class="pembahasan">
+                <b>19. Jawaban: C</b><br>
+                Misal $x^2+3x+1=5 \implies x^2+3x-4=0 \implies (x+4)(x-1)=0$. Ambil $x=1$ ($x \ge 0$).<br>
+                $f(5) = {}^2\log(2-1+7) = {}^2\log 8 = 3$.
+            </div>
+
+            <div class="pembahasan">
+                <b>20. Jawaban: E</b><br>
+                $(-{}^a\log b)(-{}^b\log c)(-{}^c\log a) = - ({}^a\log a) = -1$.
+            </div>
+
+            <div class="pembahasan">
+                <b>21. Jawaban: E</b><br>
+                ${}^b\log a = -2 \implies a = b^{-2}$.<br>
+                ${}^3\log b = ({}^3\log 2)(1+{}^2\log(4b^{-2})) = {}^3\log 2 \cdot {}^2\log(8b^{-2}) = {}^3\log(8b^{-2})$.<br>
+                $b = 8b^{-2} \implies b^3=8 \implies b=2$. $a=1/4$.<br>
+                $4a+b = 1+2=3$.
+            </div>
+
+            <div class="pembahasan">
+                <b>22. Jawaban: C</b><br>
+                Deret geometri tak hingga $S = \frac{a}{1-r} = 2$.<br>
+                $\frac{x}{1-x}=2 \implies x = 2/3$. Dimana $x={}^a\log b$.<br>
+                ${}^a\log b + {}^b\log a^{2/3} = 2/3 + \frac{2}{3}(1/(2/3)) = 2/3 + 1 = 5/3$.
+            </div>
+
+            <div class="pembahasan">
+                <b>23. Jawaban: A</b><br>
+                Nested root. Misal nilai $M$. $\log M^2 = \log x + \log y + \log M \implies \log M = \log x + \log y$. Salah.<br>
+                Pola pangkat: $x^{1/2} y^{1/4} x^{1/8} y^{1/16}... = x^{1/2+1/8+...} y^{1/4+1/16+...}$.<br>
+                Exp x: $\frac{1/2}{1-1/4} = 2/3$. Exp y: $\frac{1/4}{1-1/4} = 1/3$.<br>
+                $\log(x^{2/3}y^{1/3}) = \frac{2}{3}(6) + \frac{1}{3}(12) = 4+4=8$.<br>
+                $\sqrt{8} = 2\sqrt{2}$ (Ops ini jawaban E di soal asli, di sini opsi E).
+            </div>
+
+            <div class="pembahasan">
+                <b>24. Jawaban: B</b><br>
+                $4^{x/y}=5 \implies 4^x = 5^y$. Subst ke pers 1: $2 \cdot 5^y = 6 \implies 5^y=3 \implies y={}^5\log 3$.<br>
+                $x={}^4\log 3$.<br>
+                $1/x+1/y = {}^3\log 4 + {}^3\log 5 = {}^3\log 20$.
+            </div>
+
+            <div class="pembahasan">
+                <b>25. Jawaban: E</b><br>
+                Misal ${}^2\log x = p$. Persamaan menjadi $3p - 6/p = 7$. $3p^2-7p-6=0$.<br>
+                $(3p+2)(p-3)=0$. $p=-2/3, p=3$.<br>
+                $x_1=2^{-2/3}, x_2=2^3$. Hasil kali $2^{7/3} = 4\sqrt[3]{2}$.
+            </div>
+
+            <div class="pembahasan">
+                <b>26. Jawaban: A</b><br>
+                $2^x = 2-\sqrt{3} = \frac{1}{2+\sqrt{3}} \implies 2^{-x}=2+\sqrt{3}$.<br>
+                Basis log adalah $2^{-x}$. Numerus $2^{2x} = (2^{-x})^{-2}$.<br>
+                Hasilnya -2.
+            </div>
+
+            <div class="pembahasan">
+                <b>27. Jawaban: E</b><br>
+                Syarat basis: $3x>0, 3x \neq 1$.<br>
+                Syarat numerus $>0$: $\frac{4-x^2}{x-3} > 0 \implies \frac{x^2-4}{x-3}<0$.<br>
+                Garis bilangan: $x<-2$ atau $2<x<3$. Iris dengan basis: $2<x<3$.<br>
+                $a=2, b=3 \implies a+b=5$.
+            </div>
+
+            <div class="pembahasan">
+                <b>28. Jawaban: D</b><br>
+                Syarat numerus $>0$: $x<-4$ atau $x>3$.<br>
+                Syarat basis: $0<x<1$ atau $x>1$.<br>
+                Irisan dengan $x<7$: $3<x<7$. $b-a = 7-3=4$.
+            </div>
+
+            <div class="pembahasan">
+                <b>29. Jawaban: B</b><br>
+                Log kan kedua ruas. $(x+1)\log 2 = (2-3x)\log 3$.<br>
+                $p(x+1) = q(2-3x) \implies px+p = 2q-3qx \implies x(p+3q) = 2q-p$.<br>
+                $x = \frac{2q-p}{p+3q}$. $x+1 = \frac{2q-p+p+3q}{p+3q} = \frac{5q}{p+3q}$.
+            </div>
+
+            <div class="pembahasan">
+                <b>30. Jawaban: D</b><br>
+                Misal $y={}^9\log(x-1)$. $y^2 - 2y - a = 0$.<br>
+                Agar tepat satu solusi, $D=0 \implies 4 - 4(1)(-a)=0 \implies a=-1$.<br>
+                $y^2-2y+1=0 \implies (y-1)^2=0 \implies y=1$.<br>
+                ${}^9\log(x-1)=1 \implies x-1=9 \implies x=10$.<br>
+                $a+b = -1+10=9$.
+            </div>
+
+            <div class="pembahasan">
+                <b>31. Jawaban: D</b><br>
+                Jumlahkan kedua persamaan: $3a+3b = {}^2\log(45 \cdot 75) = {}^2\log(3375)$.<br>
+                $3(a+b) = {}^2\log(15^3) = 3 \cdot {}^2\log 15$.<br>
+                $a+b = {}^2\log 15$.
+            </div>
+
+            <div class="pembahasan">
+                <b>32. Jawaban: D</b><br>
+                Ruas kanan: $\frac{{}^2\log 5}{2 \cdot {}^2\log 3 \cdot {}^3\log 5} = \frac{1}{2}$.<br>
+                $(p+1)^2 = p^2+4 \implies 2p=3$.<br>
+                $4p^2 = (2p)^2 = 9$.
+            </div>
+
+            <div class="pembahasan">
+                <b>33. Jawaban: C</b><br>
+                $\log((x^2+1)(x^2+2)) = \log(x^2+3)$.<br>
+                Misal $u=x^2$. $(u+1)(u+2)=u+3 \implies u^2+2u-1=0$.<br>
+                $u = \frac{-2 \pm \sqrt{8}}{2} = -1 \pm \sqrt{2}$.<br>
+                Karena $u=x^2 \ge 0$, ambil $u = \sqrt{2}-1$.<br>
+                $x = \pm \sqrt{\sqrt{2}-1}$. Ada 2 nilai.
+            </div>
+
+            <div class="pembahasan">
+                <b>34. Jawaban: B</b><br>
+                ${}^2\log({}^2\log(2^{x+2}+5)) = {}^2\log(2x) \implies {}^2\log(4 \cdot 2^x+5) = 2x$.<br>
+                $4 \cdot 2^x+5 = (2^x)^2$. Misal $2^x=p$. $p^2-4p-5=0$. $(p-5)(p+1)=0$.<br>
+                $p=5 \implies 2^x=5 \implies x={}^2\log 5$.
+            </div>
+
+            <div class="pembahasan">
+                <b>35. Jawaban: D</b><br>
+                Sederhanakan persamaan logaritma menjadi $3^a - 8 = 3^{2-a}$.<br>
+                Misal $3^a=y$. $y-8=9/y \implies y^2-8y-9=0 \implies y=9$.<br>
+                $3^a=9 \implies a=2$.<br>
+                ${}^2\log(1/8) = -3$.
+            </div>
+
+            <div class="pembahasan">
+                <b>36. Jawaban: C</b><br>
+                Pers 2: $2({}^2\log x - {}^2\log y) = 4 \implies A-B=2$.<br>
+                Pers 1: $A^2-B^2 = 8 \implies (A+B)(A-B)=8 \implies A+B=4$.<br>
+                $A=3, B=1$.<br>
+                ${}^2\log(x^6 y^{-2}) = 6A - 2B = 18 - 2 = 16$.
+            </div>
+
+            <div class="pembahasan">
+                <b>37. Jawaban: E</b><br>
+                $\log x + \log y = 8$.<br>
+                $2\log x - \log y = 1$.<br>
+                Jumlahkan: $3\log x = 9 \implies \log x=3 \implies x=1000$.<br>
+                $\log y = 5 \implies y=100000$.<br>
+                $y-x = 99000$.
+            </div>
+
+            <div class="pembahasan">
+                <b>38. Jawaban: D</b><br>
+                Log kan: $4(\log x)^2 = 12\log x - 8$.<br>
+                $(\log x)^2 - 3\log x + 2 = 0$. $(\log x - 1)(\log x - 2)=0$.<br>
+                $x_1=10, x_2=100$. Jumlah $110$.
+            </div>
+
+        </div>
+    </section>
+
+</div>
+
+</body>
+</html>
