@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul Matematika SMA - Pertidaksamaan Lengkap (1-60)</title>
+    
+    <!-- Konfigurasi MathJax untuk Matematika -->
+    <script>
+        window.MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']]
+          },
+          svg: {
+            fontCache: 'global'
+          }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    
+    <!-- Font Google: Nunito -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-text: #333333;
+            --secondary-text: #555555;
+            --border-color: #dddddd;
+            --title-grad-1: #00857c;
+            --title-grad-2: #005a54;
+            --bg-color: #e0e0e0;
+            --page-bg: #ffffff;
+        }
+        
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            font-size: 10pt;
+            line-height: 1.6;
+            color: var(--primary-text);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            counter-reset: page;
+        }
+
+        /* Layout Halaman Kertas (A4 style) */
+        .page {
+            background: var(--page-bg);
+            width: 210mm;
+            min-height: 297mm;
+            padding: 20mm;
+            margin: 1cm auto;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        /* Penomoran Halaman */
+        .page:not(.cover-page)::after {
+            counter-increment: page;
+            content: counter(page);
+            position: absolute;
+            bottom: 15mm;
+            right: 20mm;
+            font-size: 10pt;
+            color: #888;
+            font-weight: bold;
+        }
+
+        /* Halaman Cover */
+        .cover-page {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 5px double #333;
+            height: 297mm;
+        }
+        
+        .logo-container {
+            margin-bottom: 40px;
+        }
+
+        .cover-img {
+            max-width: 50%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .cover-page .title {
+            font-size: 28pt;
+            font-weight: 900;
+            margin: 0;
+            color: var(--title-grad-2);
+            background: -webkit-linear-gradient(45deg, var(--title-grad-1), var(--title-grad-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cover-page .subtitle {
+            font-size: 16pt;
+            margin-top: 15px;
+            color: var(--secondary-text);
+            font-weight: 700;
+        }
+
+        /* Watermark Background */
+        .watermark-container .page::before {
+            content: '';
+            background-image: url('https://imgix3.ruangguru.com/assets/miscellaneous/jpeg_sijv7w_5618.jpeg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 8cm;
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%; height: 100%;
+            opacity: 0.05;
+            z-index: 0;
+            pointer-events: none;
+            filter: grayscale(100%);
+        }
+        
+        .cover-page::before, .toc-page::before { opacity: 0; }
+
+        .content-wrapper { position: relative; z-index: 1; width: 100%; }
+        
+        /* Typography */
+        h1 { font-size: 24pt; text-align: center; border-bottom: 3px solid var(--primary-text); padding-bottom: 10px; margin-bottom: 30px; }
+        h2 { font-size: 18pt; color: #000; border-left: 6px solid var(--title-grad-1); padding-left: 15px; margin-top: 10px; margin-bottom: 20px; }
+        h3 { font-size: 14pt; color: var(--title-grad-2); margin-top: 20px; }
+        p { margin-bottom: 15px; text-align: justify; }
+        
+        /* Daftar Isi */
+        .toc-list { list-style-type: none; padding: 0; }
+        .toc-list li { margin-bottom: 15px; font-size: 14pt; border-bottom: 1px dotted #ccc; padding-bottom: 5px; }
+        .toc-list a { text-decoration: none; color: var(--primary-text); display: flex; justify-content: space-between; }
+        .toc-list a:hover { color: var(--title-grad-1); font-weight: bold; }
+        
+        /* Item Soal */
+        .latihan-item { 
+            display: grid; 
+            grid-template-columns: 1fr 0.4fr;
+            gap: 20px; 
+            border-bottom: 1px dashed var(--border-color); 
+            padding-bottom: 20px; 
+            margin-bottom: 20px; 
+            break-inside: avoid; 
+        }
+        
+        .soal-latihan { overflow-wrap: break-word; word-wrap: break-word; }
+        
+        /* Area Coretan */
+        .coret-coret { 
+            border: 2px dashed #d1d1d1; 
+            border-radius: 8px; 
+            position: relative; 
+            background-color: #fafafa;
+            min-height: 150px;
+        }
+        .coret-coret::after { 
+            content: 'Area Coretan'; 
+            color: #e0e0e0; 
+            position: absolute; 
+            top: 50%; left: 50%; 
+            transform: translate(-50%, -50%) rotate(-15deg); 
+            font-size: 14pt; 
+            font-weight: bold; 
+            pointer-events: none; 
+        }
+        
+        /* Pembahasan Box */
+        .pembahasan { 
+            background-color: #f0fdfc; 
+            border-left: 4px solid var(--title-grad-1); 
+            padding: 15px; 
+            border-radius: 0 5px 5px 0; 
+            margin-top: 15px; 
+            margin-bottom: 20px; 
+            font-size: 9.5pt; 
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+            break-inside: avoid;
+        }
+        .pembahasan b { color: var(--title-grad-2); }
+        .pembahasan img { max-width: 100%; height: auto; display: block; margin: 10px auto; border-radius: 5px; border: 1px solid #ddd; }
+        
+        /* Pilihan Ganda List */
+        ol.pilihan-ganda { list-style-type: none; padding-left: 0; margin-top: 10px; }
+        ol.pilihan-ganda li { margin-bottom: 5px; display: flex; }
+        ol.pilihan-ganda li::before { 
+            content: attr(data-option) ". "; 
+            font-weight: bold; 
+            margin-right: 10px; 
+            min-width: 20px;
+        }
+
+        .keterangan-soal { 
+            font-weight: bold; 
+            font-size: 9pt; 
+            color: #fff; 
+            background: var(--title-grad-1); 
+            padding: 3px 10px; 
+            border-radius: 15px; 
+            display: inline-block; 
+            margin-bottom: 10px;
+        }
+
+        .info-box {
+            background: #eef7f6;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid var(--title-grad-1);
+        }
+
+        .step-list li { margin-bottom: 8px; }
+
+        /* Styling for Mark and Box classes from original HTML */
+        mark { background-color: #ffe0b2; padding: 2px 5px; border-radius: 3px; }
+        .box.red { color: #d32f2f; font-style: italic; }
+
+        @media print {
+            body { background: none; }
+            .page { width: 100%; height: auto; margin: 0; box-shadow: none; page-break-after: always; border: none; }
+            .latihan-item { break-inside: avoid; }
+            .pembahasan { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="watermark-container">
+
+    <!-- Cover Page -->
+    <section class="page cover-page">
+        <div class="content-wrapper">
+            <div class="logo-container">
+                <img src="https://imgix3.ruangguru.com/assets/miscellaneous/jpeg_sijv7w_5618.jpeg" alt="Logo Utama" class="cover-img">
+            </div>
+            <h1 class="title">MODUL MATEMATIKA<br>SMA</h1>
+            <p class="subtitle">Bank Soal & Pembahasan Lengkap<br>Pertidaksamaan (Soal 1 - 60)</p>
+            <div style="margin-top: 50px; font-size: 12pt; color: #666;">
+                <strong>Sumber Materi:</strong> defantri.com<br>
+                <em>Matematika Dasar & TKA Saintek</em>
+            </div>
+        </div>
+    </section>
+
+    <!-- Table of Contents -->
+    <section class="page toc-page">
+        <div class="content-wrapper">
+            <h1>Daftar Isi</h1>
+            <ul class="toc-list">
+                <li><a href="#materi">Rangkuman Materi Pertidaksamaan</a></li>
+                <li><a href="#soal">Latihan Soal (1 - 60)</a></li>
+                <li><a href="#pembahasan">Kunci Jawaban & Pembahasan Lengkap</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Materi Page -->
+    <section id="materi" class="page">
+        <div class="content-wrapper">
+            <h2>Pendahuluan: Pertidaksamaan</h2>
+            <p>Pertidaksamaan (pertaksamaan) merupakan kalimat terbuka (kalimat yang belum tentu nilai kebenarannya), sedangkan ketidaksamaan merupakan kalimat tertutup. Soal-soal pertidaksamaan tujuannya secara umum adalah mencari batas nilai variabel agar kalimat bernilai benar.</p>
+            
+            <div class="info-box">
+                <h3>Teori Dasar Pertidaksamaan</h3>
+                <ol class="step-list">
+                    <li><strong>Penjumlahan/Pengurangan:</strong> Jika $a \leq b$ maka $a+c \leq b+c$ (Tanda Tetap).</li>
+                    <li><strong>Perkalian/Pembagian Positif:</strong> Jika $a \leq b$ dan $c > 0$, maka $a \times c \leq b \times c$ (Tanda Tetap).</li>
+                    <li><strong>Perkalian/Pembagian Negatif:</strong> Jika $a \leq b$ dan $c < 0$, maka $a \times c \geq b \times c$ (Tanda Berubah).</li>
+                </ol>
+            </div>
+
+            <div class="info-box">
+                <h3>Jenis Pertidaksamaan Umum</h3>
+                <ul>
+                    <li><strong>Pertidaksamaan Linear:</strong> $ax+b \leq 0$</li>
+                    <li><strong>Pertidaksamaan Kuadrat:</strong> $ax^{2}+bx+c \leq 0$</li>
+                    <li><strong>Pertidaksamaan Pecahan:</strong> $\dfrac{f(x)}{g(x)} \leq 0$ dimana $g(x) \neq 0$</li>
+                    <li><strong>Pertidaksamaan Bentuk Akar:</strong> $\sqrt{f(x)} \leq 0$ dimana $f(x) \geq 0$</li>
+                    <li><strong>Pertidaksamaan Harga Mutlak:</strong> $|f(x)| \leq 0$ dimana $|f(x)|=\sqrt{f^{2}(x)}$</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h3>Pertidaksamaan Eksponen & Logaritma</h3>
+                <p><strong>Eksponen:</strong></p>
+                <ul>
+                    <li>Untuk $a > 1$: Jika $a^{f(x)} \leq a^{g(x)}$ maka $f(x) \leq g(x)$ (Tanda Tetap)</li>
+                    <li>Untuk $0 < a < 1$: Jika $a^{f(x)} \leq a^{g(x)}$ maka $f(x) \geq g(x)$ (Tanda Berubah)</li>
+                </ul>
+                <p><strong>Logaritma:</strong></p>
+                <ul>
+                    <li>Untuk $a > 1$: Jika ${}^a\!\log f(x) \leq {}^a\!\log g(x)$ maka $f(x) \leq g(x)$</li>
+                    <li>Untuk $0 < a < 1$: Jika ${}^a\!\log f(x) \leq {}^a\!\log g(x)$ maka $f(x) \geq g(x)$</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Soal Page -->
+    <section id="soal" class="page">
+        <div class="content-wrapper">
+            <h2>Soal Latihan Pertidaksamaan (1-60)</h2>
+            
+            <!-- SOAL 1 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">1. Soal SNMPTN 2011 Kode 796</div><br>
+                    Jika $2 \lt x \lt 4$, $3 \lt y \lt 5$ dan $w=x+y$, maka nilai $w$ berada antara nilai...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$5\ \text{dan}\ 7$</li>
+                        <li data-option="B">$4\ \text{dan}\ 9$</li>
+                        <li data-option="C">$5\ \text{dan}\ 8$</li>
+                        <li data-option="D">$5\ \text{dan}\ 9$</li>
+                        <li data-option="E">$4\ \text{dan}\ 7$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- SOAL 2 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">2. Soal SBMPTN 2018 Kode 527</div><br>
+                    Himpunan penyelesaian $x-\sqrt{6-x} \geq 0$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$\left \{ x|x \lt -3\ \text{atau}\ x \geq 2 \right \}$</li>
+                        <li data-option="B">$\left \{ x|x \leq -3\ \text{atau}\ 2 \leq x \leq 6 \right \}$</li>
+                        <li data-option="C">$\left \{ x|0 \leq x \leq 6 \right \}$</li>
+                        <li data-option="D">$\left \{ x|2 \leq x \leq 6 \right \}$</li>
+                        <li data-option="E">$\left \{ x| x\leq 6 \right \}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- SOAL 3 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">3. Soal SBMPTN 2017 Kode 226</div><br>
+                    Jika himpunan penyelesaian $|2x-a| \lt 5$ adalah $\left \{ x|-1\ \lt x \lt 4 \right \}$, maka nilai $a$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">-4</li>
+                        <li data-option="B">-3</li>
+                        <li data-option="C">-1</li>
+                        <li data-option="D">3</li>
+                        <li data-option="E">4</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- SOAL 4 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">4. Soal SBMPTN 2017 Kode 106</div><br>
+                    Himpunan penyelesaian dari $\dfrac{x}{x+x^{2}}\geq -\dfrac{x}{x-x^{2}}$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$\left \{x\mid -\frac{1}{2}\leq x \lt 0\ \text{atau}\ 0 \lt x \leq -\frac{1}{2} \right\}$</li>
+                        <li data-option="B">$\left \{x\mid -\frac{1}{2} \lt x \lt 0\ \text{atau}\ 0 \lt x \lt 1 \right\}$</li>
+                        <li data-option="C">$\left \{x\mid -\frac{1}{2}\leq x \lt 0\ \text{atau}\ 0 \lt x \lt 1 \right\}$</li>
+                        <li data-option="D">$\left \{x\mid 1 \lt x \lt 0\ \text{atau}\ 0 \lt x \leq \frac{1}{2} \right\}$</li>
+                        <li data-option="E">$\left \{x\mid -1 \lt x \lt 0\ \text{atau}\ 0 \lt x \lt 1 \right\}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- SOAL 5 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">5. Soal SBMPTN 2017 Kode 124</div><br>
+                    Banyaknya bilangan bulat $x$ yang memenuhi pertidaksamaan $\dfrac{3x+6}{|x-1|} \gt 4$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">5</li>
+                        <li data-option="B">6</li>
+                        <li data-option="C">7</li>
+                        <li data-option="D">8</li>
+                        <li data-option="E">9</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- SOAL 6 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">6. Soal SBMPTN 2016 Kode 355</div><br>
+                    Semua bilangan real $x$ yang memenuhi $\dfrac{x+2}{x} \leq \dfrac{x+3}{x-2}$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$x \lt -\frac{4}{3}\ \text{atau}\ x \gt 2$</li>
+                        <li data-option="B">$-\frac{4}{3}\ \leq x \lt 2$</li>
+                        <li data-option="C">$-\frac{4}{3}\leq x \lt 0\ \text{atau}\ x \gt 2$</li>
+                        <li data-option="D">$x \lt -\frac{4}{3}\ \text{atau}\ 0 \lt x \lt 2$</li>
+                        <li data-option="E">$x \lt 0\ \text{atau}\ x \gt 2$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- SOAL 7 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">7. Soal SBMPTN 2016 Kode 124</div><br>
+                    Semua nilai $x$ yang memenuhi $\dfrac{3}{x}-\dfrac{3}{x+3}  \leq 0$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$x \lt 0$</li>
+                        <li data-option="B">$-3  \leq x \leq 0$</li>
+                        <li data-option="C">$-3 \lt x \lt 0$</li>
+                        <li data-option="D">$x \lt -3\ \text{atau}\ x \gt 0$</li>
+                        <li data-option="E">$x \leq -3\ \text{atau}\ x \geq 0$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- SOAL 8 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">8. Soal SBMPTN 2015 Kode 610</div><br>
+                    Himpunan penyelesaian pertidaksamaan $\dfrac{x-1}{x+1} \lt 1$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$\left \{ x\in \mathbb{R} |x \gt 0 \right \}$</li>
+                        <li data-option="B">$\left \{ x\in \mathbb{R} |x \gt -1 \right \}$</li>
+                        <li data-option="C">$\left \{ x\in \mathbb{R} |x \lt -1 \right \}$</li>
+                        <li data-option="D">$\left \{ x\in \mathbb{R} |x \lt -1\ \text{atau}\ x \gt 0 \right \}$</li>
+                        <li data-option="E">$\left \{ x\in \mathbb{R} |x \lt 0\ \text{atau}\ x \gt 1 \right \}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- SOAL 9 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">9. Soal SBMPTN 2015 Kode 634</div><br>
+                    Himpunan penyelesaian pertidaksamaan $\dfrac{12}{x+1} \lt \dfrac{x}{6}$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$\left \{  x\in \mathbb{R} |-1 \lt x \lt 8 \right \}$</li>
+                        <li data-option="B">$\left \{ x\in \mathbb{R} |-9 \lt x \lt -1\ \text{atau}\ x \gt 8 \right \}$</li>
+                        <li data-option="C">$\left \{ x\in \mathbb{R} | x \lt -9\ \text{atau}\ 1 \lt x \lt 8 \right \}$</li>
+                        <li data-option="D">$\left \{ x\in \mathbb{R} | x \leq -1\ \text{atau}\ 8 \lt x \lt 9 \right \}$</li>
+                        <li data-option="E">$\left \{ x\in \mathbb{R} | x \lt -9\ \text{atau}\ -1 \lt x \lt 8 \right \}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- SOAL 10 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">10. Soal SIMAK UI 2018 Kode 641</div><br>
+                    Himpunan penyelesaian dari pertidaksamaan $ \sqrt{x^{2}-4} \leq 3-x$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$\left ( x\in \mathbb{R}:x\leq -2\ \text{atau}\ 2\leq x\leq \frac{13}{6} \right )$</li>
+                        <li data-option="B">$\left ( x\in \mathbb{R}:x\leq -2\ \text{atau}\ 2\leq x  \right )$</li>
+                        <li data-option="C">$\left ( x\in \mathbb{R}:  -2\leq x\leq \frac{13}{6} \right )$</li>
+                        <li data-option="D">$\left ( x\in \mathbb{R}:  x\leq \frac{13}{6} \right )$</li>
+                        <li data-option="E">$\left ( x\in \mathbb{R}: 2\leq x\leq \frac{13}{6} \right )$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- SOAL 11 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">11. Soal SIMAK UI 2018 Kode 416</div><br>
+                    Himpunan peyelesaian $16-x^{2} \leq |x+4|$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$\left ( x\in \mathbb{R}: -4\leq x\leq 4 \right )$</li>
+                        <li data-option="B">$\left ( x\in \mathbb{R}: -4\leq x \leq 3  \right )$</li>
+                        <li data-option="C">$\left ( x\in \mathbb{R}:  x\leq -4\ \text{atau}\ x \geq 4 \right )$</li>
+                        <li data-option="D">$\left ( x\in \mathbb{R}:  0\leq x\leq 3 \right )$</li>
+                        <li data-option="E">$\left ( x\in \mathbb{R}: x\leq -4\ \text{atau}\ x \geq 3 \right )$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- SOAL 12 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">12. Soal UMB-PT 2014 Kode 573</div><br>
+                    Sebuah partikel bergerak sepanjang sumbu $t$ dan posisi partikel di setiap saat adalah $s(t)=2t^{3}-24t^{2}+90t+7$, $t \geq 0$. Kecepatan partikel ini positif bilamana $t$ memenuhi...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$0\leq t \lt 3\ \text{atau}\ t\gt 5$</li>
+                        <li data-option="B">$3 \lt t \lt 5$</li>
+                        <li data-option="C">$0 \leq t \lt 5$</li>
+                        <li data-option="D">$t \geq 0$</li>
+                        <li data-option="E">$t=0\ \text{atau}\ t=5$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- SOAL 13 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">13. Soal UMB-PT 2014 Kode 573</div><br>
+                    Solusi pertaksamaan $\dfrac{x^{2}-x-2}{-x^{2}+x-1} \leq 0 $ adalah himpunan semua bilangan real $x$ yang memenuhi...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$x \leq -2\ \text{atau}\ x \geq 1$</li>
+                        <li data-option="B">$x \leq -1\ \text{atau}\ x \geq 2$</li>
+                        <li data-option="C">$-2 \leq x \leq 1$</li>
+                        <li data-option="D">$-1 \leq x \leq 2$</li>
+                        <li data-option="E">$x \leq 1$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- SOAL 14 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">14. Soal UM UGM 2014 Kode 522</div><br>
+                    Nilai $x$ yang memenuhi pertidaksamaan $\dfrac{x^{2}-2x-3}{x-2} \lt x+5 $ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$x \lt 2$</li>
+                        <li data-option="B">$x \gt \frac{7}{5}$</li>
+                        <li data-option="C">$\frac{7}{5} \lt x \lt 2$</li>
+                        <li data-option="D">$-\frac{13}{5} \lt x \lt 2$</li>
+                        <li data-option="E">$x \lt \frac{7}{5}\ \text{atau}\ x \gt 2$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- SOAL 15 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">15. Soal UMB-PT 2014 Kode 672</div><br>
+                    Solusi pertaksamaan $ \sqrt{3-x} \leq x-1$ adalah himpunan semua bilangan real $x$ yang memenuhi...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$-1 \leq  x \leq 2$</li>
+                        <li data-option="B">$x \leq -1\ \text{atau}\ 2 \leq x \leq 3$</li>
+                        <li data-option="C">$1 \leq  x \leq 2$</li>
+                        <li data-option="D">$x \leq -1\ \text{atau}\ x \geq 2$</li>
+                        <li data-option="E">$2 \leq  x \leq 3$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- SOAL 16 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">16. Soal SBMPTN 2014 Kode 677</div><br>
+                    Penyelesaian pertidaksamaan $\left ( \dfrac{x-1}{x} \right )^{2}\leq 4\left ( 1- \dfrac{1}{x} \right )-3$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$x \leq -\frac{1}{2}$</li>
+                        <li data-option="B">$x \geq -\frac{1}{2}$</li>
+                        <li data-option="C">$x \geq 2$</li>
+                        <li data-option="D">$x \leq 2$</li>
+                        <li data-option="E">$x \leq -\frac{1}{2}\ \text{atau}\ x\geq 2$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- SOAL 17 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">17. Soal SBMPTN 2014 Kode 614</div><br>
+                    Himpunan penyelesaian pertidaksamaan $ \sqrt{x^{2}-2x} \lt \sqrt{3x+6}$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$\left \{ x | -1 \lt x \lt 6 \right \}$</li>
+                        <li data-option="B">$\left \{ x | -2 \leq x \lt 0\ \text{atau}\ x \geq 2 \right \}$</li>
+                        <li data-option="C">$\left \{ x | x \geq -2 \right \}$</li>
+                        <li data-option="D">$\left \{ x | -2 \leq x \leq 0\ \text{atau}\ 2 \leq x \lt 6 \right \}$</li>
+                        <li data-option="E">$\left \{ x | -1 \lt x \leq 0\ \text{atau}\ 2 \leq x \lt 6 \right \}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- SOAL 18 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">18. Soal SBMPTN 2014 Kode 622</div><br>
+                    Semua nilai $x$ yang memenuhi $ \sqrt{x+10} - \sqrt{x+2} \gt 2$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$-2 \leq x \lt -1$</li>
+                        <li data-option="B">$x \gt 1$</li>
+                        <li data-option="C">$-\frac{3}{2} \leq x \lt -1$</li>
+                        <li data-option="D">$x \gt 2$</li>
+                        <li data-option="E">$-1 \lt x \lt 6$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- SOAL 19 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">19. Soal SBMPTN 2014 Kode 622</div><br>
+                    Semua nilai $p$ yang memenuhi pertidaksamaan $\dfrac{p}{p-2} \leq \dfrac{p-1}{p+2}$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$p \gt 2\ \text{atau}\ p \lt -2$</li>
+                        <li data-option="B">$-2 \lt p\ \leq \frac{2}{5}\ \text{dan}\ p \neq 0$</li>
+                        <li data-option="C">$p \lt -2\ \text{atau}\ \frac{2}{5} \leq p \lt 2$</li>
+                        <li data-option="D">$\frac{2}{5} \leq p \lt 2\ \text{dengan}\ n \neq 0$</li>
+                        <li data-option="E">$-2 \lt p \leq \frac{2}{5}\ \text{atau}\ p \gt 2$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- SOAL 20 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">20. Soal SBMPTN 2014 Kode 663</div><br>
+                    Himpunan semua bilangan real $x$ yang memenuhi $x^{2}+\dfrac{1}{x^{2}} \leq 2$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$\left \{ -1,1 \right \}$</li>
+                        <li data-option="B">$\left \{ x | -1 \leq x \leq 1\,\ x \neq 0 \right \}$</li>
+                        <li data-option="C">$\left \{ x | x \leq -1\ \text{atau}\ X \geq 1 \right \}$</li>
+                        <li data-option="D">$\left \{ x | 0 \lt x \leq 1 \right \}$</li>
+                        <li data-option="E">$\left \{ x | -\frac{3}{2} \leq x \leq 1,\ x \neq 0 \right \}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- SOAL 21 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">21. Soal UM UGM 2006 Kode 381</div><br>
+                    Diketahui deret geometri dengan $U_{n}= \left( {}^x\!\log 3 \right)^{n}$, $x \gt 0$, $x \neq 1$. Jika jumlah tak hingga deret tersebut ada maka $x$ harus memenuhi syarat...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$x \leq \frac{1}{3}\ \text{atau}\ x \geq 3$</li>
+                        <li data-option="B">$\frac{1}{3} \lt x \lt 3$</li>
+                        <li data-option="C">$x \gt 3\ \text{atau}\ 0 \lt \ x \lt \frac{1}{3}$</li>
+                        <li data-option="D">$x \geq 3\ \text{atau}\ 0 \lt \ x \leq \frac{1}{3}$</li>
+                        <li data-option="E">$x \lt \frac{1}{3}\ \text{atau}\ x \gt 3$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- SOAL 22 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">22. Soal UM UGM 2014 Kode 522</div><br>
+                    Nilai semua $x$ sehingga matriks $\begin{pmatrix} \sqrt{x^{2}-1} & 1\\ x & 2 \end{pmatrix}$, mempunyai invers adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$x \neq -\frac{4}{3}$ dan $x \neq \frac{4}{3}$</li>
+                        <li data-option="B">$x \neq -\sqrt{\frac{4}{3}}$ dan $x \neq \sqrt{\frac{4}{3}}$</li>
+                        <li data-option="C">$\sqrt{\frac{4}{3}} \lt x \leq -1$ atau $1 \leq x \lt \sqrt{\frac{4}{3}}$</li>
+                        <li data-option="D">$-\sqrt{\frac{4}{3}} \lt x \leq -1$ atau $1 \lt x \lt \sqrt{\frac{4}{3}}$</li>
+                        <li data-option="E">$x \lt -\sqrt{\frac{4}{3}}$ atau $  -\sqrt{\frac{4}{3}} \lt x \leq -1\ \text{atau}\ 1 \leq x \lt \sqrt{\frac{4}{3}}$ atau $x \gt \sqrt{\frac{4}{3}}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- SOAL 23 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">23. Soal UM STIS 2011</div><br>
+                    Himpunan peyelesaian dari $\left | \dfrac{1}{4}x^{2}-10 \right | \lt 6$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$-8\ \lt x\ \lt 8$</li>
+                        <li data-option="B">$x \lt -4\ \text{atau}\ x\ \gt 4$</li>
+                        <li data-option="C">$-4 \lt x \lt 4\ \text{atau}\ x \lt -8\ \text{atau}\ x\ \gt 8$</li>
+                        <li data-option="D">$-4\ \lt x\ \lt 4$</li>
+                        <li data-option="E">$-8 \lt x \lt -4\ \text{atau}\ 4 \lt x \lt 8$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- SOAL 24 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">24. Soal UM STIS 2011</div><br>
+                    Jika $a,\ b,\ c,$ dan $d$ bilangan riil positif dengan $a \gt b$ dan $c \gt d$, maka pernyataan di bawah ini benar, kecuali...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$ac \gt bd$</li>
+                        <li data-option="B">$a+c \gt b+d$</li>
+                        <li data-option="C">$ad \gt bc$</li>
+                        <li data-option="D">$ac+bd \gt ad+bc$</li>
+                        <li data-option="E">$\dfrac{1}{ac} \lt \dfrac{1}{bd}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- SOAL 25 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">25. Soal UTBK-SBMPTN 2019</div><br>
+                    Penyelesaian dari pertidaksamaan $\left| 2x+1 \right| \lt 2 + \left| x+1 \right|$ adalah berbentuk interval $(a,b)$. Nilai $a+b+2=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">-3</li>
+                        <li data-option="B">-2</li>
+                        <li data-option="C">0</li>
+                        <li data-option="D">2</li>
+                        <li data-option="E">3</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- SOAL 26 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">26. Soal UTBK-SBMPTN 2019</div><br>
+                    Himpunan penyelesaian dari $\left| x-1 \right| \lt 3 - \left| x \right|$ adalah interval $(a,b)$. Nilai $2a+b$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">-3</li>
+                        <li data-option="B">-2</li>
+                        <li data-option="C">0</li>
+                        <li data-option="D">2</li>
+                        <li data-option="E">3</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- SOAL 27 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">27. Soal UTBK-SBMPTN 2019</div><br>
+                    Jika $(a,b)$ adalah interval dari penyelesaian pertidaksamaan $\left| x+2 \right|+ \left| x+4 \right| \lt 4$ maka nilai $a-b=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">-4</li>
+                        <li data-option="B">-2</li>
+                        <li data-option="C">0</li>
+                        <li data-option="D">2</li>
+                        <li data-option="E">4</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- SOAL 28 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">28. Soal UTBK-SBMPTN 2019</div><br>
+                    Himpunan penyelesaian dari pertidaksamaan $\left| 3 - |x+1| \right| \lt 2$ adalah....
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$-5 \lt x \lt -2$ atau $-1 \lt x \lt 4$</li>
+                        <li data-option="B">$-6 \lt x \lt -2$ atau $-1 \lt x \lt 4$</li>
+                        <li data-option="C">$-5 \lt x \lt -2$ atau $0 \lt x \lt 5$</li>
+                        <li data-option="D">$-6 \lt x \lt -2$ atau $0 \lt x \lt 4$</li>
+                        <li data-option="E">$-5 \lt x \lt -2$ atau $-1 \lt x \lt 5$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- SOAL 29 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">29. Soal UTBK-SBMPTN 2019</div><br>
+                    Himpunan penyelesaian dari pertidaksamaan $\left| |x|+x \right| \leq 2$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$0 \leq x \lt 1$</li>
+                        <li data-option="B">$x \leq 1$</li>
+                        <li data-option="C">$x \leq 2$</li>
+                        <li data-option="D">$x \leq 0$</li>
+                        <li data-option="E">$x \geq 0$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- SOAL 30 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">30. Soal UTBK-SBMPTN 2019</div><br>
+                    Jika semua nilai $x$ dengan $-1 \leq x \leq 3$ yang memenuhi $\left| x+2 \right|-\sqrt{4x+8} \leq 0$ adalah $a \leq x \leq b$, maka nilai $2a+b$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">-2</li>
+                        <li data-option="B">-1</li>
+                        <li data-option="C">0</li>
+                        <li data-option="D">1</li>
+                        <li data-option="E">2</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- Soal 31 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">31. Soal UTBK-SBMPTN 2019</div><br>
+                    Himpunan penyelesaian pertidaksamaan $\dfrac{3x}{2-x} \lt 3$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$x \lt 1\ \text{atau}\ x \gt 2$</li>
+                        <li data-option="B">$x \lt 2\ \text{atau}\ x \gt 6$</li>
+                        <li data-option="C">$1 \lt x \lt 2$</li>
+                        <li data-option="D">$1 \lt x \lt 6$</li>
+                        <li data-option="E">$x \gt 2$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- Soal 32 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">32. Soal UTBK-SBMPTN 2019</div><br>
+                    Himpunan penyelesaian dari $\left| x+1 \right| \lt \dfrac{2}{x}$ adalah interval $(a,b)$. Nilai $2a+5b$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">-5</li>
+                        <li data-option="B">-2</li>
+                        <li data-option="C">0</li>
+                        <li data-option="D">2</li>
+                        <li data-option="E">5</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- Soal 33 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">33. Soal UTBK-SBMPTN 2019</div><br>
+                    Jika $1 \lt p \left| p-1 \right| $, maka...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$p \lt 0$</li>
+                        <li data-option="B">$p \gt \frac{1-\sqrt{5}}{2}$</li>
+                        <li data-option="C">$p \gt \frac{\sqrt{5}-1}{2}$</li>
+                        <li data-option="D">$p \gt 0$</li>
+                        <li data-option="E">$p \gt \frac{1+\sqrt{5}}{2}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- Soal 34 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">34. Soal UTBK-SBMPTN 2019</div><br>
+                    Jika $0 \lt a \lt 1$ maka $\dfrac{a^{x}+2}{a^{x}} \lt a^{x}$ mempunyai penyelesaian...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$x \lt {}^\!\log_{a}2$</li>
+                        <li data-option="B">$x \lt -{}^\!\log_{a}2$</li>
+                        <li data-option="C">$x \gt {}^\!\log_{a}2$</li>
+                        <li data-option="D">$x \gt - {}^\!\log_{a}2$</li>
+                        <li data-option="E">$x \lt {}^\!\log_{a}4$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- Soal 35 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">35. Soal UTBK-SBMPTN 2019</div><br>
+                    Nilai $x$ bilangan real yang memenuhi pertidaksamaan $\dfrac{8}{a^{x}+2} \gt a^{x}$ dengan $a \gt 1$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$x \lt {}^\!\log_{2}a$</li>
+                        <li data-option="B">$x \lt {}^\!\log_{a}2$</li>
+                        <li data-option="C">$x \gt {}^\!\log_{-2}a$</li>
+                        <li data-option="D">$x \gt {}^\!\log_{2}a$</li>
+                        <li data-option="E">$x \gt {}^\!\log_{a}2$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- Soal 36 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">36. Soal UTBK-SBMPTN 2019</div><br>
+                    Jika $0 \lt a \lt 1$ maka $\dfrac{3+3a^{x}}{a^{x}+1} \lt a^{x}$ mempunyai penyelesaian...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$x \gt {}^\!\log_{a}3$</li>
+                        <li data-option="B">$x \lt -2{}^\!\log_{a}3$</li>
+                        <li data-option="C">$x \lt {}^\!\log_{a}3$</li>
+                        <li data-option="D">$x \gt -10{}^\!\log_{a}3$</li>
+                        <li data-option="E">$x \lt 2{}^\!\log_{a}3$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- Soal 37 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">37. Soal UTBK-SBMPTN 2019</div><br>
+                    Himpunan penyelesaian dari pertidaksamaan $\left( {}^\!\log_{a}x \right)^{2}-{}^\!\log_{a}x-2 \gt 0 $ dengan $0 \lt a \lt 1$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$x \lt a^{2}\ \text{atau}\ x \gt a^{-1}$</li>
+                        <li data-option="B">$x \lt a^{2}\ \text{atau}\ x \gt a^{-2}$</li>
+                        <li data-option="C">$a^{2}\ \lt  x \lt a^{-1}$</li>
+                        <li data-option="D">$a^{2}\ \lt  x \lt a^{-2}$</li>
+                        <li data-option="E">$a^{-2}\ \lt  x \lt a^{2}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- Soal 38 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">38. Soal UTBK-SBMPTN 2019</div><br>
+                    Himpunan penyelesaian dari pertidaksamaan $\left( {}^\!\log_{a}x \right)^{2}+4{}^\!\log_{a}x+3 \lt 0 $ dengan $ a \gt 1$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$a^{-3}\ \lt x \lt a^{-1}$</li>
+                        <li data-option="B">$a^{-1}\ \lt x \lt a^{3}$</li>
+                        <li data-option="C">$a^{-1}\ \lt x \lt a^{-3}$</li>
+                        <li data-option="D">$a^{-3}\ \lt x \lt a$</li>
+                        <li data-option="E">$1 \lt  x \lt a^{-3}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- Soal 39 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">39. Soal UTBK-SBMPTN 2019</div><br>
+                    Untuk $0 \lt a \lt 1$, himpunan penyelesaian dari $\left( {}^\!\log_{a}x \right)^{2}-2\ {}^\!\log_{a}x-8 \gt 0 $ dengan  adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$x \lt a^{4}\ \text{atau}\ x \gt a^{-1}$</li>
+                        <li data-option="B">$x \lt a^{4}\ \text{atau}\ x \gt a^{-2}$</li>
+                        <li data-option="C">$a^{4}\ \lt  x \lt a^{-1}$</li>
+                        <li data-option="D">$a^{4}\ \lt  x \lt a^{-2}$</li>
+                        <li data-option="E">$a^{-4}\ \lt  x \lt a^{4}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- Soal 40 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">40. Soal SIMAK UI 2019 Kode 539</div><br>
+                    Hasil penjumlahan dari semua bilangan bulat $x$ yang memenuhi $\dfrac{\left ( x^{2}-x-12 \right )\sqrt{2x^{2}+5x-3}}{\left ( -x^{2}-3 \right )\sqrt{3x^{2}+x-2}} \geq 0$, adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">2</li>
+                        <li data-option="B">4</li>
+                        <li data-option="C">7</li>
+                        <li data-option="D">8</li>
+                        <li data-option="E">10</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- Soal 41 (Labeled as 41 but source uses 43 radio name, treating as next item) -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">41. Soal UM UGM 2019 Kode 634</div><br>
+                    Diberikan bilangan real $a$. Jika himpunan semua penyelesaian pertidaksamaan $\left( 2x-1  \right)^{2}-a^{2} \leq 1-4x$ adalah $\left \{ x : x\ \text{bilangan real},  p \leq x \leq q \right \}$, maka $p+q=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$-a$</li>
+                        <li data-option="B">$-1$</li>
+                        <li data-option="C">$0$</li>
+                        <li data-option="D">$1$</li>
+                        <li data-option="E">$a$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- Soal 42 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">42. Soal UTBK-SBMPTN 2019</div><br>
+                    Himpunan penyelesaian $\left( 0,25 \right)^{x+2} \gt \left( 0,5 \right)^{x^{2}+1}$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$-1 \lt x \lt 3$</li>
+                        <li data-option="B">$-1 \lt x \lt 0$</li>
+                        <li data-option="C">$0 \lt x \lt 3$</li>
+                        <li data-option="D">$x \lt -1\ \text{atau}\ x \gt 3$</li>
+                        <li data-option="E">$x \lt -2\ \text{atau}\ x \gt 4$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- Soal 43 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">43. Soal UTBK-SBMPTN 2019</div><br>
+                    Himpunan penyelesaian $\left( \dfrac{1}{8} \right)^{8+2x-x^{2}} \geq \left( \dfrac{1}{16} \right)^{x+2}$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$\left \{ x | x \leq -3\ \text{atau}\ x \geq 2 \right \}$</li>
+                        <li data-option="B">$\left \{ x | x \leq -3\ \text{atau}\ x \geq \frac{3}{8} \right \}$</li>
+                        <li data-option="C">$\left \{ x | x \leq -2\ \text{atau}\ x \geq \frac{8}{3} \right \}$</li>
+                        <li data-option="D">$\left \{ x | x \leq \frac{3}{8}\ \text{atau}\ x \geq \frac{8}{3} \right \}$</li>
+                        <li data-option="E">$\left \{ x | x \leq 2\ \text{atau}\ x \geq \frac{8}{3} \right \}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- Soal 44 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">44. Soal UTBK-SBMPTN 2019</div><br>
+                    Jika untuk semua bilangan real $x \lt 7$ sehingga ${}^{x}\!\log \left( \dfrac{x^{2}+x-12}{x^{2}+x+12} \right)$ terdefenisi untuk $a \lt x \lt b$, maka $b-a=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">1</li>
+                        <li data-option="B">2</li>
+                        <li data-option="C">3</li>
+                        <li data-option="D">4</li>
+                        <li data-option="E">5</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- Soal 45 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">45. Soal UTBK-SBMPTN 2019</div><br>
+                    Jika $a \lt x \lt b$ adalah solusi dari $\dfrac{x^{2}+2x+2}{x^{2}+x} \lt 0$, maka nilai $a+b$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">2</li>
+                        <li data-option="B">1</li>
+                        <li data-option="C">0</li>
+                        <li data-option="D">-1</li>
+                        <li data-option="E">-2</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- Soal 46 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">46. Soal UTBK-SBMPTN 2019</div><br>
+                    Jika $a \lt x \lt b$ adalah solusi dari $\dfrac{x^{2}+x+3}{x^{2}-x-2} \lt 0$, maka nilai $b-2a$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">1</li>
+                        <li data-option="B">2</li>
+                        <li data-option="C">3</li>
+                        <li data-option="D">4</li>
+                        <li data-option="E">5</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- Soal 47 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">47. Soal UTBK-SBMPTN 2019</div><br>
+                    Jika semua nilai $x$ dengan $-1 \leq x \leq 1$ yang memenuhi $\left| 2x+1 \right|-\left| 2-x \right| \leq 0$ adalah $a \leq x \leq b$, maka nilai $3ab$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">-2</li>
+                        <li data-option="B">-1</li>
+                        <li data-option="C">0</li>
+                        <li data-option="D">1</li>
+                        <li data-option="E">2</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- Soal 48 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">48. Soal UTBK-SBMPTN 2019</div><br>
+                    Jika semua nilai $x$ dengan $0 \lt x \lt 10$ yang memenuhi $\left| 2x-1 \right|-\left| x+2 \right| \geq 0$ adalah $a \leq x \lt b$, maka nilai $b-a$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">5</li>
+                        <li data-option="B">6</li>
+                        <li data-option="C">7</li>
+                        <li data-option="D">8</li>
+                        <li data-option="E">9</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- Soal 49 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">49. Soal UTBK-SBMPTN 2019</div><br>
+                    Jika interval $\left[ a,b \right]$ adalah himpunan penyelesaian dari pertidaksamaan $\left| 3 - |x-3| \right| \leq 3$, maka nilai $a+b=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">6</li>
+                        <li data-option="B">7</li>
+                        <li data-option="C">8</li>
+                        <li data-option="D">9</li>
+                        <li data-option="E">10</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- Soal 50 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">50. Soal UTBK-SBMPTN 2019</div><br>
+                    Himpunan penyelesaian dari $\left| x \right| \lt 3 + \left| x-3 \right|$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$0 \leq x \leq 3$</li>
+                        <li data-option="B">$x \lt 3$</li>
+                        <li data-option="C">$x \geq 3$</li>
+                        <li data-option="D">$x \geq -3$</li>
+                        <li data-option="E">$x \geq 0$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- Soal 51 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">51. Soal UTBK-SBMPTN 2019</div><br>
+                    Himpunan penyelesaian dari $\left| x-1 \right| \lt \dfrac{6}{x}$ adalah interval $(a,b)$. Nilai $3a+2b$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">0</li>
+                        <li data-option="B">2</li>
+                        <li data-option="C">4</li>
+                        <li data-option="D">6</li>
+                        <li data-option="E">12</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- Soal 52 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">52. Soal UTBK-SBMPTN 2019</div><br>
+                    Jika ${}^{3x}\!\log \left( \dfrac{4-x^{2}}{x-3} \right)$ terdefenisi untuk $a \lt x \lt b$, maka $a+b=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">1</li>
+                        <li data-option="B">2</li>
+                        <li data-option="C">3</li>
+                        <li data-option="D">4</li>
+                        <li data-option="E">5</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- Soal 53 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">53. Soal UM UNDIP 2019 Kode 431</div><br>
+                    Solusi dari pertaksamaan $2x \left( x+1 \right) \gt  \left( x+1 \right)\left( x+2 \right) $ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$x \gt 2$</li>
+                        <li data-option="B">$-1\ \lt  x \lt 2$</li>
+                        <li data-option="C">$-2\ \lt  x \lt 1$</li>
+                        <li data-option="D">$x \lt -1$ atau $x \gt 2$</li>
+                        <li data-option="E">$x \lt -2$ atau $x \gt 1$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- Soal 54 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">54. Soal Simulasi UTBK-SBMPTN 2021</div><br>
+                    Penyelesaian pertidaksamaan $2x^{2}+ \left| x \right| \gt 1$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$-1 \lt x \lt - \frac{1}{2}$</li>
+                        <li data-option="B">$-\frac{1}{2} \lt x \lt \frac{1}{2}$</li>
+                        <li data-option="C">$x \lt -1\ \text{atau}\ x \gt \frac{1}{2}$</li>
+                        <li data-option="D">$x \lt -\frac{1}{2}\ \text{atau}\ x \gt \frac{1}{2}$</li>
+                        <li data-option="E">$x \lt -\frac{1}{2}\ \text{atau}\ x \gt 0$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- Soal 55 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">55. Soal SIMAK UI 2013 Kode 132</div><br>
+                    Himpunan penyelesaian dari $x^{2}+ 2\left| x \right| -15 \geq 0$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$\left \{ x \in R | x \leq -3\ \text{atau}\ x \geq 3  \right \}$</li>
+                        <li data-option="B">$\left \{ x\in \mathbb{R} |  -3\ \leq  x \leq 3  \right \}$</li>
+                        <li data-option="C">$\left \{ x\in \mathbb{R} | x \leq -3 \right \}$</li>
+                        <li data-option="D">$\left \{ x\in \mathbb{R} | x \geq 3  \right \}$</li>
+                        <li data-option="E">$\left \{ x\in \mathbb{R} | x  \gt 3  \right \}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- Soal 56 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">56. Soal UM UGM 2019 Kode 923/924</div><br>
+                    Diketahui penyelesaian dari pertidaksamaan $\dfrac{3^{x+3}+3^{x}-36}{9^{x}-9} \leq 3 $ adalah $a \leq x \lt b$ atau $x \geq c$. Nilai $a+2b+c=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">0</li>
+                        <li data-option="B">1</li>
+                        <li data-option="C">2</li>
+                        <li data-option="D">3</li>
+                        <li data-option="E">4</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- Soal 57 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">57. Soal UM UGM 2019 Kode 923/924</div><br>
+                    Jika $a \lt x \lt b$ adalah solusi pertidaksamaan $1+2^{x}+2^{2x}+2^{3x}+\cdots \gt 2$, dengan $x \neq 1$, maka $a+b=\cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">-1</li>
+                        <li data-option="B">-2</li>
+                        <li data-option="C">-3</li>
+                        <li data-option="D">-4</li>
+                        <li data-option="E">-5</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- Soal 58 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">58. Soal UM UGM 2019 Kode 934</div><br>
+                    Jika himpunan penyelesaian untuk pertidaksamaan $\sqrt{x^{2}-x+1} \leq \sqrt{x+1}$ adalah $\{x|x\ \text{bilangan real},\ a \leq x \leq b \}$, maka $a+b = \cdots$
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">1</li>
+                        <li data-option="B">2</li>
+                        <li data-option="C">3</li>
+                        <li data-option="D">4</li>
+                        <li data-option="E">5</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- Soal 59 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">59. Soal UM UGM 2019 Kode 934</div><br>
+                    Nilai $x$ yang merupakan penyelesaian dari $-2^{2x+1}+4^{x}+8^{x+\frac{1}{3}}-8^{\frac{2x-1}{3}}-16^{\frac{2x-1}{4}} \gt 0$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$-1 \leq x \lt 0$</li>
+                        <li data-option="B">$x \gt 0$</li>
+                        <li data-option="C">$x \lt 0\ \text{atau}\ x \gt 1$</li>
+                        <li data-option="D">$0 \leq x \lt 1$</li>
+                        <li data-option="E">$x \gt 1$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+            <!-- Soal 60 -->
+            <div class="latihan-item">
+                <div class="soal-latihan">
+                    <div class="keterangan-soal">60. Soal UTBK-SBMPTN 2022</div><br>
+                    Jika $f(x)=\dfrac{1}{1+2x}$ dan $g(x)=x+1$, maka himpunan semua $x$ yang memenuhi $1 \lt \left(g  \circ  f  \right) (x) \lt 2$ adalah...
+                    <ol class="pilihan-ganda">
+                        <li data-option="A">$\{x:-\frac{1}{2} \lt x \lt 0 \}$</li>
+                        <li data-option="B">$\{x:   x \lt -\frac{1}{2} \}$</li>
+                        <li data-option="C">$\{x: 0 \lt x \lt 1 \}$</li>
+                        <li data-option="D">$\{x: x \gt 0 \}$</li>
+                        <li data-option="E">$\{x: x \gt 1 \}$</li>
+                    </ol>
+                </div>
+                <div class="coret-coret"></div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Pembahasan Section -->
+    <section id="pembahasan" class="page">
+        <div class="content-wrapper">
+            <h1>Kunci Jawaban & Pembahasan</h1>
+            
+            <div class="pembahasan">
+                <b>1. Jawaban: D</b><br>
+                Karena yang mau kita cari adalah nilai $w=x+y$ dimana $2 \lt x \lt 4$ dan $3 \lt y \lt 5$ maka kita dapat kisaran nilai $x+y$. <br> Dari $2 \lt x \lt 4$ dan $3 \lt y \lt 5$ kita peroleh; <br> $\begin{align} 2 \lt & x \lt 4 & \\ 3 \lt & y \lt 5 & \\\hline 2+3 \lt & x+y \lt 4+5 \\ 5 \lt & x+y \lt 9 \end{align} $
+            </div>
+
+            <div class="pembahasan">
+                <b>2. Jawaban: D</b><br>
+                Pertama kita coba selesaikan pertidaksamaan dengan menyamakan bentuk kiri dan kanan, bisa dengan mengkuadratkan ruas kiri dan kanan atau merubah bentuk yang bisa ekuivalen. <br>$\begin{align}x-\sqrt{6-x} & \geq 0 \\x & \geq \sqrt{6-x} \\x^{2} & \geq 6-x  \\x^{2}+x-6 & \geq 0  \\(x+3)(x-2) & \geq 0 \\  x=-3\ \text{atau}\ x=2 &\end{align}$<br>Dari hasil di atas kita peroleh himpunan penyelesaian pertidaksamaan kuadrat adalah $x \leq -3\ \text{atau}\ x \geq 2$. <br><br>Kedua kita perhatikan agar $\sqrt{6-x}$ mempunyai nilai real, maka:<br>$\begin{align}6-x  & \geq 0 \\x-6 & \leq 0 \\x & \leq 6\end{align}$<br><br>Ketiga kita perhatikan, karena $6-x \geq 0$ dan agar $x \geq \sqrt{6-x}$ mempunyai nilai real, maka:<br>$\begin{align}x & \geq 0\end{align}$<br>Irisan ketiga nilai $x$ yang memenuhi pada pertidaksamaan di atas merupakan himpunan penyelesaian soal. Jika kita gambarkan kurang lebih seperti berikut ini; <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj3GX4eGfMgofQNXdS103OEYj4BDncImJaHl6zLq6FkmGJ7XsOmlJ-1U3FdPyeg3zFRTWj9TiWkLSE0Ks3OMwtO-Q5Ud2Fyj-IcKeVmgjEfOUhyKfO23jcwgpdzBhv0yDdXdU1prPaORvn_/s1600/Pertidaksamaan+SBMPTN+2018.jpg" alt="Pertidaksamaan+SBMPTN+2018.jpg" title="Matematika Dasar Pertidaksamaan (*Soal Dari Berbagai Sumber)">
+            </div>
+
+            <div class="pembahasan">
+                <b>3. Jawaban: D</b><br>
+                Berdasarkan sifat pertidaksamaan nilai mutlak yaitu:<br><ul><li>$|f(x)| \lt a$ HP adalah $\left \{ x|-a\ \lt f(x) \lt a \right \}$</li><li>$|f(x)| \gt a$ HP adalah $\left \{ x|f(x) \lt -a\ \text{atau}\  f(x) \gt a \right \}$</li></ul><br>Himpunan penyelesaian $|2x-a| \lt 5$ adalah:<br>$\left \{ x|-5\ \lt 2x-a \lt 5 \right \}$<br>$\left \{ x|-5+a\ \lt 2x \lt 5+a \right \}$<br>$\left \{ x|\dfrac{-5+a}{2}\ \lt x \lt \dfrac{5+a}{2} \right \}$<br>Himpunan penyelesaian diatas ekuivalen dengan:<br>$\left \{ x|-1\ \lt x \lt 4 \right \}$<br>Sehingga dapat kita simpulkan:<br><ul><li>$\dfrac{-5+a}{2}=-1$<br>$-5+a=-2$<br>$a=3$</li><li>$\dfrac{5+a}{2}=4$<br>$5+a=8$<br>$a=3$</li></ul>
+            </div>
+
+            <div class="pembahasan">
+                <b>4. Jawaban: E</b><br>
+                Pertidaksamaan coba kita sederhanakan menjadi bentuk umum pertidaksamaan pecahan;<br>$\begin{align}\dfrac{x}{x+x^{2}} &\geq -\dfrac{x}{x-x^{2}}\\\dfrac{x}{x^{2}+x} &\geq \dfrac{x}{x^{2}-x}\\\dfrac{x}{x^{2}+x} - \dfrac{x}{x^{2}-x} &\geq 0\\\dfrac{x^{3}-x^{2}-(x^{3}+x^{2})}{(x^{2}+x)(x^{2}-x)} &\geq 0\\\dfrac{-2x^{2}}{(x^{2}+x)(x^{2}-x)} &\geq 0\\\dfrac{2x^{2}}{(x^{2}+x)(x^{2}-x)} &\leq 0\\\dfrac{2x^{2}}{x(x+1)x(x-1)} &\leq 0\\\dfrac{2x^{2}}{x^{2}(x+1)(x-1)} &\leq 0\end{align}$<br>Syarat pertama dari pertidaksamaan di atas adalah $x^{2}(x+1)(x-1)\neq 0$ maka $x \neq 0$; $x \neq -1$; dan $x \neq 1$.<br><br>Berikutnya kita cari batas atau pembuat nol pada pembilang dan penyebut, yaitu: <ul><li>Pembuat nol pembilang: $2x^{2}=0$ maka $x=0$</li><li>Pembuat nol penyebut: $x^{2}(x+1)(x-1)$ maka $x=0$, $x=-1$ dan $x=1$ </li></ul>Pembuat nol kita gambarkan pada garis bilangan, lalu kita lakukan uji nilai $x$ (*coba perhatikan gambar) <br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiSSV0r29CyE2nStPKcRujeYsFyOmSxzobgBDKg6gUDVu2RXSEU_OgVDYVoCNh7cJM_FnFA3JQazgg0jxOXEe4CmqyDAUzirYa-9vwCgxnzGrY-M4bQzFg1DY4c3T-ldFFVrBVphXOLvQTh/s1600/pertidaksamaan+sbmptn+2017.jpg" alt="pertidaksamaan+sbmptn+2017.jpg" title="Bank Soal Matematika Dasar Pertidaksamaan (*Soal dan Pembahasan)"><br>Dari gambar dapat kita ambil kesimpulan, daerah $-1  \leq x \leq 0$ atau $0  \leq x \leq 1$ merupakan Himpunan Penyelesaian soal, karena pada daerah ini $\dfrac{2x^{2}}{x^{2}(x+1)(x-1)} \leq 0$<br>Lalu dengan memperhatikan syarat pertama sebuah pecahan yaitu $x \neq 0$; $x \neq -1$; dan $x \neq 1$, maka himpunan penyelesaian yang memenuhi adalah $-1 \lt x \lt 0\ \text{atau}\ 0 \lt x \lt 1$
+            </div>
+
+            <div class="pembahasan">
+                <b>5. Jawaban: E</b><br>
+                Pertidaksamaan coba kita sederhanakan menjadi pertidaksamaan pecahan bentuk sederhana;<br>$\begin{align}\dfrac{3x+6}{|x-1|} & \gt 4  \\\dfrac{3x+6}{|x-1|} -4 & \gt 0  \\\dfrac{3x+6}{|x-1|} - \dfrac{4|x-1|}{|x-1|} & \gt 0  \\\dfrac{3x+6-4|x-1|}{|x-1|} & \gt 0\end{align}$<br><br>Syarat pertama dari pertidaksamaan di atas adalah $x-1 \neq 0$ atau $x \neq 1$.<br><br>Berikutnya kita cari batas atau pembuat nol pada pembilang dan penyebut, Karena pertidaksamaan di atas memakai harga mutlak, sehingga kita kerjakan pada dua kemungkinan, yaitu:<br><ul><li>saat $x-1\geq 0$ maka $|x-1|=x-1$<br>$\begin{align}\dfrac{3x+6-4|x-1|}{|x-1|} & \gt 0  \\\dfrac{3x+6-4(x-1)}{x-1} & \gt 0  \\\dfrac{3x+6-4x+4}{x-1} & \gt 0  \\\dfrac{-x+10}{x-1} & \gt 0  \\\dfrac{x-10}{x-1} & \lt 0  \\1 \lt x \lt 10 &\end{align}$<br>Banyaknya bilangan bulat $x$ yang memenuhi adalah $8$ yaitu $2,\ 3,\ 4,\ 5,\ 6,\ 7,\ 8,\ 9$</li><li>saat $x-1 \lt 0$ maka $|x-1|=-x+1$<br>$\begin{align}\dfrac{3x+6-4|x-1|}{|x-1|} & \gt 0  \\\dfrac{3x+6-4(-x+1)}{-x+1} & \gt 0  \\\dfrac{3x+6+4x-4}{-x+1} & \gt 0  \\\dfrac{7x+2}{-x+1} & \gt 0  \\\dfrac{7x+2}{x-1} & \lt 0  \\-\dfrac{2}{7} \lt x \lt 1 &\end{align}$<br>Banyaknya bilangan bulat $x$ yang memenuhi adalah $1$ yaitu $0$.</li>  </ul><p>Banyaknya bilangan bulat $x$ yang memenuhi adalah $8+1=9$</p>
+            </div>
+
+            <div class="pembahasan">
+                <b>6. Jawaban: C</b><br>
+                Pertidaksamaan coba kita sederhanakan menjadi bentuk umum pertidaksamaan pecahan;<br>$\begin{align}\dfrac{x+2}{x} & \leq \dfrac{x+3}{x-2}  \\\dfrac{x+2}{x} - \dfrac{x+3}{x-2} & \leq 0  \\\dfrac{(x+2)(x-2)}{(x)(x-2)} - \dfrac{(x+3)(x)}{(x)(x-2)} & \leq 0  \\\dfrac{x^{2}-4-x^{2}-3x}{x(x-2)} & \leq 0  \\\dfrac{-4-3x}{(x)(x-2)} & \leq 0  \\\dfrac{3x+4}{(x)(x-2)} & \geq 0  \\\end{align}$<br>Syarat pertama dari pertidaksamaan di atas adalah $(x)(x-2) \neq 0$ maka $x \neq 0$ atau $x \neq 2$.<br><br>Berikutnya kita cari batas atau pembuat nol pada pembilang dan penyebut, yaitu:<br><ul><li>Pembuat nol pembilang: $3x+4=0$ maka $x=-\dfrac{4}{3}$</li><li>Pembuat nol penyebut: $(x)(x-2)=0$ maka $x=0$ atau $x=2$</li></ul>Pembuat nol kita gambarkan pada garis bilangan, lalu kita lakukan uji nilai $x$ (*coba perhatikan gambar) <br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg_6ryz5b8KJf691omMF_OS2L2dwxsjq7EZs-2SslRzBZ0CMDBKKTX_hv2UawEy3Vie98msbQxLGPtP4PafDX4xZC4qAj1md3IeidkvERcQETCZIBZBX85yzNm1WVYT4v_hBN2JNhpi0Sy9/s1600/pertidaksamaan+sbmptn+2016+Kode+355.jpg" alt="pertidaksamaan+sbmptn+2016+Kode+355.jpg" title="Matematika Dasar Pertidaksamaan (*Soal Dari Berbagai Sumber)"><br>Dari gambar dapat kita ambil kesimpulan, daerah $-\dfrac{4}{3} \leq x \leq 0$ atau $x \geq 2$ merupakan Himpunan Penyelesaian soal, karena pada daerah ini $\dfrac{3x+4}{(x)(x-2)} \geq 0$. <br>Lalu dengan memperhatikan syarat pertama yaitu $x \neq 0$ atau $x \neq 2$, maka himpunan penyelesaian yang memenuhi adalah $-\dfrac{4}{3} \leq x \lt 0$ atau  $x \gt 2$
+            </div>
+
+            <div class="pembahasan">
+                <b>7. Jawaban: C</b><br>
+                Pertidaksamaan coba kita sederhanakan menjadi bentuk umum pertidaksamaan pecahan;<br>$\begin{align}\dfrac{3}{x}-\dfrac{3}{x+3} & \leq 0  \\\dfrac{3(x+3)}{(x)(x+3)}-\dfrac{3x}{(x)(x+3)} & \leq 0  \\\dfrac{3x+9-3x}{(x)(x+3)} & \leq 0  \\\dfrac{9}{(x)(x+3)} & \leq 0\end{align}$<p>Syarat pertama dari pertidaksamaan di atas adalah $(x)(x+3) \neq 0$ maka $x \neq 0$ atau $x \neq -3$.<br><br>Berikutnya kita cari batas atau pembuat nol pada pembilang dan penyebut, yaitu:<br><ul><li>Pembuat nol pembilang tidak ada</li><li>Pembuat nol penyebut adalah $(x)(x+3)=0$ maka $x=0$ atau $x=-3$</li></ul>Pembuat nol kita gambarkan pada garis bilangan, lalu kita lakukan uji nilai $x$ (*coba perhatikan gambar) <br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgET-jdcOFHlL3rLKyiBQBVMBt5B8V8c58wHjkEtQMvgEG1MdXG-ITUIy-H4g-52jPTovSnFxnC8Xfyt5nIZxdREAeg7ToaqVe9temWIjzwJcvW1Ap1KP8RUK0m4qvvFUBw6lZK3y9LTxZe/s1600/pertidaksamaan+sbmptn+2016.jpg" alt="pertidaksamaan+sbmptn+2016.jpg" title="Matematika Dasar Pertidaksamaan (*Soal Dari Berbagai Sumber)"><br>Dari gambar dapat kita ambil kesimpulan, daerah $-3  \leq x \leq 0$ merupakan Himpunan Penyelesaian soal, karena pada daerah ini $\dfrac{9}{(x)(x+3)} \leq 0$<br>Lalu dengan memperhatikan syarat pertama yaitu $x \neq 0$ atau $x \neq -3$, maka himpunan penyelesaian yang memenuhi adalah $-3 \lt x \lt 0$
+            </div>
+
+            <div class="pembahasan">
+                <b>8. Jawaban: B</b><br>
+                Pertidaksamaan coba kita sederhanakan menjadi bentuk umum pertidaksamaan pecahan;<br>$\begin{align}\dfrac{x-1}{x+1} & \lt 1  \\\dfrac{x-1}{x+1} -1 & \lt 0  \\\dfrac{x-1}{x+1} -\dfrac{x+1}{x+1} & \lt 0  \\\dfrac{x-1-x-1}{x+1} & \lt 0  \\\dfrac{-2}{x+1} & \lt 0  \\\end{align}$<br>Syarat pertama dari pertidaksamaan di atas adalah $x+1 \neq 0$ maka $x \neq -1$.<br><br>Berikutnya kita cari batas atau pembuat nol pada pembilang dan penyebut, yaitu:<br><ul><li>Pembuat nol pembilang: tidak ada</li><li>Pembuat nol penyebut: $x+1=0$ maka $x=-1$</li></ul>Pembuat nol kita gambarkan pada garis bilangan, lalu kita lakukan uji nilai $x$ (*coba perhatikan gambar) <br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi2ZQs5Ha1pYv1_L_z6mVNg8xD05Aoplvkb6Cz30LWrYjRVodYcnXDCvtNe-bJXfs7LvrWMHkHyqU97J0N24SM18eqNgpelDCUw4KDgTfPwy6Y3QxjJbnPrTFQh3UYOnOptS7jVpiVfSTIB/s300/Pertidaksamaan+sbmptn+2015+kode+610.jpg" alt="Pertidaksamaan+sbmptn+2015+kode+610.jpg" title="Matematika Dasar Pertidaksamaan (*Soal Dari Berbagai Sumber)"><br>Dari gambar dapat kita ambil kesimpulan, daerah $x\gt -1$ merupakan Himpunan Penyelesaian soal, karena pada daerah ini $\dfrac{-2}{x+1} \lt 0$
+            </div>
+
+            <div class="pembahasan">
+                <b>9. Jawaban: B</b><br>
+                Pertidaksamaan coba kita sederhanakan menjadi bentuk umum pertidaksamaan pecahan;<br>$\begin{align}\dfrac{12}{x+1} & \lt \dfrac{x}{6}  \\\dfrac{12}{x+1} - \dfrac{x}{6} & \lt 0  \\\dfrac{(12)(6)}{6(x+1)} - \dfrac{(x)(x+1)}{(6)(x+1)} & \lt 0  \\\dfrac{72-x^{2}-x}{6(x+1)} & \lt 0  \\\dfrac{-x^{2}-x+72}{6(x+1)} & \lt 0  \\\dfrac{x^{2}+x-72}{6(x+1)} & \gt 0  \\\dfrac{(x+9)(x-8)}{6(x+1)} & \gt 0\end{align}$<br>  Syarat pertama dari pertidaksamaan di atas adalah $x+1 \neq 0$ maka $x \neq -1$.</p><p>Berikutnya kita cari batas atau pembuat nol pada pembilang dan penyebut, yaitu:<br><ul><li>Pembuat nol pembilang: $(x+9)(x-8)=0$ maka $x=-9$ atau $x=8$</li><li>Pembuat nol penyebut: $x+1=0$ maka $x=-1$</li></ul>Pembuat nol kita gambarkan pada garis bilangan, lalu kita lakukan uji nilai $x$ (*coba perhatikan gambar) <br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhYOKryPsnZ7kG-efTPTPp_quCnYSHjO67SJ8HiBsN5KjbCBtsG2ehkOMOlnKWgArJWlmZ113dG2yk3wrMHcZ4fAz8YVjxPZv8N6s9wok8JZkDVXyqXpSG0QeEeL-xCRUxVoEJ1aNv3VPPw/s1600/pertidaksamaan+sbmptn+2015.jpg" alt="pertidaksamaan+sbmptn+2015.jpg" title="Matematika Dasar Pertidaksamaan (*Soal Dari Berbagai Sumber)"><br>Dari gambar dapat kita ambil kesimpulan, daerah $-9  \leq x \leq -1$ atau $ x \geq 8$ merupakan Himpunan Penyelesaian soal, karena pada daerah ini $\dfrac{(x+9)(x-8)}{6(x+1)} \gt 0$.<br>Lalu dengan memperhatikan syarat pertama yaitu $x \neq -1$ maka himpunan penyelesaian yang memenuhi adalah $-9\lt x \lt -1$ dan $x\gt 8$.
+            </div>
+
+            <div class="pembahasan">
+                <b>10. Jawaban: A</b><br>
+                <p>Pertama kita coba selesaikan pertidaksamaan dengan menyamakan bentuk kiri dan kanan, bisa dengan mengkuadratkan ruas kiri dan kanan atau merubah bentuk yang bisa ekuivalen. <br>$\begin{align}\sqrt{x^{2}-4} & \leq 3-x \\\sqrt{x^{2}-4} & \leq \sqrt{(3-x)^{2}} \\x^{2}-4 & \leq   (3-x)^{2} \\x^{2}-4 & \leq   x^{2}-6x+9 \\x^{2}-x^{2}+6x & \leq 9+4 \\6x & \leq 13 \\x & \leq \dfrac{13}{6} \end{align}$</p><p>Kedua kita perhatikan $\sqrt{x^{2}-4}$ agar mempunyai nilai real, maka:<br>$\begin{align}\sqrt{x^{2}-4} & \geq 0 \\(x+2)(x-2) & \geq 0 \\x \leq - 2\ & \text{atau}\ x \geq 2\end{align}$</p>  <p>Ketiga kita perhatikan, karena $\sqrt{x^{2}-4} \geq 0$ dan agar $ \sqrt{x^{2}-4} \leq 3-x$ mempunyai nilai real, maka:<br>$\begin{align}3-x & \geq 0 \\x-3 & \leq 0 \\x & \leq 3\end{align}$</p>  <p>Irisan ketiga nilai $x$ yang memenuhi pada pertidaksamaan di atas adalah himpunan penyelesaian soal. Jika kita gambarkan kurang lebih seperti berikut ini;<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgwQoLrKq4VAIcS-kHxP34I-XgVF-b6f_swnwSaW7caOIoV5XdO7wu3kodpTQbhc-GJAEUwdGktm3lwLl3p3M_OtTQjS5Ww6JcwxMJi1_MlteIsCKCK0nuK3sLWexqA3SgeGqTj-UDFTDTr/s1600/Pertidaksamaan+simak+ui+2018.jpg" alt="Pertidaksamaan+simak+ui+2018.jpg" title="Matematika Dasar Pertidaksamaan (*Soal Dari Berbagai Sumber)"></p>
+            </div>
+
+            <div class="pembahasan">
+                <b>11. Jawaban: E</b><br>
+                <p>Untuk menyelesaikan pertidaksamaan di atas kita coba mulai dari nilai mutlak $|x+4|$, dari defenisi nilai mutal kita peroleh:<br>$|x+4|=\left\{\begin{matrix}x+4,\ \text{untuk}\ x\geq -4 \\-x-4,\ \text{untuk}\ x \lt  -4\end{matrix}\right.$</p>  <p>Berdasarkan defenisi nilai mutlak diatas kita peroleh dua bentuk pertidaksamaan yaitu untuk $x \geq -4$, maka $16-x^{2} \leq x+4$ atau $x \lt -4$, maka $16-x^{2} \leq -x-4$. <br><ul><li><p>Untuk $x \geq -4$, maka<br>$\begin{align}16-x^{2} & \leq |x+4| \\16-x^{2} & \leq x+4 \\0 & \leq x+4+x^{2}-16 \\x^{2}+x-12 & \geq 0  \\(x+4)(x-3) & \geq 0 \\x \leq -4\ & \text{atau}\ x\geq 3\end{align}$</p><p>Irisan $x \geq -4$ dan $x \leq -4\ \text{atau}\ x\geq 3$ adalah $x\geq 3$</p><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjoadDBScyhiMcw5AJCm_PPv1_qcCSoLEGY_YYpmfs-Syual4LPH570mzWV9cVDPA5YXQKnwOFKPyiIVYBtoUNjiMKi_Lzdn7osHCLq4recFRlsxSKY7qnNJkvBwWHOylCRuxpui_9uTWCD/s1600/Pertidaksamaan+SIMAK+UI.jpg" alt="Pertidaksamaan+SIMAK+UI.jpg" title="Matematika Dasar Pertidaksamaan (*Soal Dari Berbagai Sumber)"/></li><li>Untuk $x \lt -4$, maka<br>$\begin{align}16-x^{2} & \leq |x+4| \\16-x^{2} & \lt -(x+4) \\0 & \lt -x-4+x^{2}-16 \\x^{2}-x-20 & \gt 0  \\(x-5)(x+4) & \gt 0 \\x \leq -4\ & \text{atau}\ x\geq 5\end{align}$<br>Irisan $x \lt -4$ dan $x \leq -4\ \text{atau}\ x\geq 5$ adalah $x \leq -4$<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiRSAnG5VHRpn8fWnc5_c25-Wtzd7YTHx7CBD_E942x2n-b9sIJYx_YIuZt9YZBOkKFe5VMp2tlQiGRDoa37LKpMtgS0qq8fo3hZxVt-tMazcJ-CIHDnRpU5OMfGM2b2fV7rOv6uHBXIeEN/s1600/Pertidaksamaan+SIMAK+UI+%25282%2529.jpg" alt="Pertidaksamaan+SIMAK+UI+%25282%2529.jpg" title="Matematika Dasar Pertidaksamaan (*Soal Dari Berbagai Sumber)"/></li>  </ul>  <p>Himpunan penyelesaian $16-x^{2} \leq |x+4|$ adalah $x \leq -4$ atau $x\geq 3$</p>
+            </div>
+
+            <div class="pembahasan">
+                <b>12. Jawaban: A</b><br>
+                <p>Untuk mendapatkan fungsi kecepatan selalu positif dapat kita gunakan aturan turunan pertama dari fungsi $s(t)$, dimana:<br>$\begin{align}v(t) & = s'(t) \\& = 6t^{2}-48t+90\end{align}$</p><p>Nilai kecepatan selalu positif, berarti $v(t) = 6t^{2}-48t+90 \gt 0$, sehingga dapat kita tuliskan:<br/>$\begin{align} v(t) &  \gt 0 \\6t^{2}-48t+90 & \gt 0 \\   6 \left( t^{2}- 8t+ 15 \right) & \gt 0 \\  6 \left( t-5 \right) \left( t-3 \right) & \gt 0 \\  t \lt 3\ \text{atau}\ t \gt 5 &\end{align}$<br>Karena $t \geq 0$ maka yang nilai $t$ yang memenuhi adalah $0\leq t \lt 3\ \text{atau}\ t\gt 5$.</p>
+            </div>
+
+            <div class="pembahasan">
+                <b>13. Jawaban: B</b><br>
+                Syarat sebuah pecahan mempunyai nilai adalah penyebut tidak boleh sama dengan nol, $-x^{2}+x-1 \neq 0$.<br>Jika dilihat dari $a \lt 0$ dan $D=b^{2}-4ac=1-4(-1)(-1)=-3$ $(D \lt 0)$ maka $-x^{2}+x-1$ adalah definit negatif (*selalu bernilai negatif untuk $x$ bilangan real).<br><br>Pertidaksamaan coba kita sederhanakan menjadi:<br>$\begin{align}\dfrac{x^{2}-x-2}{-x^{2}+x-1} & \leq 0 \\\dfrac{x^{2}-x-2}{ x^{2}-x+1} & \geq 0 \\\dfrac{(x-2)(x+1)}{x^{2}-x+1} & \geq 0\end{align}$<br>Berikutnya kita cari batas atau pembuat nol pada pembilang dan penyebut, yaitu:<br><ul><li>Pembuat nol pembilang: $(x-2)(x+1)=0$ maka $x=2$ atau $x=-1$</li><li>Pembuat nol penyebut: tidak ada</li></ul>Pembuat nol kita gambarkan pada garis bilangan, lalu kita lakukan uji nilai $x$ (*coba perhatikan gambar) <br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj6c11uVijlr73BENcGkAlc7VHWjCKnj-ZPUbJFTxkForhCfMIECJ0ZgIEN3-ASgrJsgzVKht1NcEu-g9tQMWc9n2dgEgCvwztAonCkp6fSDO-rU7_47PJKnyiMTmdPn3I0zMX5UXKQe3bd/s1600/pertidaksamaan+UMB+PT+2014.jpg" alt="pertidaksamaan+UMB+PT+2014.jpg" title="Bank Soal Matematika Dasar Pertidaksamaan (*Soal dan Pembahasan)"/><br>Dari gambar dapat kita ambil kesimpulan, daerah $x \leq -1$ atau $ x \geq 2$ merupakan Himpunan Penyelesaian soal, karena pada daerah ini $\dfrac{(x-2)(x+1)}{x^{2}-x+1} \geq 0$
+            </div>
+
+            <div class="pembahasan">
+                <b>14. Jawaban: E</b><br>
+                Pertidaksamaan coba kita sederhanakan menjadi bentuk umum pertidaksamaan pecahan;<br>$\begin{align}\dfrac{x^{2}-2x-3}{x-2} & \lt x+5 \\\dfrac{x^{2}-2x-3}{x-2} - (x+5) & \lt 0 \\\dfrac{x^{2}-2x-3}{x-2} - \dfrac{(x+5)(x-2)}{x-2} & \lt 0 \\\dfrac{x^{2}-2x-3}{x-2} - \dfrac{x^{2}+3x-10}{x-2} & \lt 0 \\\dfrac{-5x+7}{x-2} & \lt 0 \\\dfrac{ 5x-7}{x-2} & \gt 0 \\\end{align}$<br>Berikutnya kita cari batas atau pembuat nol pada pembilang dan penyebut, yaitu:<br><ul><li>Pembuat nol pembilang: $5x-7=0$ maka $x=\dfrac{7}{5}$</li><li>Pembuat nol penyebut: $x-2=0$ maka $x=2$</li></ul>Pembuat nol kita gambarkan pada garis bilangan, lalu kita lakukan uji nilai $x$ (*coba perhatikan gambar) <br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhphyAmxOGnPlZokSQkPbNGiogYnRx8G8X-0GxILLezbZT6xe53GzaN5FOUd7wENRbSMu1CW1Po8qqZ3Se_Q2bmfiC3GHQhnjCEw2myorFMW62MyxAbraXrGq62r8ypKUgU5U6LyaqlYgBH/s1600/pertidaksamaan+UGM+2014.jpg" alt="pertidaksamaan+UGM+2014.jpg" title="Bank Soal Matematika Dasar Pertidaksamaan (*Soal dan Pembahasan)"/><br>Dari gambar dapat kita ambil kesimpulan, daerah $x \lt \dfrac{7}{5}$ atau $x \gt 2$ merupakan Himpunan Penyelesaian soal, karena pada daerah ini $\dfrac{ 5x-7}{x-2} \gt 0$
+            </div>
+
+            <div class="pembahasan">
+                <b>15. Jawaban: E</b><br>
+                <p>Pertama kita coba selesaikan pertidaksamaan dengan menyamakan bentuk kiri dan kanan, bisa dengan mengkuadratkan ruas kiri dan kanan atau merubah bentuk yang bisa ekuivalen. <br>$\begin{align}\sqrt{3-x} & \leq x-1 \\\sqrt{3-x} & \leq \sqrt{(x-1)^{2}} \\3-x & \leq x^{2}-2x+1 \\-x^{2}+2x-1+3-x & \leq 0 \\x^{2}-x-2 & \geq 0 \\(x-2)(x+1) & \geq 0 \\  x=2\ \text{atau}\ x=-1 &\end{align}$<br>Dari hasil di atas kita peroleh himpunan penyelesaian pertidaksamaan kuadrat adalah $x \leq -1\ \text{atau}\ x \geq 2$ <br><br>Kedua kita perhatikan agar $\sqrt{3-x}$ mempunyai nilai real, maka:  <br>$\begin{align}3-x  & \geq 0 \\x-3 & \leq 0 \\x & \leq 3\end{align}$<br><br>Ketiga kita perhatikan, karena $3-x \geq 0$ dan agar $ \sqrt{3-x} \leq x-1$ mempunyai nilai real, maka:<br>$\begin{align}x-1  & \geq 0 \\x & \geq 1\end{align}$<br><br>Irisan ketiga nilai $x$ yang memenuhi pada pertidaksamaan di atas adalah himpunan penyelesaian soal. Jika kita gambarkan kurang lebih seperti berikut ini; <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgXuuctsIX1JwfqVlseKWTBM8O5_xXvsmGWkIYDMHwyiKcP9FGsbTJV-XhPC8R2DQKsEm3m1RL47a7BTWKPpDqayo52SC-fwXYv7S4lhWBjes3jyyiaznDeWEf9L0DGOYALBufOASU8G5fF/s1600/Pertidaksamaan+UMB+2014.jpg" alt="Pertidaksamaan+UMB+2014.jpg" title="Matematika Dasar Pertidaksamaan (*Soal Dari Berbagai Sumber)"/>
+            </div>
+
+            <div class="pembahasan">
+                <b>16. Jawaban: A</b><br>
+                Pertama kita coba sederhanakan pertidaksamaan menjadi:<br>$\begin{align}\left ( \dfrac{x-1}{x} \right )^{2} & \leq 4\left ( 1-\dfrac{1}{x} \right )-3  \\\left ( \dfrac{x-1}{x} \right )^{2} & \leq 4\left ( \dfrac{x-1}{x} \right )-3\end{align}$<br><br>Jika kita misalkan $\left ( \dfrac{x-1}{x} \right )=a$<br>$\begin{align}a^{2} & \leq  4a-3   \\a^{2} - 4a+3 & \leq 0  \\(a-1)(a-3) & \leq 0 \\  a=1\ \text{atau}\ a=3 &\end{align}$<br>Dari hasil di atas kita peroleh himpunan penyelesaian pertidaksamaan kuadrat adalah $1 \leq a \leq 3$. <br><br>$\begin{align}1 \leq a  & \leq 3 \\1 \leq   \dfrac{x-1}{x}   & \leq 3 \\x \leq    x-1  & \leq 3x  \\x-x \leq    x-1-x   & \leq 3x-x  \\0 \leq     -1   & \leq 2x\end{align}$<br>Karena $0 \leq   -1$ tidak memenuhi sehingga himpunan penyelesaian yang memenuhi hanya $-1 \leq 2x$ atau $x \leq -\dfrac{1}{2}$
+            </div>
+
+            <div class="pembahasan">
+                <b>17. Jawaban: E</b><br>
+                <p>Pertama kita coba selesaikan pertidaksamaan dengan menyamakan bentuk kiri dan kanan, bisa dengan mengkuadratkan ruas kiri dan kanan atau merubah bentuk yang bisa ekuivalen. <br>$\begin{align}\sqrt{x^{2}-2x} & \lt \sqrt{3x+6} \\x^{2}-2x & \lt 3x+6 \\x^{2}-2x -3x-6 & \lt 0 \\  <br>x^{2}-5x-6 & \lt 0 \\(x-6)(x+1) & \lt 0 \\  x=6\ \text{atau}\ x=-1 &\end{align}$<br>Dari hasil di atas kita peroleh himpunan penyelesaian pertidaksamaan kuadrat adalah $-1 \lt  x \lt 6$ <br><br>Kedua kita perhatikan agar $\sqrt{x^{2}-2x}$ mempunyai nilai real, maka:  <br>$\begin{align}x^{2}-2x  & \geq 0 \\x(x-2) & \geq 0  \\x \leq 0\  & \text{atau}\ x \geq 2\end{align}$<br><br>Ketiga kita perhatikan agar $\sqrt{3x+6}$ mempunyai nilai real, maka:  <br>$\begin{align}3x+6  & \geq 0 \\3x & \geq -6 \\x & \geq -2\end{align}$<br><br>Irisan ketiga nilai $x$ yang memenuhi pada pertidaksamaan di atas adalah himpunan penyelesaian soal. Jika kita gambarkan kurang lebih seperti berikut ini; <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh9u67G30APONUeyHsH0YOxBbGG0t7WKQcPnuqJIH_C-c7u0qaHCGgWgis2iuCWXtJBwnhlxbrueOD6MuL2O57AEs5EHWNLISTCZOwiqYE608z73rC8pfGH8agnkSfnsqjxyd3o2ONQU6KI/s1600/Pertidaksamaan+SBMPTN+2014.jpg" alt="Pertidaksamaan+SBMPTN+2014.jpg" title="Matematika Dasar Pertidaksamaan (*Soal Dari Berbagai Sumber)"/>
+            </div>
+
+            <div class="pembahasan">
+                <b>18. Jawaban: A</b><br>
+                <p>Pertama kita coba selesaikan pertidaksamaan dengan menyamakan bentuk kiri dan kanan, bisa dengan mengkuadratkan ruas kiri dan kanan atau merubah bentuk yang bisa ekuivalen. <br>$\begin{align}\sqrt{x+10} - \sqrt{x+2} & \gt 2 \\\sqrt{x+10}  & \gt 2 + \sqrt{x+2} \\\left (\sqrt{x+10}   \right )^{2} & \gt \left (2 + \sqrt{x+2}  \right )^{2} \\x+10 & \gt 4+x+2+4\sqrt{x+2} \\  <br>x+10-4-x-2 & \gt 4\sqrt{x+2} \\  <br>4 & \gt 4\sqrt{x+2} \\  <br>1^{2} & \gt \sqrt{x+2}^{2} \\  <br>1 & \gt  x+2 \\  <br>-1 & \gt x\end{align}$<br><br>Kedua kita perhatikan agar $\sqrt{x+10}$ mempunyai nilai real, maka:  <br>$\begin{align}x+10  & \geq 0 \\x & \geq -10\end{align}$<br><br>Ketiga kita perhatikan agar $\sqrt{3x+6}$ mempunyai nilai real, maka:  <br>$\begin{align}x+2  & \geq 0 \\x & \geq -2\end{align}$<br><br>Irisan ketiga nilai $x$ yang memenuhi pada pertidaksamaan di atas adalah himpunan penyelesaian soal.  Jika kita gambarkan kurang lebih seperti berikut ini;<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEixcWe5A1bNJRo0C2QHSMsTp-TC1f-3kKpFFo_v4xcOsbJj5fJSJ6Tzqa0Qn_omgTNApRXqPBgXU2vIVTejf6hZPyre5yxfJRlxbcr7BoXSiXPKCKhXhmxG872qX1QNWepG8QpjyyBoecip/s1600/Pertidaksamaan+SBMPTN+2014+kode+622.jpg" alt="Pertidaksamaan+SBMPTN+2014+kode+622.jpg" title="Matematika Dasar Pertidaksamaan (*Soal Dari Berbagai Sumber)"/>
+            </div>
+
+            <div class="pembahasan">
+                <b>19. Jawaban: C</b><br>
+                Pertidaksamaan coba kita sederhanakan menjadi bentuk umum pertidaksamaan pecahan;<br>$\begin{align}\dfrac{p}{p-2} & \leq \dfrac{p-1}{p+2}  \\\dfrac{p}{p-2} - \dfrac{p-1}{p+2} & \leq 0  \\\dfrac{p(p+2)}{(p-2)(p+2)} - \dfrac{(p-1)(p-2)}{(p-2)(p+2)} & \leq 0  \\\dfrac{p^{2}+2p-p^{2}+3p-2}{(p-2)(p+2)} & \leq 0  \\\dfrac{ 5p-2}{(p-2)(p+2)} & \leq 0\end{align}$<br>Syarat pertama dari pertidaksamaan di atas adalah $(p-2)(p+2) \neq 0$ maka $p \neq 2$ dan $p \neq -2$.<br><br>Berikutnya kita cari batas atau pembuat nol pada pembilang dan penyebut, yaitu:<br><ul><li>Pembuat nol pembilang: $5p-2=0$ maka $p=\dfrac{2}{5}$</li><li>Pembuat nol penyebut: $(p-2)(p+2)=0$ maka $p=2$ dan $p=-2$</li></ul>Pembuat nol kita gambarkan pada garis bilangan, lalu kita lakukan uji nilai $x$ (*coba perhatikan gambar) <br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiDW6i0PK6cQj0GM30vvCNW_g8nkAMC6tLzbP5MQnoTLASxDvKMJOrIr4g1UKPXgZEaY5movJrETsRe0oXuNjOKK8kxq5_4F6Si5sPPLWlSjyjqEVlE-ZDzW4RgOvvbRtUV_WbAVgXDmQ_-/s1600/Pertidaksamaan+SBMPTN+2014+kode+631.jpg" alt="Pertidaksamaan+SBMPTN+2014+kode+631.jpg" title="Matematika Dasar Pertidaksamaan (*Soal Dari Berbagai Sumber)"/><br>Dari gambar dapat kita ambil kesimpulan, daerah $p \leq -2$ atau $ \dfrac{2}{5} \leq p \geq 2$ merupakan Himpunan Penyelesaian soal, karena pada daerah ini $\dfrac{ 5p-2}{(p-2)(p+2)} \leq 0$<br>Lalu dengan memperhatikan syarat pertama yaitu $p \neq 2$ dan $p \neq -2$ maka himpunan penyelesaian yang memenuhi adalah $p \lt -2$ atau $\dfrac{2}{5} \leq p \lt 2$.
+            </div>
+
+            <div class="pembahasan">
+                <b>20. Jawaban: A</b><br>
+                Pertidaksamaan coba kita sederhanakan menjadi bentuk umum pertidaksamaan pecahan;<br>$\begin{align}x^{2}+\dfrac{1}{x^{2}} & \leq 2  \\\dfrac{x^{4}+ 1}{x^{2}} - 2 & \leq 0  \\\dfrac{x^{4}+ 1-2x^{2}}{x^{2}} & \leq 0  \\\dfrac{\left( x^{2} -1 \right)^{2}}{x^{2}} & \leq 0  \\\left( \dfrac{ x^{2} -1 }{x} \right)^{2} & \leq 0  \\\left( \dfrac{ (x+1)(x-1)}{x} \right)^{2} & \leq 0  \\\end{align}$<br>Untuk setiap nilai $x$ maka $\left( \dfrac{ (x+1)(x-1)}{x} \right)^{2} \geq 0$ sehingga nilai $x$ yang memenuhi $\left( \dfrac{ (x+1)(x-1)}{x} \right)^{2} \leq 0$ adalah hanya untuk sama dengan nol, yaitu untuk  $x-1$ atau $x=1$
+            </div>
+
+            <div class="pembahasan">
+                <b>21. Jawaban: C</b><br>
+                Suku-suku dari deret geometri tak hingga adalah ${}^x\!\log 3,\ \left( {}^x\!\log 3 \right)^{2},\ \left( {}^x\!\log 3 \right)^{3},\ \cdots$<br><br>Agar deret geometri tak hingga mempunyai nilai, maka $r={}^x\!\log 3$ harus $-1 \lt r \lt 1$, sehingga $-1 \lt {}^x\!\log 3 \lt 1$.<br><br>Pertidaksaaan $-1 \lt {}^x\!\log 3 \lt 1$ kita kerjakan pada dua kemungkinan<br><br><mark>Kemungkinan pertama saat $x \gt 1$</mark> <br>$\begin{align}-1 \lt & {}^x\!\log 3 \lt 1 \\{}^x\!\log x^{-1} \lt & {}^x\!\log 3 \lt {}^x\!\log x^{1} \\x^{-1} \lt &  3 \lt x \\\dfrac{1}{x} \lt &  3 \lt x  \\\end{align}$<br>Dari pertidaksamaan di atas ada dua pertidaksamaan yang kita dapat yaitu <br><ul><li>untuk $\dfrac{1}{x} \lt 3$ <br>nilai $x$ yang memenuhi  $x \lt 0$ atau $x \gt \dfrac{1}{3}\ \, \, \cdots(1)$</li><li>untuk $3 \lt x$<br>nilai $x$ yang memenuhi $x \gt 3\ \, \, \cdots(2)$</li><li>Irisan $(1)$ dan $(2)$ di atas adalah $x \gt 3$</li></ul><br><mark>Kemungkinan kedua saat $0 \lt x \lt 1$</mark>  <br>$\begin{align}   <br>-1 \lt & {}^x\!\log 3 \lt 1 \\{}^x\!\log x^{-1} \lt & {}^x\!\log 3 \lt {}^x\!\log x^{1} \\x^{-1} \gt &  3 \gt x \\  x \lt &  3 \lt x^{-1} \\x \lt &  3 \lt \dfrac{1}{x}<br>\end{align}$ <br>Dari pertidaksamaan di atas ada dua pertidaksamaan yang kita dapat yaitu  <br><ul><li>untuk $x \lt 3$<br>nilai $x$ yang memenuhi $x \lt 3\ \, \, \cdots(3)$</li><li>untuk $3 \lt \dfrac{1}{x}$ <br>nilai $x$ yang memenuhi $ 0 \lt  x \lt \dfrac{1}{3}\ \, \, \cdots(4)$</li><li>Irisan $(3)$ dan $(4)$ di atas adalah $ 0 \lt  x \lt \dfrac{1}{3}$</li></ul>nilai $x$ yang memenuhi dari kemungkinan pertama atau kedua adalah $ 0 \lt  x \lt \dfrac{1}{3}$ atau $x \gt 3$
+            </div>
+
+            <div class="pembahasan">
+                <b>22. Jawaban: E</b><br>
+                Agar sebuah matriks $\begin{pmatrix}a & b\\c & d\end{pmatrix}$ mempunyai invers maka $ad-bc \neq 0$<br><br>$\begin{align}\begin{vmatrix}\sqrt{x^{2}-1} & 1\\x & 2\end{vmatrix}  & \neq 0 \\2 \sqrt{x^{2}-1} -x & \neq 0 \\2 \sqrt{x^{2}-1} & \neq x \\4x^{2}-4  & \neq x^{2} \\3x^{2} & \neq 4 \\x^{2} & \neq \dfrac{4}{3} \\x & \neq \pm \sqrt{\dfrac{4}{3}}  \end{align}$<br>Syarat sebuah fungsi bentuk akar $\sqrt{f(x)}$ mempunyai nilai real adalah $f(x) \geq 0$.<br>Agar $\sqrt{x^{2}-1}$ mempunyai nilai real maka $x^{2}-1 \geq 0$, nilai $x$ yang memenuhi pertidaksamaan kuadrat $x^{2}-1 \geq 0$ adalah $x \leq -1\ \text{atau}\ x \geq 1$.<br>Jika kita gambarkan irisan $x \neq \pm \sqrt{\dfrac{4}{3}}$ dan $x \leq -1\ \text{atau}\ x \geq 1$ adalah seperti berikut ini;<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgV4Qbtr1054MY2o6tATlZyA1ENbhxwy6wAs75Gz84FRnFfe1YnCuO_MdE1lmUtEekhl10vVuAdWUrXYZ815Xk6SXXnLgC6yr0fHBeSgbr2G-hHyEqDYTRZ2S4mzgbZzSYQUa5K0G7PpRAO/s1600/Pertidaksamaan+UGM+2014+522.jpg" alt="Pertidaksamaan+UGM+2014+522.jpg" title="Matematika Dasar Pertidaksamaan (*Soal Dari Berbagai Sumber)"/>
+            </div>
+
+            <div class="pembahasan">
+                <b>23. Jawaban: E</b><br>
+                Dengan bantuan sifat-sifat di atas, kita peroleh;<br>\begin{array} \\\left | \dfrac{1}{4}x^{2}-10 \right | \lt 6 & \\-6 \lt \dfrac{1}{4}x^{2}-10 \lt 6 & \\4 \lt \dfrac{1}{4}x^{2} \lt 16 & \\16 \lt x^{2} \lt 64 & \\\end{array}<br>Dari pertidaksamaan di atas, kita peroleh pertidaksamaan $x^{2} \lt 64$ dan $16 \lt x^{2}$.<br>$\begin{align}x^{2}  & \lt 64 \\x^{2}-64  & \lt 0 \\(x+8)(x-8) & \lt 0 \\-8 \lt x \lt 8 & \\\hline<br>16  & \lt x^{2} \\x^{2}-16  & \gt 0 \\(x+4)(x-4) & \lt 0 \\x \lt -4\  \text{atau}\ x \gt 4 & \\\hline<br>\end{align}$<br>Irisan himpunan jika kita gambarkan kurang lebih seperti berikut ini;  <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgFwf9gCpSgwuWRkWGK0VuWKE4VlYKMcywCHluvC72SeCcnsbu9s2BKBr9924P2vtWrwdWW_MXuXRVPW8SdcXnJKyXuJ1xVogxGgBV0u6SAvXgs57oX7Kj8M4vNnUTL6JMezoZa6RZGeAvg/s1600/Pertidaksamaan+Soal+STIS+2011.jpg" alt="Pertidaksamaan+Soal+STIS+2011.jpg" title="Matematika Dasar Pertidaksamaan Soal UM STIS 2011"/>   <br>Himpunan penyelesaian $-8 \lt x \lt -4$ atau $4 \lt x \lt 8$
+            </div>
+
+            <div class="pembahasan">
+                <b>24. Jawaban: C</b><br>
+                Untuk menyelesaikan pertidaksamaan kita coba dengan mengambil beberap contoh pendukung karena $a,\ b,\ c,$ dan $d$ bilangan riil positif:<br><mark>$ac \gt bd$</mark><br>Pernyataan ini benar, untuk $a \gt b$ dan $c \gt d$ <br>Misal: untuk $3 \gt 2$ dan $5 \gt 4$ maka $3 \cdot 5 \gt 2 \cdot 4$<br><mark>$a+c \gt b+d$</mark><br>Pernyataan ini benar, untuk $a \gt b$ dan $c \gt d$  <br>Misal: untuk $3 \gt 2$ dan $5 \gt 4$ maka $3+5 \gt 2+4$<br><mark>$ad \gt bc$</mark><br>Pernyataan ini belum tentu benar, untuk $a \gt b$ dan $c \gt d$ <br>Misal: untuk $4 \gt 3$ dan $2 \gt 1$ maka $4 \cdot 1 \gt 3 \cdot 2$ (SALAH)<br><mark>$ac+bd \gt ad+bc$</mark><br>Pernyataan ini benar, untuk $a \gt b$ dan $c \gt d$  <br>Misal: untuk $4 \gt 3$ dan $2 \gt 1$ maka $4 \cdot 2+3 \cdot 1 \gt 4 \cdot 1+3 \cdot 2$<br><mark>$\dfrac{1}{ac} \lt \dfrac{1}{bd}$</mark><br>Pernyataan ini benar, untuk $a \gt b$ dan $c \gt d$  <br>  Misal: untuk $4 \gt 3$ dan $2 \gt 1$ maka $\dfrac{1}{4 \cdot 2} \lt \dfrac{1}{3 \cdot 1}$
+            </div>
+
+            <div class="pembahasan">
+                <b>25. Jawaban: D</b><br>
+                Batasan nilai $x$ pembuat nol yang kita peroleh dari $\left| x+1 \right|$ adalah $x=-1$ dan dari $\left| 2x+1 \right|$ adalah $x=-\dfrac{1}{2}$.<br><ul><li><mark>Untuk $x \lt -1$</mark>, maka<br>$\begin{align}\left| 2x+1 \right| - \left| x+1 \right| & \lt 2 \\-\left( 2x+1 \right)-\left(- (x+1) \right) & \lt 2 \\- 2x-1+x+1 & \lt 2 \\- x & \lt 2 \\x & \gt -2\end{align}$<br>Irisan $x \lt -1$ dan $x \gt -2$ adalah $-2 \lt x \lt -1$<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjzfyXLnOSSccJYEZFNJylgDqU7ZgU1iZAFdU239737pCuwqBeEg-bmFhdhn3Qa3mrJrgWafvQvZPxhvAk5HD43R4AYeduKmmQV8tc6fIpvXqeAr5wY6pGDP8JiXwV0rQtroPLK4OVHBual/s1600/Pertidaksamaan+nilai+mulat+utbk+2019-1.jpg" alt="Pertidaksamaan+nilai+mulat+utbk+2019-1.jpg" title="Soal dan pembahasan Pertidaksamaan Nilai mutlak UTBK SAINTEK 2019"/></li><li><mark>Untuk $-1 \leq x \lt -\dfrac{1}{2}$</mark>, maka<br>$\begin{align}\left| 2x+1 \right| - \left| x+1 \right| & \lt 2 \\-\left( 2x+1 \right)-\left( x+1 \right) & \lt 2 \\- 2x-1-x-1 & \lt 2 \\- 3x-2 & \lt 2 \\- 3x & \lt 4 \\x & \gt -\dfrac{4}{3}\end{align}$<br>Irisan $-1 \leq x \lt -\dfrac{1}{2}$ dan $x \gt -\dfrac{4}{3}$ adalah $-1 \leq x \lt -\dfrac{1}{2}$<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhUq7pA0TjVzuEkm8di3Vfp3r9Ge6fM_-vhyR926MN5T2BQ1H4VDNt07-Wu9xbb5iY-hFXifSNVH4DRrY15GGQsema2BJHD2KHpIbTc1QwGSrwWdg-189uuCE9J59cyhyphenhyphenDPKM6BVRmcSVhc/s1600/Pertidaksamaan+nilai+mulat+utbk+2019-2.jpg" alt="Pertidaksamaan+nilai+mulat+utbk+2019-2.jpg" title="Soal dan pembahasan Pertidaksamaan Nilai mutlak UTBK SAINTEK 2019"/></li><li><mark>Untuk $x \leq -\dfrac{1}{2}$</mark>, maka<br>$\begin{align}\left| 2x+1 \right| - \left| x+1 \right| & \lt 2 \\\left( 2x+1 \right)-\left( x+1 \right) & \lt 2 \\2x+1-x-1 & \lt 2 \\x & \lt 2\end{align}$<br>Irisan $x \leq -\dfrac{1}{2}$ dan $x \lt -2$ adalah $-\dfrac{1}{2} \leq x \lt 2$<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhGPNXGyeOpaFa9yAQdUtswpYXYV8i2ki1jmANCDHRHITK8lff-ehddjntqB0-BQAWcCKu-9gDVcPz-CgeumtC3YqnWSRjCxTabbbPqPFU5vNjpxBeXFtwhLu7-ICWCstYMdrLMputQVPWD/s1600/Pertidaksamaan+nilai+mulat+utbk+2019-3.jpg" alt="Pertidaksamaan+nilai+mulat+utbk+2019-3.jpg" title="Soal dan pembahasan Pertidaksamaan Nilai mutlak UTBK SAINTEK 2019"/></li></ul>Himpunan penyelesaian pada soal adalah gabungan dari ketiga pertidaksamaan dari apa yang kita peroleh di atas yaitu:<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhiMyr_iONOzdfDV4_HA0x6EQiJd2-OpQIFpJoThtP-onNrJfJsyUWLNr3KGbQbj0u_BXjsHrJ3JTHSBeZbjGMff_hyphenhyphen7lJgLKTBBlbgnygrIkSBqWFPr1RK1bsus5YImJAYeVlzhG3rog4J/s1600/Pertidaksamaan+nilai+mulat+utbk+2019-4.jpg" alt="Pertidaksamaan+nilai+mulat+utbk+2019-4.jpg" title="Soal dan pembahasan Pertidaksamaan Nilai mutlak UTBK SAINTEK 2019"/><br>Himpunan penyelesaian adalah $-2 \lt x \lt 2$ jika ditulis dalam bentuk interval yaitu $(-2,2)$ sehingga nilai $a+b+2=-2+2+2=2$
+            </div>
+
+            <div class="pembahasan">
+                <b>26. Jawaban: C</b><br>
+                Berdasarkan batasan nilai $x$ dari defenisi nilai mutlak di atas, kita peroleh batasan nilai $x$ yang memenuhi:<br><ul><li><mark>Untuk $x \lt 0$</mark>, maka<br>$\begin{align}\left| x-1 \right|+ \left| x \right| & \lt 3 \\-\left( x-1 \right)+\left(- x \right) & \lt 3 \\-x+1 -x & \lt 3 \\- 2x & \lt 2 \\x & \gt -1\end{align}$<br>Irisan $x \lt 0$ dan $x \gt -1$ adalah $-1 \lt x \lt 0$<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhjVFMuJzpOwKVrg6IqMfL8dX9yiCWDGG_46mG0pBPBZb0cOGtUJ_L4IOI9BBqZfhzPdfCs86xFAJsWVXgb_jwccd3QqAOTnIvk_c1UqWUBBuQtlTnfcK9glDl1zG6IjqethulpkphKe8DC/s1600/Pertidaksamaan+nilai+mulat+utbk+2019-11.jpg" alt="Pertidaksamaan+nilai+mulat+utbk+2019-11.jpg" title="Soal dan pembahasan Pertidaksamaan Nilai mutlak UTBK SAINTEK 2019"/></li><li><mark>Untuk $0 \leq x \lt 1$</mark>, maka<br>$\begin{align}\left| x-1 \right|+ \left| x \right| & \lt 3 \\-\left( x-1 \right)+ x & \lt 3 \\- x+1 + x & \lt 3 \\1 & \lt 3  \\\text{selalu benar untuk}\ & x \in R  \end{align}$<br>Irisan $0 \leq x \lt 1$ dan $x \in R$ adalah $0 \leq x \lt 1$<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjQ9lX9xOWpIETHSJfb7K5-1IeqMbRtU32Sx787hb2FnVKoVEJkv0uVmrEjc9xy1sfwb6LcpecGKykIXqnCAAkMg0M6WBQIsUEn20QnE3GTfAw1yqQ1dHChMog4iC9UdQRWYuTvF54qvnnZ/s1600/Pertidaksamaan+nilai+mulat+utbk+2019-33.jpg" alt="Pertidaksamaan+nilai+mulat+utbk+2019-33.jpg" title="Soal dan pembahasan Pertidaksamaan Nilai mutlak UTBK SAINTEK 2019"/></li><li><mark>Untuk $x \geq 1$</mark>, maka<br>$\begin{align}\left| x-1 \right|+ \left| x \right| & \lt 3 \\x-1 + x & \lt 3 \\2x-1 & \lt 3 \\2x & \lt 4 \\x & \lt 2\end{align}$<br>Irisan $x \geq 1$ dan $x \lt 2$ adalah $1 \leq x \lt 2$<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhVktKpQcatsy1DeLO5U1YnX8uXRbGsEKJ5S1o8DS4Zpmsezx6efGInS6FZ7mJo7gsvIPBfipfQQamJxhJKwLjM-pDM-VLPXLOG33OTFnE1Q07z45DEpfxrpEUhhx6TLERzUTi4eF2FW_B3/s1600/Pertidaksamaan+nilai+mulat+utbk+2019-22.jpg" alt="Pertidaksamaan+nilai+mulat+utbk+2019-22.jpg" title="Soal dan pembahasan Pertidaksamaan Nilai mutlak UTBK SAINTEK 2019"/></li></ul>Himpunan penyelesaian pada soal adalah gabungan dari ketiga pertidaksamaan dari apa yang kita peroleh di atas yaitu:<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiwF1UHMoDKV1zrVb_rL1_ZJRIBtShmJyLTLGIK6XZ5qLcYejVp0oEt_EhoLaVtJIGv0EnqaB7Buf2vSpqIjOEabriPH8_fe-2lRaT5TbLQYCUPGn-O7Aihy4as9JpCq4MtS7vIUSdEq72d/s1600/Pertidaksamaan+nilai+mulat+utbk+2019-44.jpg" alt="Pertidaksamaan+nilai+mulat+utbk+2019-44.jpg" title="Soal dan pembahasan Pertidaksamaan Nilai mutlak UTBK SAINTEK 2019"/><br>Himpunan penyelesaian adalah $-1 \lt x \lt 2$ jika ditulis dalam bentuk interval yaitu $(-1,2)$ sehingga nilai $2a+b=-2+2=0$
+            </div>
+
+            <div class="pembahasan">
+                <b>27. Jawaban: A</b><br>
+                Batasan nilai $x$ yang kita peroleh dari $\left| x+2 \right|$ adalah $x=-2$ dan dari $\left| x+4 \right|$ adalah $x=-4$.<br><ul><li><mark>Untuk $x \lt -4$</mark>, maka<br>$\begin{align}\left| x+2 \right|+ \left| x+4 \right| & \lt 4 \\-\left( x+2 \right)+\left(- (x+4) \right) & \lt 4 \\-x-2-x-4 & \lt 4 \\-2x  & \lt 4+6 \\x & \gt -5\end{align}$<br>Irisan $x \lt -4$ dan $x \gt -5$ adalah $-5 \lt x \lt -4$<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgS5qbwGz8AEX7jHQgLUzM7LnIv7v8AP8UKiJupoDBlCT7umJ0w42E_Szir9Q59tP3bvrpXquFgevyRJYXjDaOgNx42gZKQuE6oRKCkHhchmO_5NtgvsuzbRRGw1eqL74jgpxcqtqTBhBdL/s1600/Pertidaksamaan+nilai+mulat+utbk+2019-111.jpg" alt="Pertidaksamaan+nilai+mulat+utbk+2019-111.jpg" title="Soal dan pembahasan Pertidaksamaan Nilai mutlak UTBK SAINTEK 2019"/></li><li><mark>Untuk $-4 \leq x \lt -2$</mark>, maka<br>$\begin{align}\left| x+2 \right|+ \left| x+4 \right| & \lt 4 \\-\left( x+2 \right)+ \left( x+4 \right) & \lt 4 \\- x-2 + x+4 & \lt 4 \\2 & \lt 4 \\\text{selalu benar untuk}\ x \in R &amp;\end{align}$<br>Irisan $-4 \leq x \lt -2$ dan $x \in R$ adalah $-4 \leq x \lt -2$<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEitKy4Lz32zIkWx7dOBBm3JZm0rCLpAIv13KatC5v4YH1hUyw8eOg8Tecsky2WENYX_Ku-bt8N0FmybhFemTTQxu5POTdqBp60I57S35m1DrqQeqKDDfHZTebb1Ig0u3M1MU-xw4cDHp8ig/s1600/Pertidaksamaan+nilai+mulat+utbk+2019-222.jpg" alt="Pertidaksamaan+nilai+mulat+utbk+2019-222.jpg" title="Soal dan pembahasan Pertidaksamaan Nilai mutlak UTBK SAINTEK 2019"/></li><li><mark>Untuk $x \geq -2$</mark>, maka<br>$\begin{align}\left| x+2 \right|+ \left| x+4 \right| & \lt 4 \\\left( x+2 \right)+ \left( x+4 \right) & \lt 4 \\2x+6 & \lt 4 \\2x & \lt -2 \\x & \lt -1\end{align}$<br>Irisan $x \geq -2$ dan $x \lt -1$ adalah $-2 \leq x \lt -1$<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg5NwN6DO_4cQVb_U6x5P2oXJCkU7UP6nBSc94WeMUu21wskaV6aTL3Mj5auISXG_DNt9PvTLirNAOV9bBwIsB5xaeIjZZH0UUys4Iqu1GiQoDTwNmfpm_NSJqNI3TI2PBm5QnEFVyuX3yX/s1600/Pertidaksamaan+nilai+mulat+utbk+2019-333.jpg" alt="Pertidaksamaan+nilai+mulat+utbk+2019-333.jpg" title="Soal dan pembahasan Pertidaksamaan Nilai mutlak UTBK SAINTEK 2019"/></li></ul>Himpunan penyelesaian pada soal adalah gabungan dari ketiga pertidaksamaan dari apa yang kita peroleh di atas yaitu:<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh-pOeXVJJCu5HuR-YsJZ_Iunz0AIMhnFfG2aX3JHh0JjjjSi1c3qfXFtHST_7aaOwrvVz2AYCGxU-Ym9pNQivwW3dB1-c9tyF1P9mnO_k8pRYP_ADKYR7Y7WOwWkT0wyaZgCxHkK0uPLj8/s1600/Pertidaksamaan+nilai+mulat+utbk+2019-444.jpg" alt="Pertidaksamaan+nilai+mulat+utbk+2019-444.jpg" title="Soal dan pembahasan Pertidaksamaan Nilai mutlak UTBK SAINTEK 2019"/><br>Himpunan penyelesaian adalah $-5 \lt x \lt -1$ jika ditulis dalam bentuk interval yaitu $(-5,-1)$ sehingga nilai $a-b=-5+1=-4$
+            </div>
+
+            <div class="pembahasan">
+                <b>28. Jawaban: D</b><br>
+                Pertidaksamaan di atas kita kerjakan dalam dua tahap, yaitu:<br>\begin{array} \\1 \lt   |x+1| &amp; \\x+1 \lt -1\ \text{atau}\   x+1 \gt 1 &amp; \\x \lt -2\ \text{atau}\   x \gt 0 &amp; \\\hline<br>|x+1|  \lt 5 &amp; \\-5 \lt   x+1 \lt 5 &amp; \\-5-1 \lt   x \lt 5-1 &amp; \\-6 \lt   x \lt 4 &amp; <br>\end{array} <br>Himpunan penyelesaian soal adalah irisan dari pertidaksamaan $x \lt -2\ \text{atau}\   x \gt 0$ dan $-6 \lt   x \lt 4$ , jika kita gambarkan ilustrasinya seperti berikut ini:<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhYldQetwHESuP-kN7-3H0PAv_MN6j3CtbaTqn_lQqQ9l03hPzzUZ5XZ0nLP0VTip4P6z_e9ihARYL7wEPfBHwlXDfA7_fn-4qOjZd5ufjZdrZfJQQXw4n0LuK3MLWTx_Fvp9MDeRdk4zqY/s1600/Pertidaksamaan+nilai+mulat+utbk+2019-a.jpg" alt="Pertidaksamaan+nilai+mulat+utbk+2019-a.jpg" title="Soal dan pembahasan Pertidaksamaan Nilai mutlak UTBK SAINTEK 2019"/><br>Dari gambar di atas himpunan penyelesaian adalah $-6 \lt x \lt -2\ \text{atau}\ 0 \lt x \lt 4$
+            </div>
+
+            <div class="pembahasan">
+                <b>29. Jawaban: B</b><br>
+                $\begin{align}\left| |x|+x \right| &amp; \leq 2 \\\sqrt{\left( |x|+x \right)^{2}} &amp; \leq \sqrt{2^{2}} \\\left( |x|+x \right)^{2} &amp; \leq 4\end{align}$<ul><li><mark>Untuk $x \leq 0$</mark>, maka<br>$\begin{align}\left( |x|+x \right)^{2} &amp; \leq 4  \\\left( x+x \right)^{2} &amp; \leq 4  \\4x^{2} &amp; \leq 4  \\x^{2}-1 &amp; \leq 0  \\(x+1)(x-1) &amp; \leq 0  \\-1 \leq x \leq 1 &amp; \\\end{align}$<br>Irisan $x \leq 0$ dan $-1 \leq x \leq 1$ adalah $0 \leq x \leq 1$<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiEjaNZvQKGsYA0UJpCyO5JXQm2TvdFkq3baVwLT2wyQhs1j-99AYO0W_VCcO6WZutBREAnCC2AhjYqyDhF7QLZaU7xclAs-A4V7f08UF32R6zuVwU33awUBhPxx1WRfPd55OgM3aQHl4gG/s1600/Pertidaksamaan+nilai+mulat+utbk+2019-b.jpg" alt="Pertidaksamaan+nilai+mulat+utbk+2019-b.jpg" title="Soal dan pembahasan Pertidaksamaan Nilai mutlak UTBK SAINTEK 2019"/></li><li><mark>Untuk $ x \lt 0$</mark>, maka<br>$\begin{align}\left( |x|+x \right)^{2} &amp; \leq 4  \\\left( -x+x \right)^{2} &amp; \leq 4  \\0 &amp; \leq 4  \\\text{selalu benar untuk}\ &amp; x \in R  <br>\end{align}$<br>Irisan $ x \lt 0$ dan $x \in R$ adalah $x \lt 0$<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj4nHLTFOSCNpUrhQ4ssy8tEbjE-DSlhvTjI94w24hXCIhDyTL5GiLy8h-F7T7SUbnxPdS4uruH9UiR1eMoEimPQdtMtyQIpqRhSJqgt7MaYS4AYt5befwPbH53rNdOdNdf_Mj-dhMakXkr/s1600/Pertidaksamaan+nilai+mulat+utbk+2019-bb.jpg" alt="Pertidaksamaan+nilai+mulat+utbk+2019-bb.jpg" title="Soal dan pembahasan Pertidaksamaan Nilai mutlak UTBK SAINTEK 2019"/></li></ul>Himpunan penyelesaian pada soal adalah gabungan dari kedua pertidaksamaan dari apa yang kita peroleh di atas yaitu:<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhkAMJ8Y8k6_XO3c5hifF-J4S3poKhpaiJNyVPEiFIaMLkzXoc9E-sPICGG0Le86VblV11IRAfv1beT7fm6egpBxQeikF3RMHxl9gDr9RSp4GFdkPbGYNdSxc4Qxl6vt0knyvbvMqrWX561/s1600/Pertidaksamaan+nilai+mulat+utbk+2019-bbb.jpg" alt="Pertidaksamaan+nilai+mulat+utbk+2019-bbb.jpg" title="Soal dan pembahasan Pertidaksamaan Nilai mutlak UTBK SAINTEK 2019"/><br>Himpunan penyelesaian adalah $x \leq 1$
+            </div>
+
+            <div class="pembahasan">
+                <b>30. Jawaban: C</b><br>
+                Pertama kita mulai dari syarat fungsi $\sqrt{4x+8}$, agar bernilai real, maka $4x+8 \geq 0$ atau $x \geq -2$. <br>$\begin{align}\left| x+2 \right|-\sqrt{4x+8} &amp; \leq 0 \\\sqrt{\left( x+2 \right)^{2}} &amp; \leq \left(\sqrt{4x+8}\right)^{2}  \\x^{2}+4x+4 &amp; \leq  4x+8   \\x^{2}+4x+4-4x-8 &amp; \leq 0   \\x^{2}-4 &amp; \leq 0   \\(x-2)(x+2) &amp; \leq 0   \\-2 \leq x \leq 2 &amp;\end{align}$<br>  Irisan $x \geq -2$ dan $-2 \leq x \leq 2$ adalah $-2 \leq x \leq 2$.</p><p>Karena nilai $x$ yang diminta adalah semua nilai $x$ pada $-1 \leq x \leq 3$ sehingga himpunan penyelesaian yang diminta adalah irisan dari $-1 \leq x \leq 3$ dan $-2 \leq x \leq 2$, yaitu: <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjqUpNUMdgU9HySVX9BjMISkw26DCAQgWtt8HDfjJwMMnueZyxEmHdQzayJc52bttGYpgtJkcDeJz8oz4O4PBq4M4cZLAKKOa7AMNkxhfN38Wu2hy6M7j_Uwl-gst9rf5NONAuPh_oibG6W/s1600/Pertidaksamaan+nilai+mulat+utbk+2019-e.jpg" alt="Pertidaksamaan+nilai+mulat+utbk+2019-e.jpg" title="Soal dan pembahasan Pertidaksamaan Nilai mutlak UTBK SAINTEK 2019"/><br>Dari ilustrasi pada gambar di atas kita peroleh irisannya adalah $-1 \leq x \leq 2 \equiv a \leq x \leq b$ sehingga nilai $2a+b=-2+2=0$
+            </div>
+
+            <div class="pembahasan">
+                <b>31. Jawaban: A</b><br>
+                Pertidaksamaan coba kita sederhanakan menjadi bentuk umum pertidaksamaan pecahan;<br>$\begin{align}\dfrac{3x}{2-x} &amp; \lt 3  \\\dfrac{3x}{x-2}-3 &amp; \lt 0  \\\dfrac{3x}{x-2}+3 &amp; \gt 0  \\\dfrac{3x}{x-2}+\dfrac{3(x-2)}{x-2} &amp; \gt 0  \\\dfrac{3x+3x-6}{x-2} &amp; \gt 0  \\\dfrac{6x-6}{x-2} &amp; \gt 0\end{align}$<br>Syarat pertama dari pertidaksamaan pecahan adalah $x-2 \neq 0$ maka $x \neq 2$.<br><br>Berikutnya kita cari batas atau pembuat nol pada pembilang dan penyebut, yaitu:<br><ul><li>Pembuat nol pembilang: $6x-6=0$ maka $x=1$</li><li>Pembuat nol penyebut: $x-2=0$ maka $x=2$</li></ul>Karena pembuat nol-nya ada dua untuk lebih cepat mengerjakannya bisa pakai cara alternatif pertidaksamaan kuadrat sehingga himpunan penyelesaian adalah $x \lt 1\ \text{atau}\ x \gt 2$. <br><br>Jika dengan menggunakan titik uji, dapat kita kerjakan seperti berikut ini:<br>Pembuat nol kita gambarkan pada garis bilangan, lalu kita lakukan uji nilai $x$ (*coba perhatikan gambar) <br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgKmeYhZFI66ev0OeprPbR4HOY4YsLqNuItTXrL9KUdyvTJPaVxYFCB5CVlngdFl4YNchBvVox8BXIJ6t0W1EnZMQO8WvXQFrlJZcP5cw8l9Shg-PdSso7H-4YZ6m813uCX_d48mfykd2y7/s1600/Pertidaksamaan+pecahan+utbk+2019.jpg" alt="Pertidaksamaan+pecahan+utbk+2019.jpg" title="Matematika Dasar Pertidaksamaan (*Soal Dari Berbagai Sumber)"><p>Dari gambar dapat kita ambil kesimpulan, daerah $x \lt 1\ \text{atau}\ x \gt 2$ merupakan Himpunan Penyelesaian soal, karena pada daerah ini $\dfrac{6x-6}{x-2} \gt 0$.</p>
+            </div>
+
+            <div class="pembahasan">
+                <b>32. Jawaban: E</b><br>
+                Bentuk soal coba kita ubah menjadi:<br>$\begin{align}\left| x+1 \right| &amp; \lt \dfrac{2}{x} \\\left| x+1 \right| - \dfrac{2}{x} &amp; \lt 0  \\\dfrac{x \left| x+1 \right|-2}{x} &amp; \lt 0\end{align}$<br>Batasan nilai $x$ yang kita peroleh dari $\left| x+1 \right|$ adalah $x=-1$.<br><ul><li><mark>Untuk $x \geq -1$</mark>, maka<br>$\begin{align}\dfrac{x \left| x+1 \right|-2}{x} &amp; \lt 0  \\\dfrac{x \left( x+1 \right)-2}{x} &amp; \lt 0  \\\dfrac{x^{2}+x-2}{x} &amp; \lt 0  \\\dfrac{(x+2)(x-1)}{x} &amp; \lt 0\end{align}$<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjXgGVQ2CEaDtxNjQQ4mbOdoRV6izYMHCjVyLNrpr-i2FKeq1TplubEA-LfZBIAVN1-AROiat5w8KDYUh1MtO8vBVWVnUovVjGmrhgmd3h6vhbo210R6vnsYtPGaenvFlO2t1IRCdJxHM0l/s1600/Pembahasan+Pertidaksamaan+pecahan+utbk+2019.jpg" alt="Pembahasan+Pertidaksamaan+pecahan+utbk+2019.jpg" title="Soal dan pembahasan Pertidaksamaan Nilai mutlak UTBK SAINTEK 2019"/>  <p>Dari gambar dapat kita ambil kesimpulan, daerah $x \lt -2$ atau $0 \lt x \lt 1$ merupakan Himpunan Penyelesaian, karena pada daerah ini $\dfrac{(x+2)(x-1)}{x} \lt 0$.</p><p>Irisan $x \geq -1$ dan $x \lt -2$ atau $0 \lt x \lt 1$ adalah $0 \lt x \lt 1$<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhFzepXha6K5lv2plJ-4g5MjekTHbWuJQFQpiB_ehtUAmFqE2heIRAlnZO14FVrANxrsgueCsAyhHc92da9nT8glpEXUeEGCmu6jzh7KTQuABpTWr7I9cOmwOXvsQZkg0C2_z6q8Pfqeuxr/s1600/Pembahasan+Pertidaksamaan+pecahan+utbk+2019-a.jpg" alt="Pembahasan+Pertidaksamaan+pecahan+utbk+2019-a.jpg" title="Soal dan pembahasan Pertidaksamaan Nilai mutlak UTBK SAINTEK 2019"/></li><li><mark>Untuk $ x \lt -1$</mark>, maka<br>$\begin{align}\dfrac{x \left| x+1 \right|-2}{x} &amp; \lt 0  \\\dfrac{x \left(-( x+1) \right)-2}{x} &amp; \lt 0  \\\dfrac{x \left(- x-1  \right)-2}{x} &amp; \lt 0  \\\dfrac{-x^{2}-x-2}{x} &amp; \lt 0  \\\dfrac{ x^{2}+x+2}{x} &amp; \gt 0\end{align}$<br>Karena $x^{2}+x+2$ definit positif maka himpunan penyelesaian adalah $x \gt 0$  <br><br>Irisan $ x \lt -1$ dan $x \gt 0$ adalah himpunan kosong sehingga tidak ada nilai $x$ yang memenuhi.</li></ul>Himpunan penyelesaian pada soal adalah gabungan dari kedua pertidaksamaan dari apa yang kita peroleh di atas. <br><br>Karena pada syarat kedua hasilnya himpunan kosong maka himpunan penyelesaian hanya pada syarat yang pertama yaitu $0 \lt x \lt 1$ jika ditulis dalam bentuk interval adalah $(0,1)$ sehingga nilai $2a+5b=0+5=5$
+            </div>
+
+            <div class="pembahasan">
+                <b>33. Jawaban: E</b><br>
+                Batasan nilai $p$ yang kita peroleh dari $\left| p-1 \right|$ adalah $p=1$.<br><ul><li><mark>Untuk $p \geq 1$</mark>, maka<br>$\begin{align}p \left| p-1 \right| &amp; \gt 1  \\p \left( p-1 \right)  &amp; \gt 1  \\p^{2}-p  &amp; \gt 1  \\p^{2}-p-1 &amp; \gt 0  \\\end{align}$<br>Untuk menentukan pembuat nol dari $p$, kita coba gunakan rumus abc,<br>$\begin{align}p_{1,2} &amp;= \dfrac{-b \pm \sqrt{b^{2}-4ac}}{2a} \\&amp;= \dfrac{1 \pm \sqrt{1-4(1)(-1)}}{2(1)} \\&amp;= \dfrac{1 \pm \sqrt{5}}{2}\end{align}$<br>Dari hasil di atas kita peroleh himpunan penyelesaian pertidaksamaan kuadrat adalah $p \lt \dfrac{1 - \sqrt{5}}{2} $ atau $p \gt \dfrac{1 + \sqrt{5}}{2} $.<br><br>Irisan $p \geq 1$ dan $p \lt \dfrac{1 - \sqrt{5}}{2} $ atau $p \gt \dfrac{1 + \sqrt{5}}{2} $ adalah $p \gt \dfrac{1 + \sqrt{5}}{2} $<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh50b1VJzFO49kDV7GtYLQDv6lgjgej_nZmqHBzg9iKVDjwiblGShN86MSdlPqNyq3Q7wX4Lj9JR_TRkLptm0XQ4UxMlcSXw6e90jRs6lXyvk7g9cFNcbntQ3K53k-jR6IGXWGz4_2b0tLu/s1600/Pembahasan+Pertidaksamaan+pecahan+utbk+2019-aa.jpg" alt="Pembahasan+Pertidaksamaan+pecahan+utbk+2019-aa.jpg" title="Soal dan pembahasan Pertidaksamaan Nilai mutlak UTBK SAINTEK 2019"/><br></li><li><mark>Untuk $ p \lt 1$</mark>, maka<br>$\begin{align}p \left| p-1 \right| &amp; \gt 1 \\p \left( -(p-1) \right)  &amp; \gt 1 \\-p^{2}+p &amp; \gt 1 \\-p^{2}+p-1 &amp; \gt 0 \\p^{2}-p+1 &amp; \lt 0 \end{align}$<br>Karena $p^{2}-p+1$ definit positif 'selalu bernilai positif untuk setiap $p$' maka tidak ada nilai $p$ yang mengakibatkan $p^{2}-p+1 \lt 0$ sehingga pada syarat ini himpunan penyelesaian adalah himpunan kosong.<br><br>Irisan $ p \lt 1$ dan himpunan kosong adalah himpunan kosong.</li></ul><p>Himpunan penyelesaian pada soal adalah gabungan dari kedua pertidaksamaan dari apa yang kita peroleh di atas yaitu $p \gt \dfrac{1 + \sqrt{5}}{2} $</p>
+            </div>
+
+            <div class="pembahasan">
+                <b>34. Jawaban: C</b><br>
+                Untuk menyederhanakan penulisan pertidaksamaan sementara kita coba dengan memisalkan $a^{x}=m$ dimana $m \gt 0$ menjadi;<br>$\begin{align}\dfrac{a^{x}+2}{a^{x}} &amp; \lt a^{x} \\\dfrac{m+2}{m} &amp; \lt m \\\hline\text{sama-sama dikali}\ &amp; (m)  \\\hline m+2 &amp; \lt m(m) \\m+2 &amp; \lt m^{2} \\m^{2}-m-2 &amp; \gt 0 \\(m-2)(m+1) &amp; \gt 0 \\m \lt -1\ \text{atau}\ &amp; m \gt 2 \end{align}$<br><br>Kita kembalikan nilai $m=a^{x}$ maka $a^{x} \lt -1$ atau $a^{x} \gt 2$.<br><ul><li>Untuk $a^{x} \lt -1$ dan $0 \lt a \lt 1$ sehingga tidak ada nilai $x$ yang memenuhi.</li><li>Untuk $a^{x} \gt 2$ dan $0 \lt a \lt 1$, maka berlaku:<br>$\begin{align}a^{x} &amp; \gt 2  \\{}^a\!\log a^{x} &amp; \lt {}^a\!\log 2  \\x &amp; \lt {}^a\!\log 2 \\x &amp; \lt {}^ \!\log_{a} 2 \end{align}$  </li></ul>
+            </div>
+
+            <div class="pembahasan">
+                <b>35. Jawaban: B</b><br>
+                Untuk menyederhanakan penulisan pertidaksamaan kita coba dengan memisalkan $a^{x}=m$ dimana $m \gt 0$ menjadi;<br>$\begin{align}\dfrac{8}{a^{x}+2} &amp; \gt a^{x}  \\\dfrac{8}{m+2} &amp; \gt m  \\\hline\text{sama-sama dikali}\ &amp; (m+2)  \\\hline 8 &amp; \gt m(m+2) \\8 &amp; \gt m^{2}+2m \\m^{2}+2m-8 &amp; \lt 0 \\(m+4)(m-2) &amp; \lt 0 \\-4 \lt m \lt 2 &amp;\end{align}$<br><br>Kita kembalikan nilai $m=a^{x}$ maka $-4 \lt a^{x} \lt 2$.<br>$\begin{align}a^{x} &amp; \lt 2  \\{}^a\!\log a^{x} &amp; \lt {}^a\!\log 2  \\x &amp; \lt {}^a\!\log 2 \\x &amp; \lt {}^\!\log_{a}2 \end{align}$<br>Karena $a^{x} \gt 1$ maka $-4 \lt a^{x}$ berlaku untuk $x \in R$. <br><br>Irisan dari $x \lt {}^\!\log_{a}2$ dan $x \in R$ adalah $x \lt {}^\!\log_{a}2$.
+            </div>
+
+            <div class="pembahasan">
+                <b>36. Jawaban: C</b><br>
+                Untuk menyederhanakan penulisan pertidaksamaan sementara kita coba dengan memisalkan $a^{x}=m$ dimana $m \gt 0$ menjadi;<br>$\begin{align}\dfrac{3+3a^{x}}{a^{x}+1} &amp; \lt a^{x} \\\dfrac{3+3m}{m+1} &amp; \lt m \\\hline\text{sama-sama dikali}\ &amp; (m+1)  \\\hline 3+3m &amp; \lt m(m+1) \\3+3m &amp; \lt m^{2}+m \\m^{2}-2m-3 &amp; \gt 0 \\(m-3)(m+1) &amp; \gt 0 \\m \lt -1\ \text{atau}\ &amp; m \gt 3 \end{align}$<br><br>Kita kembalikan nilai $m=a^{x}$ maka $a^{x} \lt -1$ atau $a^{x} \gt 3$.<br><ul><li>Untuk $a^{x} \lt -1$ dan $0 \lt a \lt 1$ sehingga tidak ada nilai $x$ yang memenuhi.</li><li>Untuk $a^{x} \gt 3$ dan $0 \lt a \lt 1$, maka berlaku:<br>$\begin{align}a^{x} &amp; \gt 3  \\{}^a\!\log a^{x} &amp; \lt {}^a\!\log 3  \\x &amp; \lt {}^a\!\log 3 \\x &amp; \lt {}^ \!\log_{a} 3 \end{align}$  </li></ul>
+            </div>
+
+            <div class="pembahasan">
+                <b>37. Jawaban: A</b><br>
+                Untuk menyederhanakan penulisan pertidaksamaan logaritma di atas, kita coba misalkan ${}^\!\log_{a}x=m$.<br>$\begin{align}\left( {}^\!\log_{a}x \right)^{2}-{}^\!\log_{a}x-2 &amp; \gt 0 \\m^{2}-m-2 &amp; \gt 0 \\(m-2)(m+1)  &amp; \gt 0 \\  m=2\ \text{atau}\ m=-1 &amp;\end{align}$<br>Dari hasil di atas kita peroleh himpunan penyelesaian pertidaksamaan kuadrat adalah $m \lt -1$ atau $m \gt 2$.<br><br>Kita kembalikan nilai $m={}^\!\log_{a}x$ maka:<br><ul><li>Untuk ${}^\!\log_{a}x \lt -1$ dan $0 \lt a \lt 1$<br>$\begin{align}{}^\!\log_{a}x &amp; \lt -1  \\{}^\!\log_{a}x &amp; \lt {}^\!\log_{a} a^{-1}  \\x &amp; \gt  a^{-1}\end{align}$</li><li>Untuk ${}^\!\log_{a}x \gt 2$ dan $0 \lt a \lt 1$<br>$\begin{align}{}^\!\log_{a}x &amp; \gt 2  \\{}^\!\log_{a} x  &amp; \gt {}^\!\log_{a}a^{2}  \\x &amp; \lt a^{2} \end{align}$</li></ul>
+            </div>
+
+            <div class="pembahasan">
+                <b>38. Jawaban: A</b><br>
+                Untuk menyederhanakan penulisan pertidaksamaan logaritma di atas, kita coba misalkan ${}^\!\log_{a}x=m$.<br>$\begin{align}\left( {}^\!\log_{a}x \right)^{2}+4{}^\!\log_{a}x+3 &amp; \lt 0 0 \\m^{2}+4m+3 &amp; \lt 0 \\(m+1)(m+3)  &amp; \lt 0 \\  m=-1\ \text{atau}\ m=-3 &amp;\end{align}$<br>Dari hasil di atas kita peroleh himpunan penyelesaian pertidaksamaan kuadrat adalah $ -3 \lt m \lt -1$.<br><br>Kita kembalikan nilai $m={}^\!\log_{a}x$ maka $ -3 \lt {}^\!\log_{a}x \lt -1$<br><ul><li>Untuk ${}^\!\log_{a}x \gt -3$ dan $ a \gt 1$<br>$\begin{align}{}^\!\log_{a}x &amp; \gt -3  \\{}^\!\log_{a}x &amp; \gt {}^\!\log_{a} a^{-3}  \\x &amp; \gt  a^{-3}\end{align}$</li><li>Untuk ${}^\!\log_{a}x \lt -1$ dan $ a \gt 1$<br>$\begin{align}{}^\!\log_{a}x &amp; \lt -1  \\{}^\!\log_{a} x  &amp; \lt {}^\!\log_{a}a^{-1}  \\x &amp; \lt a^{-1} \end{align}$</li></ul>
+            </div>
+
+            <div class="pembahasan">
+                <b>39. Jawaban: B</b><br>
+                Untuk menyederhanakan penulisan pertidaksamaan logaritma di atas, kita coba misalkan ${}^\!\log_{a}x=m$.<br>$\begin{align}\left( {}^\!\log_{a}x \right)^{2}-2\ {}^\!\log_{a}x-8 &amp; \gt 0 \\m^{2}-2m-8 &amp; \gt 0 \\(m-4)(m+2)  &amp; \gt 0 \\  m=4\ \text{atau}\ m=-2 &amp;\end{align}$<br>Dari hasil di atas kita peroleh himpunan penyelesaian pertidaksamaan kuadrat adalah $m \lt -2$ atau $m \gt 4$.<br><br>Kita kembalikan nilai $m={}^\!\log_{a}x$ maka ${}^\!\log_{a}x \lt -2$ atau ${}^\!\log_{a}x \gt 4$.<br><ul><li>Untuk ${}^\!\log_{a}x \lt -2$ dan $0 \lt a \lt 1$<br>$\begin{align}{}^\!\log_{a}x &amp; \lt -2  \\{}^\!\log_{a}x &amp; \lt {}^\!\log_{a} a^{-2}  \\x &amp; \gt  a^{-2}\end{align}$</li><li>Untuk ${}^\!\log_{a}x \gt 4$ dan $0 \lt a \lt 1$<br>$\begin{align}{}^\!\log_{a}x &amp; \gt 4  \\{}^\!\log_{a} x  &amp; \gt {}^\!\log_{a}a^{4}  \\x &amp; \lt a^{4} \end{align}$</li></ul>
+            </div>
+
+            <div class="pembahasan">
+                <b>40. Jawaban: C</b><br>
+                Pertidaksamaan pada soal di atas memuat pertidaksamaan pecahan dan bentuk akar, kita coba selesaikan dengan manipulasi aljabar sebagai berikut:<br>$\begin{align}\dfrac{\left ( x^{2}-x-12 \right )\sqrt{2x^{2}+5x-3}}{\left ( -x^{2}-3 \right )\sqrt{3x^{2}+x-2}} &amp; \geq 0 \\\dfrac{\left ( x-4 \right ) \left ( x+3 \right ) \sqrt{\left ( 2x-1 \right )\left ( x+3 \right )}}{-\left (x^{2}+3 \right )\sqrt{\left ( 3x-2 \right )\left ( x+1 \right )}} &amp; \geq 0 \\\end{align}$<br>Untuk menentukan daerah penyelesaian pertidaksamaan di atas kita coba dengan menentukan batas daerah atau pembuat nol dari pertidaksamaan, yaitu: $x=-3$, $x=-1$, $x=\dfrac{1}{2}$, $x=\dfrac{2}{3}$, $x=4$. <br><br>Jika kita gambarkan nilai $x$ pembuat nol pada garis bilangan menjadi seperti berikut ini:<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgrIqGLFIJMwpWZ8BdtyGPcagk9M_Z4eXPNSXbYT97C5BCpqKHVzz22ZQmTzP8AjSsrngNmXnkyqc-pVbkYaT2lO4SS8MW3Lu502RKO08BH6qEaPSWWBPiDhu0Oua-PcCBEJQ4lPlrGDXe6/s1600/Pertidaksamaan+SIMAK+UI+2019.jpg" alt="Pertidaksamaan+SIMAK+UI+2019.jpg" title="Soal dan Pembahasan SIMAK UI Tahun 2019 Matematika Dasar Kode 539"/><br>Dari beberapa daerah apa yang kita peroleh pada gambar di atas, jika kita uji nilai $x$ ke setiap daerah yang dibatasi oleh $x$ pembuat nol, kita peroleh sebagai berikut:<br>Misal kita pilih sembarang nilai $x$ dari daerah $-1 \leq x \leq \dfrac{1}{2}$ yaitu $x=0$ dan kita uji ke pertidaksamaan:<br>$\begin{align}&amp; \dfrac{\left ( x-4 \right ) \left ( x+3 \right ) \sqrt{\left ( 2x-1 \right )\left ( x+3 \right )}}{-\left (x^{2}+3 \right )\sqrt{\left ( 3x-2 \right )\left ( x+1 \right )}} \\&amp;= \dfrac{\left ( 0-4 \right ) \left ( 0+3 \right ) \sqrt{\left ( 2(0)-1 \right )\left ( 0+3 \right )}}{-\left (0^{2}+3 \right )\sqrt{\left ( 3(0)-2 \right )\left ( 0+1 \right )}} \\&amp;= \dfrac{\left (- \right) \left (+ \right ) \sqrt{\left( - \right)\left( + \right )}}{-\left( + \right )\sqrt{\left ( - \right )\left ( + \right )}} \\&amp;= (+) \geq 0\end{align}$<br>Dari hasil yang kita peroleh di atas, pertidaksamaan bernilai positif $(+)$ atau $\geq 0$ untuk setiap nilai $x$ bilangan real pada daerah $-1 \leq x \leq \dfrac{1}{2}$. Hal yang sama kita lakukan untuk daerah lainnya, dan kita peroleh sebagai berikut:<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh9PXaU_R2DFa6yXzC2BNvKOFxnFhF_DVV8o2lEMCoowjbXWfqc3VZdpWPky1VAra0ojy3HB8Y_MFPQCDZN8WEBNUZ79oCrE45ibvPpyylBLyRKwgy1w0ULlgRLF6ySy8GXa8rWzEisO6Mq/s1600/Pertidaksamaan+SIMAK+UI+2019+Pembahasan.jpg" alt="Pertidaksamaan+SIMAK+UI+2019+Pembahasan.jpg" title="Soal dan Pembahasan SIMAK UI Tahun 2019 Matematika Dasar Kode 539"/><br>Daerah himpunan penyelesaian yang kita peroleh di atas yang mengakibatkan pertidaksamaan $\geq 0$ adalah $-1 \leq x \leq \dfrac{1}{2}$ atau $\dfrac{2}{3} \leq x \leq 4$.<br><br>Pada pertidaksamaan pecahan, syaratnya adalah penyebut tidak boleh nol, sehingga $\left (3x-2 \right )\left (x+1 \right )\left (x^{2}+3 \right ) \neq 0$ maka $x \neq \dfrac{2}{3}$ dan $x \neq -1$.<br><br>Himpunan penyelesaian pertidaksamaan adalah $x=-3$ atau $-1 \lt x \leq \dfrac{1}{2}$ atau $\dfrac{2}{3} \lt x \leq 4$ sehingga bilangan bulat yang memenuhi himpunan penyelesaian adalah $-3, 0, 1,2,3,4$.<br><br>Jumlah semua bilangan bulat $x$ yang memenuhi adalah $-3+0+1+2+3+4=7$
+            </div>
+
+            <div class="pembahasan">
+                <b>41. Jawaban: C</b><br>
+                Jika kita selesaikan bentuk pertidaksamaan $\left( 2x-1  \right)^{2}-a^{2} \leq 1-4x$, penyelesaiannya seperti penjabaran berikut ini:<br>$\begin{align}\left( 2x-1  \right)^{2}-a^{2} &amp; \leq 1-4x \\4x^{2}-4x+1-a^{2} &amp; \leq 1-4x \\4x^{2}-4x+1-a^{2}-1+4x &amp; \leq 0 \\4x^{2} -a^{2} &amp; \leq 0 \\\left(2x-a  \right) \left(2x+a  \right) &amp; \leq 0\end{align}$<br>Pembuat nol pertidaksamaan di atas adalah $x=\dfrac{1}{2}a$ dan $x=-\dfrac{1}{2}a$, Himpunan Penyelesaian pertidaksamaan kuadrat di atas adalah $-\dfrac{1}{2}a \leq x \leq \dfrac{1}{2}a$.<br><br>Berdasarkan keterangan soal bahwa $p \leq x \leq q$ merupakan himpunan penyelesaian maka dapat kita simpulkan bahwa $p \leq x \leq q \equiv -\dfrac{1}{2}a \leq x \leq \dfrac{1}{2}a$.<br><br>Dari bentuk di atas dapat kita peroleh nilai $p=-\dfrac{1}{2}a$ dan $q=\dfrac{1}{2}a$, sehingga nilai $p+q=-\dfrac{1}{2}a+\dfrac{1}{2}a=0$
+            </div>
+
+            <div class="pembahasan">
+                <b>42. Jawaban: D</b><br>
+                Salah satu sifat-sifat pertidaksamaan eksponen yaitu Untuk $0 \lt a \lt 1$, jika $a^{f(x)}\ \gt\ a^{g(x)}$ maka $ {f(x)}\ \lt\  {g(x)}$ (*tanda pertidaksamaan berubah). Sehingga dengan menggunakan sifat pertidaksamaan dan manipulasi aljabar, maka kita peroleh:<br><br>$\begin{align}\left( 0,25 \right)^{x+2} &amp; \gt \left( 0,5 \right)^{x^{2}+1} \\\left( 0,5 \right)^{2x+4} &amp; \gt \left( 0,5 \right)^{x^{2}+1} \\\hline 2x+4 &amp; \lt x^{2}+1 \\0 &amp; \lt x^{2}-2x+1-4 \\x^{2}-2x+3 &amp; \gt 0 \\(x+1)(x-3) &amp; \gt 0 \\  x=-1\ \text{atau}\ x=3 &amp;\end{align}$<br>Dari hasil di atas kita peroleh himpunan penyelesaian pertidaksamaan kuadrat adalah $x \lt -1\ \text{atau}\ x \gt 3$.
+            </div>
+
+            <div class="pembahasan">
+                <b>43. Jawaban: C</b><br>
+                Salah satu sifat-sifat pertidaksamaan eksponen yaitu Untuk $0 \lt a \lt 1$, jika $a^{f(x)}\ \gt\ a^{g(x)}$ maka $ {f(x)}\ \lt\  {g(x)}$ (*tanda pertidaksamaan berubah). Sehingga dengan menggunakan sifat pertidaksamaan dan manipulasi aljabar, maka kita peroleh:<br><br>$\begin{align}\left( \dfrac{1}{8} \right)^{8+2x-x^{2}} &amp; \geq \left( \dfrac{1}{16} \right)^{x+2} \\\left( \dfrac{1}{2} \right)^{3 \left( 8+2x-x^{2} \right)} &amp; \geq \left( \dfrac{1}{2} \right)^{4(x+2)} \\\left( \dfrac{1}{2} \right)^{24+6x-3x^{2}} &amp; \geq \left( \dfrac{1}{2} \right)^{4x+8} \\\hline 24+6x-3x^{2} &amp; \leq 4x+8 \\24+6x-3x^{2}-4x-8 &amp; \leq 0 \\16+2x-3x^{2} &amp; \leq 0 \\3x^{2}-2x-16 &amp; \geq 0 \\  \left( 3x-8 \right)\left( x+2 \right) &amp; \gt 0 \\x=\frac{8}{3}\ \text{atau}\ x=-2 &amp;\end{align}$<br>Dari hasil di atas kita peroleh himpunan penyelesaian pertidaksamaan kuadrat adalah $x \leq -2\ \text{atau}\ x \geq \frac{8}{3}$.
+            </div>
+
+            <div class="pembahasan">
+                <b>44. Jawaban: E</b><br>
+                Agar ${}^{x}\!\log \left( \dfrac{x^{2}+x-12}{x^{2}+x+12} \right)$ terdefenisi (mempunyai nilai) ada dua syarat yang harus dipenuhi yaitu:<br>Syarat (I) bilangan pokok $x$ <br>$\begin{align}x \gt 0\ &amp; \text{dan}\  x \neq 1 \\0 \lt x \lt 1\ &amp; \text{atau}\  x \gt 1 \end{align}$<br><br>Syarat (II) Numerus $\left( \dfrac{x^{2}+x-12}{x^{2}+x+12} \right)$:<br>$\begin{align}\left( \dfrac{x^{2}+x-12}{x^{2}+x+12} \right) &amp; \gt 0 \\\dfrac{(x+4)(x-3)}{x^{2}+x+12} &amp; \gt 0 \\\end{align}$<br>$x^{2}+x+12$ adalah Definit Positif $\left( a \gt 0\ \text{dan}\ b^{2}-4ac \lt 0 \right)$ artinya selalu bernilai positif untuk setiap $x$ bilangan real.<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg008BV0RWabVvSqUEobjDMxJbUjl2wPbmM90xwEn1HVzMixMia6lWUv-kFEmOgiD62RkP0PzAXUqxF-38CGA7tI0VY8RsjlLTZlc-0eVpeUmIteAZqY-XaKf3NNSkuQPMH4Nss9d_ZRmLa/s1600/Pertidaksamaan+UTBK+2019+%25283%2529.jpg" alt="Pertidaksamaan+UTBK+2019+%25283%2529.jpg" title="Soal dan Pembahasan Pertidaksamaan UTBK 2019"/><br>Himpunan penyelesaian dari uji nilai $x$ di atas adalah $x \lt -4$  atau $x \gt 3$<br><br>Berikutnya kita cari irisan himpunan penyelesaian yang kita peroleh dari syarat (I) $0 \lt x \lt 1$ atau $x \gt 1$, syarat (II) $x \lt -4$  atau $x \gt 3$ dan syarat soal $x \lt 7$ maka kita peroleh:<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgjJInmeJfKcS7cxGYy6nPt_It7rsdipZVeotpdpTM6gUBbecQOg8JLbdLZtgrteV4IrbKrk-3bv-neaOayvD7qFPq0lvlmdFdXWa6tyHIabtxQhPqHSXPF0A-DwVjGldo2YyLQoczsg9I-/s1600/Pertidaksamaan+UTBK+2019+%25284%2529.jpg" alt="Pertidaksamaan+UTBK+2019+%25284%2529.jpg" title="Soal dan Pembahasan Pertidaksamaan UTBK 2019"/><br>Himpunan penyelesaian akhir adalah $3 \lt x \lt 7 \equiv a \lt x \lt b$ sehingga nilai $b-a=7-3=4$
+            </div>
+
+            <div class="pembahasan">
+                <b>45. Jawaban: D</b><br>
+                Pertidaksamaan pecahan $\dfrac{x^{2}+2x+2}{x^{2}+x} \lt 0$ agar mempunyai solusi syarat pertama adalah: <br>$\begin{align}x^{2}+x &amp; \neq 0 \\x \left( x+1 \right) &amp; \neq 0 \\x \neq 0\ \text{atau}\ &amp; x \neq -1 \end{align}$<br><br>Berikutnya kita coba selesaikan pertidaksamaan dengan uji nilai $x$:<br>$\begin{align}\dfrac{x^{2}+2x+2}{x^{2}+x} &amp; \lt 0 \\\dfrac{x^{2}+2x+2}{x \left( x+1 \right)} &amp; \lt 0\end{align}$<br>$x^{2}+2x+2$ adalah Definit Positif $\left( a \gt 0\ \text{dan}\ b^{2}-4ac \lt 0 \right)$ artinya selalu bernilai positif untuk setiap $x$ bilangan real.<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgOlBK-AjacruycN175Yv5GiaOpLKiHIiumoCUJjGUnqcA3FqR0lH_mCWRLO6LO2tQK7fVMIQ5dfWs_71oNglI_qDnjGnqChQcoQ4I_LElNSVRpUw9i0CqUA4Ku7XNAfm9k7mBencM3J0cK/s1600/Pertidaksamaan+Pecahan+UTBK+2019.jpg" alt="Pertidaksamaan+Pecahan+UTBK+2019.jpg" title="Soal dan Pembahasan Pertidaksamaan UTBK 2019"/><br>Himpunan penyelesaian dari uji nilai $x$ di atas adalah $-1 \lt x \lt 0 \equiv a \lt x \lt b$, dan jika kita lihat dengan syarat pertama $x \neq 0$ atau $x \neq -1$ sudah memenuhi sehingga nilai $a+b=-1+0=-1$
+            </div>
+
+            <div class="pembahasan">
+                <b>46. Jawaban: D</b><br>
+                Pertidaksamaan pecahan $\dfrac{x^{2}+x+3}{x^{2}-x-2} \lt 0$ agar mempunyai solusi syarat pertama adalah: <br>$\begin{align}x^{2}-x-2 &amp; \neq 0 \\\left( x-2 \right) \left( x+1 \right) &amp; \neq 0 \\x \neq 2\ \text{atau}\ &amp; x \neq -1 \end{align}$<br><br>Berikutnya kita coba selesaikan pertidaksamaan dengan uji nilai $x$:<br>$\begin{align}\dfrac{x^{2}+x+3}{x^{2}-x-2} \lt 0 \\\dfrac{x^{2}+x+3}{\left( x-2 \right) \left( x+1 \right)} &amp; \lt 0\end{align}$<br>$x^{2}+x+3$ adalah Definit Positif $\left( a \gt 0\ \text{dan}\ b^{2}-4ac \lt 0 \right)$ artinya selalu bernilai positif untuk setiap $x$ bilangan real.<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiF9blOxJ6URS9Xq0i3Y798LxGDkhGxLOMuTTARS_gttgZ3EHo_gbfjgNji6rIW7twZZUgWu2MspXLMnmq7H-eawfI_fN8uMA1YZFeFgp31PKGZkmoWjJZxIpxeQF62o3lsNPtjde6xx3f6/s1600/Pertidaksamaan+Pecahan+UTBK+2019+%25282%2529.jpg" alt="Pertidaksamaan+Pecahan+UTBK+2019+%25282%2529.jpg" title="Soal dan Pembahasan Pertidaksamaan UTBK 2019"/><br>Himpunan penyelesaian dari uji nilai $x$ di atas adalah $-1 \lt x \lt 2 \equiv a \lt x \lt b$, dan jika kita lihat dengan syarat pertama $x \neq -1$ atau $x \neq 2$ sudah memenuhi sehingga nilai $b-2a=2-2(-1)=4$
+            </div>
+
+            <div class="pembahasan">
+                <b>47. Jawaban: B</b><br>
+                $\begin{align}\left| 2x+1 \right|-\left| 2-x \right| &amp; \leq 0 \\\left| 2x+1 \right| &amp; \leq \left| 2-x \right| \\\sqrt{ \left( 2x+1 \right )^{2}} &amp; \leq \sqrt{  \left( 2-x \right)^{2}} \\\sqrt{ 4x^{2}+4x+1} &amp; \leq \sqrt{x^{2}-4x+4} \\4x^{2}+4x+1 &amp; \leq x^{2}-4x+4 \\4x^{2}+4x+1-x^{2}+4x-4 &amp; \leq 0 \\3x^{2}+8x-3 &amp; \leq 0 \\\left(3x-1 \right)\left(x+3 \right) &amp; \leq 0 \\  x=\frac{1}{3}\ \text{atau}\ x=-3 &amp;\end{align}$<br>Dari hasil di atas kita peroleh himpunan penyelesaian pertidaksamaan kuadrat adalah $-3\ \leq  x \leq \dfrac{1}{3}$.</p><p>Yang diminta pada soal adalah semua nilai $x$ yang memenuhi $-1 \leq x \leq 1$ dan $-3\ \leq  x \leq \dfrac{1}{3}$, maka kita coba tentukan irisan dari kedua pertidasamaan dengan menggunakan ilustrasi gambar berikut:   <br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhA97_6usgv_I1AwM4kQ_CarjH6ZtQYcAkBh1EBhytr0gflud23dbzwIhWduH4OaZKmkopdr0d6NP85zdESuzgXS3OSJjMLEKOEptV6neuBkaVs4O93hRGW1rgxotyo1sIPt_Pz1gf8pBU7/s1600/Pertidaksamaan+Nilai+Mutlak+UTBK+2019.jpg" alt="Pertidaksamaan+Nilai+Mutlak+UTBK+2019.jpg" title="Soal dan pembahasan Pertidaksamaan Nilai mutlak UTBK SAINTEK 2019"/><p>Dari ilustrasi pada gambar di atas kita peroleh irisannya adalah $-1 \leq x \leq \dfrac{1}{3} \equiv a \leq x \leq b$ sehingga nilai $3ab=3(-1)\left( \dfrac{1}{3} \right)=-1$</p>
+            </div>
+
+            <div class="pembahasan">
+                <b>48. Jawaban: C</b><br>
+                $\begin{align}\left| 2x-1 \right|-\left| x+2 \right| &amp; \geq 0 \\\left| 2x-1 \right| &amp; \leq \left| x+2 \right| \\\sqrt{ \left( 2x-1 \right )^{2}} &amp; \geq \sqrt{  \left( x+2 \right)^{2}} \\\sqrt{ 4x^{2}-4x+1} &amp; \geq \sqrt{x^{2}+4x+4} \\4x^{2}-4x+1 &amp; \geq x^{2}+4x+4 \\4x^{2}-4x+1-x^{2}-4x-4 &amp; \geq 0 \\3x^{2}-8x-3 &amp; \geq 0 \\\left(3x+1 \right)\left(x-3 \right) &amp; \geq 0 \\  x=-\frac{1}{3}\ \text{atau}\ x=3 &amp;\end{align}$<br>Dari hasil di atas kita peroleh himpunan penyelesaian pertidaksamaan kuadrat adalah $x \leq -\dfrac{1}{3}$ atau $x \geq 3$.<br><br>Yang diminta pada soal adalah semua nilai $x$ yang memenuhi $0 \lt x \lt 10$ dan $x \leq -\dfrac{1}{3}$ atau $x \geq 3$, maka kita coba tentukan irisan dari kedua pertidasamaan dengan menggunakan ilustrasi gambar berikut:   <br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgAk-IRlKTNyceruhCAvkAdeU-GeVoU3g6iTZxJmJHpqINw9NQ5KG9DGUnyDk37oCO_Y3YGewmb4g-sdtiMmbplyNjR39VacY4PDuvkP8maWr62xNfwEelPUAa_YWtZBXSq1CD7hHHkSuGY/s1600/Pertidaksamaan+Nilai+Mutlak+UTBK+2019+%25282%2529.jpg" alt="Pertidaksamaan+Nilai+Mutlak+UTBK+2019+%25282%2529.jpg" title="Soal dan pembahasan Pertidaksamaan Nilai mutlak UTBK SAINTEK 2019"/>  <p>Dari ilustrasi pada gambar di atas kita peroleh irisannya adalah $3 \leq x \lt 10 \equiv a \leq x \lt b$ sehingga nilai $b-a=10-3=7$</p>
+            </div>
+
+            <div class="pembahasan">
+                <b>49. Jawaban: A</b><br>
+                \begin{array} \\\left| 3- |x-3| \right |  \leq  3 &amp;\\-3 \leq 3- |x-3|   \leq  3 &amp; \\-3-3 \leq - |x-3|   \leq  3-3 &amp;\\-6 \leq - |x-3|   \leq  0 &amp; \\0 \leq |x-3|   \leq  6 &amp; \\\end{array}<br>Pertidaksamaan di atas kita kerjakan dalam dua tahap, yaitu:<br>\begin{array} \\0 \leq    |x-3| &amp; \\x-3 \leq  0\ \text{atau}\   x-3 \geq 0 &amp; \\x \leq  3\ \text{atau}\   x \geq 3 &amp; \\\text{atau}\ \text{selalu benar untuk}\ x \in \text{Bilangan Real}  &amp; \\\hline<br>|x-3|  \leq  6 &amp; \\-6 \leq    x-3 \leq  6 &amp; \\-6+3 \leq    x \leq  6+3 &amp; \\-3 \leq    x \leq  9 &amp; <br>\end{array} <br>Himpunan penyelesaian soal adalah irisan dari pertidaksamaan $x \leq  3\ \text{atau}\   x \geq 3$ dan $-3 \leq    x \leq  9$ , jika kita gambarkan ilustrasinya seperti berikut ini: <br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiXK3wgaQZBtN5vw17F-W2xCXF__xivE7kxCEwd88OVEC_1Omttj6b2fDkJDY1cejVMAqqUFyvEfYeaT8A6O_nRnKpk1PyCCxmHXhe6lhNxUO7bLlTTNkkYGo30Ylxv51WZkfoo-PcALZKR/s1600/Pertidaksamaan+Nilai+Mutlak+UTBK+2019+%25283%2529.jpg" alt="Pertidaksamaan+Nilai+Mutlak+UTBK+2019+%25283%2529.jpg" title="Soal dan pembahasan Pertidaksamaan Nilai mutlak UTBK SAINTEK 2019"/>  <p>Dari gambar di atas himpunan penyelesaian adalah $-3 \leq x \lt 9 \equiv \left[-3,9 \right]$ sehingga nilai $a+b=-3+9=6$</p>
+            </div>
+
+            <div class="pembahasan">
+                <b>50. Jawaban: B</b><br>
+                Berdasarkan batasan nilai $x$ dari defenisi nilai mutlak di atas, kita peroleh batasan nilai $x$ yang memenuhi:<br><ul><li><mark>Untuk $x \lt 0$</mark>, maka<br>$\begin{align}\left| x \right| &amp; \lt 3 + \left| x-3 \right| \\\left| x \right| - \left| x-3 \right| &amp; \lt 3 \\-\left( x \right) - \left(- (x-3) \right) &amp; \lt 3 \\-x+x-3 &amp; \lt 3 \\-3 &amp; \lt 3 \\\text{selalu benar untuk}\ &amp; x \in R \\\end{align}$<br>Jika dapat penyelesaian akhir seperti di atas (Pernyataan Benar), maka semua nilai $x$ bilangan real memenuhi.<br>Irisan $x \lt 0$ dan $x \in R $ adalah $x \lt 0$</li><li><mark>Untuk $0 \leq x \lt 3$</mark>, maka<br>$\begin{align}\left| x \right| &amp; \lt 3 + \left| x-3 \right| \\\left| x \right| - \left| x-3 \right| &amp; \lt 3 \\\left( x \right) - \left(- (x-3) \right) &amp; \lt 3 \\x +x-3 &amp; \lt 3 \\2x &amp; \lt 6 \\x &amp; \lt 3\end{align}$<br>Irisan $0 \leq x \lt 3$ dan $x \lt 3$ adalah $0 \leq x \lt 3$<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEie4vUQI0A-0fhnT5IBitv0iSW6uWhzikY2vAgFAURAylvt5_2RAuGdrdu8-mUYTpUFQekz2mAKdACNEFL0cw7A8e_3yzIEz2Yrbv7Ux9IUbem9oDJraSPLb3XsEebiOtCmcp8xzkCAoU8R/s1600/Pertidaksamaan+Nilai+Mutlak+UTBK+2019+%25284%2529.jpg" alt="Pertidaksamaan+Nilai+Mutlak+UTBK+2019+%25284%2529.jpg" title="Soal dan pembahasan Pertidaksamaan Nilai mutlak UTBK SAINTEK 2019"/></li><li><mark>Untuk $x \geq 3$</mark>, maka<br>$\begin{align}\left| x \right| &amp; \lt 3 + \left| x-3 \right| \\\left| x \right| - \left| x-3 \right| &amp; \lt 3 \\x - x + 3  &amp; \lt 3 \\0 &amp; \lt 0 \\\end{align}$<br>Jika dapat penyelesaian akhir seperti di atas (Pernyataan Salah), maka tidak ada nilai $x$ bilangan real yang memenuhi.<br>Irisan $x \geq 3$ dan  tidak ada nilai $x \in R$ yang memenuhi adalah Himpunan Kosong $\left( \varnothing \right)$.<br></li></ul>Himpunan penyelesaian soal adalah gabungan dari ketiga pertidaksamaan dari apa yang kita peroleh di atas, jika kita ilustrasikan dalam gambar yaitu:<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhwJ9UjdWpbqvP_Wjf3_n9PTqXvGtTvqaY-qvZ6RRqWbMuKEIdKNMfHD-Qpf9S5KCFCM_mFD2CDin7-Sh9tCbhlcssj6hGQBbaO-DtRyAaLohWEFoPYEuTEhjta4Q0-H5fu6RC4poaH1kCn/s1600/Pertidaksamaan+Nilai+Mutlak+UTBK+2019+%25285%2529.jpg" alt="Pertidaksamaan+Nilai+Mutlak+UTBK+2019+%25285%2529.jpg" title="Soal dan pembahasan Pertidaksamaan Nilai mutlak UTBK SAINTEK 2019"/><br>Berdasarkan ilustrasi di atas, himpunan penyelesaian yang merupakan gabungan pertidaksamaan yaitu $x \lt 3$
+            </div>
+
+            <div class="pembahasan">
+                <b>51. Jawaban: D</b><br>
+                Batasan nilai $x$ yang kita peroleh dari $\left| x-1 \right|$ adalah $x=1$.<br><ul><li><mark>Untuk $x \geq 1$</mark>, maka<br>$\begin{align}\dfrac{x \left| x-1 \right|-6}{x} &amp; \lt 0  \\\dfrac{x \left( x-1 \right)-6}{x} &amp; \lt 0  \\\dfrac{x^{2}-x-6}{x} &amp; \lt 0  \\\dfrac{(x-3)(x+2)}{x} &amp; \lt 0\end{align}$<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhPKaNEfjG0buBtIQr9bOqgu_FLfVTx8qsKce2NlZfb78ulYIj5rIBeWUeeOmazlqL-kbD31oL1_nSCxkJou7v03EnmjZ1h-2TU-36lbOu7rTBJmD3rjPwxw85HLGWm-Do8riNYCi5KlOCg/s1600/Soal+UTBK+Pertidaksamaan+SAINTEK+Matematika+IPA+2019+%25281%2529.jpg" alt="Soal+UTBK+Pertidaksamaan+SAINTEK+Matematika+IPA+2019+%25281%2529.jpg" title="Soal dan pembahasan Pertidaksamaan Nilai mutlak UTBK SAINTEK 2019"/><br>Dari gambar dapat kita ambil kesimpulan, daerah $x \lt -2$ atau $0 \lt x \lt 3$ merupakan Himpunan Penyelesaian, karena pada daerah ini $\dfrac{(x-3)(x+2)}{x} \lt 0$.<br><br>Irisan $x \geq 1$ dan $x \lt -2$ atau $0 \lt x \lt 3$ adalah $1 \leq x \lt 3$, ilustrasinya seperti gambar dibawah ini:<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgE61qRoUaNjMZWPBq1EHf0a0Js9sqMT0STeUyQhUtVgI8DZApEEJczbjqML4pzNf2u2U-tQPF_RGniAzwDNiRh9Du8yTnzQWdXyHWCYe1wvLpb9xDAzoMEpEKk6a_pCIJzJp9ODjBMyW7d/s1600/Soal+UTBK+Pertidaksamaan+SAINTEK+Matematika+IPA+2019+%25282%2529.jpg" alt="Soal+UTBK+Pertidaksamaan+SAINTEK+Matematika+IPA+2019+%25282%2529.jpg" title="Soal dan pembahasan Pertidaksamaan Nilai mutlak UTBK SAINTEK 2019"/></li><li><mark>Untuk $ x \lt 1$</mark>, maka<br>$\begin{align}\dfrac{x \left| x-1 \right|-6}{x} &amp; \lt 0  \\\dfrac{x \left(-( x-1) \right)-6}{x} &amp; \lt 0  \\\dfrac{x \left(-x+1  \right)-6}{x} &amp; \lt 0  \\\dfrac{-x^{2}+x-6}{x} &amp; \lt 0  \\\dfrac{ x^{2}-x+6}{x} &amp; \gt 0\end{align}$<br>Karena $x^{2}-x+6$ adalah definit positif (Selalu bernilai positif untuk setiap $x$ bilangan real) maka nilai $x$ yang mengakibatkan $\dfrac{(+)}{x} \gt 0$ adalah $x \gt 0$<br><br>Irisan $x \gt 0$ dan $x \lt 1$ adalah $0 \lt x \lt 1$</li></ul><br>Himpunan penyelesaian soal adalah gabungan dari $1 \leq x \lt 3$ dan $0 \lt x \lt 1$ yaitu $0 \lt x \lt 3$.<br><br>Interval nilai $0 \lt x \lt 3$ dapat juga dituliskan dalam bentuk interval $(a,b)$ yaitu $(0,3)$ sehingga nilai $3a+2b=3(0)+2(3)=6$
+            </div>
+
+            <div class="pembahasan">
+                <b>52. Jawaban: E</b><br>
+                Agar ${}^{3x}\!\log \left( \dfrac{4-x^{2}}{x-3} \right)$ terdefenisi (mempunyai nilai) ada dua syarat yang harus dipenuhi yaitu:<br>Syarat (I) bilangan pokok $3x$ <br>$\begin{align}3x \gt 0\ &amp; \text{dan}\ 3x \neq 1 \\x \gt 0\ &amp; \text{dan}\  x \neq \dfrac{1}{3} \\0 \lt x \lt \dfrac{1}{3}\ &amp; \text{atau}\  x \gt \dfrac{1}{3} \end{align}$<br><br>Syarat (II) Numerus $\left( \dfrac{4-x^{2}}{x-3} \right)$:<br>$\begin{align}\left( \dfrac{4-x^{2}}{x-3} \right) &amp; \gt 0 \\\left( \dfrac{x^{2}-4}{x-3} \right) &amp; \lt 0 \\\dfrac{(x-2)(x+2)}{x-3} &amp; \lt 0\end{align}$<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhU7kaKyXscC0txAfW7RgpLcBEFCj1b3ohPAWPKZhUa5EEmqZC-W4060HB1Q_pCiTXep8u7plPJzXg4ZCQlT0TjwDDOvoJQz7uHOcekrEDfqvH8B68m4NtfwOat5seY4HlghifWrqktZz3s/s1600/Pertidaksamaan+UTBK+2019.jpg" alt="Pertidaksamaan+UTBK+2019.jpg" title="Soal dan Pembahasan Pertidaksamaan UTBK 2019"/><br>Himpunan penyelesaian dari uji nilai $x$ di atas adalah $x \lt -2$  atau $2 \lt x \lt 3$<br><br>Berikutnya kita cari irisan himpunan penyelesaian yang kita peroleh dari syarat (I) $0 \lt x \lt \dfrac{1}{3}\ \text{atau}\  x \gt \dfrac{1}{3}$ dan syarat (II) $x \lt -2$  atau $2 \lt x \lt 3$, maka kita peroleh:<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh1INoiGDQrcpX0VDxyRTAfhq3qEd9joEx3EIqA3K-_XgV_NFoPYFyfNcaCIFkXvdmlaG4kE_lqev6-C7UBPJ8SLjaHJSVMBzCJlLbNKf2ce7eM18blD8wTgadHHqAOCsSPZkCL3WekNhfj/s1600/Pertidaksamaan+UTBK+2019+%25282%2529.jpg" alt="Pertidaksamaan+UTBK+2019+%25282%2529.jpg" title="Soal dan Pembahasan Pertidaksamaan UTBK 2019"/><br>Himpunan penyelesaian adalah $2 \lt x \lt 3 \equiv a \lt x \lt b$ sehingga nilai $a+b=2+3=5$
+            </div>
+
+            <div class="pembahasan">
+                <b>53. Jawaban: D</b><br>
+                $\begin{align}2x \left( x+1 \right) &amp; \gt  \left( x+1 \right)\left( x+2 \right) \\2x^{2}+2x &amp; \gt x^{2}+3x+2 \\ x^{2}-x-2 &amp; \gt 0 \\\left( x-2 \right)\left( x+1 \right) &amp; \gt 0 \\x=2\ \text{atau}\ x=-1 &amp; \end{align}$<br>Dari hasil di atas kita peroleh himpunan penyelesaian pertidaksamaan kuadrat adalah $x \lt -1\ \text{atau}\ x \gt 2$.
+            </div>
+
+            <div class="pembahasan">
+                <b>54. Jawaban: D</b><br>
+                <ul><li><mark>Untuk $x \geq 0$</mark>, maka<br>$\begin{align}  2x^{2}+ \left| x \right|  &amp;  \gt 1  \\2x^{2} + x &amp;  \gt 1  \\2x^{2} + x -1 &amp;  \gt 0  \\\left(2x-1 \right) \left( x+1 \right) &amp; \gt 0 \\x=\frac{1}{2}\ \text{atau}\ x=-1 &amp; \\  \hline  x \lt -1\ \text{atau}\ x \gt \dfrac{1}{2} &amp;\end{align}$<br>Irisan $x \lt -1$ atau $x \gt \dfrac{1}{2}$ dan $x \geq 0$ adalah $x \gt \dfrac{1}{2}$.</li><li><mark>Untuk $x \lt 0$</mark>, maka<br>$\begin{align}  2x^{2}+ \left| x \right|  &amp;  \gt 1  \\2\left(-x \right)^{2} + \left(-x \right) &amp;  \gt 1  \\2x^{2} - x -1 &amp;  \gt 0  \\\left(2x+1 \right) \left( x-1 \right) &amp; \gt 0 \\x=-\frac{1}{2}\ \text{atau}\ x=1 &amp; \\  \hline  x \lt -\dfrac{1}{2}\ \text{atau}\ x \gt 1 &amp; \end{align}$<br>Irisan $x \lt -\dfrac{1}{2}$ atau $x \gt 1$ dan $x \lt 0$ adalah $x \lt -\dfrac{1}{2}$.</li></ul> <p>Himpunan penyelesaian untuk $x \geq 0$ atau $x \lt 0$ adalah $x \lt -\frac{1}{2}\ \text{atau}\ x \gt \frac{1}{2}$</p>
+            </div>
+
+            <div class="pembahasan">
+                <b>55. Jawaban: A</b><br>
+                <ul><li><mark>Untuk $x \geq 0$</mark>, maka<br>$\begin{align}  x^{2}+ 2\left| x \right| -15 &amp;  \geq 0  \\x^{2}+ 2x -15 &amp;  \geq 0  \\\left(x-3 \right) \left( x+5 \right) &amp; \geq 0 \\x=3\ \text{atau}\ x=-5 &amp; \\  \hline  x \leq -5\ \text{atau}\ x \geq 3 &amp;\end{align}$<br>Irisan $x \leq -5$ atau $x \geq 3$ dan $x \geq 0$ adalah $x \geq 3$.</li><li><mark>Untuk $x \lt 0$</mark>, maka<br>$\begin{align}  x^{2}+ 2\left| x \right| -15 &amp;  \geq 0  \\\left( -x \right)^{2}+ 2 \left( -x \right) -15 &amp;  \geq 0  \\x^{2} - 2x -15 &amp;  \geq 0  \\\left(x-5 \right) \left( x+3 \right) &amp; \geq 0 \\x=3\ \text{atau}\ x=-3 &amp; \\  \hline  x \leq -3\ \text{atau}\ x \geq 5 &amp;\end{align}$<br>Irisan $x \leq -3$ atau $x \geq 5$ dan $x \lt 0$ adalah $x \leq -3$.</li></ul> <p>Himpunan penyelesaian untuk $x \geq 0$ atau $x \lt 0$ adalah $x \leq -3$ atau $x \geq 3$</p>
+            </div>
+
+            <div class="pembahasan">
+                <b>56. Jawaban: D</b><br>
+                $\begin{align}\dfrac{3^{x+3}+3^{x}-36}{9^{x}-9}  &amp; \leq 3  \\\dfrac{3^{x} \cdot 3^{3}+3^{x}-36}{3^{2x}-3^{2}} -3  &amp; \leq 0  \\  \hline  \text{misal}\ a=3^{x} \rightarrow a^{2}=3^{2x}  &amp; \\  \hline  \dfrac{a \cdot 27+a-36}{a^{2}-9} -3  &amp; \leq 0  \\\dfrac{28a-36}{a^{2}-9} - \dfrac{3 \cdot \left( a^{2}- 9 \right) }{a^{2}-9}  &amp; \leq 0  \\  \dfrac{28a-36-3a^{2}+27}{a^{2}-9}  &amp; \leq 0  \\  \dfrac{-3a^{2}+28a-9}{a^{2}-9}  &amp; \leq 0  \\  \dfrac{3a^{2}-28a+9}{a^{2}-9}  &amp; \geq 0  \\  \dfrac{\left( 3a-1 \right) \left( a-9 \right)}{\left( a-3 \right) \left( a+3 \right)}  &amp; \geq 0  \end{align}$<br>Pembuat nol kita gambarkan pada garis bilangan, lalu kita lakukan uji nilai $a$ (*coba perhatikan gambar) <br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgSgwnljCL1UFMsB3vBIWqAK4fzIu-Ck1h2NUe3Vh0eWrnCXuCHj_sekmpkYlDL7ygRimq52SFHz7S_izaP4C2AbIlkkK7D_Z7S57qVnhY2yfJ4jZ37vbXEGkngL9YGGC5Rg1uhy1_rkQ8d/s0/soal+pertidaksamaan+dan+pembahasan+UM+UGM+2019+Kode+923-924.jpg" alt="soal+pertidaksamaan+dan+pembahasan+UM+UGM+2019+Kode+923-924.jpg" title="Soal dan Pembahasan Kemampuan Matematika IPA UM UGM Tahun 2019 Kode 923-924"/><br>Dari gambar di atas himpunan penyelesaian yang memenuhi adalah:<br>  <ul><li>Untuk $a \lt -3$ sehingga $3^{x} \lt -3$, tidak ada nilai $x$ yang memenuhi.</li>    <li>Untuk $\frac{1}{3} \leq a \lt 3$ sehingga $3^{-1} \leq 3^{x} \lt 3^{1}$, nilai $x$ yang memenuhi $-1 \leq x \lt 1$. Bentuk ini ekuivalen dengan $a \leq x \lt b$ sehingga $a=-1$ dan $b=1$.</li>  <li>Untuk $a \geq 9$ sehingga $3^{x} \geq 3^{2}$, nilai $x$ yang memenuhi $ x \geq 2$. Bentuk ini ekuivalen dengan $x \geq c$ sehingga $c=2$.</li>    <li>Nilai $a+2b+c$ adalah $-1+2(1)+2=3$.</li> </ul>
+            </div>
+
+            <div class="pembahasan">
+                <b>57. Jawaban: A</b><br>
+                $\begin{align} 1+2^{x}+2^{2x}+2^{3x}+\cdots &amp; \gt 2  \\\hlinea=1,\ r=2^{x} &amp; \\S_{\infty }=\dfrac{a}{1-r} &amp; \\S_{\infty }=\dfrac{1}{1-2^{x}} &amp; \\\hline  \dfrac{1}{1-2^{x}} &amp; \gt 2  \\\dfrac{1}{1-2^{x}} -2 &amp; \gt 0  \\\dfrac{1}{1-2^{x}} - \dfrac{2 \left( 1-2^{x} \right)}{1-2^{x}} &amp; \gt 0  \\\dfrac{-1+2^{x+1}}{1-2^{x}} &amp; \gt 0\end{align}$<br>Berikutnya kita cari batas atau pembuat nol pada pembilang dan penyebut, yaitu:<br><ul><li>Pembuat nol pembilang: $-1+2^{x+1}=0$ maka $x=-1$</li><li>Pembuat nol penyebut: $1-2^{x}=0$ maka $x=0$</li></ul>Pembuat nol kita gambarkan pada garis bilangan, lalu kita lakukan uji nilai $x$ (*coba perhatikan gambar) <br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhDaCIZth_JH8lPfsFDxWyxFZS8mdwQv-gxsKWfSmxqR-3zr7pAeghBjXeQc5t-BSAuHmURBDKMhySpJnwzMAMRCFOnl7XBqS18393YjYzbO-D733Y1ozcTu0es9f2kz90EwbPwXPpVqK59/s0/soal+pertidaksamaan+2+dan+pembahasan+UM+UGM+2019+Kode+923-924.jpg" alt="soal+pertidaksamaan+2+dan+pembahasan+UM+UGM+2019+Kode+923-924.jpg" title="Soal dan Pembahasan Kemampuan Matematika IPA UM UGM Tahun 2019 Kode 923-924"/><br>Dari gambar di atas himpunan penyelesaian yang memenuhi adalah $-1 \lt x \lt 0$. Bentuk ini ekuivalen dengan $a \lt x \lt b$ sehingga $a=-1$ dan $b=0$. Nilai $a+ b=-1+0=-1$.
+            </div>
+
+            <div class="pembahasan">
+                <b>58. Jawaban: B</b><br>
+                <p><b>Pertama</b> kita coba selesaikan pertidaksamaan dengan menyamakan bentuk kiri dan kanan, bisa dengan mengkuadratkan ruas kiri dan kanan atau merubah bentuk yang bisa ekuivalen nilainya. <br>$\begin{align}\sqrt{x^{2}-x+1} &amp;\leq \sqrt{x+1} \\ x^{2}-x+1 &amp;\leq x+1 \\ x^{2}-x+1-x-1 &amp; \leq 0 \\ x^{2}-2x &amp; \leq 0 \\(x)(x-2) &amp;\leq 0 \\  x=0\ \text{atau}\ x=2 &amp;\end{align}$<br>Dari hasil di atas kita peroleh himpunan penyelesaian pertidaksamaan kuadrat adalah $0 \leq  x \leq 2$.</p><br><p><b>Kedua</b> kita perhatikan agar $\sqrt{x^{2}-x+1}$ mempunyai nilai real, maka:  <br>$\begin{align}x^{2}-x+1  &amp; \geq 0 \\\end{align}$<br>  Karena $a \gt 0$ dan $D=b^{2}-4ac \lt 0$ maka $x^{2}-x+1$ definit positif yang artinya selalu bernilai positif untuk setiap $x$ bilangan real. Sehingga nilai $x$ yang memenuhi $x^{2}-x+1 \geq 0 $ adalah $ x \in \mathbb{R} $. </p> <br><p><b>Ketiga</b> kita perhatikan agar $\sqrt{x+1}$ mempunyai nilai real, maka:  <br>$\begin{align}x+1  &amp; \geq 0 \\  x &amp; \geq -1\end{align}$</p><p>Irisan ketiga nilai $x$ yang memenuhi pada pertidaksamaan di atas merupakan himpunan penyelesaian soal. Jika kita gambarkan kurang lebih seperti berikut ini;<br><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEimtND8f5MxL0qsKyLNESf0wHlmQxIQLfzuxULw7VULZErmY3_s2kQGLUhjfGaLKyQgZOXLt2I2P7oNEpopiRh9DhJ-gTij1aEd_icAZQ0sLJPn0X4PWIrZ-5JgAqKMd41NRZETzmz-sDHB/s0/pertidaksamaan+ugm+2019+kode+934.jpg" alt="pertidaksamaan+ugm+2019+kode+934.jpg" title="Matematika Dasar Pertidaksamaan Soal dan Pembahasan TKDU Matematika Dasar UM UGM Tahun 2019 Kode 934"/><br><p>Himpunan penyelesaian adalah $0 \leq  x \leq 2$ dan $a \leq  x \leq b$ sehingga $a=0$ dan $b=2$. Nilai $a+b=2$</p>
+            </div>
+
+            <div class="pembahasan">
+                <b>59. Jawaban: B</b><br>
+                $\begin{align} -2^{2x+1}+4^{x}+8^{x+\frac{1}{3}}-8^{\frac{2x-1}{3}}-16^{\frac{2x-1}{4}} &amp; \gt 0  \\ -1 \cdot 2^{2x} \cdot 2+2^{2x}+2^{3 \left(  x+\frac{1}{3} \right)}-2^{3 \left( \frac{2x-1}{3} \right)}-2^{4\left( \frac{2x-1}{4} \right)} &amp; \gt 0  \\ -2 \cdot 2^{2x} +2^{2x}+2^{3x+1}-2^{2x-1}-2^{ 2x-1} &amp; \gt 0  \\  -1 \cdot 2^{2x} +2^{3x} \cdot 2 - 2 \cdot 2^{2x-1} &amp; \gt 0  \\  -2^{2x} +2^{3x} \cdot 2 - 2^{2x-1+1} &amp; \gt 0  \\    -2^{2x} +2^{3x} \cdot 2 - 2^{2x} &amp; \gt 0  \\  -2 \cdot 2^{2x} +2^{3x} \cdot 2 &amp; \gt 0  \\   2^{3x} \cdot 2 &amp; \gt 2 \cdot 2^{2x} \\   2^{3x} &amp; \gt 2^{2x} \\  \hline    3x &amp; \gt 2x \\  3x-2x &amp; \gt 0 \\   x &amp; \gt 0\end{align}$
+            </div>
+
+            <div class="pembahasan">
+                <b>60. Jawaban: D</b><br>
+                $\begin{align}\left(g  \circ  f  \right) (x) &amp; = g \left( f (x)  \right)   \\&amp; = f (x) + 1   \\  &amp;= \dfrac{1}{1+2x} + 1  \\&amp;= \dfrac{1}{1+2x} + \dfrac{1+2x}{1+2x}  \\&amp;= \dfrac{2+2x}{1+2x}\end{align}$<br><p>Dari hasil komposisi di atas, bentuk pertidaksamaan kita peroleh:<br>  $\begin{align}1 \lt \left(g  \circ  f  \right) (x)  &amp;  \lt 2 \\1 \lt \dfrac{2+2x}{1+2x}  &amp;  \lt 2\end{align}$</p><p>Untuk mengerjakan bentuk pertidaksamaan seperti di atas, kita kerjakan pada dua pertidaksamaan.<br>    Pertidaksamaan pertama, yaitu:<br>  $\begin{align} \dfrac{2+2x}{1+2x}  &amp;  \lt 2 \\    \dfrac{2+2x}{1+2x}  - 2 &amp;  \lt 0 \\    \dfrac{2+2x}{1+2x}  - \dfrac{2(1+2x)}{1+2x} &amp;  \lt 0 \\    \dfrac{2+2x}{1+2x}  - \dfrac{2+4x}{1+2x} &amp;  \lt 0 \\     \dfrac{-2x}{1+2x} &amp;  \lt 0 \\    \dfrac{2x}{1+2x} &amp;  \gt 0 \\\end{align}$<br>Himpunan penyelesaian untuk pertidaksamaan pertama adalah $x \lt -\dfrac{1}{2}\ \text{atau}\ x \gt 0$.</p><p>Pertidaksamaan kedua, yaitu:<br>  $\begin{align} \dfrac{2+2x}{1+2x}  &amp;  \gt 1 \\    \dfrac{2+2x}{1+2x}  - 1 &amp;  \gt 0 \\    \dfrac{2+2x}{1+2x}  - \dfrac{1+2x}{1+2x} &amp;  \gt 0 \\    \dfrac{1}{1+2x}  &amp;  \gt 0\end{align}$<br>Himpunan penyelesaian untuk pertidaksamaan kedua adalah $x \gt -\dfrac{1}{2}$.</p><p>Irisan dari pertidaksamaan pertama $x \lt -\dfrac{1}{2}\ \text{atau}\ x \gt 0$ dan pertidaksamaan kedua $x \gt -\dfrac{1}{2}$ adalah $x \gt 0$.</p>
+            </div>
+
+        </div>
+    </section>
+
+</div>
+
+</body>
+</html>
