@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modul Matematika SMA - Fungsi Komposisi dan Invers (1-47)</title>
+    <title>Modul Matematika SMA - Kaidah Pencacahan (81-121)</title>
     
     <!-- Konfigurasi MathJax untuk Matematika -->
     <script>
@@ -249,7 +249,7 @@
                 <img src="https://imgix3.ruangguru.com/assets/miscellaneous/jpeg_sijv7w_5618.jpeg" alt="Logo Utama" class="cover-img">
             </div>
             <h1 class="title">MODUL MATEMATIKA<br>SMA</h1>
-            <p class="subtitle">Bank Soal & Pembahasan Lengkap<br>Fungsi Komposisi dan Fungsi Invers (Soal 1 - 47)</p>
+            <p class="subtitle">Bank Soal & Pembahasan Lengkap<br>Kaidah Pencacahan, Permutasi, dan Kombinasi (Soal 81 - 121)</p>
             <div style="margin-top: 50px; font-size: 12pt; color: #666;">
                 <strong>Sumber Materi:</strong> defantri.com<br>
                 <em>Matematika Dasar & TKA Saintek</em>
@@ -262,8 +262,8 @@
         <div class="content-wrapper">
             <h1>Daftar Isi</h1>
             <ul class="toc-list">
-                <li><a href="#materi">Rangkuman Materi Fungsi Komposisi & Invers</a></li>
-                <li><a href="#soal">Latihan Soal (1 - 47)</a></li>
+                <li><a href="#materi">Rangkuman Materi Kaidah Pencacahan</a></li>
+                <li><a href="#soal">Latihan Soal (81 - 121)</a></li>
                 <li><a href="#pembahasan">Kunci Jawaban & Pembahasan Lengkap</a></li>
             </ul>
         </div>
@@ -272,780 +272,757 @@
     <!-- Materi Page -->
     <section id="materi" class="page">
         <div class="content-wrapper">
-            <h2>Pendahuluan: Fungsi Komposisi dan Fungsi Invers (FKFI)</h2>
-            <p>The good student, Calon Guru belajar matematika dasar SMA dari <b>Soal dan Pembahasan Matematika Dasar Fungsi Komposisi dan Fungsi Invers (FKFI)</b>. Dari judulnya FKFI (Fungsi Komposisi dan Fungsi Invers), terdapat tiga kata penting yaitu Fungsi, Komposisi, Invers. Dengan bahasa sederhana bisa kita tuliskan, kita akan belajar tentang <i>fungsi (hubungan)</i>, <i>komposisi (gabungan)</i> atau <i>invers (kebalikan)</i>.</p>
-            <p>Bagaimana penerapan dari Fungsi Komposisi dan Fungsi Invers (FKFI) dalam aljabar atau pada kehidupan sehari-hari diantaranya dapat dilihat pada soal-soal yang kita diskusikan di bawah ini. Mempelajarinya atau menggunakan aturan-aturan pada fungsi komposisi dan fungsi invers sangatlah mudah.</p>
+            <h2>Pendahuluan: Kaidah Pencacahan</h2>
+            <p>Kaidah pencacahan adalah aturan membilang untuk mengetahui banyak kemungkinan atau susunan suatu kejadian atau objek tanpa harus merinci setiap kemungkinan satu per satu. Dikatakan pencacahan karena hasilnya berupa sebuah bilangan cacah.</p>
+            <p>Terdapat beberapa aturan dalam mencacah, yakni, aturan penjumlahan, aturan perkalian, aturan permutasi dan aturan kombinasi. Kemampuan bernalar kita sangat diuji pada materi ini untuk memecahkan masalah dalam kehidupan sehari-hari (seperti menentukan banyak kemungkinan susunan tempat duduk atau antrean).</p>
             
             <div class="info-box">
-                <h3>Sifat Fungsi Komposisi dan Fungsi Invers (FKFI)</h3>
-                <p>Untuk fungsi $f\left ( x \right )$ dan fungsi $g \left ( x \right )$, invers fungsi itu berturut-turut ditulis $f^{-1}\left ( x \right )$ dan $g^{-1}\left ( x \right )$. Fungsi Identitas $I \left ( x \right )=x$. Beberapa Sifat Fungsi Komposisi Fungsi Invers yang bisa kita tuliskan, antara lain;</p>
-                <ol class="step-list">
-                    <li>Jika $f\left ( x \right )=ax+b$ maka $f\left ( z \right )=a \cdot z+b$ atau $f\left ( g\left ( x \right ) \right )=a \cdot g\left ( x \right )+b$</li>
-                    <li>$\left ( f \circ g \right )\left ( x \right )=f\left ( g\left ( x \right ) \right )$</li>
-                    <li>$\left ( f \circ g \right )^{-1}\left ( x \right )=\left ( g^{-1} \circ f^{-1} \right )\left ( x \right )$</li>
-                    <li>$\left ( f^{-1} \circ f \right )\left ( x \right )=I\left ( x \right )$</li>
-                    <li>$\left (f^{-1}\right )^{-1} \left ( x \right ) =f\left ( x \right )$</li>
-                    <li>Jika $f\left ( x \right )=\frac{ax+b}{cx+d}$ maka $f^{-1}\left ( x \right )=\frac{-dx+b}{cx-a}$</li>
-                    <li>Jika $f\left ( a \right )=b$ maka $f^{-1}\left ( b \right )=a$</li>
-                </ol>
+                <h3>Aturan Penjumlahan & Aturan Perkalian</h3>
+                <p><strong>Aturan Penjumlahan:</strong> Apabila kegiatan 1, kegiatan 2, sampai kegiatan ke-n adalah kegiatan-kegiatan yang saling lepas atau semua kegiatan tersebut tidak dapat dilakukan bersamaan, maka banyak cara melakukan seluruh kegiatan tersebut akan terjadi sebanyak $n_{1}+n_{2}+ \cdots +n_{k}$.</p>
+                <p><strong>Aturan Perkalian:</strong> Apabila kegiatan-kegiatan tersebut tidak saling lepas atau dapat dilakukan secara berkesinambungan/bersamaan, maka banyak kegiatan tersebut akan terjadi sebanyak $n_{1} \times n_{2} \times \cdots \times n_{k}$.</p>
             </div>
-            
-            <p>Sedikit penambahan tentang fungsi invers atau fungsi kebalikan adalah fungsi yang merupakan kebalikan aksi dari sebuah fungsi. Misalkan, untuk sebuah fungsi $f\left ( x \right )=4x-1$, Untuk Nilai fungsi pertanyaanya adalah berapakah nilai $f\left ( 2 \right )$?, atau kita tulis menjadi $f\left ( 2 \right )= \cdots$. Untuk fungsi invers sendiri, pertanyaannya adalah $f$ berapakah yang nilainya $7$?, atau bisa kita tulis menjadi $f\left ( \cdots \right )=7$. Jika kedua pertanyaan diatas kita jawab menjadi $f\left ( 2 \right )= 7$ dan $f^{-1}\left ( 7 \right )= 2$ secara umum sudah ditampilkan pada sifat komposisi diatas yaitu Jika $f\left ( a \right )=b$ maka $f^{-1}\left ( b \right )=a$.</p>
+
+            <div class="info-box">
+                <h3>Faktorial & Permutasi</h3>
+                <p><strong>Faktorial ($!$):</strong> Didefenisikan sebagai $n!=n \times (n-1) \times (n-2) \times \cdots \times 1$. Catatan khusus: $0!=1$.</p>
+                <p><strong>Permutasi ($P$):</strong> Adalah suatu susunan objek dari objek-objek yang tersedia dimana <strong>urutan sangat diperhatikan</strong>.</p>
+                <ul>
+                    <li>Permutasi unsur berbeda: $P(n,r) = \dfrac{n!}{(n-r)!}$</li>
+                    <li>Permutasi Melingkar (Siklis): $P(n,siklis) = (n-1)!$</li>
+                    <li>Permutasi Unsur Sama: $P(n, n_1, n_2) = \dfrac{n!}{n_1! \times n_2! \times \dots}$</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h3>Kombinasi & Binomial Newton</h3>
+                <p><strong>Kombinasi ($C$):</strong> Adalah suatu susunan objek dimana <strong>urutan tidak diperhatikan</strong>. Dirumuskan dengan: $C(n,r) = \dfrac{n!}{r!(n-r)!}$</p>
+                <p><strong>Teorema Binomial Newton:</strong> Kombinasi dapat digunakan untuk menentukan koefisien dari penjabaran aljabar $(a+b)^n$.<br>
+                $(a+b)^{n}=\sum\limits_{r=0}^{n} \binom{n}{r}a^{n-r}b^{r}$</p>
+            </div>
         </div>
     </section>
 
     <!-- Soal Page -->
     <section id="soal" class="page">
         <div class="content-wrapper">
-            <h2>Soal Latihan FKFI (1-47)</h2>
+            <h2>Soal Latihan Kaidah Pencacahan (81-121)</h2>
+
+            <div class="center" style="margin-bottom: 20px;">
+                <table style="margin: 0 auto;">
+                    <tr><td><b>Nama Peserta</b> <b>:</b></td><td><input type="text" id="namasiswa" name="namasiswa" placeholder="Isi Nama Disini" style="padding: 5px;"></td></tr>
+                    <tr><td><b>Tanggal Tes</b> <b>:</b></td><td><b><div id="tanggal"></div></b></td></tr>
+                    <tr><td><b>Jumlah Soal</b> <b>:</b></td><td><b>41 soal</b></td></tr>
+                </table>
+            </div>
+
+            <div class="box blue" style="background:#e3f2fd; padding:10px; border-left:4px solid #1e88e5; margin-bottom: 20px;">
+                <b>Petunjuk Pengerjaan Soal:</b><br> Bentuk soal pilihan ganda, pilihlah jawaban yang benar di antara pilihan jawaban yang tersedia. Apabila Kamu merasa terdapat lebih dari satu jawaban yang benar, maka pilihlah yang paling benar.
+            </div>
             
-            <!-- SOAL 1 -->
+            <!-- SOAL 81 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">1. Soal SNMPTN 2011 Kode 879</div><br>
-                    Jika $f(x)=\dfrac{x-2011}{x-1}$, maka $(f \circ f \circ f \circ f \circ f)(x)$ adalah$\cdots$
+                    <div class="keterangan-soal">81. Soal UM UGM 2015 Kode 622</div><br>
+                    Lima siswa pria dan tiga wanita akan duduk berdampingan dalam satu baris.Jika disyaratkan kedua ujung ditempati pria dan tidak boleh ada $2$ wanita duduk berdampingan, maka banyak cara duduk $8$ siswa tersebut adalah...
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$\frac{x+2011}{x-1}$</li>
-                        <li data-option="B">$\frac{x+2011}{x+1}$</li>
-                        <li data-option="C">$\frac{x-2011}{x+1}$</li>
-                        <li data-option="D">$\frac{x-2011}{x-1}$</li>
-                        <li data-option="E">$\frac{-x+2011}{x-1}$</li>
+                        <li data-option="A">360</li>
+                        <li data-option="B">480</li>
+                        <li data-option="C">720</li>
+                        <li data-option="D">1440</li>
+                        <li data-option="E">2880</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 2 -->
+            <!-- SOAL 82 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">2. Soal SNMPTN 2012 Kode 421</div><br>
-                    Jika $f(x)=ax+3$, $a \neq 0$ dan $f^{-1}\left (f^{-1}\left ( 9 \right ) \right )=3$ maka nilai $a^{2}+a+1$ adalah...
+                    <div class="keterangan-soal">82. Soal UM UGM 2014 Kode 531</div><br>
+                    Tiga pria dan empat wanita akan duduk dalam satu baris.Banyak cara mereka duduk sehingga yang berjenis kelamin sama tidak berdampingan adalah...
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$11$</li>
-                        <li data-option="B">$9$</li>
-                        <li data-option="C">$7$</li>
-                        <li data-option="D">$5$</li>
-                        <li data-option="E">$3$</li>
+                        <li data-option="A">24</li>
+                        <li data-option="B">49</li>
+                        <li data-option="C">144</li>
+                        <li data-option="D">288</li>
+                        <li data-option="E">5040</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 3 -->
+            <!-- SOAL 83 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">3. Soal SNMPTN 2012 Kode 122</div><br>
-                    Jika $f(x)=ax+3$, dan $f \left (f \left ( x \right ) \right )=4x+9$ maka nilai $a^{2}+3a+3$ adalah...
+                    <div class="keterangan-soal">83. Soal UM UGM 2013 Kode 262</div><br>
+                    Dari $15$ anak yang terdiri atas laki-laki dan perempuan akan diambil $2$ anak secara acak bersamaan. Jika banyak kemungkinan terambil laki-laki dan perempuan adalah $26$, maka selisih jumlah laki-laki dan perempuan adalah...
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$13$</li>
-                        <li data-option="B">$11$</li>
-                        <li data-option="C">$7$</li>
-                        <li data-option="D">$3$</li>
-                        <li data-option="E">$2$</li>
+                        <li data-option="A">13</li>
+                        <li data-option="B">11</li>
+                        <li data-option="C">9</li>
+                        <li data-option="D">5</li>
+                        <li data-option="E">3</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 4 -->
+            <!-- SOAL 84 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">4. Soal SBMPTN 2016 Kode 322</div><br>
-                    Jika fungsi $f$ dan fungsi $g$ mempunyai invers dan memenuhi $g\left ( x-2 \right)= f\left ( x+2 \right)$, maka $g^{-1}\left ( x \right)= \cdots$
+                    <div class="keterangan-soal">84. Soal UM UGM 2010 Kode 452</div><br>
+                    Enam kursi melingkari sebuah meja. Kursi tersebut akan diduduki oleh $5$ anak terdiri dari $3$ perempuan dan $2$ laki-laki. Jika kursi yang kosong diapit oleh anak laki-laki dan perempuan, maka banyaknya susunan cara duduk adalah...
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$f^{-1}\left ( x \right )+4$</li>
-                        <li data-option="B">$4-f^{-1}\left ( x \right)$</li>
-                        <li data-option="C">$f^{-1}\left ( x+4 \right)$</li>
-                        <li data-option="D">$-f^{-1}\left ( x \right)-4$</li>
-                        <li data-option="E">$f^{-1}\left ( x \right)-4$</li>
+                        <li data-option="A">648</li>
+                        <li data-option="B">564</li>
+                        <li data-option="C">432</li>
+                        <li data-option="D">288</li>
+                        <li data-option="E">216</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 5 -->
+            <!-- SOAL 85 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">5. Soal SBMPTN 2016 Kode 324</div><br>
-                    Jika fungsi $f$ dan fungsi $g$ mempunyai invers dan memenuhi $f\left ( x \right)= g\left ( 4+2x \right)$, maka $f^{-1}\left ( x \right)= \cdots$
+                    <div class="keterangan-soal">85. Soal UM UGM 2009 Kode 921</div><br>
+                    Dari angka-angka $2,3,5,7,$ dan $9$ akan disusun bilangan yang terdiri dari $4$ angka tanpa pengulangan. Banyak bilangan yang terbentuk dengan nilai kurang dari $4000$ adalah...
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$g^{-1}\left ( x \right )-4$</li>
-                        <li data-option="B">$g^{-1}\left ( x \right)-2$</li>
-                        <li data-option="C">$\frac{1}{2}g^{-1}\left ( x \right)-2$</li>
-                        <li data-option="D">$\frac{1}{2}\left (g^{-1}\left ( x \right)-2 \right)$</li>
-                        <li data-option="E">$\frac{1}{2}g^{-1}\left ( x \right)-4$</li>
+                        <li data-option="A">40</li>
+                        <li data-option="B">48</li>
+                        <li data-option="C">112</li>
+                        <li data-option="D">120</li>
+                        <li data-option="E">132</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 6 -->
+            <!-- SOAL 86 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">6. Soal SBMPTN 2015 Kode 610</div><br>
-                    Jika $f\left ( 2-x \right)= \dfrac{x}{2}+3$, maka $f^{-1}\left ( x \right)= \cdots$
+                    <div class="keterangan-soal">86. Soal SBMPTN 2014 Kode 572</div><br>
+                    Di antara $20.000$ dan $70.000$, banyak bilangan genap dengan tidak ada digit berulang adalah...
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$2x+8$</li>
-                        <li data-option="B">$2x-8$</li>
-                        <li data-option="C">$8-2x$</li>
-                        <li data-option="D">$\frac{x}{2}-4$</li>
-                        <li data-option="E">$4-\frac{x}{2}$</li>
+                        <li data-option="A">3.360</li>
+                        <li data-option="B">4.032</li>
+                        <li data-option="C">7.392</li>
+                        <li data-option="D">10.080</li>
+                        <li data-option="E">24.998</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 7 -->
+            <!-- SOAL 87 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">7. Soal SBMPTN 2014 Kode 673</div><br>
-                    Diketahui $f \left ( x \right)= \dfrac{px+q}{x+2},\ q\neq 0$. Jika $f^{-1}$ menyatakan invers dari $f$ dan $f^{-1} \left ( q \right)=-1$, maka $f^{-1} \left ( 2q \right)= \cdots$
+                    <div class="keterangan-soal">87. Soal SBMPTN 2014 Kode 572</div><br>
+                    Banyak cara menempatkan $10$ kelereng identik ke dalam $5$ kotak dengan setiap kotak memuat paling sedikit $1$ kelereng adalah...
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$-3$</li>
-                        <li data-option="B">$-2$</li>
-                        <li data-option="C">$-\frac{3}{2}$</li>
-                        <li data-option="D">$\frac{3}{2}$</li>
-                        <li data-option="E">$3$</li>
+                        <li data-option="A">63</li>
+                        <li data-option="B">120</li>
+                        <li data-option="C">126</li>
+                        <li data-option="D">252</li>
+                        <li data-option="E">3024</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 8 -->
+            <!-- SOAL 88 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">8. Soal SBMPTN 2013 Kode 427</div><br>
-                    Jika $f\left ( \dfrac{1}{x-1} \right)= \dfrac{x-6}{x+3}$, maka nilai $f^{-1}\left ( -2 \right)$ adalah $\cdots$
+                    <div class="keterangan-soal">88. Soal SBMPTN 2014 Kode 512</div><br>
+                    Sebuah toko makanan yang menyediakan es krim dengan $6$ rasa berbeda. Banyak cara seseorang pembeli dapat memilih $5$ es krim dengan $3$ rasa berbeda adalah...
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$-1$</li>
-                        <li data-option="B">$0$</li>
-                        <li data-option="C">$1$</li>
-                        <li data-option="D">$2$</li>
-                        <li data-option="E">$3$</li>
+                        <li data-option="A">6</li>
+                        <li data-option="B">20</li>
+                        <li data-option="C">22</li>
+                        <li data-option="D">40</li>
+                        <li data-option="E">120</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 9 -->
+            <!-- SOAL 89 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">9. Soal SBMPTN 2017 Kode 226</div><br>
-                    Jika $f(x)=x^{2}-1$, dan $g(x)=\dfrac{x-2}{x+1}$ maka daerah asal fungsi $f \cdot g$ adalah...
+                    <div class="keterangan-soal">89. Soal SBMPTN 2014 Kode 504</div><br>
+                    Banyak cara menyusun $4$ buku matematika, $3$ buku fisika, dan $2$ buku kimia sehingga buku-buku sejenis dalam satu kelompok adalah...
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$\left \{ x|-\infty \lt x \lt \infty \right \}$</li>
-                        <li data-option="B">$\left \{ x|x \neq -1 \right \}$</li>
-                        <li data-option="C">$\left \{ x|x \neq 2 \right \}$</li>
-                        <li data-option="D">$\left \{ x|x \lt -1 \right \}$</li>
-                        <li data-option="E">$\left \{ x|x \geq 2 \right \}$</li>
+                        <li data-option="A">1728</li>
+                        <li data-option="B">576</li>
+                        <li data-option="C">288</li>
+                        <li data-option="D">144</li>
+                        <li data-option="E">82</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 10 -->
+            <!-- SOAL 90 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">10. Soal SBMPTN 2017 Kode 226</div><br>
-                    Jika $f(x)=1-x^{2}$, dan $g(x)=\sqrt{5-x}$ maka daerah hasil fungsi komposisi $f \circ g$ adalah...
+                    <div class="keterangan-soal">90. Soal SBMPTN 2014 Kode 589/586</div><br>
+                    Tiga pria dan empat wanita, termasuk Sinta, duduk berjajar pada tujuh kursi. Banyaknya susunan agar pria dan wanita duduk selang-seling dengan Sinta selalu di pinggir adalah...
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$\left \{ y|-\infty \lt y \lt \infty \right \}$</li>
-                        <li data-option="B">$\left \{ y|y \leq -1\ \text{atau}\ y \geq 1 \right \}$</li>
-                        <li data-option="C">$\left \{ y|y \leq 5 \right \}$</li>
-                        <li data-option="D">$\left \{ x|y \leq 1 \right \}$</li>
-                        <li data-option="E">$\left \{ x|-1 \leq y \geq 1 \right \}$</li>
+                        <li data-option="A">72</li>
+                        <li data-option="B">36</li>
+                        <li data-option="C">24</li>
+                        <li data-option="D">48</li>
+                        <li data-option="E">28</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 11 -->
+            <!-- SOAL 91 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">11. Soal UNBK Matematika IPS 2018</div><br>
-                    Diketahui $f(x)=3x+2$ dan $g(x)=x^{2}-x+3$. <br>Fungsi komposisi $(fog)(x)= \cdots $
+                    <div class="keterangan-soal">91. Soal SBMPTN 2013 Kode 130/132</div><br>
+                    Banyaknya bilangan ratusan dengan angka pertama dan terakhir mempunyai selisih $3$ dan ada angka yang sama adalah...
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$3x^{2}+3x+11$</li>
-                        <li data-option="B">$3x^{2}-3x+11$</li>
-                        <li data-option="C">$3x^{2}-3x-11$</li>
-                        <li data-option="D">$9x^{2}-9x-5$</li>
-                        <li data-option="E">$9x^{2}-9x-5$</li>
+                        <li data-option="A">32</li>
+                        <li data-option="B">30</li>
+                        <li data-option="C">26</li>
+                        <li data-option="D">16</li>
+                        <li data-option="E">15</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 12 -->
+            <!-- SOAL 92 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">12. Soal UNBK Matematika IPS 2018</div><br>
-                    Daerah asal fungsi $f$ yang ditentukan oleh $f(x)=\frac{\sqrt{3x-18}}{2x-20}$ adalah...
+                    <div class="keterangan-soal">92. Soal SBMPTN 2013 Kode 338</div><br>
+                    Banyak bilangan ratusan dengan angka pertama dan terakhir mempunyai selisih $3$ dan tidak ada angka yang sama adalah...
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$\left \{x | x \geq 6,\ x\neq 10,\ x \in \mathbb{R} \right \}$</li>
-                        <li data-option="B">$\left \{x | x \geq 6,\ x\neq -10,\ x \in \mathbb{R} \right \}$</li>
-                        <li data-option="C">$\left \{x | x \geq -6,\ x \neq 10,\ x \in \mathbb{R} \right \}$</li>
-                        <li data-option="D">$\left \{x | x \leq 6,\ x\neq -10,\ x \in \mathbb{R} \right \}$</li>
-                        <li data-option="E">$\left \{x | x \leq -6,\ x\neq 10,\ x \in \mathbb{R} \right \}$</li>
+                        <li data-option="A">104</li>
+                        <li data-option="B">117</li>
+                        <li data-option="C">127</li>
+                        <li data-option="D">130</li>
+                        <li data-option="E">140</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 13 -->
+            <!-- SOAL 93 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">13. Soal UNBK Matematika IPA 2018</div><br>
-                    Diketahui $f(x)=\frac{2-3x}{6x-5}$, $x \neq \frac{5}{6}$. Invers dari fungsi $f(x)$ adalah...
+                    <div class="keterangan-soal">93. Soal SBMPTN 2013 Kode 131</div><br>
+                    Banyaknya bilangan ratusan yang angka pertama dan terakhirnya mempunyai selisih $1\ \text{atau}\ 3$ adalah...
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$f^{-1}(x)=\frac{5x+2}{6x-3},\ x \neq \frac{1}{2}$</li>
-                        <li data-option="B">$f^{-1}(x)=\frac{5x-2}{6x+3},\ x \neq -\frac{1}{2}$</li>
-                        <li data-option="C">$f^{-1}(x)=\frac{6x+3}{5x+2},\ x \neq -\frac{5}{2}$</li>
-                        <li data-option="D">$f^{-1}(x)=\frac{5x+2}{6x+3},\ x \neq -\frac{1}{2}$</li>
-                        <li data-option="E">$f^{-1}(x)=\frac{6x-3}{5x+2},\ x \neq -\frac{5}{2}$</li>
+                        <li data-option="A">160</li>
+                        <li data-option="B">170</li>
+                        <li data-option="C">270</li>
+                        <li data-option="D">300</li>
+                        <li data-option="E">320</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 14 -->
+            <!-- SOAL 94 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">14. Soal UNBK Matematika IPA 2018</div><br>
-                    Diketahui $f(x)=2x-1$ dan $(gof)(x)=x-3$. Nilai dari $g^{-1}(-2)$ adalah...
+                    <div class="keterangan-soal">94. Soal SBMPTN 2013 Kode 138</div><br>
+                    Banyaknya bilangan ratusan dengan angka pertama dan kedua mempunyai selisih $2\ \text{atau}\ 3$ adalah...
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$-2$</li>
-                        <li data-option="B">$-1$</li>
-                        <li data-option="C">$0$</li>
-                        <li data-option="D">$1$</li>
-                        <li data-option="E">$2$</li>
+                        <li data-option="A">300</li>
+                        <li data-option="B">280</li>
+                        <li data-option="C">260</li>
+                        <li data-option="D">252</li>
+                        <li data-option="E">150</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 15 -->
+            <!-- SOAL 95 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">15. Soal SBMPTN 2018 Kode 526</div><br>
-                    Jika $g(x)=\dfrac{1}{\sqrt{x-1}}$ dan $f(x)$ merupakan fungsi dengan $(f \circ g)(x)=\dfrac{2x-1}{x-1}$, maka himpunan penyelesaian $1 \leq f(x) \leq 6$ adalah...
+                    <div class="keterangan-soal">95. Soal SNMPTN 2012 Kode 132</div><br>
+                    Enam orang berpergian dengan dua mobil milik dua orang di antara mereka. Masing-masing mobil dikemudikan oleh pemiliknya dan kapasitas mobil masing-masing adalah $5$ orang termasuk pengemudi. Banyak cara menyusun penumpang di kedua mobil tersebut adalah...
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$\left \{ x | -2 \leq x \leq -1\ \text{atau}\ 1 \leq x \leq 2\ \right \}$</li>
-                        <li data-option="B">$\left \{ x | -2 \leq x \leq 0\ \text{atau}\ x \leq 2\ \right \}$</li>
-                        <li data-option="C">$\left \{ x | -2 \leq x \leq 2\ \right \}$</li>
-                        <li data-option="D">$\left \{ x | -1 \leq x \leq 2\ \right \}$</li>
-                        <li data-option="E">$\left \{ x | 0 \leq x \leq 2\ \right \}$</li>
+                        <li data-option="A">10</li>
+                        <li data-option="B">12</li>
+                        <li data-option="C">14</li>
+                        <li data-option="D">16</li>
+                        <li data-option="E">18</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 16 -->
+            <!-- SOAL 96 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">16. Soal SBMPTN 2018 Kode 527</div><br>
-                    Jika $f(x)=\dfrac{1}{(x-1)^{2}}$ dan $g(x)=\dfrac{ 1}{x-2}$, maka himpunan penyelesaian $\dfrac{f(x)g(x)}{(f \circ g)(x)} \lt 0$ adalah...
+                    <div class="keterangan-soal">96. Soal SNMPTN 2012 Kode 431</div><br>
+                    Enam orang berpergian dengan dua mobil milik dua orang di antara mereka. Masing-masing mobil dikemudikan oleh pemiliknya dan kapasitas mobil masing-masing adalah $4$ orang termasuk pengemudi. Banyak cara menyusun penumpang di kedua mobil tersebut adalah...
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$\left \{ x | x \lt 1\ \text{atau}\  x \gt 2\ \right \}$</li>
-                        <li data-option="B">$\left \{ x | x \lt 1\ \text{atau}\  2 \lt x \lt 3 \right \}$</li>
-                        <li data-option="C">$\left \{ x | x \lt 1\ \text{atau}\  1 \lt x \lt 2 \right \}$</li>
-                        <li data-option="D">$\left \{ x | 1 \lt x \lt 2 \text{atau}\ x \gt 3\ \right \}$</li>
-                        <li data-option="E">$\left \{ x | 2 \lt x \lt 3 \text{atau}\ x \gt 3\ \right \}$</li>
+                        <li data-option="A">10</li>
+                        <li data-option="B">14</li>
+                        <li data-option="C">24</li>
+                        <li data-option="D">54</li>
+                        <li data-option="E">96</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 17 -->
+            <!-- SOAL 97 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">17. Soal SBMPTN 2018 Kode 526</div><br>
-                    Diketahui $f$ dan $g$ merupakan fungsi yang mempunyai invers. Jika $f \left( g(x) \right)=2x-1$ dan $g(x+1)=x-3$, maka nilai $f^{-1}(3) \cdot g^{-1}(3)$ adalah...
+                    <div class="keterangan-soal">97. Soal SM-UNNES 2018 Kode 1832</div><br>
+                    Jika pengulangan tidak diperbolehkan, banyaknya bilangan genap $4$ digit yang lebih dari $5000$ adalah...
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$14$</li>
-                        <li data-option="B">$9$</li>
-                        <li data-option="C">$0$</li>
-                        <li data-option="D">$-9$</li>
-                        <li data-option="E">$-14$</li>
+                        <li data-option="A">840</li>
+                        <li data-option="B">1120</li>
+                        <li data-option="C">1288</li>
+                        <li data-option="D">1400</li>
+                        <li data-option="E">1575</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 18 -->
+            <!-- SOAL 98 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">18. Soal SBMPTN 2018 Kode 527</div><br>
-                    Diketahui $f$ dan $g$ merupakan fungsi yang mempunyai invers. Jika $f \left( g(x) \right)=x+1$ dan $g(x+2)=x-4$, maka nilai $f^{-1}(2) + g^{-1}(2)$ adalah...
+                    <div class="keterangan-soal">98. Soal SM-UNNES 2017 Kode 1732</div><br>
+                    Tiga tenda disewakan untuk pendaki gunung. Tiap tenda dapat menampung $4$ atau $3$ orang, banyak cara menyewakan tenda tersebut kepada $10$ pendaki adalah......
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$-5$</li>
-                        <li data-option="B">$-3$</li>
-                        <li data-option="C">$1$</li>
-                        <li data-option="D">$3$</li>
-                        <li data-option="E">$5$</li>
+                        <li data-option="A">30</li>
+                        <li data-option="B">720</li>
+                        <li data-option="C">2.160</li>
+                        <li data-option="D">4.200</li>
+                        <li data-option="E">12.600</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 19 -->
+            <!-- SOAL 99 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">19. Soal SIMAK UI 2018 Kode 641</div><br>
-                    Jika $g(x)=\dfrac{-ax-3}{-x-4}$ dan $h(x)=\dfrac{4x-3}{-x+a}$, nilai $(g \circ h)(3)$ adalah...
+                    <div class="keterangan-soal">99. Soal SM-UNNES 2016 Kode 1622</div><br>
+                    Banyak cara membentuk bilangan genap kurang dari $6000$ dengan menggunakan bilangan $1,2,3,4,5,6,$ dan $7$ tanpa perulangan adalah...
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$6$</li>
-                        <li data-option="B">$5$</li>
-                        <li data-option="C">$4$</li>
-                        <li data-option="D">$3$</li>
-                        <li data-option="E">$2$</li>
+                        <li data-option="A">100</li>
+                        <li data-option="B">160</li>
+                        <li data-option="C">260</li>
+                        <li data-option="D">360</li>
+                        <li data-option="E">371</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 20 -->
+            <!-- SOAL 100 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">20. Soal SIMAK UI 2018 Kode 641</div><br>
-                    Jika $f(x+1)=\dfrac{2x-7}{x+1}$, maka...<br>$\begin{align}(1)\ & f(-1)=11 \\(2)\ & f^{-1}(-1)=3 \\(3)\ & (f \circ f)^{-1}(-1)=-9 \\(4)\ & \dfrac{1}{f^{-1}(-2)}=\dfrac{4}{9}  \end{align}$
+                    <div class="keterangan-soal">100. Soal SM-UNNES 2015 Kode 1532</div><br>
+                    Jika himpunan $A=\left \{ a,b,c,d,e,f \right \}$ maka banyak himpunan bagian dari $A$ yang memuat dua elemen $a$ dan $f$ adalah...
                     <ol class="pilihan-ganda">
-                        <li data-option="A">Pernyataan BENAR hanya (1), (2), dan (3)</li>
-                        <li data-option="B">Pernyataan BENAR hanya (1) dan (3)</li>
-                        <li data-option="C">Pernyataan BENAR hanya (2) dan (4)</li>
-                        <li data-option="D">Pernyataan BENAR hanya (4)</li>
-                        <li data-option="E">Pernyataan BENAR Semua</li>
+                        <li data-option="A">10</li>
+                        <li data-option="B">11</li>
+                        <li data-option="C">16</li>
+                        <li data-option="D">32</li>
+                        <li data-option="E">36</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 21 -->
+            <!-- SOAL 101 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">21. Soal UM STIS 2011</div><br>
-                    Diketahui $f(x)=2x-1$ dan $g(x)=\dfrac{5x}{x+1}$. Jika $h$ adalah funsgi sehingga $\left ( g \circ h \right )(x)=x-2$ maka $\left ( h \circ f \right )(x)=\cdots$
+                    <div class="keterangan-soal">101. Soal SM-UNNES 2014 Kode 1422</div><br>
+                    Diketahui himpunan $A=\left \{ a,b,c,d,e,f,g,h \right \}$. Banyaknya himpunan bagian dari $A$ yang memiliki $3$ elemen adalah...
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$\frac{2x-3}{2x+8}$</li>
-                        <li data-option="B">$\frac{2x-3}{-2x+6}$</li>
-                        <li data-option="C">$\frac{2x-3}{2x-8}$</li>
-                        <li data-option="D">$\frac{2x-3}{-2x+8}$</li>
-                        <li data-option="E">$\frac{2x-3}{-2x-8}$</li>
+                        <li data-option="A">8</li>
+                        <li data-option="B">16</li>
+                        <li data-option="C">24</li>
+                        <li data-option="D">56</li>
+                        <li data-option="E">336</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 22 -->
+            <!-- SOAL 102 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">22. Soal UM STIS 2011</div><br>
-                    Jika $f(x)=3^{x-1}$ maka $f^{-1}(81)=\cdots$
+                    <div class="keterangan-soal">102. Soal USM STIS 2016</div><br>
+                    Dari angka-angka $2,3,4,5,6,7,8,$ dan $9$ hendak dibuat bilangan yang terdiri atas tiga angka yang berbeda, yang lebih kecil dari $840$ tetapi lebih besar dari $630$. Banyaknya bilangan yang memenuhi ketentuan tersebut adalah...
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$1$</li>
-                        <li data-option="B">$2$</li>
-                        <li data-option="C">$3$</li>
-                        <li data-option="D">$4$</li>
-                        <li data-option="E">$5$</li>
+                        <li data-option="A">105</li>
+                        <li data-option="B">96</li>
+                        <li data-option="C">92</li>
+                        <li data-option="D">90</li>
+                        <li data-option="E">84</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 23 -->
+            <!-- SOAL 103 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">23. Soal UNBK Matematika IPA 2019</div><br>
-                    Daerah asal fungsi $h(x)= \sqrt{ \dfrac{x^{2}-3x+2}{x+2}}$ agar terdefinisi adalah...
+                    <div class="keterangan-soal">103. Soal USM STIS 2016</div><br>
+                    Banyaknya bilangan ganjil yang terdiri dari $3$ angka berbeda yang disusun dari $2,3,5,6,7,$ dan $8$ adalah...
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$\left \{x | -2 \lt x \leq 1\ \text{atau}\ x \geq 2,\ x \in \mathbb{R} \right \}$</li>
-                        <li data-option="B">$\left \{x | -2 \leq x \leq 1\ \text{atau}\ x \geq 2,\ x \in \mathbb{R} \right \}$</li>
-                        <li data-option="C">$\left \{x | -2 \lt x \leq 1\ \text{atau}\ x \geq 1,\ x \in \mathbb{R} \right \}$</li>
-                        <li data-option="D">$\left \{x | x \lt -2\ \text{atau}\ 1 \leq x \leq 2\ x \in \mathbb{R} \right \}$</li>
-                        <li data-option="E">$\left \{x | x \leq -2\ \text{atau}\ 1 \leq x \leq 2\ x \in \mathbb{R} \right \}$</li>
+                        <li data-option="A">24</li>
+                        <li data-option="B">28</li>
+                        <li data-option="C">40</li>
+                        <li data-option="D">60</li>
+                        <li data-option="E">120</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 24 -->
+            <!-- SOAL 104 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">24. Soal UNBK Matematika IPA 2019</div><br>
-                    Fungsi $f:R \rightarrow R$ dan $g: R \rightarrow R$. Jika $g(x)=x-1$ dan $(fog)(x)=x^{3}-4x$, nilai dari $f(2)=\cdots$
+                    <div class="keterangan-soal">104. Soal USM STIS 2017</div><br>
+                    Suatu sekolah menengah membentuk tim yang terdiri dari $4$ anak kelas I, $5$ anak kelas II, dan $6$ anak kelas III. Kemudian akan ditentukan ketua, wakil ketua, dan sekretaris tim. Jika kelas asal ketua tim harus lebih tinggi dari kelas asal wakil ketua dan sekretaris, maka banyaknya kemungkinan susunan tim yang terbentuk adalah...
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$9$</li>
-                        <li data-option="B">$13$</li>
-                        <li data-option="C">$15$</li>
-                        <li data-option="D">$17$</li>
-                        <li data-option="E">$25$</li>
+                        <li data-option="A">120</li>
+                        <li data-option="B">216</li>
+                        <li data-option="C">231</li>
+                        <li data-option="D">432</li>
+                        <li data-option="E">492</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 25 -->
+            <!-- SOAL 105 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">25. Soal UNBK Matematika IPA 2019</div><br>
-                    Diketahui fungsi $f(x)=\sqrt{5x+1}$, dengan $x \geq -\dfrac{1}{5}$. Jika $f^{-1}(x)$ adalah invers dari fungsi $f(x)$, nilai dari $f^{-1}(3)=\cdots$
+                    <div class="keterangan-soal">105. Soal TPS - UTBK SBMPTN 2022</div><br>
+                    Bilangan dua angka berbeda yang lebih besar daripada $10$ terbentuk dari angka $0,2,5,7,8$.<br>
+                    Berapakah dari pernyataan berikut yang bernilai benar berdasarkan informasi di atas?
+                    <ol>
+                        <li>Terdapat $16$ bilangan yang mungkin dibentuk.</li>
+                        <li>Selisih bilangan terbesar dan bilangan terkecil yang mungkin dibentuk adalah kelipatan $5$.</li>
+                        <li>Bilangan terkecil kedua yang mungkin dibentuk adalah bilangan prima.</li>
+                        <li>Terdapat bilangan kuadrat yang mungkin dibentuk.</li>
+                    </ol>
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$0$</li>
-                        <li data-option="B">$\frac{4}{5}$</li>
-                        <li data-option="C">$1$</li>
-                        <li data-option="D">$\frac{8}{5}$</li>
-                        <li data-option="E">$2$</li>
+                        <li data-option="A">0</li>
+                        <li data-option="B">1</li>
+                        <li data-option="C">2</li>
+                        <li data-option="D">3</li>
+                        <li data-option="E">4</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 26 -->
+            <!-- SOAL 106 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">26. Soal UTBK-SBMPTN 2019</div><br>
-                    Jika fungsi $\sqrt{ \dfrac{x^{2}-8x+5}{x^{2}+x+12}}$ terdefinisi untuk $x \leq a$ atau $x \geq b$, maka nilai $a+b=\cdots$
+                    <div class="keterangan-soal">106. Soal TPS - UTBK SBMPTN 2022</div><br>
+                    Bilangan $x$ dan $y$ merupakan dua bilangan dua angka dibentuk dari semua angka $1,3,7,8$.<br>
+                    Berapakah dari pernyataan berikut yang bernilai benar berdasarkan informasi di atas?
+                    <ol>
+                        <li>Terdapat $x$ yang merupakan faktor prima dari $y$.</li>
+                        <li>Maksimum $x \times y$ adalah $81 \times 73$.</li>
+                        <li>Selisih terbesar $x$ dan $y$ yang mungkin dibentuk adalah kelipatan $4$.</li>
+                        <li>Faktor persekutuan terbesar dari bilangan terbesar dan terkecil yang mungkin dibentuk adalah $1$.</li>
+                    </ol>
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$8$</li>
-                        <li data-option="B">$5$</li>
-                        <li data-option="C">$0$</li>
-                        <li data-option="D">$-5$</li>
-                        <li data-option="E">$-8$</li>
+                        <li data-option="A">0</li>
+                        <li data-option="B">1</li>
+                        <li data-option="C">2</li>
+                        <li data-option="D">3</li>
+                        <li data-option="E">4</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 27 -->
+            <!-- SOAL 107 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">27. Soal UNBK Matematika SMA IPS 2019</div><br>
-                    Daerah hasil fungsi $y=x^{2}-2x-3$ untuk daerah asal $\left \{ x | -1 \leq x \leq 4,\ x \in R \right \}$ adalah...
+                    <div class="keterangan-soal">107. Soal TPS - UTBK SBMPTN 2022</div><br>
+                    Bilangan dua angka (boleh berulang) dibentuk dari angka $1,2,4,9$.<br>
+                    Berapakah dari pernyataan berikut yang bernilai benar berdasarkan informasi di atas?
+                    <ol>
+                        <li>Maksimum selisih dua bilangan yang mungkin dibentuk adalah kelipatan $5$.</li>
+                        <li>Terdapat $12$ bilangan yang dapat dibentuk.</li>
+                        <li>Banyak bilangan genap dan bilangan ganjil yang mungkin dibentuk adalah sama.</li>
+                        <li>Tiga bilangan terkecil yang mungkin dibentuk membangun barisan aritmetika.</li>
+                    </ol>
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$\left \{ x | -4 \leq y \leq 0,\ y \in R \right \}$</li>
-                        <li data-option="B">$\left \{ x | -4 \leq y \leq 11,\ y \in R \right \}$</li>
-                        <li data-option="C">$\left \{ x | -4 \leq y \leq 5,\ y \in R \right \}$</li>
-                        <li data-option="D">$\left \{ x | 0 \leq y \leq 5,\ y \in R \right \}$</li>
-                        <li data-option="E">$\left \{ x | 0 \leq y \leq 11,\ y \in R \right \}$</li>
+                        <li data-option="A">0</li>
+                        <li data-option="B">1</li>
+                        <li data-option="C">2</li>
+                        <li data-option="D">3</li>
+                        <li data-option="E">4</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 28 -->
+            <!-- SOAL 108 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">28. Soal UNBK Matematika SMA IPS 2019</div><br>
-                    Diketahui $f(x)=x^{2}+x+1$ dan $g(x)=2x-3$. Fungsi komposisi $(fog)(x)$ adalah...
+                    <div class="keterangan-soal">108. Soal TPS - UTBK SBMPTN 2022</div><br>
+                    Bilangan dua angka (boleh berulang) yang lebih besar daripada $9$ dibentuk dari angka $0,1,3,5,7$.<br>
+                    Berapakah dari pernyataan berikut yang bernilai benar berdasarkan informasi di atas?
+                    <ol>
+                        <li>Tidak ada satu pun bilangan yang dapat dibentuk merupakan bilangan genap.</li>
+                        <li>Bilangan terbesar yang mungkin dibentuk merupakan bilangan genap.</li>
+                        <li>Lima kali bilangan terkecil lebih kecil daripada bilangan terbesar yang mungkin dibentuk.</li>
+                        <li>Faktor persekutuan terbesar dari bilangan terbesar dan terkecil yang mungkin dibentuk adalah $1$.</li>
+                    </ol>
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$4x^{2}-14x+7$</li>
-                        <li data-option="B">$4x^{2}-10x+7$</li>
-                        <li data-option="C">$4x^{2}-10x+5$</li>
-                        <li data-option="D">$4x^{2}+2x-11$</li>
-                        <li data-option="E">$4x^{2}+2x+7$</li>
+                        <li data-option="A">0</li>
+                        <li data-option="B">1</li>
+                        <li data-option="C">2</li>
+                        <li data-option="D">3</li>
+                        <li data-option="E">4</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 29 -->
+            <!-- SOAL 109 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">29. Soal UNBK Matematika SMA IPS 2019</div><br>
-                    Diketahui fungsi $f(x)=2x+1$ dan $g(x)=\dfrac{x}{3x-2}$. Daerah asal fungsi komposisi $(gof)(x)$ adalah...
+                    <div class="keterangan-soal">109. Soal TPS - UTBK SBMPTN 2022</div><br>
+                    Dua bilangan dua angka yang lebih besar daripada $10$ dibentuk dari angka $0,2,3,5,7$ sehingga keempat angka pembentuk kedua bilangan itu berbeda.<br>
+                    Berapakah dari pernyataan berikut yang bernilai benar berdasarkan informasi di atas?
+                    <ol>
+                        <li>Jumlah terbesar kedua bilangan yang mungkin dibentuk merupakan kelipatan $5$.</li>
+                        <li>Jumlah terkecil kedua bilangan yang mungkin dibentuk lebih kecil daripada $60$.</li>
+                        <li>Terdapat sepasang bilangan yang keduanya merupakan bilangan prima.</li>
+                        <li>Selisih terkecil kedua bilangan yang mungkin dibentuk merupakan kelipatan $2$.</li>
+                    </ol>
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$\left \{ x\ |\ x \neq -\frac{1}{6},\ x \in R \right \}$</li>
-                        <li data-option="B">$\left \{ x\ |\ x \neq -\frac{1}{2},\ x \in R \right \}$</li>
-                        <li data-option="C">$\left \{ x\ |\ x \neq \frac{1}{6},\ x \in R \right \}$</li>
-                        <li data-option="D">$\left \{ x\ |\ x \neq \frac{2}{3},\ x \in R \right \}$</li>
-                        <li data-option="E">$\left \{ x\ |\ x \in R \right \}$</li>
+                        <li data-option="A">0</li>
+                        <li data-option="B">1</li>
+                        <li data-option="C">2</li>
+                        <li data-option="D">3</li>
+                        <li data-option="E">4</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 30 -->
+            <!-- SOAL 110 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">30. Soal UNBK Matematika SMA IPS 2019</div><br>
-                    Pembuatan pakaian pada suatu industri dilakukan melalui dua tahap yaitu tahap pemotongan kain menjadi pola dan dilanjutkan dengan tahap penjahitan pola menjadi pakaian. Banyak unit pola yang terbentuk bergantung pada lebar kain yang tersedia dengan mengikuti fungsi $f(x)=\dfrac{3}{4}x+5$, sedangkan banyak pakain yang diproduksi bergantung pada banyak pola yang dihasilkan dengan mengikuti fungsi $g(x)=\dfrac{1}{2}x+6$. Jika tersedia $100\ m^{2}$ kain untuk membuat pola, banyak pakaian yang dihasilkan adalah...
+                    <div class="keterangan-soal">110. Soal TPS - UTBK SBMPTN 2022</div><br>
+                    Dua bilangan dua angka dibentuk dari angka $1,2,5,7,9$ sehingga keempat angka pembentuk kedua bilangan itu berbeda.<br>
+                    Berapakah dari pernyataan berikut yang bernilai benar berdasarkan informasi di atas?
+                    <ol>
+                        <li>Salah satu faktor dari bilangan terbesar yang mungkin dibentuk merupakan bilangan genap.</li>
+                        <li>Hasil perkalian terbesar kedua bilangan yang mungkin dibentuk adalah $95 \times 72$.</li>
+                        <li>Terdapat lebih dari $24$ pasang bilangan yang mungkin dibentuk.</li>
+                        <li>Selisih terkecil kedua bilangan yang mungkin dibentuk adalah $8$.</li>
+                    </ol>
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$38\ \text{pakaian}$</li>
-                        <li data-option="B">$41\ \text{pakaian}$</li>
-                        <li data-option="C">$42\ \text{pakaian}$</li>
-                        <li data-option="D">$46\ \text{pakaian}$</li>
-                        <li data-option="E">$47\ \text{pakaian}$</li>
+                        <li data-option="A">0</li>
+                        <li data-option="B">1</li>
+                        <li data-option="C">2</li>
+                        <li data-option="D">3</li>
+                        <li data-option="E">4</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 31 -->
+            <!-- SOAL 111 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">31. Soal UNBK Matematika SMA IPS 2019</div><br>
-                    Diketahui $f(x)=\dfrac{9x+17}{x+2};\ x \neq -2$ dan $f^{-1}(x)$ adalah invers dari $f(x)$. Nilai dari $f^{-1}(10)$ adalah...
+                    <div class="keterangan-soal">111. Contoh Soal TKA Matematika SMA/MA</div><br>
+                    Bagas menuliskan suatu bilangan yang terdiri atas $6$ angka ($6$ digit) di papan tulis, namun kemudian temannya Dongan menghapus angka $3$ dan $4$ yang terdapat pada bilangan tersebut sehingga bilangan yang terbaca menjadi $2026$. Berapa banyak bilangan dengan enam digit yang dapat ditulis Bagas agar hal seperti di atas dapat terjadi?
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$-16$</li>
-                        <li data-option="B">$-3$</li>
-                        <li data-option="C">$-2$</li>
-                        <li data-option="D">$2$</li>
-                        <li data-option="E">$12$</li>
+                        <li data-option="A">10</li>
+                        <li data-option="B">15</li>
+                        <li data-option="C">20</li>
+                        <li data-option="D">30</li>
+                        <li data-option="E">40</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 32 -->
+            <!-- SOAL 112 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">32. Soal SIMAK UI 2019 Kode 539</div><br>
-                    Jika $f(x+1)=x^{2}+2x+1$ dengan $x \gt 0$, maka $f^{-1}\left(x-1+f(x-1)\right)=\cdots$
+                    <div class="keterangan-soal">112. Contoh Soal TKA Matematika SMA</div><br>
+                    Luki adalah panitia bazar di sekolahnya. Dia mendapat tugas dari ketua pelaksana untuk membuat kupon. Dia ingin di setiap kupon memiliki kode akses yang unik. Kode akses kupon bazar itu memiliki lima karakter dengan format sebagai berikut:
+                    $$AXBYC$$
+                    dengan $A$, $B$, dan $C$ menyatakan huruf, serta $X$ dan $Y$ menyatakan angka. Tidak boleh ada angka dan huruf yang diulang. Berapakah berapa banyak kode akses berbeda yang dapat dibuat?
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$x-1$</li>
-                        <li data-option="B">$\sqrt{x}+1$</li>
-                        <li data-option="C">$\sqrt{x}-1$</li>
-                        <li data-option="D">$\sqrt{x(x+1)}$</li>
-                        <li data-option="E">$\sqrt{x(x-1)}$</li>
+                        <li data-option="A">1.263.600</li>
+                        <li data-option="B">1.352.000</li>
+                        <li data-option="C">1.404.000</li>
+                        <li data-option="D">1.423.656</li>
+                        <li data-option="E">1.757.600</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 33 -->
+            <!-- SOAL 113 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">33. Soal SIMAK UI 2019 Kode 539</div><br>
-                    Jika $f(x)=2x^{2}-3x+1$, $g(x)=ax+b$ dan $(g \circ f)(x-1)=4x^{2}-14x+11$, maka...<br> $\begin{align}(1)\ & a=2 \\(2)\ & b=-1 \\(3)\ & (fog)(1)=0 \\(4)\ & \dfrac{f(x)}{g(x)}=x+1   \end{align}$
+                    <div class="keterangan-soal">113. Model Soal PM UTBK SNBT 2025</div><br>
+                    Pertemuan keluarga RT IX dihadiri oleh $15$ laki-laki dan $10$ perempuan. Pada pertemuan ini setiap keluarga diwakili satu orang. Salah satu agenda pertemuan tersebut adalah memilih pengurus RT baru yang terdiri atas ketua, bendahara, dan sekretaris. Para calon diambil di antara yang hadir. Pemilihan dilakukan secara acak.<br><br>
+                    Banyak cara terpilihnya pengurus dengan sekretaris perempuan adalah....
                     <ol class="pilihan-ganda">
-                        <li data-option="A">Pernyataan BENAR hanya (1), (2), dan (3)</li>
-                        <li data-option="B">Pernyataan BENAR hanya (1) dan (3)</li>
-                        <li data-option="C">Pernyataan BENAR hanya (2) dan (4)</li>
-                        <li data-option="D">Pernyataan BENAR hanya (4)</li>
-                        <li data-option="E">Pernyataan BENAR Semua</li>
+                        <li data-option="A">5.400</li>
+                        <li data-option="B">5.520</li>
+                        <li data-option="C">5.750</li>
+                        <li data-option="D">5.760</li>
+                        <li data-option="E">6.000</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 34 -->
+            <!-- SOAL 114 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">34. Soal UTBK-SBMPTN 2019</div><br>
-                    Diketahui $\left ( f \circ f \right )^{-1} \left( 11 \right)=2p$ dan $f \left ( 2x-4 \right )=3x-7$ maka nilai $p=\cdots$
+                    <div class="keterangan-soal">114. Model Soal UTBK SNBT 2025</div><br>
+                    Wilayah RT Suka Maju terpisah oleh jalan. Ada $10$ keluarga tinggal di utara jalan dan $14$ keluarga tinggal di selatan jalan. Suatu gapura jalan akan dibangun di RT tersebut.Untuk itu, diadakan pertemuan untuk memilih panitia inti pembangunan yang terdiri atas ketua, bendahara, dan sekretaris dari $24$ wakil keluarga yang menghadiri pertemuan tersebut. Setiap keluarga diwakili oleh satu orang, pemilihan dilakukan secara acak.<br><br>
+                    Banyak cara terpilihnya panitia inti dengan orang yang tinggal di utara jalan sebagai ketua adalah....
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$1$</li>
-                        <li data-option="B">$2$</li>
-                        <li data-option="C">$3$</li>
-                        <li data-option="D">$4$</li>
-                        <li data-option="E">$5$</li>
+                        <li data-option="A">1.260</li>
+                        <li data-option="B">3.600</li>
+                        <li data-option="C">5.060</li>
+                        <li data-option="D">6.280</li>
+                        <li data-option="E">6.900</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 35 -->
+            <!-- SOAL 115 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">35. Soal UTBK-SBMPTN 2019</div><br>
-                    Diketahui $f \left ( \dfrac{1}{2x} \right ) = \dfrac{x}{3+x}$ dan $f^{-1} \left ( a \right )=-\dfrac{1}{3}$ maka nilai $a=\cdots$
+                    <div class="keterangan-soal">115. Model Soal UTBK SNBT 2025</div><br>
+                    Di RT A terdapat $8$ keluarga tinggal di utara jalan dan $12$ keluarga tinggal di selatan jalan. RT A akan mengadakan acara keakraban. Untuk persiapan acara tersebut diadakan pertemuan dengan setiap keluarga yang diwakili satu orang. Pada pertemuan tersebut akan dipilih panitia inti acara keakraban yang terdiri atas ketua, wakil ketua, bendahara, dan sekretaris dari $20$ wakil keluarga yang hadir. Pemilihan dilakukan secara acak.<br><br>
+                    Banyak cara terpilinya panitia inti dengan ketua tinggal di utara jalan dan wakil ketua tinggal di selatan jalan adalah....
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$2$</li>
-                        <li data-option="B">$1$</li>
-                        <li data-option="C">$0$</li>
-                        <li data-option="D">$-1$</li>
-                        <li data-option="E">$-2$</li>
+                        <li data-option="A">13.824</li>
+                        <li data-option="B">17.280</li>
+                        <li data-option="C">27.684</li>
+                        <li data-option="D">29.376</li>
+                        <li data-option="E">31.104</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 36 -->
+            <!-- SOAL 116 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">36. Soal UTBK-SBMPTN 2019</div><br>
-                    Jika $ f \left ( x-1 \right ) = 5x^{2}+6x-6$;  $g \left ( x \right )=ax+1$ dan $ \left ( g \circ f \right ) \left( 1 \right)=-51$ maka nilai $f \left ( a+1 \right )=\cdots$
+                    <div class="keterangan-soal">116. Model Soal UTBK SNBT 2025</div><br>
+                    Rombongan klub sepeda tingkat kelurahan yang terdiri atas $12$ laki-laki dan $10$ perempuan akan mengadakan kegiatan bersepeda menuju suatu tempat wisata. Akan dibawa tiga bendera, yaitu merah putih, klub, dan kota. Di tempat wisata akan dipilih pengurus klub baru yang terdiri atas ketua, bendahara, sekretaris, dan kepala humas. Pembawa bendera dan pengurus klub akan dipilih secara acak di antara anggota rombongan.<br><br>
+                    Banyak cara terpilihnya tiga pembawa bendera dengan pembawa bendera merah putih perempuan adalah....
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$-2$</li>
-                        <li data-option="B">$-6$</li>
-                        <li data-option="C">$-7$</li>
-                        <li data-option="D">$-11$</li>
-                        <li data-option="E">$-13$</li>
+                        <li data-option="A">4.400</li>
+                        <li data-option="B">4.200</li>
+                        <li data-option="C">4.000</li>
+                        <li data-option="D">1.320</li>
+                        <li data-option="E">1.230</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 37 -->
+            <!-- SOAL 117 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">37. Soal UTBK-SBMPTN 2019</div><br>
-                    Diketahui $f \left ( \dfrac{1}{x} \right ) = \dfrac{x}{2+3x}$ dan $f^{-1} \left ( a \right )=-1$ maka nilai $a=\cdots$
+                    <div class="keterangan-soal">117. Model Soal UTBK SNBT 2025</div><br>
+                    Akan diadakan pemilihan kepala daerah dengan tiga calon, yaitu Sabar, Subur, dan Makmur. Sebelum dilaksanakan pemilihan, diadakan debat para calon. Pada debat pertama, panitia menyediakan $11$ masalah kelompok ekonomi dan $9$ masalah kelompok pendidikan. Masalah akan diberikan kepada para calon secara acak untuk dicari penyelesaiannya.<br><br>
+                    Jika dipilih tiga masalah berbeda untuk diberikan kepada ketiga calon, banyak cara memilih masalah dengan Sabar dan Subur mendapat masalah ekonomi dan Makmur mendapat masalah pendidikan adalah....
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$2$</li>
-                        <li data-option="B">$1$</li>
-                        <li data-option="C">$0$</li>
-                        <li data-option="D">$-1$</li>
-                        <li data-option="E">$-2$</li>
+                        <li data-option="A">990</li>
+                        <li data-option="B">900</li>
+                        <li data-option="C">198</li>
+                        <li data-option="D">189</li>
+                        <li data-option="E">119</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 38 -->
+            <!-- SOAL 118 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">38. Soal UTBK-SBMPTN 2019</div><br>
-                    Diketahui $f \left ( 2x \right ) = -\dfrac{1}{x+2}$ dan $f^{-1} \left ( \dfrac{2}{a} \right )=3a$ maka nilai $a=\cdots$
+                    <div class="keterangan-soal">118. Model Soal UTBK SNBT 2025</div><br>
+                    Bu guru menyediakan $22$ bacaan berbeda yang terdiri atas $12$ bacaan tentang pahlawan dan $10$ bacaan tentang kesehatan. Bu guru akan memberikan beberapa bacaan untuk dibaca oleh tiga siswa, yaitu Aisah, Banu, dan Candra. Setelah selesai membaca, siswa diminta membuat rangkuman isi bacaan. Bacaan yang diberikan kepada siswa dipilih secara acak.<br><br>
+                    Jika dipilih tiga bacaan yang semuanya diberikan kepada ketiga siswa, banyak cara guru memilih buku sehingga Aisah menerima bacaan tentang kesehatan serta Badu dan Candra menerima bacaan tentang pahlawan adalah....
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$2$</li>
-                        <li data-option="B">$1$</li>
-                        <li data-option="C">$0$</li>
-                        <li data-option="D">$-1$</li>
-                        <li data-option="E">$-2$</li>
+                        <li data-option="A">1.320</li>
+                        <li data-option="B">1.080</li>
+                        <li data-option="C">660</li>
+                        <li data-option="D">540</li>
+                        <li data-option="E">340</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 39 -->
+            <!-- SOAL 119 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">39. Soal UTBK-SBMPTN 2019</div><br>
-                    Jika $ f \left ( x \right ) = 3x+a$ dan $ \left ( f \circ f \right ) \left( x \right)=9x+a+3$ maka nilai $f \left ( a \right )=\cdots$
+                    <div class="keterangan-soal">119. Model Soal UTBK SNBT 2025</div><br>
+                    Bu Budi mempunyai tanaman $10$ aglonema merah dan $11$ aglonema hijau yang semuanya berbeda. Pada suatu hari, empat tetangganya, yaitu Bu Amir, Bu Cholis, Bu Denis, dan Bu Erwin, bertamu ke rumahnya. Bu Budi akan memberi tamunya tanaman aglonema. Tanamannya dipilih secara acak.<br><br>
+                    Jika Bu Erwin memilih empat tanaman, banyak cara terpilihnya dua aglonema merah dan dua aglonema hijau adalah....
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$6$</li>
-                        <li data-option="B">$5$</li>
-                        <li data-option="C">$4$</li>
-                        <li data-option="D">$3$</li>
-                        <li data-option="E">$2$</li>
+                        <li data-option="A">100</li>
+                        <li data-option="B">200</li>
+                        <li data-option="C">1.225</li>
+                        <li data-option="D">2.475</li>
+                        <li data-option="E">9.900</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 40 -->
+            <!-- SOAL 120 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">40. Soal UTBK-SBMPTN 2019</div><br>
-                    Jika $ f \left ( x \right ) = ax+3$ dan $ \left ( f \circ f \right ) \left( x \right)=4x-3$ maka nilai $f \left ( a \right )=\cdots$
+                    <div class="keterangan-soal">120. Model Soal UTBK SNBT 2025</div><br>
+                    Pak guru menyediakan $23$ bacaan berbeda, yaitu $11$ bacaan dengan topik tentang buah-buahan dan $12$ bacaan tentang sayuran. Pak guru akan memberikan beberapa bacaan kepada tiga siswa, yaitu Agus, Badu, dan Cici, untuk dibaca. Setelah selesai membaca, ketiga siswa diminta membuat rangkuman isi bacaan. Bacaan yang diberikan kepada siswa dipilih secara acak.<br><br>
+                    Jika dipilih empat bacaan berbeda untuk Agus, banyak cara terpilihnya tiga bacaan dengan topik tentang buah-buahan dan satu bacaan tentang sayuran adalah....
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$1$</li>
-                        <li data-option="B">$3$</li>
-                        <li data-option="C">$5$</li>
-                        <li data-option="D">$7$</li>
-                        <li data-option="E">$9$</li>
+                        <li data-option="A">11.880</li>
+                        <li data-option="B">5.940</li>
+                        <li data-option="C">1.980</li>
+                        <li data-option="D">1.080</li>
+                        <li data-option="E">177</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
             </div>
 
-            <!-- SOAL 41 -->
+            <!-- SOAL 121 -->
             <div class="latihan-item">
                 <div class="soal-latihan">
-                    <div class="keterangan-soal">41. Soal Simulasi UTBK-SBMPTN 2025</div><br>
-                    Jika $f \left ( x \right ) = \dfrac{x+1}{x-1}$ maka $f^{-1} \left ( \dfrac{1}{x} \right )$ adalah...
+                    <div class="keterangan-soal">121. Model Soal UTBK SNBT 2025</div><br>
+                    Suatu kecamatan terdiri atas $17$ kelurahan yang terpisahkan oleh suatu sungai dengan $8$ kelurahan di sebelah barat sungai dan $9$ kelurahan di sebelah timur sungai. Setiap kelurahan akan mendapatkan bantuan uang dari suatu perusahaan, masing-masing sebesar $\text{Rp}50.000.000,00$. Bantuan tidak diberikan sekaligus kepada semua kelurahan, tetapi diberikan secara bertahap. Giliran kelurahan yang akan mendapat bantuan ditentukan secara acak.<br><br>
+                    Jika awalnya dipilih secara berurutan tiga kelurahan untuk diberi bantuan, banyak cara terpilihnya kelurahan pertama di barat sungai, kelurahan kedua di barat sungai, dan kelurahan ketiga di timur sungai adalah....
                     <ol class="pilihan-ganda">
-                        <li data-option="A">$-f(x)$</li>
-                        <li data-option="B">$-f(-x)$</li>
-                        <li data-option="C">$\frac{1}{f(x)}$</li>
-                        <li data-option="D">$\frac{1}{f(-x)}$</li>
-                        <li data-option="E">$-\frac{1}{f(x)}$</li>
-                    </ol>
-                </div>
-                <div class="coret-coret"></div>
-            </div>
-
-            <!-- SOAL 42 -->
-            <div class="latihan-item">
-                <div class="soal-latihan">
-                    <div class="keterangan-soal">42. Soal SIMAK UI 2020</div><br>
-                    Diketahui $f(x)+3g^{-1}(x)=x^{2}+x-18$ dan $f(x)+2g^{-1}(x)=x^{2}-14$. Jika $f^{-1}(x)$ bernilai positif, maka $f^{-1}(2)+g^{-1}(2)=\cdots$
-                    <ol class="pilihan-ganda">
-                        <li data-option="A">$1$</li>
-                        <li data-option="B">$2$</li>
-                        <li data-option="C">$3$</li>
-                        <li data-option="D">$4$</li>
-                        <li data-option="E">$5$</li>
-                    </ol>
-                </div>
-                <div class="coret-coret"></div>
-            </div>
-
-            <!-- SOAL 43 -->
-            <div class="latihan-item">
-                <div class="soal-latihan">
-                    <div class="keterangan-soal">43. Soal UM UNDIP 2019 Kode 324</div><br>
-                    Diberikan dua fungsi real $f(x)=x^{2}-2 \left| x \right|$ dan $g(x)=x^{2} +1 $. Jumlah semua nilai $x$ yang memenuhi persamaan $\left( fog \right)(x)=0$ adalah...
-                    <ol class="pilihan-ganda">
-                        <li data-option="A">$-2$</li>
-                        <li data-option="B">$-1$</li>
-                        <li data-option="C">$0$</li>
-                        <li data-option="D">$1$</li>
-                        <li data-option="E">$4$</li>
-                    </ol>
-                </div>
-                <div class="coret-coret"></div>
-            </div>
-
-            <!-- SOAL 44 -->
-            <div class="latihan-item">
-                <div class="soal-latihan">
-                    <div class="keterangan-soal">44. Soal UM UGM 2019 Kode 634</div><br>
-                    Diberikan fungsi $f(x)=\dfrac{2x-1}{x+1}$. Nilai $\left( f^{-1} \circ f^{-1} \right)\left( \frac{1}{2} \right)$ adalah...
-                    <ol class="pilihan-ganda">
-                        <li data-option="A">$1$</li>
-                        <li data-option="B">$2$</li>
-                        <li data-option="C">$3$</li>
-                        <li data-option="D">$4$</li>
-                        <li data-option="E">$5$</li>
-                    </ol>
-                </div>
-                <div class="coret-coret"></div>
-            </div>
-
-            <!-- SOAL 45 -->
-            <div class="latihan-item">
-                <div class="soal-latihan">
-                    <div class="keterangan-soal">45. Soal UM UGM 2019 Kode 934</div><br>
-                    Diketahui $f(x)=x^{2} +1$ dan $g(x)=ax+2$, dengan $a \neq 0$. Jika $\left( f \circ g^{-1} \right)(1)=5$ maka $4a^{2} -3 = \cdots $
-                    <ol class="pilihan-ganda">
-                        <li data-option="A">$-3$</li>
-                        <li data-option="B">$-2$</li>
-                        <li data-option="C">$-1$</li>
-                        <li data-option="D">$1$</li>
-                        <li data-option="E">$2$</li>
-                    </ol>
-                </div>
-                <div class="coret-coret"></div>
-            </div>
-
-            <!-- SOAL 46 -->
-            <div class="latihan-item">
-                <div class="soal-latihan">
-                    <div class="keterangan-soal">46. Soal Simulasi UTBK-SNBT</div><br>
-                    Jika $f \left ( \dfrac{\sqrt{x+1}}{x-1} \right)= \dfrac{2x-1}{x+2}$, maka nilai $f^{-1}\left ( 1 \right)=\cdots$
-                    <ol class="pilihan-ganda">
-                        <li data-option="A">$-2$</li>
-                        <li data-option="B">$-1$</li>
-                        <li data-option="C">$0$</li>
-                        <li data-option="D">$1$</li>
-                        <li data-option="E">$2$</li>
-                    </ol>
-                </div>
-                <div class="coret-coret"></div>
-            </div>
-
-            <!-- SOAL 47 -->
-            <div class="latihan-item">
-                <div class="soal-latihan">
-                    <div class="keterangan-soal">47. Contoh Soal TKA Matematika SMA</div><br>
-                    Diketahui fungsi $f(x)=\sqrt{2x+3}$, dengan $x \geq -\frac{3}{2}$. Jika $f^{-1}(x)$ adalah invers dari fungsi $f(x)$, nilai dari $f^{-1}(3)=\cdots$
-                    <ol class="pilihan-ganda">
-                        <li data-option="A">$6$</li>
-                        <li data-option="B">$3$</li>
-                        <li data-option="C">$\frac{3}{2}$</li>
-                        <li data-option="D">$-\frac{1}{2}$</li>
-                        <li data-option="E">$-1$</li>
+                        <li data-option="A">144</li>
+                        <li data-option="B">257</li>
+                        <li data-option="C">504</li>
+                        <li data-option="D">576</li>
+                        <li data-option="E">648</li>
                     </ol>
                 </div>
                 <div class="coret-coret"></div>
@@ -1060,377 +1037,479 @@
             <h1>Kunci Jawaban & Pembahasan</h1>
             
             <div class="pembahasan">
-                <b>1. Jawaban: D</b><br>
-                $\begin{align}f(x) & = \dfrac{x-2011}{x-1} \\(f \circ f)(x) & = f \left( f(x) \right) \\& = \dfrac{f(x)-2011}{f(x)-1} \\& = \dfrac{\dfrac{x-2011}{x-1}-2011}{\dfrac{x-2011}{x-1}-1} \\& = \dfrac{\dfrac{x-2011}{x-1}-\dfrac{2011x-2011}{x-1}}{\dfrac{x-2011}{x-1}-\dfrac{x-1}{x-1}} \\& = \dfrac{\dfrac{x-2011-2011x+2011}{x-1}}{\dfrac{x-2011-x+1}{x-1}} \\& = \dfrac{\dfrac{-2010x}{x-1}}{\dfrac{-2010}{x-1}} \\& = \dfrac{-2010x}{-2010} \\& = x \end{align}$
-                <p>Dari hasil di atas yaitu $(f \circ f)(x) = x$ maka: </p>
-                <p>$\begin{align}(f \circ f \circ f)(x) &= f(x) \\(f \circ f \circ f \circ f)(x) &= x \\(f \circ f \circ f \circ f \circ f)(x) &= f(x) \\\end{align}$</p>
+                <b>81. Jawaban: D</b><br>
+                Dari informasi pada soal, $8$ siswa yang berdiri dari lima siswa pria dan tiga siswa wanita duduk berdampingan dalam satu baris.
+                <p>Kejadian yang diharapkan adalah kedua ujung ditempati pria dan tidak boleh ada $2$ wanita duduk berdampingan. Untuk menghitung banyak kemungkinan ini kita kerjakan pertama adalah banyak posisi duduk di ujung lalu posisi duduk wanita.<br>
+                Kemungkinan I:<br>
+                $\begin{array}{c|c|c|c|c|c|c|c|cc} \text{P}_{5} & \text{W}_{3} & \text{P}_{3} & \text{W}_{2} & \text{P}_{2} & \text{W}_{1} & \text{P}_{1} & \text{P}_{4} \\\hline (5) & (3) & (3) & (2) & (2) & (1) & (1) & (4) \\\end{array} $<br>
+                Banyak posisi duduk adalah $5 \cdot 3 \cdot 3 \cdot 2 \cdot 2 \times 4 =720$</p>
+                <p>Kemungkinan II:<br>
+                $\begin{array}{c|c|c|c|c|c|c|c|cc} \text{P}_{5} & \text{P}_{3} & \text{W}_{3} & \text{P}_{2} & \text{W}_{2} & \text{P}_{1} & \text{W}_{1} & \text{P}_{4} \\\hline (5) & (3) & (3) & (2) & (2) & (1) & (1) & (4) \\\end{array} $<br>
+                Banyak posisi duduk adalah $5 \cdot 3 \cdot 3 \cdot 2 \cdot 2 \times 4 =720$</p>
+                <p>Dari kemungkinan I dan kemungkinan II, banyak kemungkinan yang terjadi adalah $720+720=1.440$.</p>
             </div>
 
             <div class="pembahasan">
-                <b>2. Jawaban: E</b><br>
-                Untuk $f(x) = ax+3$ dapat kita tentukan $f^{-1}(x)$ dan $f^{-1}(9)$ yaitu:<br>
-                $\begin{align}y & = ax+3 \\y - 3 & = ax \\\dfrac{y - 3}{a} & = x \\f^{-1}(x) & = \dfrac{x - 3}{a} \\f^{-1}(9) & = \dfrac{9 - 3}{a} \\f^{-1}(9) & = \dfrac{6}{a}\end{align}$
-                <p>Lalu kita substitusikan kepada $f^{-1}\left (f^{-1}\left ( 9 \right ) \right )=3$, sehingga kita peroleh:<br>
-                $\begin{align}f^{-1}\left (f^{-1}\left ( 9 \right ) \right) & = f^{-1}\left ( \dfrac{6}{a} \right ) \\3 & = \dfrac{\dfrac{6}{a} - 3}{a} \\3a & = \dfrac{6-3a}{a} \\3a^{2} & = 6-3a \\3a^{2}+3a-6 & = 0 \\a^{2}+a-2 & = 0 \\a^{2}+a-2 +3 & = 0 +3 \\a^{2}+a+1 & = 3 \end{align}$</p>
+                <b>82. Jawaban: C</b><br>
+                Dari informasi pada soal, $7$ orang akan duduk dalam satu baris yang terdiri dari tiga pria dan empat wanita akan duduk dalam satu baris.
+                <p>Kejadian yang diharapkan adalah cara mereka duduk sehingga yang berjenis kelamin sama tidak berdampingan.<br> 
+                Untuk menghitung banyak kemungkinan ini kita kerjakan pertama adalah posisi duduk wanita lalu posisi duduk pria.<br>
+                $\begin{array}{c|c|c|c|c|c|c|cc} \text{W}_{4} & \text{P}_{3} & \text{W}_{3} & \text{P}_{2} & \text{W}_{2} & \text{P}_{1} & \text{W}_{1} \\\hline (4) & (3) & (3) & (2) & (2) & (1) & (1) \\\end{array} $<br>
+                Banyak posisi duduk adalah $4 \cdot 3 \cdot 3 \cdot 2 \cdot 2 =144$</p>
             </div>
 
             <div class="pembahasan">
-                <b>3. Jawaban: A</b><br>
-                Untuk $f(x) = ax+3$ dapat kita tentukan $f \left (f \left ( x \right ) \right )$ yaitu:<br>
-                $\begin{align}f \left (f \left ( x \right ) \right ) & = af(x)+3 \\4x+9 & = a(ax+3)+3 \\4x+9 & = a^{2}x+3a+3\end{align}$<br>
-                Dari bentuk diatas dapat kita simpulkan $4x= a^{2}x$ dan $9 =3a+3$ sehingga<br>
-                $a^{2}+3a+3=4+9$ <br>
-                $a^{2}+3a+3=13$
+                <b>83. Jawaban: B</b><br>
+                Dari informasi pada soal, $15$ anak yang terdiri atas laki-laki dan perempuan akan diambil $2$ anak secara acak bersamaan.
+                <p>Jika kita misalkan bayanyak perempuan adalah $x$, dan banyak kemungkinan terambil laki-laki dan perempuan adalah $26$. Dapat kita tuliskan:<br>
+                $\begin{align} C_{1}^{15-x} \cdot C_{1}^{x} &= 26 \\( 15-x ) \cdot ( x ) &= 26 \\15x-x^{2} &= 26 \\ x^{2}-15x+26 &= 0 \\ ( x-13 ) \cdot ( x-2 ) &= 0 \\ x=13\ \text{atau}\ x=2 & \end{align}$</p> 
+                <p>Untuk $x=13$ maka kita peroleh banyak laki-laki adalah $2$, sehingga selisih jumlah laki-laki dan perempuan adalah $13-2=11$.</p>
             </div>
 
             <div class="pembahasan">
-                <b>4. Jawaban: E</b><br>
-                Untuk menyelesaikan soal di atas kita coba dengan memisalkan $g \left ( x-2 \right)= f\left ( x+2 \right)=a$ sehingga kita peroleh $g \left ( x-2 \right)=a$ atau $f\left ( x+2 \right)=a$
-                <p>$\begin{align}g\left ( x-2 \right) &=a \\g^{-1}\left ( a \right ) &=x-2 \\g^{-1}\left ( a \right )+2 &=x \\\hline f\left ( x+2 \right ) &=a \\f^{-1}\left ( a \right ) &=x+2 \\f^{-1}\left ( a \right ) &=g^{-1}\left ( a \right )+2+2 \\f^{-1}\left ( a \right ) &=g^{-1}\left ( a \right )+4 \\f^{-1}\left ( a \right )-4 &=g^{-1}\left ( a \right ) \\g^{-1}\left ( a \right ) &=f^{-1}\left ( a \right )-4 \end{align}$</p>
-                <p>Dari hasil di atas dapat kita simpulkan bahwa $g^{-1}\left ( x \right ) =f^{-1}\left ( x \right )-4$</p>
+                <b>84. Jawaban: C</b><br>
+                Dari informasi pada soal, Enam kursi melingkari sebuah meja dan kursi tersebut akan diduduki oleh $5$ anak, sehingga akan selalu ada satu kursi kosong.
+                <p>Karena kursi kosong harus selalu di apit oleh anak laki-laki dan perempuan, maka pertama kita lakukan adalah memilih kursi yang akan kita kosongkan $(K)$. Untuk memilih kursi yang akan kita kosongkan adalah sebanyak $6$ pilihan.</p>
+                <p>Lalu diantara kursi kosong, banyak kemungkinan yang duduk adalah laki-laki $2$ dan perempuan $3$, lalu sisanya $3$ orang sudah bebas tempat duduknya asal tidak duduk di tempat yang sudah dipilih untuk kosong. Banyak kemungkinan posisi duduk pada posisi ini adalah $\left( 3 \cdot 2 \cdot 3 \cdot 2 \cdot 1 \right) \times 2=72$.</p>
+                <p>Ada $6$ kursi kosong, sehingga untuk memilih kursi kosong, yang kita pilih dapat terjadi sebanyak $6$ kali. Banyak posisi duduk total adalah $6 \times 72=432$.</p>
             </div>
 
             <div class="pembahasan">
-                <b>5. Jawaban: C</b><br>
-                Untuk menjawab soal ini kita butuh sedikit kreatifitas dengan memisalkan bahwa $ f \left ( x \right)= g\left ( 4+2x \right)=y$, sehingga kita peroleh $g\left ( 4+2x \right)=y$ dan $f\left ( x \right)=y$.
-                <p>$\begin{align}g\left ( 4+2x \right) &=y \\g^{-1}\left ( y \right ) &=4+2x \\g^{-1}\left ( y \right )-4 &=2x \\\dfrac{1}{2} \left (g^{-1}\left ( y \right )-4 \right ) &=x \\\dfrac{1}{2} g^{-1}\left ( y \right )-2 &=x \\\hline f\left ( x \right ) &=y \\f^{-1}\left ( y \right ) &=x \\f^{-1}\left ( y \right ) &=\dfrac{1}{2} g^{-1}\left ( y \right )-2 \\ \end{align}$</p>
-                <p>Dari apa yang kita peroleh di atas dapat kita simpulkan $f^{-1}\left ( x \right )=\dfrac{1}{2} g^{-1}\left ( x \right )-2$</p>
-            </div>
-
-            <div class="pembahasan">
-                <b>6. Jawaban: C</b><br>
-                Untuk menjawab soal ini bisa kita kerjakan dengan mencari terlebih dahulu $f\left ( x \right)$ lalu kita akan dapat $f^{-1}\left ( x \right)$.
-                <p>Alternatif lain kita bisa kreatif dengan memakai sifat Jika $f\left ( a \right )=b$ maka $f^{-1}\left ( b \right )=a$.<br>
-                Jika $f\left ( 2-x \right)= \dfrac{x}{2}+3$, maka $f^{-1}\left ( \dfrac{x}{2}+3 \right)= 2-x$</p>
-                <p>Kita misalkan <br>
-                $\begin{align}\dfrac{x}{2}+3 &=a \\\dfrac{x}{2} &=a-3 \\x &=2a-6 \\\hline f^{-1}\left ( \dfrac{x}{2}+3 \right) &= 2-x \\f^{-1}\left ( a \right) &= 2-\left ( 2a-6 \right) \\f^{-1}\left ( a \right) &= 2-2a+6 \\f^{-1}\left ( a \right) &= 8-2a \end{align}$</p>
-            </div>
-
-            <div class="pembahasan">
-                <b>7. Jawaban: C</b><br>
-                Untuk menjawab soal ini bisa kita kerjakan dengan mencari terlebih dahulu $f^{-1}\left ( x \right)$ lalu mensubstitusikan $f^{-1}\left ( q \right)=1$ lalu menghitung $f^{-1}\left ( 2q \right)= \cdots$.
-                <br>Alternatif lain dengan sedikit kreatif memakai sifat Jika $f\left ( a \right )=b$ maka $f^{-1}\left ( b \right )=a$.
-                <br>Jika $f^{-1} \left ( q \right)=-1$, maka $\left (f^{-1} \left ( -1 \right) \right )^{-1}=q$ atau bisa kita tulis $f\left ( -1 \right)=q$
-                <p>$\begin{align}f \left ( x \right) &= \dfrac{px+q}{x+2} \\f \left ( -1 \right) &= \dfrac{-p+q}{-1+2} \\q &= \dfrac{-p+q}{1} \\q &= -p+q \\p &=0 \\\hline f \left ( x \right) &= \dfrac{q}{x+2} \\f^{-1} \left ( \dfrac{q}{x+2} \right) &= x \ \end{align}$</p>
-                <p>Kita dapat memisalkan $\dfrac{q}{x+2}=2q$ karena kita mau mencari $f^{-1} \left ( 2q \right)$ <br>
-                $\begin{align}q &=2qx+4q \\-3q &=2qx \\x &=\dfrac{-3q}{2q} \\ \end{align}$</p>
-            </div>
-
-            <div class="pembahasan">
-                <b>8. Jawaban: A</b><br>
-                Untuk menjawab soal ini bisa juga kita kerjakan dengan mencari terlebih dahulu $f\left ( x \right)$ lalu kita akan dapat $f^{-1}\left ( x \right)$ dan $f^{-1}\left ( 2 \right)$.<br>
-                Alternatif lain kita bisa sedikit berkreasi dengan memakai sifat Jika $f\left ( a \right )=b$ maka $f^{-1}\left ( b \right )=a$.<br>
-                Jika $f\left ( \dfrac{1}{x-1} \right)= \dfrac{x-6}{x+3}$, maka $f^{-1}\left ( \dfrac{x-6}{x+3} \right)= \dfrac{1}{x-1}$<br>
-                Kita misalkan $\dfrac{x-6}{x+3}=-2$ karena kita mau menghitung $f^{-1}\left ( -2 \right)$ <br>
-                $\begin{align}x-6 &=-2x-6 \\-6+6 &=-3x \\x &=0 \\\hline f^{-1}\left ( \dfrac{x-6}{x+3} \right) &= \dfrac{1}{x-1} \\f^{-1}\left ( -2 \right) &= \dfrac{1}{0-1} \\f^{-1}\left ( -2 \right) &= \dfrac{1}{-1}=-1 \end{align}$
-            </div>
-
-            <div class="pembahasan">
-                <b>9. Jawaban: B</b><br>
-                $\begin{align}f \cdot g & = x^{2}-1 \cdot \dfrac{x-2}{x+1} \\& = (x-1)(x+1) \cdot \dfrac{x-2}{x+1} \\& = \dfrac{(x-2)(x-1)(x+1)}{x+1} \\\end{align}$<br>
-                Himpunan daerah asal sebuah fungsi adalah himpunan daerah asal (domain) agar fungsi mempunyai hasil (range) real.<br>
-                Dari bentuk diatas $f \cdot g$ adalah $\dfrac{(x-2)(x-1)(x+1)}{x+1}$, sehingga agar fungsi $f \cdot g$ mempunyai hasil real, maka domain harus $\left \{ x|x \neq -1 \right \}$. Karena saat $x=-1$ nilai $f \cdot g$ adalah tak tentu.
-            </div>
-
-            <div class="pembahasan">
-                <b>10. Jawaban: A</b><br>
-                $\begin{align}(f \circ g)(x) & = f \left( g(x) \right) \\& = 1-\left( g(x) \right)^{2} \\& = 1-\left( \sqrt{5-x} \right)^{2} \\& = 1-(5-x) \\& = x-4\end{align}$<br>
-                Fungsi $(f \circ g)(x)=x-4$ adalah fungsi linear (garis lurus), sehingga untuk himpunan daerah asal $(x)$ yang tidak dibatasi maka daerah hasil $(y)$ merupakan himpunan tak hingga.
-            </div>
-
-            <div class="pembahasan">
-                <b>11. Jawaban: B</b><br>
-                $ \begin{align} 
-                (fog)(x) & = f \left( g(x) \right) \\& = 3g(x)+2 \\& = 3 \left( x^{2}-x+3 \right) +2 \\& = 3 x^{2} - 3x + 9 +2 \\& = 3 x^{2} - 3x + 11
-                \end{align} $
-            </div>
-
-            <div class="pembahasan">
-                <b>12. Jawaban: A</b><br>
-                Daerah asal fungsi maksudnya adalah batasan nilai $x$ agar fungsi mempunyai nilai Real.<br><br>
-                Fungsi pada soal terdiri atas dua fungsi yaitu, fungsi pecahan dan fungsi bentuk akar.<br><br>
-                Untuk fungsi pecahan agar mempunyai nilai Real syaratnya adalah penyebut tidak sama dengan nol.<br>
-                $ \begin{align} 2x-20 & \neq 0 \\2x & \neq 20 \\x & \neq 10 \end{align} $<br><br>
-                Untuk fungsi bentuk akar, agar mempunyai nilai Real syaratnya adalah yang didalam akar harus lebih dari atau sama dengan nol.<br>
-                $ \begin{align} 3x-18 & \geq 0 \\3x & \geq 18 \\x & \geq \frac{18}{3} \\ x & \geq 6 \end{align} $
-            </div>
-
-            <div class="pembahasan">
-                <b>13. Jawaban: D</b><br>
-                Invers fungsi $f(x)$;<br>
-                $f (x)=\frac{ax+b}{cx+d}$ maka $f^{-1}\left ( x \right )=\frac{-dx+b}{cx-a}$<br>
-                $ \begin{align}
-                f(x) & =\frac{2-3x}{6x-5} \\y & =\frac{2-3x}{6x-5} \\y(6x-5) & = 2-3x \\6xy-5y & = 2-3x \\6xy+3x & = 2+5y \\x(6y+3) & = 2+5y \\x & = \frac{2+5y}{6y+3} \\f^{-1}(x) & = \frac{2+5x}{6x+3}
-                \end{align} $
-            </div>
-
-            <div class="pembahasan">
-                <b>14. Jawaban: D</b><br>
-                Berdasarkan informasi pada soal, diketahui $(gof)(x)=x-3$ maka<br>
-                $g \left (f(x) \right )=x-3$<br>
-                $g \left (2x-1 \right )=\frac{1}{2}(2x-1)+\frac{1}{2}-3$<br>
-                $g \left (2x-1 \right )=\frac{1}{2}(2x-1)-\frac{5}{2}$<br>
-                $g \left (a \right )=\frac{1}{2}(a)-\frac{5}{2}$<br>
-                invers fungsi $g(a)$ adalah $g^{-1}(a)$ salah satu cara menentukan $g^{-1}(a)$ yaitu:<br>
-                $y=\frac{1}{2}(a)-\frac{5}{2}$<br>
-                $2y=a-5$<br>
-                $2y+5=a$<br>
-                $g^{-1}(a)=2a+5$<br>
-                $g^{-1}(-2)=2(-2)+5=1$<br>
-            </div>
-
-            <div class="pembahasan">
-                <b>15. Jawaban: C</b><br>
-                Dari $(f \circ g)(x)$ dapat kita peroleh $f(x)$, dengan mensubtitusi $g^{-1}(x)$ ke $(f \circ g)(x)$.
-                <p>Pertama kita coba cari $g^{-1}(x)$ dari $g(x)=\dfrac{1}{\sqrt{x-1}}$.<br>
-                $\begin{align}y & = \dfrac{1}{\sqrt{x-1}} \\y^{2} & = \dfrac{1}{x-1} \\x-1 & = \dfrac{1}{y^{2}} \\x & = \dfrac{1}{y^{2}} +1 \\g^{-1}(x) & = \dfrac{1}{x^{2}} +1 \\g^{-1}(x) & = \dfrac{1+x^{2}}{x^{2}} \end{align}$</p>
-                <p>Berikut kita cari $f(x)$ dengan mensubstitusi $g^{-1}(x)$ ke $(f \circ g)(x)$ <br>
-                $\begin{align}f(x) & = (f \circ g)(g^{-1}(x)) \\& = \dfrac{2\left (g^{-1}(x) \right )-1}{\left (g^{-1}(x) \right )-1} \\& = \dfrac{2\left (\dfrac{1+x^{2}}{x^{2}} \right )-1}{\left (\dfrac{1+x^{2}}{x^{2}} \right )-1} \\& = \dfrac{\dfrac{2+2x^{2}}{x^{2}}-\dfrac{x^{2}}{x^{2}}}{\dfrac{1+x^{2}}{x^{2}}-\dfrac{ x^{2}}{x^{2}}} \\& = \dfrac{2+x^{2}}{1} \\& = 2+x^{2}  \end{align}$</p><br>
-                Diketahui $1 \leq f(x) \leq 6$, maka:<br>
-                $1 \leq 2+x^{2} \leq 6$<br>
-                $1-2 \leq x^{2} \leq 6-2$<br>
-                $-1 \leq x^{2} \leq 4$<br><br>
-                Untuk $x^{2} \leq 4$<br>
-                $\begin{align}x^{2}-4 & \leq 0 \\(x+2)(x-2) & \leq 0 \\-2 \leq x \leq 2 & \end{align}$<br><br>
-                Untuk $x^{2} \geq -1$ selalu benar untuk setiap $x$ bilangan real.<br><br>
-                Irisan $-2 \leq x \leq 2$ dan $x \in \mathbb{R}$ adalah $-2 \leq x \leq 2$
-            </div>
-
-            <div class="pembahasan">
-                <b>16. Jawaban: C</b><br>
-                $\begin{align}f(x)g(x) & = \dfrac{1}{(x-1)^{2}} \times \dfrac{1}{x-2} \\& = \dfrac{1}{(x-1)^{2}(x-2)} \end{align}$<br><br>
-                $\begin{align}(f \circ g)(x) & = f \left( g(x) \right) \\& = \dfrac{1}{\left (\dfrac{1}{g(x)}-1 \right )^{2}} \\& = \dfrac{1}{\left (\dfrac{1}{x-2}-1 \right )^{2}} \\& = \dfrac{1}{\left (\dfrac{1}{x-2}-\dfrac{x-2}{x-2} \right )^{2}} \\& = \dfrac{1}{\left (\dfrac{2-x}{x-2} \right )^{2}} \\& = \dfrac{1}{\left (\dfrac{-(x-2)}{x-2} \right )^{2}} \\& = \dfrac{1}{\left (-1 \right )^{2}}=1\end{align}$<br><br>
-                $\begin{align}\dfrac{f(x)g(x)}{(f \circ g)(x)} & \lt 0 \\\dfrac{\dfrac{1}{(x-1)^{2}(x-2)}}{1} & \lt 0 \\\dfrac{1}{(x-1)^{2}(x-2)} & \lt 0 \\(x-1)^{2}(x-2) & \lt 0 \\x \lt 1\ \text{atau}\ &\ 1 \lt x \lt 2 \end{align}$
-            </div>
-
-            <div class="pembahasan">
-                <b>17. Jawaban: E</b><br>
-                Dari $g(x+1)=x-3$ dapat kita peroleh $g(x)$ dan $g^{-1}(x)$  yaitu<br>
-                $\begin{align}g(x+1) & = x-3 \\g(x+1)& = x+1-4 \\g(a)& = a-4 \\g(x)& = x-4 \\g^{-1}(x)& = x+4 \\g^{-1}(3)& = 3+4=7\end{align}$<br><br>
-                Dari $f \left( g(x) \right)=2x-1$ dapat kita peroleh $f(x)$ dan $f^{-1}(x)$  yaitu<br>
-                $\begin{align}f \left( g(x) \right) & = 2x-1 \\f ( x-4) & = 2x-1 \\f ( x-4) & = 2(x-4)+8-1 \\f ( x-4) & = 2(x-4)+7 \\f(a) & = 2a+7 \\f(x) & = 2x+7 \\f^{-1}(x)& = \dfrac{x-7}{2} \\f^{-1}(3)& = \dfrac{3-7}{2}=-2\end{align}$<br><br>
-                $f^{-1}(3) \cdot g^{-1}(3)= -2 \times 7=-14$
-            </div>
-
-            <div class="pembahasan">
-                <b>18. Jawaban: D</b><br>
-                Dari $g(x+2)=x-4$ dapat kita peroleh $g(x)$ dan $g^{-1}(x)$  yaitu<br>
-                $\begin{align}g(x+2) & = x-4 \\g(x+2)& = x+2-6 \\g(a)& = a-6 \\g(x)& = x-6 \\g^{-1}(x)& = x+6 \\g^{-1}(2)& = 2+6=8\end{align}$<br><br>
-                Dari $f \left( g(x) \right)=x+1$ dapat kita peroleh $f(x)$ dan $f^{-1}(x)$  yaitu<br>
-                $\begin{align}f \left( g(x) \right) & = x+1 \\f ( x-6) & = x+1 \\f ( x-6) & = x-6+7 \\f(a) & = a+7 \\f(x) & = x+7 \\f^{-1}(x)& = x-7 \\f^{-1}(2)& = 2-7=-5\end{align}$<br><br>
-                $f^{-1}(2) + g^{-1}(2)= -5 + 8=3$
-            </div>
-
-            <div class="pembahasan">
-                <b>19. Jawaban: D</b><br>
-                $\begin{align}(g \circ h)(x) & = g \left ( h(x) \right ) \\& = \dfrac{-ah(x)-3}{-h(x)-4} \\& = \dfrac{-a \left(\dfrac{4x-3}{-x+a} \right)-3}{-\left( \dfrac{4x-3}{-x+a}\right)-4} \\& = \dfrac{ \dfrac{-4ax+3a}{-x+a} -3}{ \dfrac{-4x+3}{-x+a}-4} \\& = \dfrac{ \dfrac{-4ax+3a}{-x+a} - 3 \left( \dfrac{-x+a}{-x+a} \right)}{ \dfrac{-4x+3}{-x+a}-4 \left( \dfrac{-x+a}{-x+a} \right)} \\& = \dfrac{ -4ax+3a + 3x-3a }{ -4x+3 +4x-4a } \\& = \dfrac{ -4ax+ 3x }{ 3 -4a } \\& = \dfrac{ x(3-4a ) }{ 3 -4a } \\& = x\end{align}$<br>
-                Karena $(g \circ h)(x) = x$ maka $g(x)$ dan $h(x)$ saling invers, sehingga $(g \circ h)(x) = x$ dan $(g \circ h)(3) = 3$
-            </div>
-
-            <div class="pembahasan">
-                <b>20. Jawaban: E</b><br>
+                <b>85. Jawaban: B</b><br>
+                Dari informasi pada soal, dari angka-angka $2,3,5,7,$ dan $9$ akan disusun bilangan yang terdiri dari $4$ angka tanpa pengulangan.
+                <p>Banyak bilangan yang terbentuk dengan nilai kurang dari $4000$ dapat kita hitung dengan memilih angka pertama yang mungkin yaitu $2,3$:<br>
+                $\begin{array}{c|c|c|c|c|c|cc} k_{1} & k_{2} & k_{3} & k_{4} \\\hline (2) & (4) & (3) & (2) \end{array} $</p>
                 <ul>
-                    <li>Untuk point $(1)$ pernyataan $f(-1)=11$ adalah <b>BENAR</b><br>
-                        $\begin{align}f(x+1) & = \dfrac{2x-7}{x+1} \\f(x+1) & = \dfrac{2(x+1)-9}{x+1} \\f(a) & = \dfrac{2(a)-9}{a} \\f(x) & = \dfrac{2x-9}{x} \\f(-1) & = \dfrac{2(-1)-9}{ -1 }=11\end{align}$</li>
-                    <li>Untuk point $(2)$ pernyataan $f^{-1}(-1)=3$ adalah <b>BENAR</b><br>
-                        $\begin{align}f(x) & = \dfrac{2x-9}{x} \\y & = \dfrac{2x-9}{x} \\yx & = 2x-9 \\yx-2x & = -9 \\x & = \dfrac{-9}{y-2} \\f^{-1}(x) & = \dfrac{-9}{x-2} \\f^{-1}(-1) & = \dfrac{-9}{-1-2}=3\end{align}$</li>
-                    <li>Untuk point $(3)$ pernyataan $(f \circ f)^{-1}(-1)=-9$ adalah <b>BENAR</b><br>
-                        $\begin{align}f(x) & = \dfrac{2x-9}{x} \\(f \circ f)^{-1}(-1) & = f^{-1} \left( f^{-1}(-1) \right) \\& = f^{-1} \left( 3 \right) \\& = \dfrac{-9}{3-2} \\& = \dfrac{-9}{1}=-9\end{align}$</li>
-                    <li>Untuk point $(4)$ pernyataan $\dfrac{1}{f^{-1}(-2)}=\dfrac{4}{9}$ adalah <b>BENAR</b><br>
-                        $\begin{align}f^{-1}(x) & = \dfrac{-9}{x-2} \\f^{-1}(-2) & = \dfrac{-9}{-2-2} \\& = \dfrac{-9}{-4}=\dfrac{ 9}{ 4} \end{align}$</li>
+                    <li>$k_{1}$ ada $2$ angka yang mungkin yaitu $2,3$, karena bilangan yang diharapkan terjadi adalah kurang dari $4000$.</li>
+                    <li>$k_{2}$ ada $5$ angka yang mungkin, tetapi karena satu angka sudah dipakai sebelumnya, sehingga tinggal $4$ angka yang bisa dipakai dari $2,3,5,7,9$</li>
+                    <li>$k_{3}$ ada $5$ angka yang mungkin, tetapi karena dua angka sudah dipakai sebelumnya, sehingga tinggal $3$ angka yang bisa dipakai dari $2,3,5,7,9$</li>
+                    <li>$k_{4}$ ada $5$ angka yang mungkin, tetapi karena tiga angka sudah dipakai sebelumnya, sehingga tinggal $2$ angka yang bisa dipakai dari $2,3,5,7,9$</li>
                 </ul>
+                <p>Banyak kemungkinan bilangan adalah $2 \times 4 \times 3 \times 2 = 48$</p>
             </div>
 
             <div class="pembahasan">
-                <b>21. Jawaban: D</b><br>
-                $\begin{align}\left ( g \circ h \right )(x) &= x-2 \\g\left ( h(x) \right ) &= x-2 \\\dfrac{5h(x)}{h(x)+1} &= x-2 \\5h(x) &= \left( x-2 \right)\left( h(x)+1 \right) \\5h(x) &= xh(x)-2h(x) +x-2 \\7h(x)-xh(x) &= x-2 \\h(x) \left( 7-x \right) &= x-2 \\h(x) &= \dfrac{x-2}{\left( 7-x \right)} \\\hline \left ( h \circ f \right )(x) &= h\left ( f(x) \right ) \\&= \dfrac{f(x)-2}{\left( 7-f(x) \right)} \\&= \dfrac{2x-1-2}{\left( 7- (2x-1) \right)} \\&= \dfrac{2x-3}{ 7-2x+1 } \\&= \dfrac{2x-3}{ 8-2x } \end{align}$
+                <b>86. Jawaban: C</b><br>
+                Dari informasi pada soal, disampaikan akan disusun bilangan genap di antara $20.000$ dan $70.000$ dengan tidak ada digit berulang.
+                <p>Angka yang dapat kita gunakan untuk membentuk bilangan adalah $0,1,2,3,4,5,6,7,8,9$<br>
+                Untuk menyusun angka diantara $20.000$ dan $70.000$ sehingga bilangan yang akan kita susun adalah bilangan yang terdiri dari $5$ angka.</p>
+                <p>Kemungkinan pertama jika satuannya adalah $0,8$ maka angka di depan yang mungkin adalah $2,3,4,5,6$ dan angka yang lainnya bebas.<br>
+                $\begin{array}{c|c|c|c|cc} \text{A}_{1} & \text{A}_{2} & \text{A}_{3} & \text{A}_{4} & \text{A}_{5} \\\hline (5) & (8) & (7) & (6) & (2) \\\end{array} $<br>
+                Banyak bilangan yang dapat disusun adalah $5 \cdot 8 \cdot 7 \cdot 6 \cdot 2 = 3.360$</p>
+                <p>Kemungkinan kedua jika satuannya adalah $2$ maka angka di depan yang mungkin adalah $3,4,5,6$ dan angka yang lainnya bebas.<br>
+                $\begin{array}{c|c|c|c|cc} \text{A}_{1} & \text{A}_{2} & \text{A}_{3} & \text{A}_{4} & \text{A}_{5} \\\hline (4) & (8) & (7) & (6) & (1) \\\end{array} $<br>
+                Banyak bilangan yang dapat disusun adalah $4 \cdot 8 \cdot 7 \cdot 6 \cdot 1 = 1.344$<br>
+                Kemungkinan ini dapat terjadi sebanyak $3$ kali yaitu saat satuannya $2,4,6$, sehingga banyak kemungkinan susunan angka adalah $3 \times 1.344 = 4.032$</p>
+                <p>Dari kemungkinan pertama dan kedua, total kemungkinan susunan adalah $4.032+3.360=7.392$.</p>
             </div>
 
             <div class="pembahasan">
-                <b>22. Jawaban: E</b><br>
-                $\begin{align}f(x)&= 3^{x-1} \\\hline y &= 3^{x-1} \\y &= 3^{x} \cdot 3^{-1} \\3y &= 3^{x} \\x &= {}^3\!\log 3y \\\hline f^{-1}(x) &= {}^3\!\log 3x \\f^{-1}(81) &= {}^3\!\log 3(81) \\&= {}^3\!\log 243 \\&= {}^3\!\log 3^{5} \\&= 5 \end{align}$
+                <b>87. Jawaban: C</b><br>
+                Dari informasi pada soal, disampaikan akan disusun $10$ kelereng identik ke dalam $5$ kotak dengan setiap kotak memuat paling sedikit $1$ kelereng.
+                <p>Untuk menyusun $10$ kelereng ke dalam $5$ kotak, maka ada beberapa susunan yang mungkin terjadi.</p>
+                <ol>
+                    <li>Kemungkinan $6,1,1,1,1$, sehingga banyak susunan yang mungkin adalah:<br>
+                        $\begin{align} P_{4,1}^{5} & = \dfrac{5!}{4! \cdot 1!} = 5 \end{align}$</li>
+                    <li>Kemungkinan $5,2,1,1,1$, sehingga banyak susunan yang mungkin adalah:<br>
+                        $\begin{align} P_{3,1,1}^{5} & = \dfrac{5!}{3! \cdot 1! \cdot 1!} = 20 \end{align}$</li>
+                    <li>Kemungkinan $4,3,1,1,1$, sehingga banyak susunan yang mungkin adalah:<br>
+                        $\begin{align} P_{3,1,1}^{5} & = \dfrac{5!}{3! \cdot 1! \cdot 1!} = 20 \end{align}$</li>
+                    <li>Kemungkinan $4,2,2,1,1$, sehingga banyak susunan yang mungkin adalah:<br>
+                        $\begin{align} P_{2,2,1}^{5} & = \dfrac{5!}{2! \cdot 2! \cdot 1!} = 30 \end{align}$</li>
+                    <li>Kemungkinan $3,3,2,1,1$, sehingga banyak susunan yang mungkin adalah:<br>
+                        $\begin{align} P_{2,2,1}^{5} & = \dfrac{5!}{2! \cdot 2! \cdot 1!} = 30 \end{align}$</li>
+                    <li>Kemungkinan $3,2,2,2,1$, sehingga banyak susunan yang mungkin adalah:<br>
+                        $\begin{align} P_{3,1,1}^{5} & = \dfrac{5!}{3! \cdot 1! \cdot 1!} = 20 \end{align}$</li>
+                    <li>Kemungkinan $2,2,2,2,2$, sehingga banyak susunan yang mungkin adalah:<br>
+                        $\begin{align} P_{5}^{5} & = \dfrac{5!}{5!} = 1 \end{align}$</li>
+                </ol>
+                <p>Dari semua kemungkinan yang ada kita peroleh total kemungkinan adalah $1+20 \times 3+30 \times 2+5=126$</p>
             </div>
 
             <div class="pembahasan">
-                <b>23. Jawaban: A</b><br>
-                Domain (daerah asal) fungsi $f(x)$ agar $f(x)$ terdefinisi maksudnya adalah batasan nilai $x$ agar fungsi $f(x)$ mempunyai nilai real atau sering juga disebut hanya "agar fungsi $f(x)$ mempunyai penyelesaian".<br><br>
-                Fungsi pada soal terdiri atas dua fungsi yaitu, fungsi bentuk akar dan fungsi pecahan.<br><br>
-                Untuk fungsi pecahan $f(x)=\dfrac{u(x)}{v(x)}$, agar fungsi pecahan terdefinisi (mempunyai nilai real) syaratnya adalah penyebut tidak sama dengan nol $v(x) \neq 0$.<br>
-                $ \begin{align}x+2 & \neq 0 \\x & \neq -2\end{align} $<br><br>
-                Untuk fungsi bentuk akar $f(x)=\sqrt{u(x)}$, agar fungsi terdefinisi syaratnya adalah yang di dalam akar harus lebih dari atau sama dengan nol $u(x) \geq 0$.<br>
-                $ \begin{align}\dfrac{x^{2}-3x+2}{x+2} & \geq 0 \\\dfrac{(x-2)(x-1)}{x+2} & \geq 0\end{align} $<br>
-                Himpunan penyelesaian $\dfrac{(x-2)(x-1)}{x+2} \geq 0$ adalah $-2 \lt x \leq 1$ atau $x \geq 2$.<br><br>
-                Batasan nilai $x$ yang memenuhi adalah irisan dari pertidaksamaan $-2 \leq x \leq 1$, $x \geq 2$ dan $x \neq -2$ yaitu: $\left \{x | -2 \lt x \leq 1\ \text{atau}\ x \geq 2,\ x \in \mathbb{R} \right \}$
+                <b>88. Jawaban: E</b><br>
+                Dari informasi pada soal, disampaikan akan pilih $5$ es krim dengan $3$ rasa berbeda dari $6$ es krim rasa berbeda.
+                <p>Untuk memilih $5$ es krim dengan $3$ rasa berbeda, ada beberapa cara yang mungkin terjadi.</p>
+                <ol>
+                    <li>Kemungkinan pertama: ada $3$ rasa yang berbeda dan ada $2$ rasa yang berbeda, sehingga banyak susunan yang mungkin adalah:<br>
+                        $\begin{align} C_{3}^{6} \cdot C_{1}^{3} \cdot C_{1}^{2} & = \dfrac{6!}{3! ( 6-3 )!} \cdot ( 3 ) \cdot ( 2 ) \\& = ( 20 ) \cdot ( 3 ) \cdot ( 2 ) \\& = 60 \end{align}$</li>
+                    <li>Kemungkinan kedua: ada $3$ rasa yang berbeda dan ada $2$ rasa yang sama, sehingga banyak susunan yang mungkin adalah:<br>
+                        $\begin{align} C_{3}^{6} \cdot C_{2}^{3} & = \dfrac{6!}{3! ( 6-3 )!} \cdot \dfrac{3!}{2! ( 3-2 )!} \\& = ( 20 ) \cdot ( 3 ) \\& = 60 \end{align}$</li>
+                </ol>
+                <p>Dari semua kemungkinan yang ada kita peroleh total kemungkinan adalah $60+60 =120$</p>
             </div>
 
             <div class="pembahasan">
-                <b>24. Jawaban: C</b><br>
-                Berdasarkan informasi pada soal Fungsi Komposisi di atas, diketahui $(fog)(x)=x^{3}-4x$ maka:<br>
-                $ \begin{align} f \left ( g(x) \right ) & = x^{3}-4x \\f \left ( x-1 \right ) & = x^{3}-4x \\\hline \text{untuk}\ x=3 \\\hline f \left ( 3-1 \right ) & = 3^{3}-4(3) \\f \left ( 2 \right ) & = 27-12 \\& = 15 \\ \end{align} $
+                <b>89. Jawaban: A</b><br>
+                Dari informasi pada soal disampaikan $4$ buku matematika, $3$ buku fisika, dan $2$ buku kimia sehingga buku-buku sejenis dalam satu kelompok.
+                <p>Kejadian yang diharapkan adalah kejadian susunan buku sehingga tiap buku mata pelajaran yang sama disusun secara berkelompok. Banyak susunan yang mungkin adalah:<br>
+                $\begin{array}{c|c|cc} \text{Matematika} & \text{Kimia} & \text{Fisika} \\\hline 4! & 2! & 3! \end{array} $<br>
+                Banyak susunan matematika, kimia, dan fisika dapat kita susun lagi sebanyak $3!$, sehingga total keseluruhan susunan adalah $\left( 4! \cdot 2! \cdot 3! \right) \cdot 3!=1.728$</p>
             </div>
 
             <div class="pembahasan">
-                <b>25. Jawaban: D</b><br>
-                Berdasarkan informasi pada soal Fungsi Invers di atas, diketahui $f(x)=\sqrt{5x+1}$ maka berlaku:<br>
-                $ \begin{align} y & = \sqrt{5x+1} \\y^{2} & = 5x+1 \\y^{2}-1 & = 5x \\\dfrac{y^{2}-1}{5} & = x \\\hline f^{-1}(x) &=\dfrac{x^{2}-1}{5} \\f^{-1}(3) &=\dfrac{3^{2}-1}{5} \\&=\dfrac{8}{5} \end{align} $
+                <b>90. Jawaban: B</b><br>
+                Dari informasi pada soal, $7$ orang akan duduk dalam satu baris yang terdiri dari tiga pria dan empat wanita akan duduk dalam satu baris.
+                <p>Kejadian yang diharapkan adalah cara mereka duduk sehingga yang berjenis kelamin sama tidak berdampingan dan Sinta selalu duduk di ujung.<br>
+                Untuk menghitung banyak kemungkinan ini kita kerjakan pertama adalah posisi duduk Sinta dan posisi wanita lalu posisi duduk pria.<br>
+                $\begin{array}{c|c|c|c|c|c|c|cc} \text{W}_{4} & \text{P}_{3} & \text{W}_{3} & \text{P}_{2} & \text{W}_{2} & \text{P}_{1} & \text{W}_{\text{Sinta}} \\\hline (3) & (3) & (2) & (2) & (1) & (1) & (1) \\\end{array} $<br>
+                Banyak posisi duduk adalah $3 \cdot 3 \cdot 2 \cdot 2 =36$</p>
             </div>
 
             <div class="pembahasan">
-                <b>26. Jawaban: A</b><br>
-                Agar sebuah $f(x)$ terdefinisi maksudnya adalah batasan nilai $x$ agar fungsi $f(x)$ mempunyai nilai real.<br><br>
-                Fungsi pada soal terdiri atas dua fungsi yaitu, fungsi bentuk akar dan fungsi pecahan.<br>
-                Penyebut pecahan adalah $y=x^{2}+x+12$ karena $a \gt 0$ dan $D \lt 0$ sehingga fungsi selalu bernilai positif (definit positif).<br><br>
-                Untuk fungsi bentuk akar, syaratnya adalah yang di dalam akar harus $\geq 0$. Karena penyebut definit positif, maka kita cukup mencari batasan untuk pembilang $ x^{2}-8x+5 \geq 0$.<br>
-                $ \begin{align}
-                x^{2}-8x+5 & \geq 0 \\x_{1,2} & = \dfrac{-b\pm \sqrt{b^{2}-4ac}}{2a} \\& = \dfrac{8 \pm \sqrt{64-20}}{2} \\& = \dfrac{8 \pm \sqrt{44}}{2} \\& = \dfrac{8 \pm 2 \sqrt{11}}{2} \\x_{1}& = 4 + \sqrt{11} \\x_{2}& = 4 - \sqrt{11}
-                \end{align} $<br>
-                Himpunan penyelesaian pertidaksamaan kuadrat adalah $x \leq 4 - \sqrt{11}$ atau $x \geq 4 + \sqrt{11}$, sehingga nilai $a+b= 4 - \sqrt{11}+4 + \sqrt{11}=8$.
+                <b>91. Jawaban: C</b><br>
+                Dari informasi pada soal, akan disusun bilangan yang terdiri dari tiga angka dengan syarat angka pertama dan terakhir mempunyai selisih $3$ dan ada angka yang sama.
+                <p>Untuk menyusun bilangan yang diharapkan, kemungkinan pertama adalah $aab$, dimana $\left| b-a \right| =3$, banyak bilangan yang mungkin adalah:<br>
+                $\begin{array}{c|c|c|cc} \text{a} & \text{a} & \text{b} & \text{Banyak Bilangan} \\\hline (1) & (1) & (4) & 1 \cdot 1 \cdot 1=1 \\(2) & (2) & (5) & 1 \cdot 1 \cdot 1=1 \\(3) & (3) & (0,6) & 1 \cdot 1 \cdot 2=2 \\(4) & (4) & (1,7) & 1 \cdot 1 \cdot 2=2 \\(5) & (5) & (2,8) & 1 \cdot 1 \cdot 2=2 \\(6) & (6) & (3,9) & 1 \cdot 1 \cdot 2=2 \\(7) & (7) & (4) & 1 \cdot 1 \cdot 1=1 \\(8) & (8) & (5) & 1 \cdot 1 \cdot 1=1 \\(9) & (9) & (6) & 1 \cdot 1 \cdot 1=1 \\\end{array} $<br>
+                Banyak bilangan yang mungkin adalah $13$</p>
+                <p>Kemungkinan kedua adalah $baa$, dimana $\left| b-a \right| =3$, banyak bilangan yang mungkin adalah sama seperti banyak susunan $aab$ hanya untuk bilangan $033$ tidak ikut kita ganti dengan $300$ sehingga banyak susunan untuk $baa$ adalah $13$.</p>
+                <p>Total bilangan ratusan dengan angka pertama dan terakhir mempunyai selisih $3$ dan ada angka yang sama adalah $13+13=26$</p>
             </div>
 
             <div class="pembahasan">
-                <b>27. Jawaban: C</b><br>
-                Kurva $y=x^{2}-2x-3$ berbentuk parabola terbuka ke atas sehingga titik puncak $(x_{p},y_{p})$ adalah pembuat minimum.<br>
-                $x_{p}=-\dfrac{b}{2a}=-\dfrac{-2}{2(1)}=1$ sehingga $y_{p}=(1)^{2}-2(1)-3=-4$<br><br>
-                Kita uji nilai domain $x$ dari rentang nilai domain yang diinginkan pada soal:<br>
+                <b>92. Jawaban: A</b><br>
+                Dari informasi pada soal, akan disusun bilangan yang terdiri dari tiga angka dengan syarat angka pertama dan terakhir mempunyai selisih $3$ dan tidak ada angka yang sama.
+                <p>Untuk menyusun bilangan yang diharapkan, kita misalkan bilangan adalah $abc$, dimana $\left| c-a \right| =3$, banyak bilangan yang mungkin adalah:<br>
+                $\begin{array}{c|c|c|cc} \text{a} & \text{b} & \text{c} & \text{Banyak Bilangan} \\\hline (1) & (0-9) & (4) & 1 \cdot 8 \cdot 1=8 \\(2) & (0-9) & (5) & 1 \cdot 8 \cdot 1=8 \\(3) & (0-9) & (0,6) & 1 \cdot 8 \cdot 2=16 \\(4) & (0-9) & (1,7) & 1 \cdot 8 \cdot 2=16 \\(5) & (0-9) & (2,8) & 1 \cdot 8 \cdot 2=16 \\(6) & (0-9) & (3,9) & 1 \cdot 8 \cdot 2=16 \\(7) & (0-9) & (4) & 1 \cdot 8 \cdot 1=8 \\(8) & (0-9) & (5) & 1 \cdot 8 \cdot 1=8 \\(9) & (0-9) & (6) & 1 \cdot 8 \cdot 1=8 \\\end{array} $<br>
+                Banyak angka pada $b$ adalah $10$ yaitu angka dari $0-9$. Tetapi karena angka tidak boleh ada yang sama maka banyak angka yang bisa dipakai pada $b$ tinggal $8$ sebab dua angka sudah dipakai pada $a$ dan $c$.<br>
+                Banyak bilangan yang mungkin keseluruhan adalah $104$</p>
+            </div>
+
+            <div class="pembahasan">
+                <b>93. Jawaban: D</b><br>
+                Dari informasi pada soal, akan disusun bilangan yang terdiri dari tiga angka dengan syarat angka pertama dan terakhir mempunyai selisih $1\ \text{atau}\ 3$.
+                <p>Untuk menyusun bilangan yang diharapkan, misalkan bilangan adalah $abc$ dimana $\left| c-a \right| =1$ atau $\left| c-a \right| =3$, banyak bilangan yang mungkin adalah:<br>
+                $\begin{array}{c|c|c|cc} \text{a} & \text{b} & \text{c} & \text{Banyak Bilangan} \\\hline (1) & (0-9) & (0,2,4) & 1 \cdot 10 \cdot 3=30 \\(2) & (0-9) & (1,3,5) & 1 \cdot 10 \cdot 3=30 \\(3) & (0-9) & (0,2,4,6) & 1 \cdot 10 \cdot 4=40 \\(4) & (0-9) & (1,3,5,7) & 1 \cdot 10 \cdot 4=40 \\(5) & (0-9) & (2,4,6,8) & 1 \cdot 10 \cdot 4=40 \\(6) & (0-9) & (3,5,7,9) & 1 \cdot 10 \cdot 4=40 \\(7) & (0-9) & (4,6,8) & 1 \cdot 10 \cdot 3=30 \\(8) & (0-9) & (5,7,9) & 1 \cdot 10 \cdot 3=30 \\(9) & (0-9) & (6,8) & 1 \cdot 10 \cdot 2=20\end{array} $<br>
+                Banyak bilangan yang mungkin keseluruhan adalah $300$</p>
+            </div>
+
+            <div class="pembahasan">
+                <b>94. Jawaban: B</b><br>
+                Dari informasi pada soal, akan disusun bilangan yang terdiri dari tiga angka dengan syarat angka pertama dan kedua mempunyai selisih $2\ \text{atau}\ 3$.
+                <p>Untuk menyusun bilangan yang diharapkan, misalkan bilangan adalah $abc$ dimana $\left| b-a \right| =2$ atau $\left| b-a \right| =3$, banyak bilangan yang mungkin adalah:<br>
+                $\begin{array}{c|c|c|cc} \text{a} & \text{b} & \text{c} & \text{Banyak Bilangan} \\\hline (1) & (3,4) & (0-9) & 1 \cdot 2 \cdot 10=20 \\(2) & (0,4,5) & (0-9) & 1 \cdot 3 \cdot 10=30 \\(3) & (0,1,5,6) & (0-9) & 1 \cdot 4 \cdot 10=40 \\(4) & (1,2,6,7) & (0-9) & 1 \cdot 4 \cdot 10=40 \\(5) & (2,3,7,8) & (0-9) & 1 \cdot 4 \cdot 10=40 \\(6) & (3,4,8,9) & (0-9) & 1 \cdot 4 \cdot 10=40 \\(7) & (4,5,9) & (0-9) & 1 \cdot 3 \cdot 10=30 \\(8) & (5,6) & (0-9) & 1 \cdot 2 \cdot 10=20 \\(9) & (6,7) & (0-9) & 1 \cdot 2 \cdot 10=20 \\\end{array} $<br>
+                Banyak bilangan yang mungkin keseluruhan adalah $280$</p>
+            </div>
+
+            <div class="pembahasan">
+                <b>95. Jawaban: D</b><br>
+                Enam orang berpergian dengan dua mobil milik dua orang diantara mereka. Karena mobil harus dikemudikan pemilikinya maka yang disusun ke mobil adalah tinggal $4$ orang, pembagian keempat orang tersebut pada kedua mobil adalah sebagai berikut:
                 <ul>
-                    <li>Untuk domain $x=-1$ maka hasil $y=(-1)^{2}-2(-1)-3=0$</li>
-                    <li>Untuk domain $x=1$ maka hasil $y=(1)^{2}-2(1)-3=-4$</li>
-                    <li>Untuk domain $x=4$ maka hasil $y=(4)^{2}-2(4)-3=5$</li>
+                    <li>Dipilih $4$ orang dari $4$ orang ke mobil $\text{A}$ dan sisanya (dipilih $0$ orang dari $0$ orang) ke mobil $\text{B}$. <br>Banyak susunan pada kasus ini adalah $C_{4}^{4} \cdot C_{0}^{0} =1 \cdot 1= 1$</li>
+                    <li>dipilih $3$ orang dari $4$ orang ke mobil $\text{A}$ dan sisanya (dipilih $1$ orang dari $1$ orang) ke mobil $\text{B}$. <br>Banyak susunan pada kasus ini adalah $C_{3}^{4} \cdot C_{1}^{1} =4 \cdot 1= 4$</li>
+                    <li>dipilih $2$ orang dari $4$ orang ke mobil $\text{A}$ dan sisanya (dipilih $2$ orang dari $2$ orang) ke mobil $\text{B}$. <br>Banyak susunan pada kasus ini adalah $C_{2}^{4} \cdot C_{2}^{2} =6 \cdot 1= 6$</li>
+                    <li>dipilih $1$ orang dari $4$ orang ke mobil $\text{A}$ dan sisanya (dipilih $3$ orang dari $3$ orang) ke mobil $\text{B}$. <br>Banyak susunan pada kasus ini adalah $C_{1}^{4} \cdot C_{3}^{3} =4 \cdot 1= 4$</li>
+                    <li>dipilih $0$ orang dari $4$ orang ke mobil $\text{A}$ dan sisanya (dipilih $4$ orang dari $4$ orang) ke mobil $\text{B}$. <br>Banyak susunan pada kasus ini adalah $C_{0}^{4} \cdot C_{4}^{4} =1 \cdot 1= 1$</li>
                 </ul>
-                <p>Daerah hasil $y$ adalah berada pada rentang $-4 \leq y \leq 0 $ dan $0 \leq y \leq 5$ atau jika kita gabungkan menjadi $-4 \leq y \leq 5 $.</p>
+                Total banyak susunan penempatan orang pada kedua mobil adalah $1+4+6+4+1 =16$
             </div>
 
             <div class="pembahasan">
-                <b>28. Jawaban: B</b><br>
-                $ \begin{align}
-                (fog)(x) & = f \left( g(x) \right) \\& = \left[ g(x) \right]^{2}+g(x)+1 \\& = \left[ 2x-3 \right]^{2}+\left[ 2x-3 \right]+1 \\& = 4x^{2}-12x+9+2x-3+1 \\& = 4x^{2}-10x +7 
-                \end{align}$
-            </div>
-
-            <div class="pembahasan">
-                <b>29. Jawaban: A</b><br>
-                $ \begin{align}
-                (gof)(x) & = g \left( f(x) \right) \\& = \dfrac{f(x)}{3f(x)-2} \\& = \dfrac{2x+1}{3 (2x+1)-2} \\& = \dfrac{2x+1}{6x+3-2} \\& = \dfrac{2x+1}{6x+1}
-                \end{align}$<br>
-                Menentukan daerah asal fungsi $y$ adalah menentukan batasan nilai domain $x$ yang memenuhi agar fungsi $y$ mempunyai nilai real. Sehingga agar $\dfrac{2x+1}{6x+1}$ mempunyai hasil real maka $6x+1\neq 0$ atau $ x \neq -\dfrac{1}{6}$.
-            </div>
-
-            <div class="pembahasan">
-                <b>30. Jawaban: D</b><br>
-                Untuk membuat pakaian jadi melalui dua tahap dimana kain yang tersedia $100\ m^{2}$ sehingga dapat kita simpulkan:<br>
+                <b>96. Jawaban: B</b><br>
+                Enam orang berpergian dengan dua mobil milik dua orang diantara mereka. Karena mobil harus dikemudikan pemilikinya maka yang disusun ke mobil adalah tinggal $4$ orang, pembagian keempat orang tersebut pada kedua mobil adalah sebagai berikut:
                 <ul>
-                    <li>Tahap pertama pemotongan kain $f(x)=\dfrac{3}{4}x+5$, untuk $x=100$ kita peroleh $f(100)=\dfrac{3}{4}(100)+5=80$</li>
-                    <li>Tahap kedua penjahitan kain $g(x)=\dfrac{1}{2}x+6$, untuk $x=80$ kita peroleh $g(80)=\dfrac{1}{2}(80)+6=46$</li>
+                    <li>Dipilih $3$ orang dari $4$ orang ke mobil $\text{A}$ dan sisanya (dipilih $1$ orang dari $1$ orang) ke mobil $\text{B}$. <br>Banyak susunan pada kasus ini adalah $C_{3}^{4} \cdot C_{1}^{1} =4 \cdot 1= 4$</li>
+                    <li>Dipilih $2$ orang dari $4$ orang ke mobil $\text{A}$ dan sisanya (dipilih $2$ orang dari $2$ orang) ke mobil $\text{B}$. <br>Banyak susunan pada kasus ini adalah $C_{2}^{4} \cdot C_{2}^{2} =6 \cdot 1= 6$</li>
+                    <li>dipilih $1$ orang dari $4$ orang ke mobil $\text{A}$ dan sisanya (dipilih $3$ orang dari $3$ orang) ke mobil $\text{B}$. <br>Banyak susunan pada kasus ini adalah $C_{1}^{4} \cdot C_{3}^{3} =4 \cdot 1= 4$</li>
                 </ul>
+                Total banyak susunan penempatan orang pada kedua mobil adalah $4+6+4 =14$
             </div>
 
             <div class="pembahasan">
-                <b>31. Jawaban: B</b><br>
-                Dari fungsi $f(x)=\dfrac{9x+17}{x+2};\ x \neq -2$ dapat kita tentukan inversnya:<br>
-                $ \begin{align}
-                y\ & =\dfrac{9x+17}{x+2} \\y(x+2)\ & = 9x+17 \\xy +2y\ & = 9x+17 \\xy -9x \ & = -2y+17 \\x(y -9) \ & = -2y+17 \\x \ & =\dfrac{-2y+17}{(y -9)} \\f^{-1}(x)\ & =\dfrac{-2x+17}{x -9 } \\f^{-1}(10)\ & =\dfrac{-2(10)+17}{10 -9 } \\& =\dfrac{-3}{1 }=-3 
-                \end{align}$
+                <b>97. Jawaban: C</b><br>
+                Dari informasi pada soal, disampaikan akan disusun bilangan genap $4$ digit yang lebih dari $5000$ dengan tidak ada digit berulang.
+                <p>Angka yang dapat kita gunakan untuk membentuk bilangan adalah $0,1,2,3,4,5,6,7,8,9$<br>
+                Untuk menyusun bilangan genap $4$ digit yang lebih dari $5000$, ada beberapa kemungkinan yang dapat terjadi, antara lain:</p>
+                <p>Kemungkinan pertama satuannya $0,2,4$ sehingga angka pertama yang mungkin adalah $5,6,7,8,9$ dan angka yang lainnya bebas.<br>
+                $\begin{array}{c|c|c|cc} \text{A}_{1} & \text{A}_{2} & \text{A}_{3} & \text{A}_{4} \\\hline (5) & (8) & (7) & (3) \\\end{array} $<br>
+                Banyak bilangan yang dapat disusun adalah $5 \cdot 8 \cdot 7 \cdot 3 = 840$</p>
+                <p>Kemungkinan kedua satuannya $6$ sehingga angka pertama yang mungkin adalah $5,7,8,9$ dan angka yang lainnya bebas.<br>
+                $\begin{array}{c|c|c|cc} \text{A}_{1} & \text{A}_{2} & \text{A}_{3} & \text{A}_{4} \\\hline (4) & (8) & (7) & (1) \\\end{array} $<br>
+                Banyak bilangan yang dapat disusun adalah $4 \cdot 8 \cdot 7 \cdot 1 = 224$</p>
+                <p>Kemungkinan ketiga satuannya $8$ sehingga angka pertama yang mungkin adalah $5,6,7,9$ dan angka yang lainnya bebas.<br>
+                $\begin{array}{c|c|c|cc} \text{A}_{1} & \text{A}_{2} & \text{A}_{3} & \text{A}_{4} \\\hline (4) & (8) & (7) & (1) \\\end{array} $<br>
+                Banyak bilangan yang dapat disusun adalah $4 \cdot 8 \cdot 7 \cdot 1 = 224$</p>
+                <p>Dari kemungkinan pertama, kedua dan ketiga, total kemungkinan susunan adalah $840+224+224=1.288$</p>
             </div>
 
             <div class="pembahasan">
-                <b>32. Jawaban: E</b><br>
-                $\begin{align}f(x+1) &= x^{2}+2x+1 \\f(x+1) &= (x+1)^{2} \\f(x) &= (x)^{2} \\f(x-1) &= (x-1)^{2} \\\hline f(x) &= (x)^{2} \\f^{-1}(x) &= \pm \sqrt{x}\end{align}$<br><br>
-                $\begin{align}f^{-1}\left(x-1+f(x-1)\right) &= \pm \sqrt{x-1+f(x-1)} \\&= \pm \sqrt{x-1+(x-1)^{2}} \\&= \pm \sqrt{x-1+x^{2}-2x+1} \\&= \pm \sqrt{x^{2}-x} \\&= \pm \sqrt{x(x-1)} \end{align}$
+                <b>98. Jawaban: E</b><br>
+                Dari informasi pada soal, disampaikan tiga tenda dapat dapat menampung $4$ atau $3$ orang, sehingga tenda akan diisi oleh $3$ atau $4$ orang.
+                <p>Untuk membagi $3$ tenda kepada $10$ orang, maka kemungkinan yang dapat terjadi adalah $3-3-4$, $3-4-3$, atau $4-3-3$. Banyak caranya adalah:</p>
+                <ol>
+                    <li>Kemungkinan $3-3-4$, tenda $I$ diberi kepada $3$ orang dari $10$ dan tenda $II$ diberi kepada $3$ orang dari $7$, dan tenda $III$ diberi kepada $4$ orang dari $4$. Banyak cara pada susunan ini adalah:<br>
+                        $\begin{align} &\ \ \ C_{3}^{10} \cdot C_{3}^{7} \cdot C_{4}^{4} \\ & = \dfrac{10!}{3! \cdot (10-3)!} \cdot \dfrac{7!}{3! \cdot (7-3)!} \cdot 1 \\& = 120 \cdot 35 = 4.200 \end{align}$</li>
+                    <li>Kemungkinan $3-4-3$ tenda $I$ diberi kepada $3$ orang dari $10$ dan tenda $II$ diberi kepada $4$ orang dari $7$, dan tenda $III$ diberi kepada $3$ orang dari $3$. Banyak cara pada susunan ini adalah:<br>
+                        $\begin{align} &\ \ \ C_{3}^{10} \cdot C_{4}^{7} \cdot C_{3}^{3} \\ & = \dfrac{10!}{3! \cdot (10-3)!} \cdot \dfrac{7!}{4! \cdot (7-4)!} \cdot 1 \\& = 120 \cdot 35 = 4.200 \end{align}$</li>
+                    <li>Kemungkinan $4-3-3$, tenda $I$ diberi kepada $4$ orang dari $10$ dan tenda $II$ diberi kepada $4$ orang dari $7$, dan tenda $III$ diberi kepada $3$ orang dari $3$. Banyak cara pada susunan ini adalah:<br>
+                        $\begin{align} &\ \ \ C_{3}^{10} \cdot C_{4}^{7} \cdot C_{3}^{3} \\ & = \dfrac{10!}{3! \cdot (10-3)!} \cdot \dfrac{7!}{4! \cdot (7-4)!} \cdot 1 \\& = 120 \cdot 35 = 4.200 \end{align}$</li>
+                </ol>
+                <p>Dari semua kemungkinan yang terjadi, banyak cara membagikan tenda adalah $4.200+4.200+4.200=12.600$.</p>
             </div>
 
             <div class="pembahasan">
-                <b>33. Jawaban: A</b><br>
-                $\begin{align}(g \circ f)(x-1) &= 4x^{2}-14x+11 \\(g \circ f)(x-1) &= 4(x-1)^{2}-6(x-1)+1 \\(g \circ f)(x) &= 4x^{2}-6x+1 \\g \left( f(x) \right) &= 4x^{2}-6x+1 \\a \cdot f(x) +b &= 4x^{2}-6x+1 \\a \cdot \left( 2x^{2}-3x+1 \right) +b &= 4x^{2}-6x+1 \\2ax^{2}-3ax+a +b &= 4x^{2}-6x+1 \\\hline a &= 2 \\a+b &= 1 \\b &= -1 \\g(x) &= 2x-1\end{align}$<br><br>
-                $\begin{align}(f \circ g)(1) &= f \left( g(1) \right) = f \left( 1 \right) = 2(1)^{2}-3(1)+1 = 0 \end{align}$<br><br>
-                $\begin{align}\dfrac{f(x)}{g(x)} &= \dfrac{2x^{2}-3x+1}{2x-1} = \dfrac{(2x-1)(x-1)}{2x-1} = x-1 \end{align}$<br>
-                Sehingga pernyataan (1), (2), dan (3) BENAR.
+                <b>99. Jawaban: E</b><br>
+                Dari informasi pada soal, disampaikan akan disusun bilangan genap kurang dari $6000$ dengan tidak ada digit berulang.
+                <p>Angka yang dapat kita gunakan untuk membentuk bilangan adalah $1,2,3,4,5,6,7$<br>
+                Untuk menyusun bilangan genap $4$ digit yang kurang dari $6000$, ada beberapa kemungkinan yang dapat terjadi, antara lain:</p>
+                <p>Kemungkinan pertama, bilangan genap terdiri dari satu digit, banyak bilangan yang mungkin adalah $3$.</p>
+                <p>Kemungkinan kedua, bilangan genap terdiri dari dua digit, banyak bilangan yang mungkin adalah:<br>
+                $\begin{array}{c|cc} \text{A}_{1} & \text{A}_{2} \\\hline (6) & (3) \\\end{array} $<br>
+                Banyak bilangan yang dapat disusun adalah $6 \cdot 3 = 18$</p>
+                <p>Kemungkinan ketiga, bilangan genap terdiri dari tiga digit, banyak bilangan yang mungkin adalah:<br>
+                $\begin{array}{c|c|cc} \text{A}_{1} & \text{A}_{2} & \text{A}_{3} \\\hline (6) & (5) & (3) \\\end{array} $<br>
+                Banyak bilangan yang dapat disusun adalah $6 \cdot 5 \cdot 3 = 90$</p>
+                <p>Kemungkinan keempat, bilangan genap terdiri dari empat digit satuannya $6$, banyak bilangan yang mungkin adalah:<br>
+                $\begin{array}{c|c|c|cc} \text{A}_{1} & \text{A}_{2} & \text{A}_{3} & \text{A}_{4} \\\hline (5) & (5) & (4) & (1) \\\end{array} $<br>
+                Banyak bilangan yang dapat disusun adalah $5 \cdot 5 \cdot 4 = 100$</p>
+                <p>Kemungkinan kelima, bilangan genap terdiri dari empat digit satuannya $4$ atau $2$, banyak bilangan yang mungkin adalah:<br>
+                $\begin{array}{c|c|c|cc} \text{A}_{1} & \text{A}_{2} & \text{A}_{3} & \text{A}_{4} \\\hline (4) & (5) & (4) & (2) \\\end{array} $<br>
+                Banyak bilangan yang dapat disusun adalah $4 \cdot 5 \cdot 4 \cdot 2 = 160$</p>
+                <p>Dari semua kemungkinan, total kemungkinan bilangan yang dapat disusun adalah $3+18+90+100+160=371$.</p>
             </div>
 
             <div class="pembahasan">
-                <b>34. Jawaban: C</b><br>
-                $\begin{align}f \left ( 2x-4 \right ) &= 3x-7 \\f^{-1} \left ( 3x-7 \right ) &= 2x-4 \\x=6\ \rightarrow f^{-1} \left ( 3(6)-7 \right ) &= 2(6)-4 \\f^{-1} \left ( 11 \right ) &= 8 \\x=5\ \rightarrow f^{-1} \left ( 3(5)-7 \right ) &= 2(5)-4 \\f^{-1} \left ( 8 \right ) &= 6 \\\hline \left ( f \circ f \right )^{-1} \left( 11 \right) &=2p \\f^{-1} \left( f^{-1} (11) \right) &=2p \\f^{-1} \left( 8 \right) &=2p \\6 &=2p \\3 &= p \end{align}$
+                <b>100. Jawaban: C</b><br>
+                Dari informasi pada soal, himpunan $A=\left \{ a,b,c,d,e,f \right \}$.
+                <p>Anggota himpunan bagian $A$ yang mungkin dengan syarat $\left \{ a,f \right \}$ termasuk anggota,<br>
+                misalnya: $\left \{ a,f \right \}$, $\left \{ a,b,f \right \}$, atau $\left \{ a,b,c,d,e,f \right \}$</p>
+                <ul>
+                    <li>Banyak himpunan bagian $A$ yang memiliki $2$ anggota, artinya tidak ada lagi tambahan anggota yang dapat dipilih dari $\left \{ b,c,d,e \right \}$. <br>Dengan menggunakan kombinasi banyak himpunan bagian $A$ adalah $C(4,0)=1$</li>
+                    <li>Banyak himpunan bagian $A$ yang memiliki $3$ anggota, artinya ada $1$ tambahan anggota yang dapat dipilih dari $\left \{ b,c,d,e \right \}$. <br>Dengan menggunakan kombinasi banyak himpunan bagian $A$ adalah $C(4,1)=4$</li>
+                    <li>Banyak himpunan bagian $A$ yang memiliki $4$ anggota, artinya ada $2$ tambahan anggota yang dapat dipilih dari $\left \{ b,c,d,e \right \}$. <br>Dengan menggunakan kombinasi banyak himpunan bagian $A$ adalah $C(4,2)=6$</li>
+                    <li>Banyak himpunan bagian $A$ yang memiliki $5$ anggota, artinya ada $3$ tambahan anggota yang dapat dipilih dari $\left \{ b,c,d,e \right \}$. <br>Dengan menggunakan kombinasi banyak himpunan bagian $A$ adalah $C(4,3)=4$</li>
+                    <li>Banyak himpunan bagian $A$ yang memiliki $6$ anggota, artinya ada $4$ tambahan anggota yang dapat dipilih dari $\left \{ b,c,d,e \right \}$. <br>Dengan menggunakan kombinasi banyak himpunan bagian $A$ adalah $C(4,4)=1$</li>
+                </ul>
+                <p>Total banyak himpunan $A$ adalah $1+4+6+4+1=16$</p>
+                <p>Sebagai alternatif, dapat digunakan $2^{n}$, dimana $n$ adalah banyak anggota yang dapat ditambahkan. Pada soal di atas, yang dapat ditambahkan ke himpunan $\left \{ a,f \right \}$ adalah $4$ yaitu $\left \{ b,c,d,e \right \}$ sehingga banyak himpunan bagian $A$ adalah $2^{4}=16$.</p>
             </div>
 
             <div class="pembahasan">
-                <b>35. Jawaban: D</b><br>
-                $\begin{align}f \left ( \dfrac{1}{2x} \right ) & = \dfrac{x}{3+x} \\\hline m &= \dfrac{1}{2x} \rightarrow x = \dfrac{1}{2m} \\\hline f \left ( m \right ) & = \dfrac{\dfrac{1}{2m}}{3+\dfrac{1}{2m}} = \dfrac{1}{6m+1} \\\hline f \left ( x \right ) & = \dfrac{1}{6x+1} \\f^{-1} \left ( x \right ) & = \dfrac{1-x}{6x} \\f^{-1} \left ( a \right ) & = \dfrac{1-a}{6a} \\-\dfrac{1}{3} & = \dfrac{1-a}{6a} \\-6a & = 3-3a \\-3a & = 3 \\a & = -1 \end{align}$
+                <b>101. Jawaban: D</b><br>
+                Dari informasi pada soal, himpunan $A=\left \{ a,b,c,d,e,f,g,h \right \}$ sehingga $n(A)=8$.
+                <p>Banyaknya himpunan bagian dari $A$ yang memiliki $3$ elemen adalah:<br>
+                $\begin{align} C(8,3) & = \binom{8}{3} \\& =\dfrac{8!}{3!(8-3)!} \\ & =\dfrac{8 \cdot 7 \cdot 6 \cdot 5!}{6 \cdot 5!} \\ & = 56 \end{align}$</p>
             </div>
 
             <div class="pembahasan">
-                <b>36. Jawaban: B</b><br>
-                $\begin{align}f \left ( x-1 \right ) &= 5x^{2}+6x-6 \\x=2\ \rightarrow f \left ( 1 \right ) &= 5(2)^{2}+6(2)-6 = 26 \\\hline \left ( g \circ f \right ) \left( 1 \right) &=-51 \\g \left ( f (1) \right ) &=-51 \\g \left ( 26 \right ) &=-51 \\a(26)+1 &=-51 \\a &= \dfrac{-52}{26}=-2\end{align}$<br>
-                Nilai dari $f \left ( a+1 \right )$ adalah...<br>
-                $\begin{align}f \left ( -2+1 \right ) &= f \left ( -1 \right ) \\x=0 \rightarrow f(-1)&= 5(0)^{2}+6(0)-6 = -6 \end{align}$
+                <b>102. Jawaban: D</b><br>
+                Dari informasi pada soal, disampaikan akan disusun bilangan diantara $630$ dan $840$ dengan tidak ada digit berulang.
+                <p>Angka yang dapat kita gunakan untuk membentuk bilangan adalah $2,3,4,5,6,7,8,9$<br>
+                Untuk menyusun bilangan diantara bilangan diantara $630$ dan $840$ dengan tidak ada digit berulang, ada beberapa kemungkinan yang dapat terjadi, antara lain:</p>
+                <p>Kemungkinan pertama, ratusan angka $6$ sehingga puluhan yang mungkin adalah $3,4,5,7,8,9$ dan satuan bebas.<br>
+                $\begin{array}{c|c|cc} \text{A}_{1} & \text{A}_{2} & \text{A}_{3} \\\hline (1) & (6) & (6) \\\end{array} $<br>
+                Banyak bilangan yang dapat disusun adalah $1 \cdot 6 \cdot 6 = 36$</p>
+                <p>Kemungkinan kedua, ratusan angka $7$ sehingga puluhan yang mungkin adalah $2,3,4,5,6,8,9$ dan satuan bebas.<br>
+                $\begin{array}{c|c|cc} \text{A}_{1} & \text{A}_{2} & \text{A}_{3} \\\hline (1) & (7) & (6) \\\end{array} $<br>
+                Banyak bilangan yang dapat disusun adalah $1 \cdot 7 \cdot 6 = 42$</p>
+                <p>Kemungkinan ketiga, ratusan angka $8$ sehingga puluhan yang mungkin adalah $2,3$ dan satuan bebas.<br>
+                $\begin{array}{c|c|cc} \text{A}_{1} & \text{A}_{2} & \text{A}_{3} \\\hline (1) & (2) & (5) \\\end{array} $<br>
+                Banyak bilangan yang dapat disusun adalah $1 \cdot 2 \cdot 6 = 12$</p>
+                <p>Dari semua kemungkinan, total kemungkinan bilangan yang dapat disusun adalah $36+42+12=90$.</p>
             </div>
 
             <div class="pembahasan">
-                <b>37. Jawaban: B</b><br>
-                $\begin{align}f \left ( \dfrac{1}{x} \right ) & = \dfrac{x}{2+3x} \\\hline m &= \dfrac{1}{x} \rightarrow x = \dfrac{1}{m} \\\hline f \left ( m \right ) & = \dfrac{\dfrac{1}{m}}{2+3\dfrac{1}{m}} = \dfrac{1}{2m+3} \\\hline f \left ( x \right ) & = \dfrac{1}{2x+3} \\f^{-1} \left ( x \right ) & = \dfrac{1-3x}{2x} \\f^{-1} \left ( a \right ) & = \dfrac{1-3a}{2a} \\-1 & = \dfrac{1-3a}{2a} \\-2a & = 1-3a \\3a-2a & = 1 \\a & = 1 \end{align}$
+                <b>103. Jawaban: D</b><br>
+                Dari informasi pada soal, disampaikan akan disusun bilangan ganjil yang terdiri dari $3$ angka berbeda yang disusun dari $2,3,5,6,7,8$ dengan tidak ada digit berulang.
+                <p>Untuk menyusun bilangan ganjil, pertama kita pilih angka yang mungkin jadi satuan ada $3$ yaitu $3,5,7$. Sedangkan untuk ratusan dan puluhan angka yang mungkin digunakan adalah bebas, semua angka yang belum digunakan dapat menjadi ratusan atau puluhan.</p> 
+                <p>Banyak bilangan yang mungkin adalah:<br>
+                $\begin{array}{c|c|cc} \text{Ratusan} & \text{Puluhan} & \text{Satuan} \\\hline (5) & (4) & (3) \end{array} $<br>
+                Banyak bilangan ganjil adalah: $5 \times 4 \times 3 = 60$</p>
             </div>
 
             <div class="pembahasan">
-                <b>38. Jawaban: D</b><br>
-                $\begin{align}f \left ( 2x \right ) & = - \dfrac{1}{x+2} \\\hline m &= 2x \rightarrow x = \dfrac{m}{2} \\\hline f \left ( m \right ) & = \dfrac{1}{\dfrac{m}{2}+2} = \dfrac{2}{m+4} \\\hline f \left ( x \right ) & = \dfrac{2}{x+4} \\f^{-1} \left ( x \right ) & = \dfrac{-2-4x}{x} \\f^{-1} \left ( \dfrac{2}{a} \right ) & = \dfrac{-2-4 \cdot \dfrac{2}{a} }{\dfrac{2}{a}} \\3a & = \dfrac{-2- \dfrac{8}{a} }{\dfrac{2}{a}} \\6 & = -2- \dfrac{8}{a} \\\dfrac{8}{a} & = -6 \\a & = -1\end{align}$
+                <b>104. Jawaban: E</b><br>
+                Banyak tim yang mungkin terjadi dengan syarat Kelas ketua harus berasal dari kelas yang lebih tinggi dari wakil ketua dan sekretaris ada beberapa kemungkinan yaitu:
+                <ul>
+                    <li>Kemungkinan pertama ketua adalah <b>kelas III</b>.
+                        <ul>
+                            <li>Jika yang jadi ketua adalah <b>kelas III</b> maka ada $6$ yang mungkin, karena kelas XII berjumlah $6$ siswa.</li>
+                            <li>Banyak kemungkinan yang jadi <b>wakil ketua</b> ada $9$ karena yang mungkin jadi wakil adalah kelas X dan XI yang berjumlah $9$ siswa.</li>
+                            <li>Banyak kemungkinan yang jadi <b>Sekretaris</b> ada $8$ karena yang mungkin jadi sekretaris adalah kelas X dan XI yang berjumlah $9-1=8$ siswa, dimana $1$ siswa kita anggap sudah menjadi wakil ketua.</li>
+                        </ul>
+                        $\begin{array}{c|c|cc} \text{Ketua} & \text{Sekretaris} & \text{Bendahara} \\\hline 6 & 9 & 8 \end{array} $<br>
+                        Banyak susunan pengurus adalah $6 \times 9 \times 8=432$ susunan.
+                    </li>
+                    <li>Kemungkinan kedua ketua adalah <b>kelas II</b>.
+                        <ul>
+                            <li>Jika yang jadi ketua adalah <b>kelas II</b> ada $5$ yang mungkin, karena kelas II berjumlah $5$ siswa.</li>
+                            <li>Banyak kemungkinan yang jadi <b>wakil ketua</b> ada $4$ karena yang mungkin jadi wakil adalah kelas X yang berjumlah $4$ siswa.</li>
+                            <li>Banyak kemungkinan yang jadi <b>Sekretaris</b> ada $3$ karena yang mungkin jadi sekretaris adalah kelas X yang berjumlah $4-1=3$ siswa, dimana $1$ siswa kita anggap sudah menjadi wakil ketua.</li>
+                        </ul>
+                        $\begin{array}{c|c|cc} \text{Ketua} & \text{Sekretaris} & \text{Bendahara} \\\hline 5 & 4 & 3 \end{array} $<br>
+                        Banyak susunan pengurus adalah $5 \times 4 \times 3=60$ susunan.
+                    </li>
+                </ul>
+                <p>Dari semua kemungkinan banyak susunan tim yang mungkin adalah $432+60=492$ susunan.</p>
             </div>
 
             <div class="pembahasan">
-                <b>39. Jawaban: C</b><br>
-                $\begin{align}\left ( f \circ f \right ) \left( x \right) &=9x+a+3 \\f \left ( 3x+a \right ) &=9x+a+3 \\3(3x+a)-2a+3 &=9x+a+3 \\f \left ( x \right ) &=3x-2a+3 \\3x+a &=3x-2a+3 \\3a &= 3 \rightarrow a=1 \\\hline f \left ( x \right ) &=3x+1 \\f \left ( 1 \right ) &=3(1)+1 =4 \end{align}$
+                <b>105. Jawaban: C</b><br>
+                Dari informasi pada soal, disampaikan akan disusun dua angka berbeda yang lebih besar daripada $10$.
+                <p>Angka yang dapat kita gunakan untuk membentuk susunan angka adalah $0,2,5,7,8$<br>
+                $\begin{array}{c|c|c|cc} \text{A}_{1} & \text{A}_{2} \\\hline (4) & (4) \\\hline 2,5,7,8 & 0,2,5,7,8 \\\end{array} $<br>
+                Banyak bilangan yang dapat disusun adalah $4 \cdot 4 = 16$, dimana jika diurutkan dari yang terkecil sampai terbesar adalah $20,25,27,\cdots,85,87$.</p> 
+                <ol>
+                    <li>Terdapat $16$ bilangan yang mungkin dibentuk.<br><b>BENAR</b>, $16$ susunan angka yang dapat dibentuk.</li>
+                    <li>Selisih bilangan terbesar dan bilangan terkecil yang mungkin dibentuk adalah kelipatan $5$.<br><b>SALAH</b>, karena selisihnya adalah $87-20=57$.</li>
+                    <li>Bilangan terkecil kedua yang mungkin dibentuk adalah bilangan prima.<br><b>SALAH</b>, karena $25$ bukan bilangan prima.</li>
+                    <li>Terdapat bilangan kuadrat yang mungkin dibentuk.<br><b>BENAR</b>, yaitu $25$.</li>
+                </ol>
+                <p>Pernyataan yang benar ada 2.</p>
             </div>
 
             <div class="pembahasan">
-                <b>40. Jawaban: D</b><br>
-                $\begin{align}\left ( f \circ f \right ) \left( x \right) &=4x-3 \\f \left ( ax+3 \right ) &= 4x-3 \\\hline m=ax+3 &\rightarrow \dfrac{m-3}{a}= x \\\hline f \left ( x \right ) &= \dfrac{4x-12}{a} -3 \\ax+3 &= \dfrac{4}{a}x-\dfrac{12}{a} -3 \end{align}$<br>
-                Dari kesamaan persamaan di atas:<br>
-                $\begin{align}a \equiv \dfrac{4}{a} & \rightarrow a=\pm 2 \\-\dfrac{12}{a}-3 \equiv 3 & \rightarrow a=-2 \\\hline f \left ( x \right ) &=-2x+3 \\f \left ( -2 \right ) &=-2(-2)+3 = 7 \end{align}$
+                <b>106. Jawaban: E</b><br>
+                Dari informasi pada soal, disampaikan akan disusun dua bilangan dua angka dari semua angka $1,3,7,8$.<br>
+                <ol>
+                    <li>Terdapat $x$ yang merupakan faktor prima dari $y$.<br><b>BENAR</b>, saat $x=13$ dan $y=78$</li>
+                    <li>Maksimum $x \times y$ adalah $81 \times 73$.<br><b>BENAR</b>, saat $x=81$ dan $y=73$</li>
+                    <li>Selisih terbesar $x$ dan $y$ yang mungkin dibentuk adalah kelipatan $4$.<br><b>BENAR</b>, saat $x=83$ dan $y=71$</li>
+                    <li>Faktor persekutuan terbesar dari bilangan terbesar dan terkecil yang mungkin dibentuk adalah $1$.<br><b>BENAR</b>, yaitu FPB $13$ dan $87$</li>
+                </ol>
+                <p>Semua pernyataan (4) bernilai benar.</p>
             </div>
 
             <div class="pembahasan">
-                <b>41. Jawaban: A</b><br>
-                $\begin{align}f \left ( x \right ) & = \dfrac{x+1}{x-1} \\\hline m & = \dfrac{x+1}{x-1} \\x & = \dfrac{m + 1}{m - 1} \\\hline f^{-1} \left ( x \right ) & = \dfrac{x + 1}{x - 1} \end{align}$<br>
-                Dari hasil di atas kita peroleh:<br>
-                $\begin{align}f^{-1}\left ( \frac{1}{x} \right ) & = \dfrac{\frac{1}{x} + 1}{\frac{1}{x} - 1} = \dfrac{ 1+x }{ 1-x } = - \dfrac{ x + 1 }{ x-1 } = - f \left ( x \right ) \end{align}$
+                <b>107. Jawaban: B</b><br>
+                Dari informasi pada soal, disampaikan akan disusun dua angka (boleh berulang) dari angka $1,2,4,9$.<br>
+                $\begin{array}{c|c|c|cc} \text{A}_{1} & \text{A}_{2} \\\hline (4) & (4) \\\hline 1,2,4,9 & 1,2,4,9 \\\end{array} $<br>
+                Banyak bilangan yang dapat disusun adalah $4 \cdot 4 = 16$, yang jika diurutkan dari yang terkecil sampai terbesar adalah $11,12,14,\cdots,94,99$.
+                <ol>
+                    <li>Maksimum selisih dua bilangan yang mungkin dibentuk adalah kelipatan $5$.<br><b>SALAH</b>, saat bilangan $11$ dan $99$</li>
+                    <li>Terdapat $12$ bilangan yang dapat dibentuk.<br><b>SALAH</b>, ada $16$ bilangan yang dapat dibentuk</li>
+                    <li>Banyak bilangan genap dan bilangan ganjil yang mungkin dibentuk adalah sama.<br><b>BENAR</b>, karena ada banyak digit ganjil dan genap sama</li>
+                    <li>Tiga bilangan terkecil yang mungkin dibentuk membangun barisan aritmetika.<br><b>SALAH</b>, bilangan $11,12,14$ tidak barisan aritmetika</li>
+                </ol>
+                <p>Pernyataan yang benar hanya 1.</p>
             </div>
 
             <div class="pembahasan">
-                <b>42. Jawaban: B</b><br>
-                $\begin{align}f(x)+3g^{-1}(x)& = x^{2}+x-18 \\f(x)+2g^{-1}(x)& = x^{2}-14\ (-) \\\hline g^{-1}(x)& = x-4 \\g^{-1}(2)& = 2-4=-2\end{align}$<br>
-                $\begin{align}f(x)+2 \left( x-4 \right) & = x^{2}-14 \\f(x) & = x^{2}-2x-6 \\\hline f^{-1}(2) & = a \rightarrow f(a) = 2 \\\hline 2 & = a^{2}-2a-6 \\0 & = a^{2}-2a-8 \\  a=-2\ & \text{atau}\ a=4 \end{align}$<br>
-                Karena $f^{-1}(x)$ bernilai positif, maka $f^{-1}(2) = 4$. <br>
-                Nilai $f^{-1}(2)+g^{-1}(2)=4-2=2$
+                <b>108. Jawaban: C</b><br>
+                Dari informasi pada soal, disampaikan akan disusun dua angka (boleh berulang) yang lebih besar daripada $9$.
+                <p>Angka yang dapat kita gunakan untuk membentuk susunan angka adalah $0,1,3,5,7$<br>
+                $\begin{array}{c|c|c|cc} \text{A}_{1} & \text{A}_{2} \\\hline (4) & (5) \\\hline 1,3,5,7 & 0,1,3,5,7 \\\end{array} $<br>
+                Banyak bilangan yang dapat disusun adalah $4 \cdot 5 = 20$, dimana jika diurutkan dari yang terkecil sampai terbesar adalah $10,11,13,\cdots,75,77$.</p> 
+                <ol>
+                    <li>Tidak ada satu pun bilangan yang dapat dibentuk merupakan bilangan genap.<br><b>SALAH</b>, karena ada bilangan $10$</li>
+                    <li>Bilangan terbesar yang mungkin dibentuk merupakan bilangan genap.<br><b>SALAH</b>, karena bilangan terbesar adalah $77$</li>
+                    <li>Lima kali bilangan terkecil lebih kecil daripada bilangan terbesar yang mungkin dibentuk.<br><b>BENAR</b>, $5 \times 10 \lt 77$</li>
+                    <li>Faktor persekutuan terbesar dari bilangan terbesar dan terkecil yang mungkin dibentuk adalah $1$.<br><b>BENAR</b>, yaitu FPB $10$ dan $77$.</li>
+                </ol>
+                <p>Pernyataan yang benar ada 2.</p>
             </div>
 
             <div class="pembahasan">
-                <b>43. Jawaban: C</b><br>
-                $ \begin{align} (fog)(x) & = \left( x^{2}+1 \right)^{2}-2 \left| \left( x^{2}+1 \right) \right| \\& = x^{4}+2x^{2}+1 -2 \left( x^{2}+1 \right) \text{ (karena } x^2+1 > 0 \text{)} \\0 &= x^{4}-1 \end{align} $<br>
-                Berdasarkan sifat polinomial akar-akarnya, jumlah semua nilai $x$ (akar-akarnya) $x_1+x_2+x_3+x_4 = -\frac{b}{a} = \frac{0}{1} = 0$.
+                <b>109. Jawaban: C</b><br>
+                Dari informasi pada soal, disampaikan akan disusun dua bilangan sehingga keempat angka berbeda yang lebih besar daripada $10$ dari angka $0,2,3,5,7$
+                <ol>
+                    <li>Jumlah terbesar kedua bilangan yang mungkin dibentuk merupakan kelipatan $5$.<br><b>BENAR</b>, saat $73$ dan $52$</li>
+                    <li>Jumlah terkecil kedua bilangan yang mungkin dibentuk lebih kecil daripada $60$.<br><b>BENAR</b>, saat $20$ dan $35$</li>
+                    <li>Terdapat sepasang bilangan yang keduanya merupakan bilangan prima.<br><b>SALAH</b>, bilangan prima yang dapat terjadi adalah $23$, $37$, $53$, dan $73$.</li>
+                    <li>Selisih terkecil kedua bilangan yang mungkin dibentuk merupakan kelipatan $2$.<br><b>SALAH</b>, karena selisih terkecil saat $27$ dan $30$.</li>
+                </ol>
+                <p>Pernyataan yang benar ada 2.</p>
             </div>
 
             <div class="pembahasan">
-                <b>44. Jawaban: B</b><br>
-                Invers fungsi $f(x)=\dfrac{ax+b}{cx+d}$ adalah $f^{-1}(x)=\dfrac{-dx+b}{cx-a}$. Sehingga untuk $f(x)=\dfrac{2x-1}{x+1}$ dapat kita peroleh:<br>
-                $ \begin{align} f^{-1} \left( x \right)\ & = \dfrac{-x-1}{x-2} \\f^{-1} \left( \frac{1}{2} \right)\ & = \dfrac{-\left( \frac{1}{2} \right)-1}{\left( \frac{1}{2} \right)-2} = 1 \\\hline\left( f^{-1} \circ f^{-1} \right)\left( \frac{1}{2} \right) & = f^{-1} \left( 1 \right) = \dfrac{-1-1}{1-2} = 2 \end{align}$ 
+                <b>110. Jawaban: C</b><br>
+                Dari informasi pada soal, disampaikan akan disusun dua bilangan terdiri dari dua angka sehingga keempat angka berbeda dari angka $1,2,5,7,9$
+                <ol>
+                    <li>Salah satu faktor dari bilangan terbesar yang mungkin dibentuk merupakan bilangan genap.<br><b>SALAH</b>, karena bilangan terbesar adalah $97$ merupakan bilangan prima</li>
+                    <li>Hasil perkalian terbesar kedua bilangan yang mungkin dibentuk adalah $95 \times 72$.<br><b>BENAR</b>, karena terbesar saat $92 \times 75$</li>
+                    <li>Terdapat lebih dari $24$ pasang bilangan yang mungkin dibentuk.<br><b>BENAR</b>, untuk bilangan $12$ banyak pasangannya yang mungkin ada $3 \times 2=6$, bilangan $21$ banyak pasangannya yang mungkin ada $3 \times 2=6$ dan seterusnya.</li>
+                    <li>Selisih terkecil kedua bilangan yang mungkin dibentuk adalah $8$.<br><b>SALAH</b>, karena selisih terkecil saat $19$ dan $25$.</li>
+                </ol>
+                <p>Pernyataan yang benar ada 2.</p>
             </div>
 
             <div class="pembahasan">
-                <b>45. Jawaban: B</b><br>
-                Invers fungsi $g(x)=ax+2$ adalah $g^{-1}(x)=\dfrac{x-2}{a}$, sehingga $g^{-1}(1)=\dfrac{-1}{a}$.<br>
-                $ \begin{align} \left( f \circ g^{-1} \right)(1) &= 5 \\   f \left( \dfrac{-1}{a} \right) &= 5 \\ \left( \dfrac{-1}{a} \right)^{2}+1 &= 5 \\ \dfrac{1}{a^{2}} &= 4 \\  1 &= 4a^{2} \\  \hline  4a^{2}-3 &= 1-3 =-2 \end{align} $ 
+                <b>111. Jawaban: D</b><br>
+                Dari informasi pada soal, disampaikan akan disusun dua bilangan yang terdiri dari $6$ angka. Setelah angka $3$ dan $4$ dihapus, bilangan yang tersisa adalah $2026$. Ini berarti urutan angka $2,$ $0,$ $2,$ dan $6$ tetap. Kita dapat membayangkan ada $5$ posisi di mana angka $3$ dan $4$ bisa disisipkan ke dalam bilangan $2026$.<br>
+                $\begin{array}{c|c|c|c|c|c|c|c|c} \text{_} \text{_} & \text{(1)} & \text{_} \text{_} & \text{(1)} & \text{_} \text{_} & \text{(1)} & \text{_} \text{_} & \text{(1)} & \text{_} \text{_} \\\hline \text{3} \text{4} & \text{2} & \text{3} \text{4} & \text{0} & \text{3} \text{4} & \text{2} & \text{3} \text{4} & \text{6} & \text{3} \text{4} \\\end{array} $<br>
+                Pertama, kita pilih salah satu dari $6$ posisi untuk angka $3$. Kemudian, kita pilih salah satu dari $5$ posisi yang tersisa untuk angka $4$.<br>
+                Jumlah cara untuk menempatkan angka $3$ dan $4$ adalah $6 \times 5=30$.
+                <p>Kita juga bisa menggunakan rumus permutasi, karena kita akan menyusun $2$ angka ($3/4$) ke dalam $6$ tempat yang tersedia:<br>
+                \begin{align} P(n,r) &= \frac{n!}{(n-r)!} \\P(6,2) &= \frac{6!}{(6-2)!} \\&= \frac{6\times 5\times 4!}{4!} \\&= 6 \times 5 = 30 \end{align}</p>
             </div>
 
             <div class="pembahasan">
-                <b>46. Jawaban: D</b><br>
-                Menggunakan sifat $f(a)=b \rightarrow f^{-1}(b)=a$<br>
-                $\begin{align}f \left ( \dfrac{\sqrt{x+1}}{x-1} \right) &= \dfrac{2x-1}{x+2} \\f^{-1} \left ( \dfrac{2x-1}{x+2} \right) &= \dfrac{\sqrt{x+1}}{x-1}\end{align}$<br>
-                $\begin{align}\dfrac{2x-1}{x+2} &= 1 \rightarrow x = 3 \\\hline f^{-1} \left ( 1 \right) &= \dfrac{\sqrt{3+1}}{3-1} = \dfrac{2}{2}=1 \end{align}$
+                <b>112. Jawaban: C</b><br>
+                Dari informasi pada soal, disampaikan akan disusun kode $AXBYC$. $A$, $B$, dan $C$ menyatakan huruf, serta $X$ dan $Y$ menyatakan angka. Tidak boleh ada angka dan huruf yang diulang.
+                <p>Kita ketahui banyak huruf yang dapat digunakan adalah $26$ dan banyak angka yang dapat digunakan adalah $10$, sehingga keseluruhan kemungkinan kode yang dapat dibentuk adalah:<br>
+                $\begin{array}{c|c|c|c|c|c|c|c|c} \text{A} & \text{X} & \text{B} & \text{Y} & \text{C} \\\hline 26 & 10 & 25 & 9 & 24 \\\end{array} $</p>
+                <p>Banyak kode yang dapat dibuat adalah:<br>
+                $ \begin{align} & 26 \times 10 \times 25 \times 24 \times 9 \\& = 260 \times 60 \times 9 \\& = 260 \times 540 \\&= 1.404.000 \end{align}$</p>
             </div>
 
             <div class="pembahasan">
-                <b>47. Jawaban: B</b><br>
-                Berdasarkan informasi pada soal Fungsi Komposisi dan Fungsi Invers di atas, diketahui $f(x)=\sqrt{2x+3}$ maka dapat kita tuliskan:<br>
-                $ \begin{align} y & = \sqrt{2x+3} \\y^{2} & = 2x+3 \\x &= \dfrac{y^{2}-3}{2} \end{align} $<br>
-                Dari hasil di atas dapat kita peroleh:<br>
-                $ \begin{align} f^{-1}(x) &=\dfrac{x^{2}-3}{2} \\f^{-1}(3) &=\dfrac{3^{2}-3}{2} = 3 \end{align} $
+                <b>113. Jawaban: B</b><br>
+                Dari informasi pada soal, disampaikan akan disusun pengurus RT baru yang terdiri atas ketua, bendahara, dan sekretaris perempuan dari $15$ laki-laki dan $10$ perempuan. Dalam kasus ini kita anggap tidak boleh ada satu orang memegang dua jabatan.
+                <p>Karena yang menjadi hal khusus adalah sekretaris perempuan, maka yang pertama kita susun adalah sekretaris perempuan.<br>
+                $\begin{array}{c|c|c|c|c|c|c|c|c} \text{Ketua} & \text{bendahara} & \text{sekretaris} \\\hline \text{(23)} & \text{(24)} & \text{(10)} \\\end{array} $<br>
+                Banyak cara terpilihnya pengurus adalah $23 \times 24 \times 10 =5.520$.</p>
+            </div>
+
+            <div class="pembahasan">
+                <b>114. Jawaban: C</b><br>
+                Dari informasi pada soal, disampaikan akan disusun panitia inti pembangunan yang terdiri atas ketua, bendahara, dan sekretaris perempuan dari $10$ keluarga tinggal di utara jalan dan$14$ keluarga tinggal di selatan jalan. Dalam kasus ini kita anggap tidak boleh ada satu orang memegang dua jabatan.
+                <p>Karena yang menjadi hal khusus adalah ketua yang tinggal di utara jalan, maka yang pertama kita susun adalah ketua.<br>
+                $\begin{array}{c|c|c|c|c|c} \text{Ketua} & \text{bendahara} & \text{sekretaris} \\\hline \text{(10)} & \text{(23)} & \text{(22)} \\\end{array} $<br>
+                Banyak cara terpilihnya pengurus adalah $10 \times 23 \times 22 =5.060$.</p>
+            </div>
+
+            <div class="pembahasan">
+                <b>115. Jawaban: D</b><br>
+                Dari informasi pada soal, disampaikan akan disusun panitia inti pembangunan yang terdiri atas ketua, wakil ketua,bendahara, dan sekretaris dari $8$ keluarga tinggal di utara jalan dan $12$ keluarga tinggal di selatanjalan dengan syarat ketua tinggal di utara jalan dan wakil ketua tinggal di selatan jalan. Dalam kasus ini kita anggap tidak boleh ada satu orang memegang dua jabatan.
+                <p>Karena yang menjadi hal khusus adalah ketua dari utara dan wakil dari selatan, maka yang pertama kita susun adalah ketua dan wakil.<br>
+                $\begin{array}{c|c|c|c|c|c} \text{Ketua} & \text{wakil} & \text{bendahara} & \text{sekretaris} \\\hline \text{(8)} & \text{(12)} & \text{(18)} & \text{(17)} \\\end{array} $<br>
+                Banyak cara terpilihnya pengurus adalah $8 \times 12 \times 18 \times 17 =29.376$.</p>
+            </div>
+
+            <div class="pembahasan">
+                <b>116. Jawaban: B</b><br>
+                Dari informasi pada soal, akan dipilih tiga pembawa bendera dengan pembawa bendera merah putih perempuan dari $12$ laki-laki dan $10$ perempuan.
+                <p>Karena yang menjadi hal khusus adalah pembawa bendera merah putih perempuan dan $2$ orang lagi yang membawa bendera klub dan bendera kota bebas maka yang pertama kita susun adalah pembawa bendera merah putih.<br>
+                $\begin{array}{c|c|c|c|c|c} \text{Merah Putih} & \text{Klub} & \text{Kota} \\\hline \text{(10)} & \text{(21)} & \text{(20)} \\\end{array} $<br>
+                Banyak cara terpilihnya pembawa bendera adalah $10 \cdot 21 \cdot 20 =4.200$.</p>
+            </div>
+
+            <div class="pembahasan">
+                <b>117. Jawaban: A</b><br>
+                Dari informasi pada soal, akan dipilih dari $11$ masalah ekonomi dan $9$ masalah pendidikan diberikan kepada ketiga calon, banyak cara memilih masalah dengan Sabar dan Subur mendapat masalah ekonomi dan Makmur mendapat masalah pendidikan.
+                <p>Karena Sabar dan Subur mendapat masalah ekonomi dan Makmur mendapat masalah pendidikan, banyak kemungkinan yang terjadi adalah:<br>
+                $\begin{array}{c|c|c|c|c|c} \text{Sabar} & \text{Subur} & \text{Makmur} \\\hline \text{(11)} & \text{(10)} & \text{(9)} \\\end{array} $<br>
+                Banyak cara terpilihnya pembawa bendera adalah $11 \cdot 10 \cdot 9 =990$.</p>
+            </div>
+
+            <div class="pembahasan">
+                <b>118. Jawaban: A</b><br>
+                Dari informasi pada soal, akan dipilih dari $12$ bacaan tentang pahlawan dan $10$ bacaan tentang kesehatan diberikan kepada ketiga anak, banyak cara sehingga Aisah menerima bacaan tentang kesehatan serta Badu dan Candra menerima bacaan tentang pahlawan.
+                <p>Banyak kemungkinan yang terjadi adalah:<br>
+                $\begin{array}{c|c|c|c|c|c} \text{Aisah} & \text{Badu} & \text{Candra} \\\hline \text{(10)} & \text{(12)} & \text{(11)} \\\end{array} $<br>
+                Banyak cara terpilihnya adalah $10 \cdot 12 \cdot 11 =1320$.</p>
+            </div>
+
+            <div class="pembahasan">
+                <b>119. Jawaban: D</b><br>
+                Dari informasi pada soal, akan dipilih dari $10$ aglonema merah dan $11$ aglonema hijau, jika Bu Erwin memilih empat tanaman, banyak cara terpilihnya dua aglonema merah dan dua aglonema hijau.
+                <p>Bu Erwin memilih empat tanaman, banyak cara terpilihnya dua aglonema merah dari $10$ dan dua aglonema hijau dari $11$ adalah:<br>
+                $\begin{align} & C(10,2) \cdot C(11,2) \\ & = \binom{10}{2} \cdot \binom{11}{2} \\& =\dfrac{10!}{2!(10-2)!} \cdot \dfrac{11!}{2!(11-2)!} \\ & =\dfrac{10 \cdot 9 \cdot 8!}{2! \cdot 8!} \cdot \dfrac{11 \cdot 10 \cdot 9!}{2! \cdot 9!} \\ & =45 \cdot 55 \\ & = 2.475 \end{align}$</p>
+            </div>
+
+            <div class="pembahasan">
+                <b>120. Jawaban: C</b><br>
+                Dari informasi pada soal, dipilih empat bacaan berbeda untuk Agus dari $11$ bacaan dengan topik tentang buah-buahan dan $12$ bacaan tentang sayuran.
+                <p>Cara terpilihnya tiga bacaan buah-buahan dari $11$ dan satu bacaan tentang sayuran dari $12$ adalah:<br>
+                $\begin{align} & C(11,3) \cdot C(12,1) \\ & = \binom{11}{3} \cdot \binom{12}{1} \\& =\dfrac{11!}{3!(11-3)!} \cdot \dfrac{12!}{1!(12-1)!} \\ & =\dfrac{11 \cdot 10 \cdot 9 }{3! } \cdot 12 \\ & =\dfrac{11 \cdot 10 \cdot 9 }{3 \cdot 2 \cdot 1} \cdot 12 \\ & = 11 \cdot 5 \cdot 3 \cdot 12 \\ & = 1.980 \end{align}$</p>
+            </div>
+
+            <div class="pembahasan">
+                <b>121. Jawaban: C</b><br>
+                Dari informasi pada soal, dipilih secara berurutan tiga kelurahan untuk diberi bantuan.
+                <p>Banyak cara terpilihnya kelurahan pertama di barat sungai, kelurahan kedua di barat sungai, dan kelurahan ketiga di timur sungai adalah:<br>
+                $\begin{array}{c|c|c|c|c|c} \text{barat} & \text{barat} & \text{timur} \\\hline \text{(8)} & \text{(7)} & \text{(9)} \\\end{array} $<br>
+                Banyak cara terpilihnya adalah $8 \cdot 7 \cdot 9 =504$.</p>
             </div>
 
         </div>
