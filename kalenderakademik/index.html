@@ -1,0 +1,241 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalender Akademik 2026-2027</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        .holiday-tooltip:hover .tooltip-text { visibility: visible; opacity: 1; }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen p-4 md:p-8">
+
+    <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200">
+        
+        <!-- Header Section -->
+        <div class="bg-indigo-700 p-6 text-white">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div>
+                    <h1 class="text-2xl font-bold">Kalender Akademik</h1>
+                    <p class="opacity-80 text-sm">Mei 2026 — Juli 2027</p>
+                </div>
+                <div class="flex bg-indigo-800 rounded-lg p-1">
+                    <button id="btn-calendar" onclick="switchView('calendar')" class="px-4 py-2 rounded-md transition-all flex items-center gap-2 bg-indigo-600 shadow-md">
+                        <i data-lucide="calendar" class="w-4 h-4"></i> Kalender
+                    </button>
+                    <button id="btn-list" onclick="switchView('list')" class="px-4 py-2 rounded-md transition-all flex items-center gap-2 hover:bg-indigo-700">
+                        <i data-lucide="list" class="w-4 h-4"></i> Daftar Libur
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calendar View Container -->
+        <div id="calendar-view" class="p-6">
+            <!-- Controls -->
+            <div class="flex justify-between items-center mb-8">
+                <button id="prev-month" onclick="changeMonth(-1)" class="p-2 hover:bg-slate-100 rounded-full transition-colors disabled:opacity-25">
+                    <i data-lucide="chevron-left" class="text-slate-600"></i>
+                </button>
+                <h2 id="current-month-display" class="text-xl font-semibold text-slate-800 tracking-tight">
+                    Mei 2026
+                </h2>
+                <button id="next-month" onclick="changeMonth(1)" class="p-2 hover:bg-slate-100 rounded-full transition-colors disabled:opacity-25">
+                    <i data-lucide="chevron-right" class="text-slate-600"></i>
+                </button>
+            </div>
+
+            <!-- Grid Header -->
+            <div class="grid grid-cols-7 gap-2 mb-2">
+                <div class="text-center py-2 text-xs font-bold uppercase text-red-500">Min</div>
+                <div class="text-center py-2 text-xs font-bold uppercase text-slate-400">Sen</div>
+                <div class="text-center py-2 text-xs font-bold uppercase text-slate-400">Sel</div>
+                <div class="text-center py-2 text-xs font-bold uppercase text-slate-400">Rab</div>
+                <div class="text-center py-2 text-xs font-bold uppercase text-slate-400">Kam</div>
+                <div class="text-center py-2 text-xs font-bold uppercase text-slate-400">Jum</div>
+                <div class="text-center py-2 text-xs font-bold uppercase text-slate-400">Sab</div>
+            </div>
+
+            <!-- Grid Body -->
+            <div id="calendar-grid" class="grid grid-cols-7 gap-2 mb-4">
+                <!-- Days will be injected here -->
+            </div>
+
+            <div class="mt-8 flex items-start gap-3 bg-blue-50 p-4 rounded-xl text-blue-800 text-sm">
+                <i data-lucide="info" class="shrink-0 w-5 h-5"></i>
+                <p>
+                    <strong>Tips Guru:</strong> Warna merah menandakan Hari Minggu atau Libur Nasional. Gunakan tampilan ini untuk menyusun Program Semester (Promes) Matematika Anda.
+                </p>
+            </div>
+        </div>
+
+        <!-- List View Container (Hidden by default) -->
+        <div id="list-view" class="hidden p-6">
+            <h2 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+                Daftar Libur Nasional Indonesia
+            </h2>
+            <div id="holiday-list-container" class="space-y-6 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar">
+                <!-- Holidays will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const HOLIDAYS = {
+            "2026-05-01": "Hari Buruh Internasional",
+            "2026-05-14": "Kenaikan Yesus Kristus",
+            "2026-05-27": "Hari Raya Idul Adha 1447 H",
+            "2026-05-29": "Hari Raya Waisak 2570 BE",
+            "2026-06-01": "Hari Lahir Pancasila",
+            "2026-06-16": "Tahun Baru Islam 1448 H",
+            "2026-08-17": "Hari Kemerdekaan RI",
+            "2026-08-25": "Maulid Nabi Muhammad SAW",
+            "2026-12-25": "Hari Raya Natal",
+            "2027-01-01": "Tahun Baru 2027 Masehi",
+            "2027-01-25": "Isra Mikraj Nabi Muhammad SAW",
+            "2027-02-06": "Tahun Baru Imlek 2578 Kongzili",
+            "2027-03-09": "Hari Suci Nyepi 1949",
+            "2027-03-10": "Hari Raya Idul Fitri 1448 H",
+            "2027-03-11": "Hari Raya Idul Fitri 1448 H",
+            "2027-03-26": "Wafat Yesus Kristus",
+            "2027-03-28": "Hari Paskah",
+            "2027-05-01": "Hari Buruh Internasional",
+            "2027-05-06": "Kenaikan Yesus Kristus",
+            "2027-05-16": "Hari Raya Idul Adha 1448 H",
+            "2027-05-20": "Hari Raya Waisak 2571 BE",
+            "2027-06-01": "Hari Lahir Pancasila",
+            "2027-07-06": "Tahun Baru Islam 1449 H"
+        };
+
+        const MONTH_NAMES = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+        
+        let currentDate = new Date(2026, 4, 1);
+        let activeView = 'calendar';
+
+        function init() {
+            lucide.createIcons();
+            renderCalendar();
+            renderHolidayList();
+        }
+
+        function switchView(view) {
+            activeView = view;
+            const calendarView = document.getElementById('calendar-view');
+            const listView = document.getElementById('list-view');
+            const btnCalendar = document.getElementById('btn-calendar');
+            const btnList = document.getElementById('btn-list');
+
+            if (view === 'calendar') {
+                calendarView.classList.remove('hidden');
+                listView.classList.add('hidden');
+                btnCalendar.classList.add('bg-indigo-600', 'shadow-md');
+                btnList.classList.remove('bg-indigo-600', 'shadow-md');
+            } else {
+                calendarView.classList.add('hidden');
+                listView.classList.remove('hidden');
+                btnList.classList.add('bg-indigo-600', 'shadow-md');
+                btnCalendar.classList.remove('bg-indigo-600', 'shadow-md');
+            }
+        }
+
+        function changeMonth(delta) {
+            const newDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + delta, 1);
+            
+            // Constraints: May 2026 to July 2027
+            if (newDate.getFullYear() === 2026 && newDate.getMonth() < 4) return;
+            if (newDate.getFullYear() === 2027 && newDate.getMonth() > 6) return;
+            if (newDate.getFullYear() < 2026 || newDate.getFullYear() > 2027) return;
+
+            currentDate = newDate;
+            renderCalendar();
+        }
+
+        function renderCalendar() {
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+            const grid = document.getElementById('calendar-grid');
+            const display = document.getElementById('current-month-display');
+            
+            display.innerText = `${MONTH_NAMES[month]} ${year}`;
+            grid.innerHTML = '';
+
+            // Update button states
+            document.getElementById('prev-month').disabled = (year === 2026 && month === 4);
+            document.getElementById('next-month').disabled = (year === 2027 && month === 6);
+
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+            // Padding
+            for (let i = 0; i < firstDay; i++) {
+                const empty = document.createElement('div');
+                empty.className = "h-20 md:h-24";
+                grid.appendChild(empty);
+            }
+
+            // Days
+            for (let i = 1; i <= daysInMonth; i++) {
+                const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+                const isHoliday = !!HOLIDAYS[dateStr];
+                const isSunday = (firstDay + i - 1) % 7 === 0;
+                const holidayName = HOLIDAYS[dateStr] || "";
+
+                const dayDiv = document.createElement('div');
+                dayDiv.className = `h-20 md:h-24 p-2 border rounded-xl flex flex-col justify-between transition-all group relative holiday-tooltip ${isHoliday || isSunday ? 'bg-red-50 border-red-100' : 'bg-white border-slate-100 hover:border-indigo-300'}`;
+                
+                dayDiv.innerHTML = `
+                    <span class="text-sm font-semibold ${isHoliday || isSunday ? 'text-red-600' : 'text-slate-700'}">${i}</span>
+                    ${isHoliday ? `
+                        <div class="hidden md:block text-[10px] leading-tight text-red-700 font-medium overflow-hidden line-clamp-2">${holidayName}</div>
+                        <div class="md:hidden w-1.5 h-1.5 bg-red-500 rounded-full absolute bottom-2 left-1/2 -translate-x-1/2"></div>
+                        <div class="tooltip-text invisible opacity-0 absolute z-10 bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 bg-slate-800 text-white text-xs rounded-lg shadow-xl transition-all">
+                            ${holidayName}
+                            <div class="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-slate-800"></div>
+                        </div>
+                    ` : ''}
+                `;
+                grid.appendChild(dayDiv);
+            }
+        }
+
+        function renderHolidayList() {
+            const container = document.getElementById('holiday-list-container');
+            container.innerHTML = '';
+
+            const sortedHolidays = Object.entries(HOLIDAYS).sort(([a], [b]) => new Date(a) - new Date(b));
+
+            sortedHolidays.forEach(([date, name]) => {
+                const d = new Date(date);
+                const monthName = MONTH_NAMES[d.getMonth()];
+                const day = d.getDate();
+                const year = d.getFullYear();
+
+                const item = document.createElement('div');
+                item.className = "flex items-center gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 hover:bg-white hover:border-indigo-200 transition-all shadow-sm";
+                item.innerHTML = `
+                    <div class="w-16 h-16 flex flex-col items-center justify-center bg-indigo-100 text-indigo-700 rounded-lg shrink-0">
+                        <span class="text-xs font-bold uppercase">${monthName.substring(0, 3)}</span>
+                        <span class="text-xl font-black">${day}</span>
+                    </div>
+                    <div>
+                        <p class="font-bold text-slate-800">${name}</p>
+                        <p class="text-xs text-slate-500 uppercase tracking-widest">${year}</p>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>
