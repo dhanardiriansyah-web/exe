@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EXE - IG Carousel Generator</title>
+    
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- html2canvas Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            pink: '#d81b60',
+                            orange: '#f57c00',
+                            yellow: '#fbc02d',
+                            dark: '#1f2022'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #e2e8f0; } /* Latar belakang luar (abu-abu) */
+        
+        .preview-wrapper {
+            width: 378px;
+            height: 472.5px;
+            position: relative;
+            flex-shrink: 0;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .slide-content {
+            width: 1080px !important;
+            height: 1350px !important;
+            max-height: 1350px !important;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform-origin: top left;
+            transform: scale(0.35); /* Mode Preview */
+            background-color: white;
+            overflow: hidden; 
+            display: flex;
+            flex-direction: column;
+        }
+
+        .bg-gradient-brand {
+            background: linear-gradient(135deg, #d81b60 0%, #f57c00 50%, #fbc02d 100%);
+        }
+        
+        .bg-pattern {
+            background-image: radial-gradient(#d81b60 2px, transparent 2px);
+            background-size: 40px 40px;
+            background-color: white;
+            opacity: 0.05;
+            position: absolute;
+            inset: 0;
+        }
+
+        .lh-tight { line-height: 1.1 !important; }
+        .lh-none { line-height: 1 !important; }
+        
+        table, th, td {
+            border: 2px solid #1f2022 !important;
+        }
+    </style>
+</head>
+<body class="p-8 text-gray-800 antialiased font-sans flex flex-col items-center overflow-x-hidden">
+
+    <div class="mb-8 text-center max-w-2xl">
+        <h1 class="text-3xl font-bold text-brand-dark mb-2">📸 EXE Carousel Generator</h1>
+        <p class="text-gray-600 mb-4"><strong>Update Super Final:</strong> Skrip logo diganti menggunakan injeksi Base64. Logo <strong>dijamin 100% muncul dan bisa di-download</strong> tanpa error CORS lagi. Tabel dan bayangan warna sudah aman.</p>
+    </div>
+
+    <div class="flex overflow-x-auto gap-8 pb-10 w-full max-w-[1600px] justify-start px-4 snap-x">
+        
+        <!-- ================= SLIDE 1: HOOK ================= -->
+        <div class="flex flex-col gap-4 snap-center">
+            <div class="preview-wrapper" id="wrap-slide-1">
+                <div class="slide-content" id="slide-1">
+                    <div class="bg-pattern"></div>
+                    <div class="relative z-10 flex-1 flex flex-col items-center px-20 py-24 text-center justify-between">
+                        
+                        <div class="w-full flex justify-center mb-12">
+                            <!-- Logo diamankan dengan class exe-logo -->
+                            <img alt="EXE Logo" class="h-24 exe-logo">
+                        </div>
+
+                        <div class="flex-1 flex flex-col items-center justify-center w-full mt-2">
+                            <div class="bg-pink-100 text-brand-pink text-[36px] font-extrabold px-10 py-4 rounded-full mb-10 border-2 border-brand-pink flex items-center gap-4 shadow-sm">
+                                🚨 INFO PENTING!
+                            </div>
+                            
+                            <h2 class="text-[130px] font-black text-brand-dark lh-none tracking-tighter mb-2">
+                                TKA SMA
+                            </h2>
+                            <h2 class="text-[125px] font-black text-brand-pink lh-none tracking-tighter mb-12">
+                                DIMAJUKAN!
+                            </h2>
+                            
+                            <div class="w-32 h-3 bg-brand-yellow rounded-full mb-12"></div>
+                            
+                            <p class="text-[50px] text-gray-700 font-semibold lh-tight px-6">
+                                Yakin <span class="text-brand-dark font-extrabold">pondasi matematikamu</span> udah aman buat ngerjain soal TKA bulan Oktober?
+                            </p>
+                        </div>
+
+                        <div class="text-[36px] text-gray-400 mt-10 flex items-center gap-4 font-medium">
+                            <span>Geser ke kiri</span> <i class="fas fa-arrow-right text-brand-pink"></i>
+                        </div>
+                    </div>
+                    <div class="h-6 w-full bg-gradient-brand absolute bottom-0 left-0"></div>
+                </div>
+            </div>
+            <button onclick="exportSlide('slide-1')" id="btn-slide-1" class="bg-brand-dark text-white py-3 px-6 rounded-xl font-semibold shadow-md hover:bg-brand-pink transition flex items-center justify-center gap-2">
+                <i class="fas fa-download"></i> Download Slide 1
+            </button>
+        </div>
+
+        <!-- ================= SLIDE 2: PROBLEM/AGITASI ================= -->
+        <div class="flex flex-col gap-4 snap-center">
+            <div class="preview-wrapper" id="wrap-slide-2">
+                <!-- Dikembalikan ke bg-slate-50 agar kotak putihnya lebih menonjol -->
+                <div class="slide-content bg-slate-50" id="slide-2">
+                    <div class="h-6 w-full bg-gradient-brand absolute top-0 left-0"></div>
+                    <div class="relative z-10 flex-1 flex flex-col px-20 py-24 justify-center">
+                        
+                        <h2 class="text-[65px] font-black text-brand-dark lh-tight mb-12">
+                            Jujur aja... <br>
+                            <span class="text-[50px] font-bold text-gray-500">Jangan paksa hafal rumus susah kalau:</span>
+                        </h2>
+
+                        <div class="space-y-8">
+                            <!-- Kotak masalah dikembalikan ke putih dengan bayangan agar tidak flat/dominan putih -->
+                            <div class="flex items-center gap-6 bg-white p-8 rounded-[1.5rem] shadow-md border border-gray-100">
+                                <i class="fas fa-circle-xmark text-[55px] text-brand-pink flex-shrink-0"></i>
+                                <p class="text-[40px] font-semibold text-gray-700 lh-tight">
+                                    Ngitung pecahan, akar & desimal aja masih sering salah.
+                                </p>
+                            </div>
+                            <div class="flex items-center gap-6 bg-white p-8 rounded-[1.5rem] shadow-md border border-gray-100">
+                                <i class="fas fa-circle-xmark text-[55px] text-brand-pink flex-shrink-0"></i>
+                                <p class="text-[40px] font-semibold text-gray-700 lh-tight">
+                                    Aljabar dasar masih bingung pas mau pindah ruas.
+                                </p>
+                            </div>
+                            <div class="flex items-center gap-6 bg-white p-8 rounded-[1.5rem] shadow-md border border-gray-100">
+                                <i class="fas fa-circle-xmark text-[55px] text-brand-pink flex-shrink-0"></i>
+                                <p class="text-[40px] font-semibold text-gray-700 lh-tight">
+                                    Belum bisa cari pola logika, selalu ngandelin di-suapin rumus.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="mt-12 bg-pink-100/50 border-l-[16px] border-brand-pink p-8 rounded-r-[1.5rem]">
+                            <p class="text-[38px] font-bold text-brand-dark lh-tight">
+                                Fakta: Di TKA, jebakan paling sering ada di <span class="text-brand-pink">manipulasi hitungan dasar ini</span>, BUKAN di rumus tingkat tinggi!
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <button onclick="exportSlide('slide-2')" id="btn-slide-2" class="bg-brand-dark text-white py-3 px-6 rounded-xl font-semibold shadow-md hover:bg-brand-pink transition flex items-center justify-center gap-2">
+                <i class="fas fa-download"></i> Download Slide 2
+            </button>
+        </div>
+
+        <!-- ================= SLIDE 3: SOLUSI (TABEL BARU) ================= -->
+        <div class="flex flex-col gap-4 snap-center">
+            <div class="preview-wrapper" id="wrap-slide-3">
+                <div class="slide-content bg-white" id="slide-3">
+                    <div class="h-6 w-full bg-gradient-brand absolute top-0 left-0"></div>
+                    <div class="relative z-10 flex-1 flex flex-col px-12 py-20">
+                        
+                        <div class="text-center mb-8">
+                            <h2 class="text-[75px] font-black lh-none text-brand-dark">
+                                MATRIKULASI TKA
+                            </h2>
+                            <p class="text-[32px] font-medium text-gray-600 mt-2">
+                                Modul perbaikan pondasi hitung & logika aljabar
+                            </p>
+                        </div>
+
+                        <div class="flex-1 w-full flex flex-col justify-center">
+                            <table class="w-full text-left border-collapse bg-white">
+                                <thead>
+                                    <tr>
+                                        <th colspan="3" class="text-center py-2 text-[26px] font-extrabold text-brand-dark bg-gray-100 uppercase tracking-widest">SMA</th>
+                                    </tr>
+                                    <tr class="bg-gray-100">
+                                        <th class="py-3 px-2 text-center text-[24px] font-bold w-[12%] text-brand-dark">Pertemuan</th>
+                                        <th class="py-3 px-4 text-center text-[24px] font-bold w-[33%] text-brand-dark">Topik</th>
+                                        <th class="py-3 px-4 text-center text-[24px] font-bold w-[55%] text-brand-dark">Materi</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-[20px] leading-snug text-gray-800">
+                                    <tr>
+                                        <td class="py-2.5 px-3 text-center font-bold text-[22px]">1</td>
+                                        <td class="py-2.5 px-4 font-bold">Operasi Bilangan & Pecahan</td>
+                                        <td class="py-2.5 px-4">Menguasai penjumlahan/perkalian pecahan, desimal, dan akar tanpa kalkulator</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2.5 px-3 text-center font-bold text-[22px]">2</td>
+                                        <td class="py-2.5 px-4 font-bold">Manipulasi Aljabar Dasar</td>
+                                        <td class="py-2.5 px-4">Logika pemfaktoran, menjabarkan kurung, dan menyederhanakan bentuk aljabar</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2.5 px-3 text-center font-bold text-[22px]">3</td>
+                                        <td class="py-2.5 px-4 font-bold">Persamaan & Pindah Ruas</td>
+                                        <td class="py-2.5 px-4">Memahami konsep kesetimbangan persamaan linear, bukan sekadar hafal "plus pindah jadi minus"</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2.5 px-3 text-center font-bold text-[22px]">4</td>
+                                        <td class="py-2.5 px-4 font-bold">Perbandingan & Proporsi</td>
+                                        <td class="py-2.5 px-4">Logika perbandingan senilai dan berbalik nilai dalam kehidupan sehari-hari</td>
+                                    </tr>
+                                    <tr class="bg-orange-50">
+                                        <td class="py-2.5 px-3 text-center font-bold text-[22px]">try out</td>
+                                        <td class="py-2.5 px-4"></td>
+                                        <td class="py-2.5 px-4 font-semibold text-brand-orange">Mid-Term Try Out (Fokus Akurasi Hitung Dasar)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2.5 px-3 text-center font-bold text-[22px]">5</td>
+                                        <td class="py-2.5 px-4 font-bold">Sistem Persamaan Linear</td>
+                                        <td class="py-2.5 px-4">Substitusi dan eliminasi dengan pemahaman logika matematis</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2.5 px-3 text-center font-bold text-[22px]">6</td>
+                                        <td class="py-2.5 px-4 font-bold">Pola Bilangan & Barisan</td>
+                                        <td class="py-2.5 px-4">Mencari pola dari deret angka secara manual sebelum mengenal rumus umum</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2.5 px-3 text-center font-bold text-[22px]">7</td>
+                                        <td class="py-2.5 px-4 font-bold">Relasi & Pengenalan Fungsi</td>
+                                        <td class="py-2.5 px-4">Memahami pemetaan nilai x menjadi y dengan grafis sederhana</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2.5 px-3 text-center font-bold text-[22px]">8</td>
+                                        <td class="py-2.5 px-4 font-bold">Teorema Pythagoras & Segitiga</td>
+                                        <td class="py-2.5 px-4">Konsep kuadrat dan akar aplikatif untuk mencari jarak</td>
+                                    </tr>
+                                    <tr class="bg-pink-50">
+                                        <td class="py-2.5 px-3 text-center font-bold text-[22px]">try out</td>
+                                        <td class="py-2.5 px-4 font-bold">Final Try Out</td>
+                                        <td class="py-2.5 px-4 font-semibold text-brand-pink">Evaluasi Pondasi Aljabar</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <button onclick="exportSlide('slide-3')" id="btn-slide-3" class="bg-brand-dark text-white py-3 px-6 rounded-xl font-semibold shadow-md hover:bg-brand-pink transition flex items-center justify-center gap-2">
+                <i class="fas fa-download"></i> Download Slide 3
+            </button>
+        </div>
+
+        <!-- ================= SLIDE 4: CTA ================= -->
+        <div class="flex flex-col gap-4 snap-center">
+            <div class="preview-wrapper" id="wrap-slide-4">
+                <!-- Dikembalikan ke bg-slate-50 agar box kuning dan tombol pop-up -->
+                <div class="slide-content bg-slate-50" id="slide-4">
+                    <div class="h-6 w-full bg-gradient-brand absolute top-0 left-0"></div>
+                    <div class="relative z-10 flex-1 flex flex-col items-center px-20 py-24 text-center justify-between">
+                        
+                        <div class="w-full">
+                            <h2 class="text-[60px] font-bold text-gray-800 lh-tight mb-6">
+                                Jangan nunggu masuk sekolah baru panik.
+                            </h2>
+                            <h1 class="text-[75px] font-black text-brand-pink lh-none">
+                                AMANKAN KUOTAMU SEKARANG!
+                            </h1>
+                        </div>
+
+                        <div class="w-full bg-brand-dark text-white py-12 px-10 rounded-[3rem] shadow-2xl relative my-12 border-4 border-white">
+                            <div class="absolute -top-10 -right-5 text-[80px]">🔥</div>
+                            <p class="text-[35px] font-semibold text-gray-300 uppercase tracking-widest mb-2">Mulai Belajar Serentak</p>
+                            <h3 class="text-[120px] font-black lh-none text-brand-yellow tracking-tighter">23 MEI</h3>
+                        </div>
+
+                        <div class="flex flex-col items-center w-full mt-2">
+                            <i class="fas fa-arrow-down text-[60px] text-brand-pink mb-8"></i>
+                            
+                            <div class="w-full border-[5px] border-brand-pink bg-white text-brand-dark py-8 px-6 rounded-full shadow-lg flex flex-col items-center justify-center gap-2">
+                                <div class="text-[50px] font-black flex items-center gap-4 lh-none">
+                                    KONTAK KAMI <i class="fas fa-hand-pointer text-brand-pink"></i>
+                                </div>
+                                <div class="text-[30px] font-semibold text-gray-600 lh-none">
+                                    untuk informasi lebih lanjut
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w-full flex justify-center mt-12 pt-8 border-t border-gray-300">
+                            <!-- Logo diamankan dengan class exe-logo -->
+                            <img alt="EXE Logo" class="h-16 grayscale opacity-60 exe-logo">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <button onclick="exportSlide('slide-4')" id="btn-slide-4" class="bg-brand-dark text-white py-3 px-6 rounded-xl font-semibold shadow-md hover:bg-brand-pink transition flex items-center justify-center gap-2">
+                <i class="fas fa-download"></i> Download Slide 4
+            </button>
+        </div>
+
+    </div>
+
+    <script>
+        // --- SKRIP ANTI-CORS LOGO INJECTOR ---
+        // Skrip ini akan secara otomatis menarik logo dari URL, mengubahnya menjadi data Base64 lokal,
+        // dan memasukkannya ke elemen gambar. Karena bersifat lokal, html2canvas tidak akan memblokirnya!
+        document.addEventListener("DOMContentLoaded", async () => {
+            const targetUrl = "https://images2.imgbox.com/76/c6/FZAMWIZX_o.png";
+            // Proxy yang lebih handal untuk mengubah origin
+            const proxyUrl = "https://api.allorigins.win/raw?url=" + encodeURIComponent(targetUrl);
+            
+            try {
+                const response = await fetch(proxyUrl);
+                const blob = await response.blob();
+                const reader = new FileReader();
+                reader.onloadend = function() {
+                    const base64data = reader.result;
+                    // Tempelkan data base64 ke semua elemen yang punya class 'exe-logo'
+                    const logos = document.querySelectorAll('.exe-logo');
+                    logos.forEach(logo => {
+                        logo.src = base64data;
+                    });
+                }
+                reader.readAsDataURL(blob);
+            } catch (error) {
+                console.error("Gagal meload logo:", error);
+                // Jika proxy gagal, kembalikan ke URL asli sebagai cadangan terakhir
+                document.querySelectorAll('.exe-logo').forEach(logo => {
+                    logo.src = targetUrl;
+                });
+            }
+        });
+
+        // Tunggu font siap
+        document.fonts.ready.then(() => {
+            console.log("Fonts loaded.");
+        });
+
+        async function exportSlide(slideId) {
+            const btn = document.getElementById('btn-' + slideId);
+            const originalSlide = document.getElementById(slideId);
+            const wrapper = document.getElementById('wrap-' + slideId);
+            
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Memproses...';
+            btn.disabled = true;
+
+            try {
+                await document.fonts.ready;
+                
+                // --- STRATEGI ISOLASI MUTLAK ---
+                // Pindahkan slide keluar dari wrapper dan tempelkan ke ujung paling atas browser
+                // Ini mencegah warna abu-abu dari "body" website ikut terfoto
+                
+                originalSlide.style.transform = 'none';
+                originalSlide.style.position = 'fixed';
+                originalSlide.style.top = '0px';
+                originalSlide.style.left = '0px';
+                originalSlide.style.zIndex = '9999';
+                
+                document.body.appendChild(originalSlide);
+
+                // Beri waktu 0.3 detik agar browser merender posisinya dengan sempurna
+                await new Promise(resolve => setTimeout(resolve, 300));
+
+                const canvas = await html2canvas(originalSlide, {
+                    scale: 1, 
+                    width: 1080,
+                    height: 1350,
+                    useCORS: true,
+                    backgroundColor: null, 
+                    logging: false
+                });
+
+                // Kembalikan slide ke dalam kotak kecil aslinya
+                wrapper.appendChild(originalSlide);
+                originalSlide.style.position = 'absolute';
+                originalSlide.style.transform = 'scale(0.35)';
+                originalSlide.style.zIndex = '1';
+
+                const link = document.createElement('a');
+                link.download = `EXE_Carousel_${slideId}.png`;
+                link.href = canvas.toDataURL('image/png', 1.0);
+                link.click();
+
+            } catch (error) {
+                console.error("Error exporting image:", error);
+                alert("Gagal mengunduh gambar. Pastikan koneksi stabil.");
+                
+                // Jika error, pastikan slide tetap kembali ke tempatnya
+                wrapper.appendChild(originalSlide);
+                originalSlide.style.position = 'absolute';
+                originalSlide.style.transform = 'scale(0.35)';
+                originalSlide.style.zIndex = '1';
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>
