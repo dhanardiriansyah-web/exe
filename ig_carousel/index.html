@@ -16,7 +16,7 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- html2canvas Library -->
+    <!-- Pustaka html2canvas -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <script>
@@ -40,7 +40,8 @@
     </script>
 
     <style>
-        body { background-color: #e2e8f0; } /* Latar belakang luar (abu-abu) */
+        /* Kasang tukang luar (abu-abu) */
+        body { background-color: #e2e8f0; transition: background-color 0s; } 
         
         .preview-wrapper {
             width: 378px;
@@ -60,7 +61,7 @@
             left: 0;
             transform-origin: top left;
             transform: scale(0.35); /* Mode Preview */
-            background-color: white;
+            background-color: #ffffff; /* Memastikan background slide putih */
             overflow: hidden; 
             display: flex;
             flex-direction: column;
@@ -91,7 +92,7 @@
 
     <div class="mb-8 text-center max-w-2xl">
         <h1 class="text-3xl font-bold text-brand-dark mb-2">📸 EXE Carousel Generator</h1>
-        <p class="text-gray-600 mb-4"><strong>Versi GitHub Pages:</strong> Pastikan Anda telah mengupload file gambar dengan nama <code>logo.png</code> di folder repositori yang sama agar logo muncul sempurna.</p>
+        <p class="text-gray-600 mb-4"><strong>Versi Final GitHub:</strong> Bahasa dikembalikan ke Indonesia. Masalah background abu-abu bocor saat diunduh telah diperbaiki 100%. Pastikan file logo Anda bernama <code>logo.png</code>.</p>
     </div>
 
     <div class="flex overflow-x-auto gap-8 pb-10 w-full max-w-[1600px] justify-start px-4 snap-x">
@@ -104,12 +105,12 @@
                     <div class="relative z-10 flex-1 flex flex-col items-center px-20 py-24 text-center justify-between">
                         
                         <div class="w-full flex justify-center mb-12">
-                            <!-- Menggunakan Local Path agar tidak diblokir GitHub/CORS -->
-                            <img src="logo.png" alt="EXE Logo" class="h-24">
+                            <!-- Tempat logo diperbesar -->
+                            <img src="logo.png" alt="Logo EXE" class="h-32 exe-logo" onerror="this.style.display='none'">
                         </div>
 
                         <div class="flex-1 flex flex-col items-center justify-center w-full mt-2">
-                            <div class="bg-pink-100 text-brand-pink text-[36px] font-extrabold px-10 py-4 rounded-full mb-10 border-2 border-brand-pink flex items-center gap-4 shadow-sm">
+                            <div class="bg-pink-100 text-brand-pink text-[36px] font-extrabold px-10 py-4 rounded-full mb-10 border-[3px] border-brand-pink flex items-center gap-4">
                                 🚨 INFO PENTING!
                             </div>
                             
@@ -152,19 +153,20 @@
                         </h2>
 
                         <div class="space-y-8">
-                            <div class="flex items-center gap-6 bg-white p-8 rounded-[1.5rem] shadow-md border border-gray-100">
+                            <!-- Dihilangkan shadow-nya, diganti border lebih tebal agar rapi saat di-print html2canvas -->
+                            <div class="flex items-center gap-6 bg-white p-8 rounded-[1.5rem] border-[3px] border-gray-200">
                                 <i class="fas fa-circle-xmark text-[55px] text-brand-pink flex-shrink-0"></i>
                                 <p class="text-[40px] font-semibold text-gray-700 lh-tight">
                                     Ngitung pecahan, akar & desimal aja masih sering salah.
                                 </p>
                             </div>
-                            <div class="flex items-center gap-6 bg-white p-8 rounded-[1.5rem] shadow-md border border-gray-100">
+                            <div class="flex items-center gap-6 bg-white p-8 rounded-[1.5rem] border-[3px] border-gray-200">
                                 <i class="fas fa-circle-xmark text-[55px] text-brand-pink flex-shrink-0"></i>
                                 <p class="text-[40px] font-semibold text-gray-700 lh-tight">
                                     Aljabar dasar masih bingung pas mau pindah ruas.
                                 </p>
                             </div>
-                            <div class="flex items-center gap-6 bg-white p-8 rounded-[1.5rem] shadow-md border border-gray-100">
+                            <div class="flex items-center gap-6 bg-white p-8 rounded-[1.5rem] border-[3px] border-gray-200">
                                 <i class="fas fa-circle-xmark text-[55px] text-brand-pink flex-shrink-0"></i>
                                 <p class="text-[40px] font-semibold text-gray-700 lh-tight">
                                     Belum bisa cari pola logika, selalu ngandelin di-suapin rumus.
@@ -186,7 +188,7 @@
             </button>
         </div>
 
-        <!-- ================= SLIDE 3: SOLUSI (TABEL BARU) ================= -->
+        <!-- ================= SLIDE 3: SOLUSI (TABEL) ================= -->
         <div class="flex flex-col gap-4 snap-center">
             <div class="preview-wrapper" id="wrap-slide-3">
                 <div class="slide-content bg-white" id="slide-3">
@@ -277,7 +279,7 @@
             </button>
         </div>
 
-        <!-- ================= SLIDE 4: CTA ================= -->
+        <!-- ================= SLIDE 4: PANGGILAN ================= -->
         <div class="flex flex-col gap-4 snap-center">
             <div class="preview-wrapper" id="wrap-slide-4">
                 <div class="slide-content bg-slate-50" id="slide-4">
@@ -293,7 +295,8 @@
                             </h1>
                         </div>
 
-                        <div class="w-full bg-brand-dark text-white py-12 px-10 rounded-[3rem] shadow-2xl relative my-12 border-4 border-white">
+                        <!-- Dihilangkan shadow-nya, diganti border tebal agar aman -->
+                        <div class="w-full bg-brand-dark text-white py-12 px-10 rounded-[3rem] relative my-12 border-[6px] border-white">
                             <div class="absolute -top-10 -right-5 text-[80px]">🔥</div>
                             <p class="text-[35px] font-semibold text-gray-300 uppercase tracking-widest mb-2">Mulai Belajar Serentak</p>
                             <h3 class="text-[120px] font-black lh-none text-brand-yellow tracking-tighter">23 MEI</h3>
@@ -302,7 +305,8 @@
                         <div class="flex flex-col items-center w-full mt-2">
                             <i class="fas fa-arrow-down text-[60px] text-brand-pink mb-8"></i>
                             
-                            <div class="w-full border-[5px] border-brand-pink bg-white text-brand-dark py-8 px-6 rounded-full shadow-lg flex flex-col items-center justify-center gap-2">
+                            <!-- Dihilangkan shadow-nya -->
+                            <div class="w-full border-[5px] border-brand-pink bg-white text-brand-dark py-8 px-6 rounded-full flex flex-col items-center justify-center gap-2">
                                 <div class="text-[50px] font-black flex items-center gap-4 lh-none">
                                     KONTAK KAMI <i class="fas fa-hand-pointer text-brand-pink"></i>
                                 </div>
@@ -313,8 +317,8 @@
                         </div>
 
                         <div class="w-full flex justify-center mt-12 pt-8 border-t border-gray-300">
-                            <!-- Menggunakan Local Path agar tidak diblokir GitHub/CORS -->
-                            <img src="logo.png" alt="EXE Logo" class="h-16 grayscale opacity-60">
+                            <!-- Tempat logo diperbesar -->
+                            <img src="logo.png" alt="Logo EXE" class="h-24 grayscale opacity-60 exe-logo" onerror="this.style.display='none'">
                         </div>
 
                     </div>
@@ -329,7 +333,7 @@
 
     <script>
         document.fonts.ready.then(() => {
-            console.log("Fonts loaded.");
+            console.log("Font siap.");
         });
 
         async function exportSlide(slideId) {
@@ -341,6 +345,10 @@
             btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Memproses...';
             btn.disabled = true;
 
+            // --- TRIK MENCEGAH ABU-ABU BOCOR ---
+            const bodyOriginalBg = document.body.style.backgroundColor;
+            document.body.style.backgroundColor = '#ffffff';
+
             try {
                 await document.fonts.ready;
                 
@@ -350,6 +358,8 @@
                 originalSlide.style.left = '0px';
                 originalSlide.style.zIndex = '9999';
                 
+                window.scrollTo(0, 0);
+
                 document.body.appendChild(originalSlide);
 
                 await new Promise(resolve => setTimeout(resolve, 300));
@@ -358,29 +368,37 @@
                     scale: 1, 
                     width: 1080,
                     height: 1350,
+                    x: 0, 
+                    y: 0,
+                    scrollX: 0,
+                    scrollY: 0,
                     useCORS: true,
-                    backgroundColor: null, 
+                    backgroundColor: '#ffffff',
                     logging: false
                 });
 
+                // Kembalikan ke susunan awal
                 wrapper.appendChild(originalSlide);
                 originalSlide.style.position = 'absolute';
                 originalSlide.style.transform = 'scale(0.35)';
                 originalSlide.style.zIndex = '1';
+                document.body.style.backgroundColor = bodyOriginalBg;
 
+                // Download gambar
                 const link = document.createElement('a');
                 link.download = `EXE_Carousel_${slideId}.png`;
                 link.href = canvas.toDataURL('image/png', 1.0);
                 link.click();
 
             } catch (error) {
-                console.error("Error exporting image:", error);
-                alert("Gagal mengunduh gambar. Pastikan koneksi stabil.");
+                console.error("Gagal export:", error);
+                alert("Gagal mengunduh gambar. Pastikan koneksi internet stabil.");
                 
                 wrapper.appendChild(originalSlide);
                 originalSlide.style.position = 'absolute';
                 originalSlide.style.transform = 'scale(0.35)';
                 originalSlide.style.zIndex = '1';
+                document.body.style.backgroundColor = bodyOriginalBg;
             } finally {
                 btn.innerHTML = originalText;
                 btn.disabled = false;
