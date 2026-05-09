@@ -91,7 +91,7 @@
 
     <div class="mb-8 text-center max-w-2xl">
         <h1 class="text-3xl font-bold text-brand-dark mb-2">📸 EXE Carousel Generator</h1>
-        <p class="text-gray-600 mb-4"><strong>Update Super Final:</strong> Skrip logo diganti menggunakan injeksi Base64. Logo <strong>dijamin 100% muncul dan bisa di-download</strong> tanpa error CORS lagi. Tabel dan bayangan warna sudah aman.</p>
+        <p class="text-gray-600 mb-4"><strong>Versi GitHub Pages:</strong> Pastikan Anda telah mengupload file gambar dengan nama <code>logo.png</code> di folder repositori yang sama agar logo muncul sempurna.</p>
     </div>
 
     <div class="flex overflow-x-auto gap-8 pb-10 w-full max-w-[1600px] justify-start px-4 snap-x">
@@ -104,8 +104,8 @@
                     <div class="relative z-10 flex-1 flex flex-col items-center px-20 py-24 text-center justify-between">
                         
                         <div class="w-full flex justify-center mb-12">
-                            <!-- Logo diamankan dengan class exe-logo -->
-                            <img alt="EXE Logo" class="h-24 exe-logo">
+                            <!-- Menggunakan Local Path agar tidak diblokir GitHub/CORS -->
+                            <img src="logo.png" alt="EXE Logo" class="h-24">
                         </div>
 
                         <div class="flex-1 flex flex-col items-center justify-center w-full mt-2">
@@ -142,7 +142,6 @@
         <!-- ================= SLIDE 2: PROBLEM/AGITASI ================= -->
         <div class="flex flex-col gap-4 snap-center">
             <div class="preview-wrapper" id="wrap-slide-2">
-                <!-- Dikembalikan ke bg-slate-50 agar kotak putihnya lebih menonjol -->
                 <div class="slide-content bg-slate-50" id="slide-2">
                     <div class="h-6 w-full bg-gradient-brand absolute top-0 left-0"></div>
                     <div class="relative z-10 flex-1 flex flex-col px-20 py-24 justify-center">
@@ -153,7 +152,6 @@
                         </h2>
 
                         <div class="space-y-8">
-                            <!-- Kotak masalah dikembalikan ke putih dengan bayangan agar tidak flat/dominan putih -->
                             <div class="flex items-center gap-6 bg-white p-8 rounded-[1.5rem] shadow-md border border-gray-100">
                                 <i class="fas fa-circle-xmark text-[55px] text-brand-pink flex-shrink-0"></i>
                                 <p class="text-[40px] font-semibold text-gray-700 lh-tight">
@@ -282,7 +280,6 @@
         <!-- ================= SLIDE 4: CTA ================= -->
         <div class="flex flex-col gap-4 snap-center">
             <div class="preview-wrapper" id="wrap-slide-4">
-                <!-- Dikembalikan ke bg-slate-50 agar box kuning dan tombol pop-up -->
                 <div class="slide-content bg-slate-50" id="slide-4">
                     <div class="h-6 w-full bg-gradient-brand absolute top-0 left-0"></div>
                     <div class="relative z-10 flex-1 flex flex-col items-center px-20 py-24 text-center justify-between">
@@ -316,8 +313,8 @@
                         </div>
 
                         <div class="w-full flex justify-center mt-12 pt-8 border-t border-gray-300">
-                            <!-- Logo diamankan dengan class exe-logo -->
-                            <img alt="EXE Logo" class="h-16 grayscale opacity-60 exe-logo">
+                            <!-- Menggunakan Local Path agar tidak diblokir GitHub/CORS -->
+                            <img src="logo.png" alt="EXE Logo" class="h-16 grayscale opacity-60">
                         </div>
 
                     </div>
@@ -331,37 +328,6 @@
     </div>
 
     <script>
-        // --- SKRIP ANTI-CORS LOGO INJECTOR ---
-        // Skrip ini akan secara otomatis menarik logo dari URL, mengubahnya menjadi data Base64 lokal,
-        // dan memasukkannya ke elemen gambar. Karena bersifat lokal, html2canvas tidak akan memblokirnya!
-        document.addEventListener("DOMContentLoaded", async () => {
-            const targetUrl = "https://images2.imgbox.com/76/c6/FZAMWIZX_o.png";
-            // Proxy yang lebih handal untuk mengubah origin
-            const proxyUrl = "https://api.allorigins.win/raw?url=" + encodeURIComponent(targetUrl);
-            
-            try {
-                const response = await fetch(proxyUrl);
-                const blob = await response.blob();
-                const reader = new FileReader();
-                reader.onloadend = function() {
-                    const base64data = reader.result;
-                    // Tempelkan data base64 ke semua elemen yang punya class 'exe-logo'
-                    const logos = document.querySelectorAll('.exe-logo');
-                    logos.forEach(logo => {
-                        logo.src = base64data;
-                    });
-                }
-                reader.readAsDataURL(blob);
-            } catch (error) {
-                console.error("Gagal meload logo:", error);
-                // Jika proxy gagal, kembalikan ke URL asli sebagai cadangan terakhir
-                document.querySelectorAll('.exe-logo').forEach(logo => {
-                    logo.src = targetUrl;
-                });
-            }
-        });
-
-        // Tunggu font siap
         document.fonts.ready.then(() => {
             console.log("Fonts loaded.");
         });
@@ -378,10 +344,6 @@
             try {
                 await document.fonts.ready;
                 
-                // --- STRATEGI ISOLASI MUTLAK ---
-                // Pindahkan slide keluar dari wrapper dan tempelkan ke ujung paling atas browser
-                // Ini mencegah warna abu-abu dari "body" website ikut terfoto
-                
                 originalSlide.style.transform = 'none';
                 originalSlide.style.position = 'fixed';
                 originalSlide.style.top = '0px';
@@ -390,7 +352,6 @@
                 
                 document.body.appendChild(originalSlide);
 
-                // Beri waktu 0.3 detik agar browser merender posisinya dengan sempurna
                 await new Promise(resolve => setTimeout(resolve, 300));
 
                 const canvas = await html2canvas(originalSlide, {
@@ -402,7 +363,6 @@
                     logging: false
                 });
 
-                // Kembalikan slide ke dalam kotak kecil aslinya
                 wrapper.appendChild(originalSlide);
                 originalSlide.style.position = 'absolute';
                 originalSlide.style.transform = 'scale(0.35)';
@@ -417,7 +377,6 @@
                 console.error("Error exporting image:", error);
                 alert("Gagal mengunduh gambar. Pastikan koneksi stabil.");
                 
-                // Jika error, pastikan slide tetap kembali ke tempatnya
                 wrapper.appendChild(originalSlide);
                 originalSlide.style.position = 'absolute';
                 originalSlide.style.transform = 'scale(0.35)';
